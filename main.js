@@ -1,4 +1,12 @@
 debugValue = 0;
+game = null;
+
+/**
+ * Loaded before the game is opened
+ */
+function preload(){
+  loadAllYAML();
+}
 /**
  * Called once when the page is opened
  */
@@ -7,6 +15,7 @@ function setup() {
   ellipseMode(RADIUS);
 
   initCanvas();
+  testRegion = regionFromName("cc");
 }
 
 /**
@@ -16,7 +25,7 @@ function draw() {
   background(51);
   push();
   doCamTransform(256, 0, 1);
-
+  
 
   pop();
   drawCinemaBars();
