@@ -70,9 +70,9 @@ function doCamTransform(x, y, zoom){
   //0,0 is at the top left so we need to move it
   translate(windowWidth / 2, windowHeight / 2);
   //scale by ratio between game screen and intended screen height
-  var superfuckingratio = pixelToUnitRatio;
+  var ratio = pixelToUnitRatio;
 
-  scale(superfuckingratio, superfuckingratio);
+  scale(ratio * zoom, ratio * zoom);
   //move intended center to screen center
   translate(-x, -y);
 }

@@ -19,19 +19,25 @@ class Player extends Entity{
     this.levelProgressNeeded = 4;
     this.restricted = true;
     this.ctrlSets = ctrlSets;
+    this.ctrlVector = {x: 0, y: 0};
   }
+  //design this with the idea that it will be completely overriden in cent's code
   update(){
-    var ctrlVector = {x: 0, y: 0};
-    for (var i in this.ctrlSets){
-      var testCv = this.ctrlSets[i].getCtrlVector();
-      if (testCv !== null){
-        this.ctrlVector = testCv;
-      }
-    }
+    this.ctrlVector = this.getControls();
     this.xv = this.ctrlVector.x * this.tempSpeed * tFix;
     this.yv = this.ctrlVector.y * this.tempSpeed * tFix;
     this.x += this.xv;
     this.y += this.yv;
+  }
+  getControls(){
+    var ctrlVector = {x: 0, y: 0};
+    for (var i in this.ctrlSets){
+      var testCv = this.ctrlSets[i].getCtrlVector();
+      if (testCv !== null){
+        ctrlVector = testCv;
+      }
+    }
+    return ctrlVector;
   }
   updateAsMain(){
     cameraFocusX = this.x;
