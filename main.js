@@ -1,4 +1,4 @@
-debugValue = 0;
+debugValue = "no debug value yet";
 game = null;
 
 /**
@@ -33,13 +33,13 @@ function draw() {
   pop();
   drawCinemaBars();
 
-  //drawDebugValueText();
+  drawDebugValueText();
 }
 function drawDebugValueText(){
   fill(255);
   noStroke();
-  textSize(32);
-  text(debugValue, 0, 32);
+  textSize(24);
+  text(debugValue, 0, 24);
 }
 
 function updateAll(){

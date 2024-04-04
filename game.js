@@ -20,7 +20,6 @@ class Game{
     //better to keep things separate
     for (var i in this.players){
       this.players[i].update();
-      this.players[i].backboneUpdate();
     }
     this.mainPlayer.updateAsMain();
   }

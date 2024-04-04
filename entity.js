@@ -24,9 +24,30 @@ class Entity{
   getRadius(){
     return this.tempRadius;
   }
-  backboneUpdate(){
+  restrict(){
     if (this.restricted){
       this.area.restrict(this);
+    }
+  }
+  gainEffect(effect){
+    if (!effect.allowDuplicates){
+      for (var i in this.effects){
+        if (this.effects[i].constructor.name === effect.constructor.name){
+          //duplicate found, get outta there
+          return;
+        }
+      }
+    }
+    this.effects.push(effect);
+  }
+
+  applyEffects(){
+    for (var i = 0; i < this.effects.length; i++){
+      this.effects[i].apply(this);
+      if (this.effects[i].toRemove){
+        this.effects.splice(i, 1);
+        i--;
+      }
     }
   }
   draw(){
