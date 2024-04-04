@@ -34,6 +34,14 @@ const gsUnitWidth = 1280;
  * Ratio between pixels and game units
  */
 var pixelToUnitRatio = 1;
+/**
+ * Horizontal center of screen
+ */
+var cameraFocusX = 0;
+/**
+ * Vertical center of screen
+ */
+var cameraFocusY = 0;
 
 /**
  * Creates the canvas and gets canvas aspect ratio

@@ -15,17 +15,20 @@ function setup() {
   ellipseMode(RADIUS);
 
   initCanvas();
-  testRegion = regionFromName("cc");
+  game = initGame();
 }
 
+var tFix = 0.5;
 /**
  * Called every frame
  */
 function draw() {
+  tFix = deltaTime / (1000 / 60) / 2;
+  updateAll();
   background(51);
   push();
-  doCamTransform(256, 0, 1);
-  
+  doCamTransform(cameraFocusX, cameraFocusY, 1);
+  game.draw();
 
   pop();
   drawCinemaBars();
@@ -37,4 +40,8 @@ function drawDebugValueText(){
   noStroke();
   textSize(32);
   text(debugValue, 0, 32);
+}
+
+function updateAll(){
+  game.update();
 }
