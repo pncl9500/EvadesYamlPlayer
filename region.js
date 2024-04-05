@@ -222,6 +222,7 @@ class Zone{
     this.height = height;
     this.translate = translate ?? null;
     this.properties = properties ?? {};
+    this.lineAlpha = this.type === "active" ? 15 : 15;
   }
   getZoneBaseColor(){
     switch (this.type) {
@@ -262,6 +263,17 @@ class Zone{
     if (this.properties.hasOwnProperty("background_color")){
       fill(this.properties.background_color[0], this.properties.background_color[1], this.properties.background_color[2], this.properties.background_color[3]);
       rect(this.x, this.y, this.width, this.height);
+    }
+    
+    if (settings.drawTiles){
+      stroke(0, 0, 0, this.lineAlpha);
+      strokeWeight(3);
+      for (var x = 0; x < this.width / 32; x++){
+        line(x * 32 + this.x, this.y, x * 32 + this.x, this.y + this.height);
+      }
+      for (var y = 0; y < this.height / 32; y++){
+        line(this.x, y * 32 + this.y, this.x + this.width, y * 32 + this.y);
+      }
     }
   }
 }

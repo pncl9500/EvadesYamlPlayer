@@ -33,7 +33,7 @@ function draw() {
   pop();
   drawCinemaBars();
 
-  drawDebugValueText();
+  //drawDebugValueText();
 }
 function drawDebugValueText(){
   fill(255);
