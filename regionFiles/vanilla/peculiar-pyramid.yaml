@@ -58,6 +58,14 @@ areas:
     width: 64
     x: 3072
     y: 0
+  - height: 128
+    translate: {x: "if you are reading this you need a new peculiar pyramid file", y: 0}
+    type: teleport
+    width: 64
+    x: 3072
+    y: 128
+    properties:
+      background_color: [0, 0, 0, 70]
 - name: Tunnel 2
   x: 4832
   y: 4800

@@ -19,7 +19,8 @@ regionTeleports = {
       "zone_0": {dest: "Haunted Halls", y: -80},
       "zone_1": {dest: "Wacky Wonderland", y: 80},
       "zone_2": {dest: "Peculiar Pyramid Hard", x: 144},
-      "zone_7": {dest: "Shifting Sands", x: 60}
+      "zone_7": {dest: "Shifting Sands", x: 60},
+      "zone_8": {dest: "Dusty Depths", x: 60, area: 1}
     }
   },
   "Wacky Wonderland":{

@@ -178,5 +178,12 @@ regionOffsets = {
   "Withering Wasteland": {
     x: 1952,
     y: 173712
-  }
-  }
+  },
+
+
+  //this is not correct but it doesnt matter so it is ok for now
+  "Dusty Depths": {
+    x: 0,
+    y: 0
+  },
+}

@@ -47,8 +47,15 @@ class Region{
       //WHY?!?!?!?!
       if (typeof x === "string"){
         if (x.startsWith("var x")){
-          //all you can do is pray no one does this without putting spaces
           let str = x.split(" ");
+          //in the case someone doesn't use spaces:
+          if (str.length === 2){
+            str[0] = x.substring(0, 3);
+            str[1] = x.substring(3, 5);
+            str[2] = x.substring(5, 6);
+            str[3] = x.substring(6);
+            console.log(str);
+          }
           let mul = str[2] === "-" ? -1 : 1;
           let add = parseInt(str[3]) * mul;
           x = regionOffsets[this.name].x + add;
@@ -56,8 +63,15 @@ class Region{
       }
       if (typeof y === "string"){
         if (y.startsWith("var y")){
-          //all you can do is pray no one does this without putting spaces
           let str = y.split(" ");
+          //in the case someone doesn't use spaces:
+          if (str.length === 2){
+            str[0] = y.substring(0, 3);
+            str[1] = y.substring(3, 5);
+            str[2] = y.substring(5, 6);
+            str[3] = y.substring(6);
+            console.log(str);
+          }
           let mul = str[2] === "-" ? -1 : 1;
           let add = parseInt(str[3]) * mul;
           y = regionOffsets[this.name].y + add;
@@ -80,8 +94,13 @@ class Region{
       //why is this even a thing
       if (typeof x === "string"){
         if (x.startsWith("last_x")){
-          //all you can do is pray no one does this without putting spaces
           let str = x.split(" ");
+          if (str.length === 1){
+            str[0] = x.substring(0, 6);
+            str[1] = x.substring(6, 7);
+            str[2] = x.substring(7);
+            console.log(str);
+          }
           let mul = str[1] === "-" ? -1 : 1;
           let add = parseInt(str[2]) * mul;
           x = lastArea.x + add;
@@ -89,8 +108,13 @@ class Region{
       }
       if (typeof y === "string"){
         if (y.startsWith("last_y")){
-          //all you can do is pray no one does this without putting spaces
           let str = y.split(" ");
+          if (str.length === 1){
+            str[0] = y.substring(0, 6);
+            str[1] = y.substring(6, 7);
+            str[2] = y.substring(7);
+            console.log(str);
+          }
           let mul = str[1] === "-" ? -1 : 1;
           let add = parseInt(str[2]) * mul;
           y = lastArea.y + add;
@@ -99,8 +123,13 @@ class Region{
       //NOT AGAIN
       if (typeof x === "string"){
         if (x.startsWith("last_right")){
-          //all you can do is pray no one does this without putting spaces
           let str = x.split(" ");
+          if (str.length === 1){
+            str[0] = x.substring(0, 10);
+            str[1] = x.substring(10, 11);
+            str[2] = x.substring(11);
+            console.log(str);
+          }
           let mul = str[1] === "-" ? -1 : 1;
           let add = parseInt(str[2]) * mul;
           x = lastArea.bounds.right + lastArea.x + add;
@@ -108,8 +137,13 @@ class Region{
       }
       if (typeof y === "string"){
         if (y.startsWith("last_bottom")){
-          //all you can do is pray no one does this without putting spaces
           let str = y.split(" ");
+          if (str.length === 1){
+            str[0] = y.substring(0, 11);
+            str[1] = y.substring(11, 12);
+            str[2] = y.substring(12);
+            console.log(str);
+          }
           let mul = str[1] === "-" ? -1 : 1;
           let add = parseInt(str[2]) * mul;
           y = lastArea.bounds.bottom + lastArea.y + add;
