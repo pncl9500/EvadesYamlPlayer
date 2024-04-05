@@ -6,7 +6,7 @@ class Player extends Entity{
     this.regionNum = regionNum;
     this.region = game.regions[regionNum];
     this.areaNum = areaNum;
-    this.area = region.areas[areaNum];
+    this.area = this.region.areas[areaNum];
     this.downed = false;
     this.name = name;
     this.speed = 5;

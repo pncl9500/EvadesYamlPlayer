@@ -56,9 +56,6 @@ class Region{
         x = lastArea.x;
       }
       if (y === "last_y"){
-        console.log(`areaId: ${a}`)
-        console.log(lastArea.y);
-        console.log(lastZone.y);
         y = lastArea.y;
       }
       //why is this even a thing

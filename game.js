@@ -43,11 +43,18 @@ class Game{
   }
 }
 
+startingRegionName = "Central Core";
 function initGame(){
   game = new Game();
-  cc = regionFromName("cc");
-  game.addRegion(cc);
-  mainPlayer = new Player(176 + random(-64,64), 240 + random(-96,96), 16, {r: 255, g: 0, b: 0}, "TestPlayer", true, game, 0, 0, [new WASDset, new ArrowSet, new MouseSet]);
+  addVanillaRegionsToGame(game);
+  startingRegionId = 0;
+  for (var i in game.regions){
+    if (game.regions[i].name === startingRegionName){
+      startingRegionId = i;
+      break;
+    }
+  }
+  mainPlayer = new Player(176 + random(-64,64), 240 + random(-96,96), 16, {r: 255, g: 0, b: 0}, "TestPlayer", true, game, startingRegionId, 0, [new WASDset, new ArrowSet, new MouseSet]);
   game.setMainPlayer(mainPlayer);
   game.addPlayer(mainPlayer);
   //game.addPlayer(new Player(203, 110, 16, {r: 0, g: 255, b: 0}, "DummyPlayer", true, game, 0, 0, [new WASDset, new ArrowSet, new MouseSet]));
