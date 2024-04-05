@@ -33,10 +33,13 @@ class Game{
     this.regions.push(region);
   }
   draw(){
-    this.mainPlayer.area.draw();
+    this.mainPlayer.area.draw(this.mainPlayer.region);
     for (var i in this.players){
-      this.players[i].draw();
+      if (!this.players[i].isMain && this.players[i].area === this.mainPlayer.area){
+        this.players[i].draw();
+      }
     }
+    this.mainPlayer.draw();
   }
 }
 
@@ -44,9 +47,9 @@ function initGame(){
   game = new Game();
   cc = regionFromName("cc");
   game.addRegion(cc);
-
-  mainPlayer = new Player(128, 256, 16, {r: 255, g: 0, b: 0}, "TestPlayer", true, game, 0, 0, [new WASDset, new ArrowSet, new MouseSet]);
+  mainPlayer = new Player(176 + random(-64,64), 240 + random(-96,96), 16, {r: 255, g: 0, b: 0}, "TestPlayer", true, game, 0, 0, [new WASDset, new ArrowSet, new MouseSet]);
   game.setMainPlayer(mainPlayer);
   game.addPlayer(mainPlayer);
+  //game.addPlayer(new Player(203, 110, 16, {r: 0, g: 255, b: 0}, "DummyPlayer", true, game, 0, 0, [new WASDset, new ArrowSet, new MouseSet]));
   return game;
 }

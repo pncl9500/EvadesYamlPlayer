@@ -19,11 +19,17 @@ class Region{
         if (h === "last_height"){
           h = lastZone.height;
         }
-        if (x === "last_right" || x === "last_x"){
+        if (x === "last_right"){
           x = lastZone.x + lastZone.width;
         }
-        if (y === "last_bottom" || y === "last_y"){
+        if (x === "last_x"){
+          x = lastZone.x;
+        }
+        if (y === "last_bottom"){
           y = lastZone.y + lastZone.height;
+        }
+        if (y === "last_y"){
+          y = lastZone.y;
         }
 
         var zone = new Zone(zn.type, x, y, w, h, zn.properties, zn.translate);
@@ -38,11 +44,41 @@ class Region{
       if (y === "var y"){
         y = 0;
       }
-      if (x === "last_right" || x === "last_x"){
-        x = lastZone.x + lastArea.x;
+      if (x === "last_right"){
+        //x = lastZone.x + lastZone.width + lastArea.x;
+        x = lastArea.bounds.right + lastArea.x;
       }
-      if (y === "last_bottom" || y === "last_y"){
-        y = lastZone.y + lastArea.y;
+      if (y === "last_bottom"){
+        //x = lastZone.x + lastZone.width + lastArea.x;
+        y = lastArea.bounds.bottom + lastArea.y;
+      }
+      if (x === "last_x"){
+        x = lastArea.x;
+      }
+      if (y === "last_y"){
+        console.log(`areaId: ${a}`)
+        console.log(lastArea.y);
+        console.log(lastZone.y);
+        y = lastArea.y;
+      }
+      //why is this even a thing
+      if (typeof x === "string"){
+        if (x.startsWith("last_x")){
+          //all you can do is pray no one does this without putting spaces
+          let str = x.split(" ");
+          let mul = str[1] === "-" ? -1 : 1;
+          let add = parseInt(str[2]) * mul;
+          x = lastArea.x + add;
+        }
+      }
+      if (typeof y === "string"){
+        if (y.startsWith("last_y")){
+          //all you can do is pray no one does this without putting spaces
+          let str = y.split(" ");
+          let mul = str[1] === "-" ? -1 : 1;
+          let add = parseInt(str[2]) * mul;
+          y = lastArea.y + add;
+        }
       }
       var area = new Area(x, y, zones, ar.properties);
       this.areas.push(area);
@@ -85,10 +121,10 @@ class Area{
     }
   }
   findBounds(){
-    var lb = 99999;
-    var rb = -99999;
-    var tb = 99999;
-    var bb = -99999;
+    var lb = 9999999;
+    var rb = -9999999;
+    var tb = 9999999;
+    var bb = -9999999;
     for (var z in this.zones){
       let zlb = this.zones[z].x;
       let zrb = this.zones[z].x + this.zones[z].width;
@@ -146,6 +182,14 @@ class Zone{
   draw(parentArea, parentRegion){
     this.getZoneBaseColor();
     rect(this.x, this.y, this.width, this.height);
+    if (parentRegion.properties !== undefined && parentRegion.properties.hasOwnProperty("background_color")){
+      fill(parentRegion.properties.background_color[0], parentRegion.properties.background_color[1], parentRegion.properties.background_color[2], parentRegion.properties.background_color[3]);
+      rect(this.x, this.y, this.width, this.height);
+    }
+    if (parentArea.properties !== undefined && parentArea.properties.hasOwnProperty("background_color")){
+      fill(parentArea.properties.background_color[0], parentArea.properties.background_color[1], parentArea.properties.background_color[2], parentArea.properties.background_color[3]);
+      rect(this.x, this.y, this.width, this.height);
+    }
     if (this.properties.hasOwnProperty("background_color")){
       fill(this.properties.background_color[0], this.properties.background_color[1], this.properties.background_color[2], this.properties.background_color[3]);
       rect(this.x, this.y, this.width, this.height);

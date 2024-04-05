@@ -100,44 +100,47 @@ class Player extends Entity{
   doExitTranslate(exitZone){
     //we are going to check if the translated exitZone (basically the rectangle where
     //players might go) is in another area, and then put the player in that area.
-    var translatedExitZone = {
-      x: exitZone.x + this.area.x + exitZone.translate.x,
-      y: exitZone.y + this.area.y + exitZone.translate.y,
-      width: exitZone.width,
-      height: exitZone.height,
+    var foundArea = null;
+    var foundAreaNum = null;
+    var epsilon = tpZoneEpsilon
+    while (foundArea === null && epsilon > -1024){
+      var translatedExitZone = {
+        x: exitZone.x + this.area.x + exitZone.translate.x + epsilon,
+        y: exitZone.y + this.area.y + exitZone.translate.y + epsilon,
+        width: exitZone.width - epsilon * 2,
+        height: exitZone.height - epsilon * 2,
+      }
+      for (var a = this.region.areas.length - 1; a >= 0; a--){
+        var area = this.region.areas[a];
+        var areaZone = {
+          x: area.x,
+          y: area.y,
+          width: area.bounds.right - area.bounds.left,
+          height: area.bounds.bottom - area.bounds.top,
+        }
+        var areaHasBeenFound = rectRect(translatedExitZone, areaZone);
+        if (areaHasBeenFound){
+          foundArea = this.region.areas[a];
+          foundAreaNum = a;
+        }
+      }
+      epsilon -= 8;
     }
-    for (var a in this.region.areas){
-      var area = this.region.areas[a];
-      console.log(area.bounds);
-      var areaZone = {
-        x: area.x,
-        y: area.y,
-        width: area.bounds.right - area.bounds.left,
-        height: area.bounds.bottom - area.bounds.top,
-      }
-      var areaHasBeenFound = rectRect(translatedExitZone, areaZone);
-      if (areaHasBeenFound){
-        let xTranslateMul = 0;
-        if (exitZone.translate.x > 0){
-          xTranslateMul = 1;
-        }
-        if (exitZone.translate.x < 0){
-          xTranslateMul = -1;
-        }
-        let yTranslateMul = 0;
-        if (exitZone.translate.y > 0){
-          yTranslateMul = 1;
-        }
-        if (exitZone.translate.y < 0){
-          yTranslateMul = -1;
-        }
-        this.x += exitZone.translate.x - translatedExitZone.width * xTranslateMul;
-        this.y += exitZone.translate.y - translatedExitZone.height * yTranslateMul;
-        this.x -= this.region.areas[a].x - this.area.x;
-        this.y -= this.region.areas[a].y - this.area.y;
-        this.areaNum = a;
-        this.area = this.region.areas[a];
-      }
+    if (epsilon !== tpZoneEpsilon - 8){
+      console.warn("Exit translation did not immediately find valid area. This is normal when user enters some rr teleports, but behavior may be inaccurate.")
+    }
+    if (epsilon < -1024){
+      console.warm("Exit translation could not find valid area. Search cut to prevent infinite loop. This is not normal and something has gone very wrong.")
+    }
+    if (foundArea !== null){
+      this.x += exitZone.translate.x;
+      this.y += exitZone.translate.y;
+      this.x -= foundArea.x - this.area.x;
+      this.y -= foundArea.y - this.area.y;
+      this.areaNum = foundAreaNum;
+      this.area = foundArea;
     }
   }
 }
+//this is actually helpful somehow
+tpZoneEpsilon = 8;
