@@ -39,10 +39,29 @@ class Region{
       var x = ar.x;
       var y = ar.y;
       if (x === "var x"){
-        x = 0;
+        x = regionOffsets[this.name].x;
       }
       if (y === "var y"){
-        y = 0;
+        y = regionOffsets[this.name].y;
+      }
+      //WHY?!?!?!?!
+      if (typeof x === "string"){
+        if (x.startsWith("var x")){
+          //all you can do is pray no one does this without putting spaces
+          let str = x.split(" ");
+          let mul = str[2] === "-" ? -1 : 1;
+          let add = parseInt(str[3]) * mul;
+          x = regionOffsets[this.name].x + add;
+        }
+      }
+      if (typeof y === "string"){
+        if (y.startsWith("var y")){
+          //all you can do is pray no one does this without putting spaces
+          let str = y.split(" ");
+          let mul = str[2] === "-" ? -1 : 1;
+          let add = parseInt(str[3]) * mul;
+          y = regionOffsets[this.name].y + add;
+        }
       }
       if (x === "last_right"){
         //x = lastZone.x + lastZone.width + lastArea.x;
@@ -75,6 +94,25 @@ class Region{
           let mul = str[1] === "-" ? -1 : 1;
           let add = parseInt(str[2]) * mul;
           y = lastArea.y + add;
+        }
+      }
+      //NOT AGAIN
+      if (typeof x === "string"){
+        if (x.startsWith("last_right")){
+          //all you can do is pray no one does this without putting spaces
+          let str = x.split(" ");
+          let mul = str[1] === "-" ? -1 : 1;
+          let add = parseInt(str[2]) * mul;
+          x = lastArea.bounds.right + lastArea.x + add;
+        }
+      }
+      if (typeof y === "string"){
+        if (y.startsWith("last_bottom")){
+          //all you can do is pray no one does this without putting spaces
+          let str = y.split(" ");
+          let mul = str[1] === "-" ? -1 : 1;
+          let add = parseInt(str[2]) * mul;
+          y = lastArea.bounds.bottom + lastArea.y + add;
         }
       }
       var area = new Area(x, y, zones, ar.properties);

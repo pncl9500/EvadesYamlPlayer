@@ -10,7 +10,7 @@ function getRptl(){
     cc4: "regionFiles/vanilla/coupled-corridors.yaml",
     dd: "regionFiles/vanilla/dangerous-district.yaml",
     ddh: "regionFiles/vanilla/dangerous-district-hard.yaml",
-    dd2: "regionFiles/vanilla/dusty-depths.yaml",
+    //dd2: "regionFiles/vanilla/dusty-depths.yaml",
     ee: "regionFiles/vanilla/elite-expanse.yaml",
     eeh: "regionFiles/vanilla/elite-expanse-hard.yaml",
     ee2: "regionFiles/vanilla/endless-echo.yaml",

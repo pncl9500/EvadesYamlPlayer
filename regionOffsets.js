@@ -39,143 +39,143 @@ regionOffsets = {
     x: 270104,
     y: 24640
   },
-  ee: {
+  "Elite Expanse": {
     x: 1952,
     y: 21760
   },
-  eeh: {
+  "Elite Expanse Hard": {
     x: 270104,
     y: 21760
   },
-  ee2: {
+  "Endless Echo": {
     x: 1952,
     y: 23200
   },
-  ee2h: {
+  "Endless Echo Hard": {
     x: -1248,
     y: 23200
   },
-  ff: {
+  "Frozen Fjord": {
     x: 1952,
     y: 31840
   },
-  ffh: {
+  "Frozen Fjord Hard": {
     x: 135052,
     y: 31840
   },
-  gg: {
+  "Glacial Gorge": {
     x: 1952,
     y: 17440
   },
-  ggh: {
+  "Glacial Gorge Hard": {
     x: 135052,
     y: 17440
   },
-  gg2: {
+  "Grand Garden": {
     x: 1952,
     y: 137192
   },
-  gg2h: {
+  "Grand Garden Hard": {
     x: 96652,
     y: 137192
   },
-  hh2: {
+  "Haunted Halls": {
     x: 1952,
     y: 1440
   },
-  hh: {
+  "Humongous Hollow": {
     x: 1952,
     y: 20320
   },
-  hhh: {
+  "Humongous Hollow Hard": {
     x: 270104,
     y: 20320
   },
-  ii: {
+  "Infinite Inferno": {
     x: 1952,
     y: 149392
   },
-  mm2: {
+  "Magnetic Monopole": {
     x: 1952,
     y: 108480
   },
-  mm2h: {
+  "Magnetic Monopole Hard": {
     x: 96652,
     y: 108480
   },
-  mm: {
+  "Monumental Migration": {
     x: 1952,
     y: 27520
   },
-  mm3: {
+  "Mysterious Mansion": {
     x: 270104,
     y: 43040
   },
-  oo: {
+  "Ominous Occult": {
     x: 1952,
     y: 28960
   },
-  ooh: {
+  "Ominous Occult Hard": {
     x: 135052,
     y: 28928
   },
-  pp: {
+  "Peculiar Pyramid": {
     x: 1952,
     y: 4320
   },
-  pph: {
+  "Peculiar Pyramid Hard": {
     x: 142432,
     y: 4320
   },
-  qq: {
+  "Quiet Quarry": {
     x: 1952,
     y: 26080
   },
-  qqh: {
+  "Quiet Quarry Hard": {
     x: 135052,
     y: 26080
   },
-  rl: {
+  "Research Lab": {
     x: 5632,
     y: 147952
   },
-  rr: {
+  "Restless Ridge": {
     x: 0,
     y: 43040
   },
-  rrh: {
+  "Restless Ridge Hard": {
     x: 135052,
     y: 43040
   },
-  ss2: {
+  "Shifting Sands": {
     x: 5088,
     y: 4320
   },
-  ss: {
+  "Stellar Square": {
     x: 0,
     y: -384
   },
-  tt: {
+  "Toxic Territory": {
     x: 1952,
     y: 107040
   },
-  tth: {
+  "Toxic Territory Hard": {
     x: 96652,
     y: 107040
   },
-  vv: {
+  "Vicious Valley": {
     x: 1952,
     y: 18880
   },
-  vvh: {
+  "Vicious Valley Hard": {
     x: 135052,
     y: 18880
   },
-  ww: {
+  "Wacky Wonderland": {
     x: 1952,
     y: 16000
   },
-  ww2: {
+  "Withering Wasteland": {
     x: 1952,
     y: 173712
   }

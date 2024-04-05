@@ -16,7 +16,6 @@ function YAMLfromStrs(strs){
 function loadAllYAML(){
   loadedYAMLstrs = {};
   regionPathsToLoad = getRptl();
-  //god this is so fucking stupid
   for (const [key, value] of Object.entries(regionPathsToLoad)){
     loadedYAMLstrs[key] = loadStrings(value);
   }

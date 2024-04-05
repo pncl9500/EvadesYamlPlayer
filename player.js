@@ -78,9 +78,15 @@ class Player extends Entity{
       if (zone.properties.hasOwnProperty("minimum_speed")){
         this.gainEffect(new MinimumSpeedZoneEffect(zone.properties.minimum_speed), false);
       }
-      if (zone.type === "exit"){
+      //this code looks terrible
+      if (zone.type === "exit" || zone.type === "teleport"){
         if (!this.onTpZoneLastFrame){
-          this.doExitTranslate(zone);
+          if (zone.type === "exit"){
+            this.doExitTranslate(zone); 
+          }
+          if (zone.type === "teleport"){
+            this.doTeleportTranslate(this.area.zones.indexOf(zone)); 
+          }
         }
         onTpZoneThisFrame = true;
         this.onTpZoneLastFrame = true;
@@ -104,13 +110,19 @@ class Player extends Entity{
     var foundAreaNum = null;
     var epsilon = tpZoneEpsilon
     while (foundArea === null && epsilon > -1024){
+      console.log(epsilon);
       var translatedExitZone = {
         x: exitZone.x + this.area.x + exitZone.translate.x + epsilon,
         y: exitZone.y + this.area.y + exitZone.translate.y + epsilon,
         width: exitZone.width - epsilon * 2,
         height: exitZone.height - epsilon * 2,
       }
-      for (var a = this.region.areas.length - 1; a >= 0; a--){
+      //for (var a = this.region.areas.length - 1; a >= 0; a--){
+      for (var a in this.region.areas){
+        if (a === this.areaNum){
+          //this doesnt even work
+          continue;
+        }
         var area = this.region.areas[a];
         var areaZone = {
           x: area.x,
@@ -126,11 +138,11 @@ class Player extends Entity{
       }
       epsilon -= 8;
     }
-    if (epsilon !== tpZoneEpsilon - 8){
+    if ((epsilon !== tpZoneEpsilon - 8) && !(epsilon <= -1024)){
       console.warn("Exit translation did not immediately find valid area. This is normal when user enters some rr teleports, but behavior may be inaccurate.")
     }
-    if (epsilon < -1024){
-      console.warm("Exit translation could not find valid area. Search cut to prevent infinite loop. This is not normal and something has gone very wrong.")
+    if (epsilon <= -1024){
+      console.warn("Exit translation could not find valid area. Search cut to prevent infinite loop. This is not normal and something has gone very wrong.")
     }
     if (foundArea !== null){
       this.x += exitZone.translate.x;
@@ -139,6 +151,57 @@ class Player extends Entity{
       this.y -= foundArea.y - this.area.y;
       this.areaNum = foundAreaNum;
       this.area = foundArea;
+    }
+  }
+  goToRegionFromId(id){
+    this.regionNum = id;
+    this.region = this.game.regions[id];
+  }
+  goToAreaFromId(id){
+    this.areaNum = id;
+    this.area = this.region.areas[id];
+  }
+  doTeleportTranslate(zoneId){
+    //we are actually going to override evades convention here because it is very bad!
+    const regionName = this.region.name;
+    const areaId = this.areaNum;
+    const areaSet = "area_" + areaId;
+    const zoneSet = "zone_" + zoneId;
+    if (regionTeleports[regionName] === undefined){
+      //no region teleport assigned, abort
+      console.warn("No region teleport found.");
+      return;
+    }
+    if (!regionTeleports[regionName].hasOwnProperty(areaSet)){
+      console.warn("Teleport zone does not have a known area.");
+      return;
+    }
+    if (!regionTeleports[regionName][areaSet].hasOwnProperty(zoneSet)){
+      console.warn("Teleport zone is not assigned.");
+      return;
+    }
+    const rtSet = regionTeleports[regionName][areaSet][zoneSet];
+
+    //warp to bbh if it doesnt work
+    const dest = rtSet.dest ?? "Burning Bunker Hard";
+    const areaDest = rtSet.area ?? 0;
+    const x = rtSet.x ?? null;
+    const y = rtSet.y ?? null;
+    for (var i in this.game.regions){
+      if (this.game.regions[i].name === dest){
+        //found region
+        this.goToRegionFromId(i);
+        this.goToAreaFromId(areaDest);
+        if (x !== null){
+          this.x = x;
+          this.x += (this.x < 0) ? this.area.bounds.right : this.area.bounds.left;
+        }
+        if (y !== null){
+          this.y = y;
+          this.y += (this.y < 0) ? this.area.bounds.bottom : this.area.bounds.top;
+        }
+        return;
+      }
     }
   }
 }
