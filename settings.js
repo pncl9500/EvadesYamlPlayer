@@ -1,3 +1,4 @@
 settings = {
-  drawTiles: true,
+  drawTiles: false,
+  regionBackground : true,
 }

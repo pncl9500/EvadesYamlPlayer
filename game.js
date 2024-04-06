@@ -58,7 +58,6 @@ function initGame(){
   mainPlayer = new Player(176 + random(-64,64), 240 + random(-96,96), 16, {r: 255, g: 0, b: 0}, "TestPlayer", true, game, startingRegionId, startingArea, [new WASDset, new ArrowSet, new MouseSet]);
   game.setMainPlayer(mainPlayer);
   game.addPlayer(mainPlayer);
-  console.log(mainPlayer.region);
   //game.addPlayer(new Player(203, 110, 16, {r: 0, g: 255, b: 0}, "DummyPlayer", true, game, 0, 0, [new WASDset, new ArrowSet, new MouseSet]));
   return game;
 }

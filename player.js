@@ -110,7 +110,6 @@ class Player extends Entity{
     var foundAreaNum = null;
     var epsilon = tpZoneEpsilon
     while (foundArea === null && epsilon > -1024){
-      console.log(epsilon);
       var translatedExitZone = {
         x: exitZone.x + this.area.x + exitZone.translate.x + epsilon,
         y: exitZone.y + this.area.y + exitZone.translate.y + epsilon,

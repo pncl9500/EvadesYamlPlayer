@@ -54,7 +54,6 @@ class Region{
             str[1] = x.substring(3, 5);
             str[2] = x.substring(5, 6);
             str[3] = x.substring(6);
-            console.log(str);
           }
           let mul = str[2] === "-" ? -1 : 1;
           let add = parseInt(str[3]) * mul;
@@ -70,7 +69,6 @@ class Region{
             str[1] = y.substring(3, 5);
             str[2] = y.substring(5, 6);
             str[3] = y.substring(6);
-            console.log(str);
           }
           let mul = str[2] === "-" ? -1 : 1;
           let add = parseInt(str[3]) * mul;
@@ -99,7 +97,6 @@ class Region{
             str[0] = x.substring(0, 6);
             str[1] = x.substring(6, 7);
             str[2] = x.substring(7);
-            console.log(str);
           }
           let mul = str[1] === "-" ? -1 : 1;
           let add = parseInt(str[2]) * mul;
@@ -113,7 +110,6 @@ class Region{
             str[0] = y.substring(0, 6);
             str[1] = y.substring(6, 7);
             str[2] = y.substring(7);
-            console.log(str);
           }
           let mul = str[1] === "-" ? -1 : 1;
           let add = parseInt(str[2]) * mul;
@@ -128,7 +124,6 @@ class Region{
             str[0] = x.substring(0, 10);
             str[1] = x.substring(10, 11);
             str[2] = x.substring(11);
-            console.log(str);
           }
           let mul = str[1] === "-" ? -1 : 1;
           let add = parseInt(str[2]) * mul;
@@ -142,14 +137,13 @@ class Region{
             str[0] = y.substring(0, 11);
             str[1] = y.substring(11, 12);
             str[2] = y.substring(12);
-            console.log(str);
           }
           let mul = str[1] === "-" ? -1 : 1;
           let add = parseInt(str[2]) * mul;
           y = lastArea.bounds.bottom + lastArea.y + add;
         }
       }
-      var area = new Area(x, y, zones, ar.properties);
+      var area = new Area(x, y, zones, ar.properties, this);
       this.areas.push(area);
       lastArea = area;
     }
@@ -160,14 +154,23 @@ class Region{
 }
 
 class Area{
-  constructor(x, y, zones, properties){
+  constructor(x, y, zones, properties, parent){
     this.x = x;
     this.y = y;
     this.zones = zones;
     this.properties = properties;
+    this.parent = parent;
     this.bounds = this.findBounds();
   }
   draw(parentRegion){
+    if (settings.regionBackground){
+      if (this.parent.hasOwnProperty("properties") && this.parent.properties.hasOwnProperty("background_color")){
+        background(this.parent.properties.background_color[0], this.parent.properties.background_color[1], this.parent.properties.background_color[2], floor(this.parent.properties.background_color[3] * 0.3));
+      }
+      if (this.hasOwnProperty("properties") && this.properties !== undefined && this.properties.hasOwnProperty("background_color")){
+        background(this.properties.background_color[0], this.properties.background_color[1], this.properties.background_color[2], floor(this.properties.background_color[3] * 0.3));
+      }
+    }
     for (var i in this.zones){
       this.zones[i].draw(this, parentRegion);
     }
