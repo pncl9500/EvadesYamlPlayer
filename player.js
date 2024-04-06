@@ -56,7 +56,18 @@ class Player extends Entity{
     }
     return ctrlVector;
   }
-
+  resetToSpawn(){
+    this.x = 176 + random(-64,64);
+    this.y = 240 + random(-96,96);
+    for (var i in this.game.regions){
+      if (this.game.regions[i].name === startingRegionName){
+        this.regionNum === i;
+        this.region = this.game.regions[i];
+      }
+    }
+    this.areaNum = startingAreaNum;
+    this.area = this.region.areas[this.areaNum];
+  }
   resetAllModifiers(){
     this.tempSpeed = this.speed;
   }
@@ -78,18 +89,24 @@ class Player extends Entity{
       if (zone.properties.hasOwnProperty("minimum_speed")){
         this.gainEffect(new MinimumSpeedZoneEffect(zone.properties.minimum_speed), false);
       }
-      //this code looks terrible
-      if (zone.type === "exit" || zone.type === "teleport"){
-        if (!this.onTpZoneLastFrame){
-          if (zone.type === "exit"){
-            this.doExitTranslate(zone); 
+      switch (zone.type) {
+        case "removal":
+          this.resetToSpawn();
+        case "exit":
+        case "teleport":
+          if (!this.onTpZoneLastFrame){
+            if (zone.type === "exit"){
+              this.doExitTranslate(zone); 
+            }
+            if (zone.type === "teleport"){
+              this.doTeleportTranslate(this.area.zones.indexOf(zone)); 
+            }
           }
-          if (zone.type === "teleport"){
-            this.doTeleportTranslate(this.area.zones.indexOf(zone)); 
-          }
-        }
-        onTpZoneThisFrame = true;
-        this.onTpZoneLastFrame = true;
+          onTpZoneThisFrame = true;
+          this.onTpZoneLastFrame = true;
+          break;
+        default:
+          break;
       }
     }
     if (!onTpZoneThisFrame){
