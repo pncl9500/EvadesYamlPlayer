@@ -35,7 +35,7 @@ class Game{
   draw(){
     this.mainPlayer.area.draw(this.mainPlayer.region);
     for (var i in this.players){
-      if (!this.players[i].isMain && this.players[i].area === this.mainPlayer.area){
+      if (!this.players[i].isMain && this.players[i].area == this.mainPlayer.area){
         this.players[i].draw();
       }
     }
@@ -44,9 +44,9 @@ class Game{
 }
 
 startingRegionName = "Central Core";
-startingArea = 0;
+startingAreaNum = 0;
 function initGame(){
-  game = new Game();
+  var game = new Game();
   addVanillaRegionsToGame(game);
   startingRegionId = 0;
   for (var i in game.regions){
@@ -55,9 +55,10 @@ function initGame(){
       break;
     }
   }
-  mainPlayer = new Player(176 + random(-64,64), 240 + random(-96,96), 16, {r: 255, g: 0, b: 0}, "TestPlayer", true, game, startingRegionId, startingArea, [new WASDset, new ArrowSet, new MouseSet]);
+  mainPlayer = new Player(176 + random(-64,64), 240 + random(-96,96), 16, {r: 255, g: 0, b: 0}, "TestPlayer", true, game, startingRegionId, startingAreaNum, [new WASDset, new ArrowSet]);
   game.setMainPlayer(mainPlayer);
   game.addPlayer(mainPlayer);
-  //game.addPlayer(new Player(203, 110, 16, {r: 0, g: 255, b: 0}, "DummyPlayer", true, game, 0, 0, [new WASDset, new ArrowSet, new MouseSet]));
+  //dummy = new Player(300, 240, 16, {r: 0, g: 255, b: 0}, "DummyPlayer", false, game, startingRegionId, startingAreaNum, [new ArrowSet]);
+  //game.addPlayer(dummy);
   return game;
 }

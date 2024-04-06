@@ -116,8 +116,12 @@ class Player extends Entity{
         width: exitZone.width - epsilon * 2,
         height: exitZone.height - epsilon * 2,
       }
-      //for (var a = this.region.areas.length - 1; a >= 0; a--){
-      for (var a in this.region.areas){
+      //for (var a in this.region.areas){
+      //going backwards will prioritize earlier areas, which DOES ACTUALLY MATTER at least in cc2h
+      //since one teleport zone is meant to go into security gate B, but it overlaps with
+      //network connector
+      //also in rr40 i think
+      for (var a = this.region.areas.length - 1; a >= 0; a--){
         if (a === this.areaNum){
           //this doesnt even work
           continue;

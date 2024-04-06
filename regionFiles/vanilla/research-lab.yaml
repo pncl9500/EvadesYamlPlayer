@@ -7,7 +7,7 @@ areas:
 - x: var x
   y: var y
   zones:
-  - type: exit
+  - type: teleport
     x: 0
     y: 0
     width: 64
@@ -293,7 +293,7 @@ areas:
     width: 256
     height: 480
     properties: {minimum_speed: 10}
-  - type: exit
+  - type: teleport
     x: last_right
     y: 0
     width: 64

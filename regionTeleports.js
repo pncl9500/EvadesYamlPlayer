@@ -133,12 +133,32 @@ regionTeleports = {
       "zone_2": {dest: "Grand Garden Hard", x: 144}
     }
   },
+  //too many teleports
   "Cyber Castle":{
     "area_0": {
       "zone_0": {dest: "Research Lab", x: 176},
       "zone_1": {dest: "Cyber Castle Hard", x: 144},
-      "zone_4": {dest: "Infinite Inferno", y: 80},
       "zone_3": {dest: "Grand Garden", y: -80},
+      "zone_4": {dest: "Infinite Inferno", y: 80},
+      "zone_8": {dest: "Cyber Castle", x: 144, y: -240, area: 1},
+    },
+    "area_2":{
+      "zone_3": {dest: "Cyber Castle", x: 576, y: -160, area: 14},
+    },
+    "area_7":{
+      "zone_5": {dest: "Cyber Castle", x: 80, area: 9},
+    },
+    "area_8":{
+      "zone_0": {dest: "Cyber Castle", x: -80, area: 9},
+    },
+    "area_9":{
+      "zone_3": {dest: "Research Lab", x: 128, y: 240},
+      "zone_4": {dest: "Research Lab", x: 128, y: 240},
+      "zone_5": {dest: "Research Lab", x: 128, y: 240},
+      "zone_6": {dest: "Research Lab", x: 128, y: 240},
+    },
+    "area_14":{
+      "zone_2": {dest: "Cyber Castle", x: 256, y: -128, area: 15},
     }
   },
   "Infinite Inferno":{
@@ -265,7 +285,14 @@ regionTeleports = {
   "Cyber Castle Hard":{
     "area_0": {
       "zone_1": {dest: "Cyber Castle", x: 144},
-    }
+      "zone_6": {dest: "Cyber Castle Hard", x: 144, y: -240, area: 1},
+    },
+    "area_2":{
+      "zone_3": {dest: "Cyber Castle Hard", x: 576, y: -160, area: 21},
+    },
+    "area_13":{
+      "zone_3": {dest: "Cyber Castle Hard", y: -80, area: 14},
+    },
   },
 
 
@@ -283,6 +310,14 @@ regionTeleports = {
   "Shifting Sands":{
     "area_0": {
       "zone_0": {dest: "Peculiar Pyramid", x: -80},
+    }
+  },
+  //RL has been modified so the exit zones are teleports.
+  "Research Lab":{
+    "area_0": {
+      "zone_0": {dest: "Cyber Castle", x: 144},
+      "zone_6": {dest: "Cyber Castle", x: 144},
+      "zone_7": {dest: "Cyber Castle", x: 304, y: 240, area: 9},
     }
   },
   "Coupled Corridors":{
