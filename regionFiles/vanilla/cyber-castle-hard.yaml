@@ -1595,7 +1595,7 @@ areas:
     translate:
       x: 0
       y: 160
-    type: teleport
+    type: exit
     width: 32
     x: 928
     y: 928
