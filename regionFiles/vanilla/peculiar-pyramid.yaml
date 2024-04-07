@@ -65,7 +65,7 @@ areas:
     x: 3072
     y: 128
     properties:
-      background_color: [0, 0, 0, 70]
+      background_color: [170, 130, 90, 100]
 - name: Tunnel 2
   x: 4832
   y: 4800
