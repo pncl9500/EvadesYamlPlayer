@@ -12,6 +12,9 @@ regionTeleports = {
       "zone_0": {dest: "Central Core", y: -80},
       "zone_1": {dest: "Peculiar Pyramid", y: 80},
       "zone_2": {dest: "Mysterious Mansion", x: 144}
+    },
+    "area_16": {
+      "zone_2": {dest: "Mysterious Mansion", x: 112},
     }
   },
   "Peculiar Pyramid":{

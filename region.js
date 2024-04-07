@@ -3,6 +3,10 @@ class Region{
     this.name = name;
     this.properties = properties;
     this.areas = [];
+    this.buildRegions(areaArray);
+  }
+  buildRegions(areaArray){
+    //clean this code up later, its really bad
     var lastArea = null;
     for (var a = 0; a < areaArray.length; a++){
       var lastZone = null;
@@ -155,12 +159,16 @@ class Region{
 
 class Area{
   constructor(x, y, zones, properties, parent){
+    this.loaded = false;
     this.x = x;
     this.y = y;
     this.zones = zones;
     this.properties = properties;
     this.parent = parent;
     this.bounds = this.findBounds();
+    this.players = [];
+    //players do not go in the entities array
+    this.entities = [];
   }
   draw(parentRegion){
     if (settings.regionBackground){
@@ -174,9 +182,56 @@ class Area{
     for (var i in this.zones){
       this.zones[i].draw(this, parentRegion);
     }
+    //sort entities
+    this.entities.sort((a, b) => (a.z > b.z) ? 1 : -1);
+    for (var i in this.entities){
+      this.entities[i].draw();
+    }
   }
   update(){
-
+    for (var i in this.entities){
+      this.entities[i].update();
+    }
+  }
+  enter(player){
+    this.players.push(player);
+  }
+  exit(player){
+    this.players.splice(this.players.indexOf(player), 1);
+  }
+  attemptLoad(){
+    if (this.players.length === 1){
+      this.load();
+    } 
+  }
+  attemptUnload(){
+    if (this.players.length === 0){
+      this.unload();
+    } 
+  }
+  load(){
+    this.loaded = true;
+    this.addPellets();
+  }
+  addPellets(){
+    for (var i in this.zones){
+      if (this.zones[i].type === "active"){
+        const pprop = this.parent.properties ?? {};
+        const aprop = this.properties ?? {};
+        const pelletCount = aprop.pellet_count ?? (pprop.pellet_count ?? defaults.regionProps.pellet_count);
+        const pelletMultiplier = aprop.pellet_multiplier ?? (pprop.pellet_multiplier ?? defaults.regionProps.pellet_multiplier);
+        const zone = this.zones[i];
+        for (var p = 0; p < pelletCount; p++){
+          let px = random(zone.x + pelletRadius, zone.x + zone.width - pelletRadius);
+          let py = random(zone.y + pelletRadius, zone.y + zone.height - pelletRadius);
+          this.entities.push(new Pellet(px, py, this, this.zones[i], pelletMultiplier));
+        }
+      }
+    }
+  }
+  unload(){
+    this.loaded = false;
+    this.entities = [];
   }
   restrict(entity){
     if (entity.x - entity.getRadius() < this.bounds.left){

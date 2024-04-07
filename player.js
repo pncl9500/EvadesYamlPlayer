@@ -1,12 +1,14 @@
 class Player extends Entity{
   constructor(x, y, radius, color, name, isMain, game, regionNum = 0, areaNum = 0, ctrlSets = []){
-    super(x, y, radius, color, null, "noOutline")
+    super(x, y, radius, color, null, 1, "noOutline")
     this.isMain = isMain;
     this.game = game;
     this.regionNum = regionNum;
     this.region = game.regions[regionNum];
     this.areaNum = areaNum;
     this.area = this.region.areas[areaNum];
+    this.area.enter(this);
+    this.area.attemptLoad(this);
     this.downed = false;
     this.name = name;
     this.speed = 5;
@@ -65,8 +67,12 @@ class Player extends Entity{
         this.region = this.game.regions[i];
       }
     }
+    this.area.exit(this);
+    this.area.attemptUnload(this);
     this.areaNum = startingAreaNum;
     this.area = this.region.areas[this.areaNum];
+    this.area.enter(this);
+    this.area.attemptLoad(this);
   }
   resetAllModifiers(){
     this.tempSpeed = this.speed;
@@ -165,12 +171,16 @@ class Player extends Entity{
       console.warn("Exit translation could not find valid area. Search cut to prevent infinite loop. This is not normal and something has gone very wrong.")
     }
     if (foundArea !== null){
+      this.area.exit(this);
+      this.area.attemptUnload(this);
       this.x += exitZone.translate.x;
       this.y += exitZone.translate.y;
       this.x -= foundArea.x - this.area.x;
       this.y -= foundArea.y - this.area.y;
       this.areaNum = foundAreaNum;
       this.area = foundArea;
+      this.area.enter(this);
+      this.area.attemptLoad(this);
     }
   }
   goToRegionFromId(id){
@@ -210,8 +220,12 @@ class Player extends Entity{
     for (var i in this.game.regions){
       if (this.game.regions[i].name === dest){
         //found region
+        this.area.exit(this);
+        this.area.attemptUnload(this);
         this.goToRegionFromId(i);
         this.goToAreaFromId(areaDest);
+        this.area.enter(this);
+        this.area.attemptLoad(this);
         if (x !== null){
           this.x = x;
           this.x += (this.x < 0) ? this.area.bounds.right : this.area.bounds.left;

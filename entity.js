@@ -7,16 +7,20 @@ class Entity{
      * @param {number} x - X position.
      * @param {number} y - Y position.
      * @param {number} radius - In game units.
-     * @param {Object} color - Object containing r, g, b, and also a values of a color.
+     * @param {Object} color - Object containing r, g, b, and also a values of a color. Hex values work too
      * @param {String} renderType - Rendering style of object, can be outline, noOutline, ring, or image
      */
-  constructor(x, y, radius, color, area, renderType = "noOutline"){
+  constructor(x, y, radius, color, area, z, renderType = "noOutline"){
     this.x = x;
     this.y = y;
     this.radius = radius;
     this.tempRadius = radius;
     this.color = color;
-    this.tempColor = color;
+    this.z = z;
+    if (typeof this.color === "string"){
+      this.color = hexToRgb(this.color);
+    }
+    this.tempColor = this.color;
     this.renderType = renderType;
     this.restricted = false;
     this.area = area;
@@ -75,5 +79,8 @@ class Entity{
     }
     this.tempColor = this.color;
     this.tempRadius = this.radius;
+  }
+  update(){
+    
   }
 }
