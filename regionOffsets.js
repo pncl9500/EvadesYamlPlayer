@@ -39,6 +39,10 @@ regionOffsets = {
     x: 270104,
     y: 24640
   },
+  "Dusty Depths": {
+    x: 70208,
+    y: 5456
+  },
   "Elite Expanse": {
     x: 1952,
     y: 21760
@@ -178,12 +182,5 @@ regionOffsets = {
   "Withering Wasteland": {
     x: 1952,
     y: 173712
-  },
-
-
-  //this is not correct but it doesnt matter so it is ok for now
-  "Dusty Depths": {
-    x: 0,
-    y: 0
   },
 }
