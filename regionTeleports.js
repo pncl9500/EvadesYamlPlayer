@@ -296,6 +296,9 @@ regionTeleports = {
     "area_13":{
       "zone_3": {dest: "Cyber Castle Hard", y: -80, area: 14},
     },
+    "area_21":{
+      "zone_2": {dest: "Cyber Castle Hard", x: 256, y: -128, area: 22},
+    }
   },
 
 

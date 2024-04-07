@@ -1,6 +1,6 @@
 class Player extends Entity{
   constructor(x, y, radius, color, name, isMain, game, regionNum = 0, areaNum = 0, ctrlSets = []){
-    super(x, y, radius, color, null, 1, "noOutline")
+    super(x, y, radius, color, 1, "noOutline")
     this.isMain = isMain;
     this.game = game;
     this.regionNum = regionNum;
@@ -42,7 +42,7 @@ class Player extends Entity{
     this.yv = this.ctrlVector.y * this.tempSpeed * tFix;
     this.x += this.xv;
     this.y += this.yv;
-    this.restrict();
+    this.area.restrict(this);
 
     this.zonesTouched = this.getZonesTouched();
 

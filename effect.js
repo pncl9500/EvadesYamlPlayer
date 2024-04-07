@@ -13,7 +13,7 @@ class Effect{
   apply(target){
     this.doEffect(target);
     if (!this.noDuration){
-      this.life -= deltaTime;
+      this.life -= dTime;
       if (this.life < 0){
         this.toRemove = true;
         return;

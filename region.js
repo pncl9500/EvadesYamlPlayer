@@ -36,7 +36,7 @@ class Region{
           y = lastZone.y;
         }
 
-        var zone = new Zone(zn.type, x, y, w, h, zn.properties, zn.translate);
+        var zone = new Zone(zn.type, x, y, w, h, zn.properties, zn.spawner, zn.translate, this, a);
         zones.push(zone);
         lastZone = zone;
       }
@@ -191,6 +191,9 @@ class Area{
   update(){
     for (var i in this.entities){
       this.entities[i].update();
+      if (this.entities[i].restricted){
+        this.restrict(this.entities[i]);
+      }
     }
   }
   enter(player){
@@ -224,8 +227,9 @@ class Area{
         for (var p = 0; p < pelletCount; p++){
           let px = random(zone.x + pelletRadius, zone.x + zone.width - pelletRadius);
           let py = random(zone.y + pelletRadius, zone.y + zone.height - pelletRadius);
-          this.entities.push(new Pellet(px, py, this, this.zones[i], pelletMultiplier));
+          this.entities.push(new Pellet(px, py, this.zones[i], pelletMultiplier));
         }
+        this.zones[i].initSpawners();
       }
     }
   }
@@ -272,7 +276,7 @@ class Area{
 }
 
 class Zone{
-  constructor(type, x, y, width, height, properties, translate){
+  constructor(type, x, y, width, height, properties, spawner, translate, parentRegion, parentAreaNum){
     this.type = type;
     this.x = x;
     this.y = y;
@@ -281,6 +285,9 @@ class Zone{
     this.translate = translate ?? null;
     this.properties = properties ?? {};
     this.lineAlpha = this.type === "active" ? 15 : 15;
+    this.parentRegion = parentRegion;
+    this.parentAreaNum = parentAreaNum;
+    this.spawner = spawner;
   }
   getZoneBaseColor(){
     switch (this.type) {
@@ -333,5 +340,50 @@ class Zone{
         line(this.x, y * 32 + this.y, this.x + this.width, y * 32 + this.y);
       }
     }
+  }
+  initSpawners(){
+    console.log("INITIATE-NUCLEAR-REACTOR")
+    if (this.spawner === undefined){
+      return;
+    }
+    const spawner = this.spawner;
+    for (var i in spawner){
+      this.spawn(spawner[i]);
+    }
+  }
+  spawn(spawner){
+    for (var spawnIndex = 0; spawnIndex < spawner.count; spawnIndex++){
+      let enemyType = random(spawner.types);
+      let area = this.parentRegion.areas[this.parentAreaNum]
+      let x = spawner.x ?? random(this.x + spawner.radius, this.x + this.width - spawner.radius);
+      let y = spawner.y ?? random(this.y + spawner.radius, this.y + this.height - spawner.radius);
+      if (typeof x === "string"){
+        let strs = x.split(", ");
+        x = random(parseInt(strs[0]), parseInt(strs[1]));
+        console.log(strs);
+        console.log(x);
+      }
+      if (typeof y === "string"){
+        let strs = y.split(", ");
+        y = random(parseInt(strs[0]), parseInt(strs[1]));
+        console.log(strs);
+        console.log(y);
+      }
+      let d = spawner.angle ?? random(0, 360);
+      let enemy = getEnemyFromSpawner(x, y, d * (Math.PI/180), enemyType, spawner, spawnIndex);
+      enemy.parentZone = this;
+      area.entities.push(enemy);
+    }
+  }
+}
+
+
+
+function getEnemyFromSpawner(x, y, d, enemyType, spawner, spawnIndex){
+  let r = spawner.radius;
+  let s = spawner.speed;
+  switch (enemyType) {
+    case "normal": return new Normal(x, y, d, s, r, "#ffffff");
+    default: return new MysteryEnemy(x, y, d, s, r, enemyType);
   }
 }

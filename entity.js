@@ -10,7 +10,7 @@ class Entity{
      * @param {Object} color - Object containing r, g, b, and also a values of a color. Hex values work too
      * @param {String} renderType - Rendering style of object, can be outline, noOutline, ring, or image
      */
-  constructor(x, y, radius, color, area, z, renderType = "noOutline"){
+  constructor(x, y, radius, color, z, renderType = "noOutline"){
     this.x = x;
     this.y = y;
     this.radius = radius;
@@ -23,15 +23,9 @@ class Entity{
     this.tempColor = this.color;
     this.renderType = renderType;
     this.restricted = false;
-    this.area = area;
   }
   getRadius(){
     return this.tempRadius;
-  }
-  restrict(){
-    if (this.restricted){
-      this.area.restrict(this);
-    }
   }
   gainEffect(effect){
     if (!effect.allowDuplicates){

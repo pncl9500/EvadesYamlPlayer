@@ -24,6 +24,11 @@ var tFix = 0.5;
  */
 function draw() {
   tFix = deltaTime / (1000 / 60) / 2;
+  dTime = deltaTime;
+  if (deltaTime > 1000){
+    tFix = 0;
+    dTime = 0;
+  }
   updateAll();
   background(51);
   push();
