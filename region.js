@@ -3,6 +3,7 @@ class Region{
     this.name = name;
     this.properties = properties;
     this.areas = [];
+    this.unknownEnemyTypes = [];
     this.buildRegions(areaArray);
   }
   buildRegions(areaArray){
@@ -185,6 +186,7 @@ class Area{
     //sort entities
     this.entities.sort((a, b) => (a.z > b.z) ? 1 : -1);
     for (var i in this.entities){
+      this.entities[i].drawExtra();
       this.entities[i].draw();
     }
   }
@@ -202,9 +204,9 @@ class Area{
   exit(player){
     this.players.splice(this.players.indexOf(player), 1);
   }
-  attemptLoad(){
+  attemptLoad(throughTp){
     if (this.players.length === 1){
-      this.load();
+      this.load(throughTp);
     } 
   }
   attemptUnload(){
@@ -212,9 +214,32 @@ class Area{
       this.unload();
     } 
   }
-  load(){
+  load(throughTp){
     this.loaded = true;
     this.addPellets();
+    if (this.parent.areas.indexOf(this) === 0 && throughTp){
+      this.scanForUnknownEnemyTypes();
+    }
+  }
+  scanForUnknownEnemyTypes(){
+    this.parent.unknownEnemyTypes = [];
+    for (var a in this.parent.areas){
+      for (var z in this.parent.areas[a].zones){
+        let zn = this.parent.areas[a].zones[z];
+        for (var s in zn.spawner){
+          for (var t in zn.spawner[s].types){
+            let type = zn.spawner[s].types[t];
+            let testEnem = getEnemyFromSpawner(0, 0, 0, type, zn.spawner, 0);
+            if (testEnem.constructor.name === "MysteryEnemy" && this.parent.unknownEnemyTypes.indexOf(type) === -1){
+              this.parent.unknownEnemyTypes.push(type);
+            }
+          }
+        }
+      }
+    }
+    for (var i in this.parent.unknownEnemyTypes){
+      console.warn(`Unknown enemy in ${this.parent.name}: ${this.parent.unknownEnemyTypes[i]}`);
+    }
   }
   addPellets(){
     for (var i in this.zones){
@@ -342,7 +367,6 @@ class Zone{
     }
   }
   initSpawners(){
-    console.log("INITIATE-NUCLEAR-REACTOR")
     if (this.spawner === undefined){
       return;
     }
@@ -352,7 +376,7 @@ class Zone{
     }
   }
   spawn(spawner){
-    for (var spawnIndex = 0; spawnIndex < spawner.count; spawnIndex++){
+    for (var spawnIndex = 0; spawnIndex < spawner.count ?? 1; spawnIndex++){
       let enemyType = random(spawner.types);
       let area = this.parentRegion.areas[this.parentAreaNum]
       let x = spawner.x ?? random(this.x + spawner.radius, this.x + this.width - spawner.radius);
@@ -360,14 +384,10 @@ class Zone{
       if (typeof x === "string"){
         let strs = x.split(", ");
         x = random(parseInt(strs[0]), parseInt(strs[1]));
-        console.log(strs);
-        console.log(x);
       }
       if (typeof y === "string"){
         let strs = y.split(", ");
         y = random(parseInt(strs[0]), parseInt(strs[1]));
-        console.log(strs);
-        console.log(y);
       }
       let d = spawner.angle ?? random(0, 360);
       let enemy = getEnemyFromSpawner(x, y, d * (Math.PI/180), enemyType, spawner, spawnIndex);
@@ -382,8 +402,9 @@ class Zone{
 function getEnemyFromSpawner(x, y, d, enemyType, spawner, spawnIndex){
   let r = spawner.radius;
   let s = spawner.speed;
+  let auraSize = spawner[enemyType + "_radius"] ?? (defaults.spawnerProps[enemyType + "_radius"] ?? 150);
   switch (enemyType) {
-    case "normal": return new Normal(x, y, d, s, r, "#ffffff");
-    default: return new MysteryEnemy(x, y, d, s, r, enemyType);
+    case "normal": return new Normal(x, y, d, s, r);
+    default: return new MysteryEnemy(x, y, d, s, r, pal.nmaur[enemyType] ?? {r: 0, b: 0, g: 0}, pal.nmaur.hasOwnProperty(enemyType) ? auraSize : 0, enemyType);
   }
 }

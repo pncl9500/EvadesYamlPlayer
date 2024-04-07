@@ -19,13 +19,14 @@ function setup() {
 }
 
 var tFix = 0.5;
+var timeCap = 250;
 /**
  * Called every frame
  */
 function draw() {
   tFix = deltaTime / (1000 / 60) / 2;
   dTime = deltaTime;
-  if (deltaTime > 1000){
+  if (deltaTime > timeCap){
     tFix = 0;
     dTime = 0;
   }

@@ -8,7 +8,7 @@ class Player extends Entity{
     this.areaNum = areaNum;
     this.area = this.region.areas[areaNum];
     this.area.enter(this);
-    this.area.attemptLoad(this);
+    this.area.attemptLoad(true);
     this.downed = false;
     this.name = name;
     this.speed = 5;
@@ -72,7 +72,7 @@ class Player extends Entity{
     this.areaNum = startingAreaNum;
     this.area = this.region.areas[this.areaNum];
     this.area.enter(this);
-    this.area.attemptLoad(this);
+    this.area.attemptLoad(true);
   }
   resetAllModifiers(){
     this.tempSpeed = this.speed;
@@ -180,7 +180,7 @@ class Player extends Entity{
       this.areaNum = foundAreaNum;
       this.area = foundArea;
       this.area.enter(this);
-      this.area.attemptLoad(this);
+      this.area.attemptLoad(false);
     }
   }
   goToRegionFromId(id){
@@ -225,7 +225,7 @@ class Player extends Entity{
         this.goToRegionFromId(i);
         this.goToAreaFromId(areaDest);
         this.area.enter(this);
-        this.area.attemptLoad(this);
+        this.area.attemptLoad(true);
         if (x !== null){
           this.x = x;
           this.x += (this.x < 0) ? this.area.bounds.right : this.area.bounds.left;

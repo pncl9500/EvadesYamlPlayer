@@ -48,6 +48,9 @@ class Entity{
       }
     }
   }
+  drawExtra(){
+
+  }
   draw(){
     fill(this.tempColor.r, this.tempColor.g, this.tempColor.b, this.tempColor.a ?? 255);
     switch (this.renderType) {

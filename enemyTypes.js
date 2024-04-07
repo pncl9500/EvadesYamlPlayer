@@ -1,7 +1,6 @@
-class MysteryEnemy extends Enemy{
-  constructor(x, y, angle, speed, radius, placeholderType){
-    console.warn(`unimplemented enemy type "${placeholderType}"`)
-    super(x, y, angle, speed, radius, pal.nm.hasOwnProperty(placeholderType) ? pal.nm[placeholderType] : pal.nm.mystery);
+class MysteryEnemy extends AuraEnemy{
+  constructor(x, y, angle, speed, radius, auraColor, auraRadius, placeholderType){
+    super(x, y, angle, speed, radius, pal.nm.hasOwnProperty(placeholderType) ? pal.nm[placeholderType] : pal.nm.mystery, auraColor, auraRadius);
   }
 }
 
