@@ -1,6 +1,9 @@
 class Enemy extends Entity{
   constructor(x, y, angle, speed, radius, color){
     super(x, y, radius, color, 2000 - radius, "outline");
+    
+    this.immune = false;
+
     this.angle = angle;
     this.xv = speed;
     this.yv = 0;
@@ -21,13 +24,13 @@ class Enemy extends Entity{
     this.resetState();
     this.x += this.xv * tFix * this.speedMultiplier;
     this.y += this.yv * tFix * this.speedMultiplier;
-    this.checkForWallbounces();
+    this.wallBounce();
     this.updateAura();
   }
   updateAura(){
 
   }
-  checkForWallbounces(){
+  wallBounce(){
     this.x - this.radius < this.parentZone.x && (this.x = this.parentZone.x + this.radius, this.angleToVel(), this.xv *= -1, this.velToAngle());
     this.x + this.radius > this.parentZone.x + this.parentZone.width && (this.x = this.parentZone.x + this.parentZone.width - this.radius, this.angleToVel(), this.xv *= -1, this.velToAngle());
     this.y - this.radius < this.parentZone.y && (this.y = this.parentZone.y + this.radius, this.angleToVel(), this.yv *= -1, this.velToAngle());

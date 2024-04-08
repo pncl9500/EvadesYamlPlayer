@@ -229,7 +229,7 @@ class Area{
         for (var s in zn.spawner){
           for (var t in zn.spawner[s].types){
             let type = zn.spawner[s].types[t];
-            let testEnem = getEnemyFromSpawner(0, 0, 0, type, zn.spawner, 0);
+            let testEnem = getEnemyFromSpawner(0, 0, 0, type, zn.spawner, 0, zn);
             if (testEnem.constructor.name === "MysteryEnemy" && this.parent.unknownEnemyTypes.indexOf(type) === -1){
               this.parent.unknownEnemyTypes.push(type);
             }
@@ -390,7 +390,7 @@ class Zone{
         y = random(parseInt(strs[0]), parseInt(strs[1]));
       }
       let d = spawner.angle ?? random(0, 360);
-      let enemy = getEnemyFromSpawner(x, y, d * (Math.PI/180), enemyType, spawner, spawnIndex);
+      let enemy = getEnemyFromSpawner(x, y, d * (Math.PI/180), enemyType, spawner, spawnIndex, this);
       enemy.parentZone = this;
       area.entities.push(enemy);
     }
@@ -399,12 +399,13 @@ class Zone{
 
 
 
-function getEnemyFromSpawner(x, y, d, enemyType, spawner, spawnIndex){
+function getEnemyFromSpawner(x, y, d, enemyType, spawner, spawnIndex, zone){
   let r = spawner.radius;
   let s = spawner.speed;
   let auraSize = spawner[enemyType + "_radius"] ?? (defaults.spawnerProps[enemyType + "_radius"] ?? 150);
   switch (enemyType) {
     case "normal": return new Normal(x, y, d, s, r);
+    case "wall": return new Wall(s, r, spawnIndex, spawner.count, spawner.move_clockwise ?? defaults.spawnerProps.move_clockwise, zone);
     default: return new MysteryEnemy(x, y, d, s, r, pal.nmaur[enemyType] ?? {r: 0, b: 0, g: 0}, pal.nmaur.hasOwnProperty(enemyType) ? auraSize : 0, enemyType);
   }
 }

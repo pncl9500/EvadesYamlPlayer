@@ -25,11 +25,12 @@ var gsPixelHeight = 720;
 /**
  * Height of the game's screen in game units
  */
-const gsUnitHeight = 720;
+//720
+const gsUnitHeight = 2000;
 /**
  * Height of the game's screen in game units (not actually necessary)
  */
-const gsUnitWidth = 1280;
+const gsUnitWidth = gsUnitHeight * targetCanvRatio;
 /**
  * Ratio between pixels and game units
  */
