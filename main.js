@@ -1,5 +1,6 @@
 debugValue = "no debug value yet";
 game = null;
+ui = null;
 
 /**
  * Loaded before the game is opened
@@ -16,6 +17,7 @@ function setup() {
 
   initCanvas();
   game = initGame();
+  ui = initUI();
 }
 
 var tFix = 0.5;
@@ -35,8 +37,9 @@ function draw() {
   push();
   doCamTransform(cameraFocusX, cameraFocusY, 1);
   game.draw();
-
+  ui.draw();
   pop();
+
   drawCinemaBars();
 
   //drawDebugValueText();
