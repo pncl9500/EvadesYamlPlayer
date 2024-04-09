@@ -26,8 +26,7 @@ class Area{
     for (var i in this.zones){
       this.zones[i].drawLines(this, parentRegion);
     }
-    //figure out how the fuck to draw the line buffer here
-    tint(255, 40);
+    tint(255, settings.gridAlpha);
     image(gridBuffer, 0, 0);
     //sort entities
     this.entities.sort((a, b) => (a.z > b.z) ? 1 : -1);
