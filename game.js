@@ -45,6 +45,9 @@ class Game{
 
 startingRegionName = "Central Core";
 startingAreaNum = 0;
+// startingRegionName = "Monumental Migration";
+// startingAreaNum = 479;
+
 function initGame(){
   var game = new Game();
   addVanillaRegionsToGame(game);

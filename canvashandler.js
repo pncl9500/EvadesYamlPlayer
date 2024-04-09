@@ -21,12 +21,12 @@ var gsPixelWidth = 1280;
 /**
  * Height of the game's screen in pixels
  */
-var gsPixelHeight = 720;
+var gsPixelHeight = 1280;
 /**
  * Height of the game's screen in game units
  */
 //720
-const gsUnitHeight = 2000;
+const gsUnitHeight = 720;
 /**
  * Height of the game's screen in game units (not actually necessary)
  */

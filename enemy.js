@@ -2,9 +2,12 @@ class Enemy extends Entity{
   constructor(x, y, angle, speed, radius, color){
     super(x, y, radius, color, 2000 - radius, "outline");
     
+    this.normalMovementDisabled = false;
+
     this.immune = false;
 
     this.angle = angle;
+    this.speed = speed;
     this.xv = speed;
     this.yv = 0;
     this.restricted = true;
@@ -20,12 +23,18 @@ class Enemy extends Entity{
     this.xv = mag * cos(this.angle);
     this.yv = mag * sin(this.angle);
   }
-  update(){
+  update(area, players){
     this.resetState();
-    this.x += this.xv * tFix * this.speedMultiplier;
-    this.y += this.yv * tFix * this.speedMultiplier;
+    this.behavior(area, players);
+    if (!this.normalMovementDisabled){
+      this.x += this.xv * tFix * this.speedMultiplier;
+      this.y += this.yv * tFix * this.speedMultiplier;
+    }
     this.wallBounce();
     this.updateAura();
+  }
+  behavior(area, players){
+
   }
   updateAura(){
 
@@ -35,6 +44,10 @@ class Enemy extends Entity{
     this.x + this.radius > this.parentZone.x + this.parentZone.width && (this.x = this.parentZone.x + this.parentZone.width - this.radius, this.angleToVel(), this.xv *= -1, this.velToAngle());
     this.y - this.radius < this.parentZone.y && (this.y = this.parentZone.y + this.radius, this.angleToVel(), this.yv *= -1, this.velToAngle());
     this.y + this.radius > this.parentZone.y + this.parentZone.height && (this.y = this.parentZone.y + this.parentZone.height - this.radius, this.angleToVel(), this.yv *= -1, this.velToAngle());
+    this.wallBounceEvent();
+  }
+  wallBounceEvent(){
+
   }
   resetState(){
     this.speedMultiplier = 1;

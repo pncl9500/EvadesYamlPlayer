@@ -4,8 +4,6 @@ properties:
   friction: 0.75
 areas:
 - name: Tunnel 1
-  properties:
-    allow_solo_with_group: true
   x: var x
   y: var y
   zones:
@@ -24,7 +22,7 @@ areas:
   - height: 480
     properties:
       background_color: [0, 0, 0, 100]
-    translate: {x: 140576, y: 0}
+    translate: {x: 283008, y: 0}
     type: teleport
     width: 32
     x: 0
@@ -59,18 +57,22 @@ areas:
     x: 3072
     y: 0
   - height: 128
-    translate: {x: "if you are reading this you need a new peculiar pyramid file", y: 0}
+    translate: {x: 65248, y: 2064}
     type: teleport
     width: 64
     x: 3072
     y: 128
+    requirements:
+    - dusty_depths_found
     properties:
       background_color: [170, 130, 90, 100]
 - name: Tunnel 2
   x: 4832
   y: 4800
   properties:
-    allow_solo_with_group: true
+    pellet_count: 5
+    pellet_multiplier: 2.5
+    charge_reduced: True
   zones:
   - height: 64
     translate: {x: 0, y: -160}
@@ -102,7 +104,9 @@ areas:
   x: 4832
   y: 5760
   properties:
-    allow_solo_with_group: true
+    pellet_count: 10
+    pellet_multiplier: 1.5
+    charge_reduced: True
   zones:
   - height: 64
     translate: {x: 0, y: -160}
@@ -142,7 +146,9 @@ areas:
   x: 6144
   y: 4640
   properties:
-    allow_solo_with_group: true
+    pellet_count: 5
+    pellet_multiplier: 2.5
+    charge_reduced: True
   zones:
   - height: 160
     translate: {x: 160, y: 0}
@@ -176,8 +182,6 @@ areas:
 - name: Tunnel 5
   x: 6624
   y: 4640
-  properties:
-    allow_solo_with_group: true
   zones:
   - height: 128
     translate: {x: -160, y: 0}
@@ -210,7 +214,6 @@ areas:
     y: 416
 - name: Perimeter 1
   properties:
-    allow_solo_with_group: true
     background_color: [68, 62, 12, 70]
   x: 4832
   y: 6240
