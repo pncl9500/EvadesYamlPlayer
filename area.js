@@ -23,6 +23,12 @@ class Area{
     for (var i in this.zones){
       this.zones[i].draw(this, parentRegion);
     }
+    for (var i in this.zones){
+      this.zones[i].drawLines(this, parentRegion);
+    }
+    //figure out how the fuck to draw the line buffer here
+    tint(255, 40);
+    image(gridBuffer, 0, 0);
     //sort entities
     this.entities.sort((a, b) => (a.z > b.z) ? 1 : -1);
     for (var i in this.entities){

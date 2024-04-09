@@ -7,7 +7,6 @@ class Zone{
     this.height = height;
     this.translate = translate ?? null;
     this.properties = properties ?? {};
-    this.lineAlpha = this.type === "active" ? 15 : 15;
     this.parentRegion = parentRegion;
     this.parentAreaNum = parentAreaNum;
     this.spawner = spawner;
@@ -52,15 +51,16 @@ class Zone{
       fill(this.properties.background_color[0], this.properties.background_color[1], this.properties.background_color[2], this.properties.background_color[3]);
       rect(this.x, this.y, this.width, this.height);
     }
-    
+  }
+  drawLines(){
     if (settings.drawTiles){
-      stroke(0, 0, 0, this.lineAlpha);
-      strokeWeight(3);
+      gridBuffer.stroke(0, 0, 0, 255);
+      gridBuffer.strokeWeight(1.5);
       for (var x = 0; x < this.width / 32; x++){
-        line(x * 32 + this.x, this.y, x * 32 + this.x, this.y + this.height);
+        gridBuffer.line(x * 32 + this.x, this.y, x * 32 + this.x, this.y + this.height);
       }
       for (var y = 0; y < this.height / 32; y++){
-        line(this.x, y * 32 + this.y, this.x + this.width, y * 32 + this.y);
+        gridBuffer.line(this.x, y * 32 + this.y, this.x + this.width, y * 32 + this.y);
       }
     }
   }

@@ -11,7 +11,7 @@ class Enemy extends Entity{
     this.xv = speed;
     this.yv = 0;
     this.restricted = true;
-    this.speedMultiplier = 1;
+    this.resetState();
     this.angleToVel();
     //all enemies have parentZone property
   }
@@ -27,10 +27,12 @@ class Enemy extends Entity{
     this.resetState();
     this.behavior(area, players);
     if (!this.normalMovementDisabled){
-      this.x += this.xv * tFix * this.speedMultiplier;
-      this.y += this.yv * tFix * this.speedMultiplier;
+      this.x += this.xv * tFix * this.speedMultiplier * this.xSpeedMultiplier;
+      this.y += this.yv * tFix * this.speedMultiplier * this.ySpeedMultiplier;
     }
-    this.wallBounce();
+    if (!this.wallBounceDisabled){
+      this.wallBounce();
+    }
     this.updateAura();
   }
   behavior(area, players){
@@ -51,6 +53,9 @@ class Enemy extends Entity{
   }
   resetState(){
     this.speedMultiplier = 1;
+    this.xSpeedMultiplier = 1;
+    this.ySpeedMultiplier = 1;
+    this.wallBounceDisabled = false;
   }
 }
 
