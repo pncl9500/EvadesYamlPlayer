@@ -4,7 +4,7 @@ function initUI(){
 class UI{
   constructor(){
     this.uiPanels = [];
-    this.uiPanels.push(new UIpanel(-1, -1));
+    //this.uiPanels.push(new Chat());
   }
   draw(){
     for (var i in this.uiPanels){
@@ -26,12 +26,22 @@ class UIpanel{
     this.padding = 10;
   }
   draw(){
-    fill(0, 152);
-    rect(0, 0, 300, 175);
+    
   }
   transform(){
     translate(cameraFocusX, cameraFocusY);
     translate(gsUnitWidth * this.xside / 2, gsUnitHeight * this.yside / 2);
     translate(this.padding * -this.xside, this.padding * -this.yside)
+  }
+}
+
+class Chat extends UIpanel{
+  constructor(){
+    super(-1 ,-1);
+  }
+  draw(){
+    noStroke();
+    fill(0, 152);
+    rect(0, 0, 300, 175);
   }
 }
