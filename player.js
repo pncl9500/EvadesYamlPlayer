@@ -24,6 +24,7 @@ class Player extends Entity{
     this.ctrlVector = {x: 0, y: 0};
     this.effects = [];
     this.onTpZoneLastFrame = false;
+    this.shifting = false;
     this.energyBarColor = {r: settings.energyBarColor[0], g: settings.energyBarColor[1], b: settings.energyBarColor[2], a: settings.energyBarColor[3]};
   }
   //design this with the idea that it will be completely overriden in cent's code
@@ -32,15 +33,16 @@ class Player extends Entity{
       this.speed += 0.2;
     }
     this.resetAllModifiers();
-
+    
     this.applyEffects();
 
 
 
     //final pass
     this.ctrlVector = this.getControls();
-    this.xv = this.ctrlVector.x * this.tempSpeed * tFix;
-    this.yv = this.ctrlVector.y * this.tempSpeed * tFix;
+    this.speedMultiplier *= this.shifting ? 0.5 : 1;
+    this.xv = this.ctrlVector.x * this.tempSpeed * tFix * this.speedMultiplier * this.xSpeedMultiplier;
+    this.yv = this.ctrlVector.y * this.tempSpeed * tFix * this.speedMultiplier * this.ySpeedMultiplier;
     this.x += this.xv;
     this.y += this.yv;
     this.area.restrict(this);
@@ -50,6 +52,10 @@ class Player extends Entity{
     this.handleZonesTouched();
   }
   getControls(){
+    this.shifting = false;
+    if (keyIsDown(16)){
+      this.shifting = true;
+    }
     var ctrlVector = {x: 0, y: 0};
     for (var i in this.ctrlSets){
       var testCv = this.ctrlSets[i].getCtrlVector();
@@ -103,6 +109,9 @@ class Player extends Entity{
   }
   resetAllModifiers(){
     this.tempSpeed = this.speed;
+    this.speedMultiplier = 1;
+    this.xSpeedMultiplier = 1;
+    this.ySpeedMultiplier = 1;
   }
   getZonesTouched(){
     var zt = [];
