@@ -58,9 +58,15 @@ class Player extends Entity{
     }
     var ctrlVector = {x: 0, y: 0};
     for (var i in this.ctrlSets){
+      if (!this.ctrlSets[i].active){
+        continue;
+      }
       var testCv = this.ctrlSets[i].getCtrlVector();
-      if (testCv !== null){
-        ctrlVector = testCv;
+      if (testCv.x !== null){
+        ctrlVector.x = testCv.x;
+      }
+      if (testCv.y !== null){
+        ctrlVector.y = testCv.y;
       }
     }
     return ctrlVector;

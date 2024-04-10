@@ -17,9 +17,9 @@ class KeyCtrlSet extends ControlSet{
     this.rightKey = rightKey;
   }
   getCtrlVector(){
-    let x = keyIsDown(this.rightKey) ? 1 : (keyIsDown(this.leftKey) ? -1 : 0);
-    let y = keyIsDown(this.upKey) ? -1 : (keyIsDown(this.downKey) ? 1 : 0);
-    return this.active && {} ? {x: x, y: y} : null;
+    let x = keyIsDown(this.rightKey) ? 1 : (keyIsDown(this.leftKey) ? -1 : null);
+    let y = keyIsDown(this.upKey) ? -1 : (keyIsDown(this.downKey) ? 1 : null);
+    return {x: x, y: y};
   }
 }
 

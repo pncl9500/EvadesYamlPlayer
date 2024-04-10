@@ -61,7 +61,5 @@ function initGame(){
   mainPlayer = new Player(176 + random(-64,64), 240 + random(-96,96), 16, {r: 255, g: 0, b: 0}, "TestPlayer", true, game, startingRegionId, startingAreaNum, [new WASDset, new ArrowSet]);
   game.setMainPlayer(mainPlayer);
   game.addPlayer(mainPlayer);
-  dummy = new Player(300, 240, 16, {r: 0, g: 255, b: 0}, "DummyPlayer", false, game, startingRegionId, startingAreaNum, [new WASDset]);
-  game.addPlayer(dummy);
   return game;
 }
