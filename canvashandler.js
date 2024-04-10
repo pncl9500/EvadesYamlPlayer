@@ -49,7 +49,6 @@ var cameraFocusY = 0;
  */
 function initCanvas(){
   createCanvas(windowWidth, windowHeight);
-  gridBuffer = createGraphics(windowWidth, windowHeight);
   windowAspectRatio = windowWidth / windowHeight;
   //This is some kludge shit right here
   //drawCinemaBars() sets a bunch of variables needed to scale the game properly

@@ -52,18 +52,6 @@ class Zone{
       rect(this.x, this.y, this.width, this.height);
     }
   }
-  drawLines(){
-    if (settings.drawTiles){
-      gridBuffer.stroke(0, 0, 0, 255);
-      gridBuffer.strokeWeight(1.5);
-      for (var x = 0; x < this.width / 32; x++){
-        gridBuffer.line(x * 32 + this.x, this.y, x * 32 + this.x, this.y + this.height);
-      }
-      for (var y = 0; y < this.height / 32; y++){
-        gridBuffer.line(this.x, y * 32 + this.y, this.x + this.width, y * 32 + this.y);
-      }
-    }
-  }
   initSpawners(){
     if (this.spawner === undefined){
       return;

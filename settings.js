@@ -1,5 +1,12 @@
 settings = {
   drawTiles: true,
   regionBackground : true,
-  gridAlpha: 40,
+  gridColor: [
+    0,
+    0,
+    60,
+    40,
+  ],
+  gridLineWidth: 1,
+  gridSize: 32
 }

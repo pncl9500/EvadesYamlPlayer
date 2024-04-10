@@ -23,16 +23,29 @@ class Area{
     for (var i in this.zones){
       this.zones[i].draw(this, parentRegion);
     }
-    for (var i in this.zones){
-      this.zones[i].drawLines(this, parentRegion);
+    //buffers suck don't do them, you can just do this
+    if (settings.drawTiles){
+      this.drawTiles();
     }
-    tint(255, settings.gridAlpha);
-    image(gridBuffer, 0, 0);
     //sort entities
     this.entities.sort((a, b) => (a.z > b.z) ? 1 : -1);
     for (var i in this.entities){
       this.entities[i].drawExtra();
       this.entities[i].draw();
+    }
+  }
+  drawTiles(){
+    let r = settings.gridColor[0];
+    let g = settings.gridColor[1];
+    let b = settings.gridColor[2];
+    let a = settings.gridColor[3];
+    stroke(r, g, b, a);
+    strokeWeight(settings.gridLineWidth);
+    for (var x = 1; x < (this.bounds.right - this.bounds.left) / settings.gridSize; x++){
+      line(x * settings.gridSize, this.bounds.top, x * settings.gridSize, this.bounds.bottom);
+    }
+    for (var y = 1; y < (this.bounds.bottom - this.bounds.top) / settings.gridSize; y++){
+      line(this.bounds.left, y * settings.gridSize, this.bounds.right, y * settings.gridSize);
     }
   }
   update(){
