@@ -1,4 +1,5 @@
 settings = {
+  fps: 60,
   //whether or not to draw the grid.
   drawTiles: true,
   //the color of the grid, alpha included

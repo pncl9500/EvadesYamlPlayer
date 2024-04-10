@@ -12,6 +12,7 @@ function preload(){
  * Called once when the page is opened
  */
 function setup() {
+  frameRate(settings.fps);
   textFont('Helvetica');
   //everything in evades is based on radius instead of diameter so we use radius
   ellipseMode(RADIUS);
