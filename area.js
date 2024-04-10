@@ -30,7 +30,12 @@ class Area{
     //sort entities
     this.entities.sort((a, b) => (a.z > b.z) ? 1 : -1);
     for (var i in this.entities){
-      this.entities[i].drawExtra();
+      this.entities[i].drawAura();
+    }
+    for (var i in this.players){
+      this.players[i].draw();
+    }
+    for (var i in this.entities){
       this.entities[i].draw();
     }
   }

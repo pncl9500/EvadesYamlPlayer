@@ -34,12 +34,6 @@ class Game{
   }
   draw(){
     this.mainPlayer.area.draw(this.mainPlayer.region);
-    for (var i in this.players){
-      if (!this.players[i].isMain && this.players[i].area == this.mainPlayer.area){
-        this.players[i].draw();
-      }
-    }
-    this.mainPlayer.draw();
   }
 }
 

@@ -19,13 +19,26 @@ class Player extends Entity{
     this.level = 1;
     this.levelProgress = 0;
     this.levelProgressNeeded = 4;
+    this.upgradePoints = 0;
     this.restricted = true;
     this.ctrlSets = ctrlSets;
     this.ctrlVector = {x: 0, y: 0};
     this.effects = [];
     this.onTpZoneLastFrame = false;
     this.shifting = false;
+    this.resetAllModifiers();
+  }
+  resetAllModifiers(){
+    this.tempSpeed = this.speed;
+    this.speedMultiplier = 1;
+    this.xSpeedMultiplier = 1;
+    this.ySpeedMultiplier = 1;
     this.energyBarColor = {r: settings.energyBarColor[0], g: settings.energyBarColor[1], b: settings.energyBarColor[2], a: settings.energyBarColor[3]};
+
+    this.invincibility = false;
+    this.corrosiveBypass = false;
+    this.effectVulnerability = 1;
+    this.fullEffectImmunity = false;
   }
   //design this with the idea that it will be completely overriden in cent's code
   update(){
@@ -113,12 +126,6 @@ class Player extends Entity{
     textSize(12);
     text(this.name, this.x, this.y - this.radius - 15);
   }
-  resetAllModifiers(){
-    this.tempSpeed = this.speed;
-    this.speedMultiplier = 1;
-    this.xSpeedMultiplier = 1;
-    this.ySpeedMultiplier = 1;
-  }
   getZonesTouched(){
     var zt = [];
     for (var i in this.area.zones){
@@ -151,6 +158,11 @@ class Player extends Entity{
           onTpZoneThisFrame = true;
           this.onTpZoneLastFrame = true;
           break;
+        case "safe":
+          //check again if the player is completely 100% inside the safe zone, and then apply safe zone effect
+          if (circleRect({x: this.x, y: this.y, radius: this.getRadius()}, {x: zone.x + this.getRadius() * 2, y: zone.y + this.getRadius() * 2, width: zone.width - this.getRadius() * 4, height: zone.height - this.getRadius() * 4})){
+            this.gainEffect(new SafeZoneEffect(), false);
+          }
         default:
           break;
       }

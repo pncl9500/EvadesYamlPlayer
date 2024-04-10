@@ -31,3 +31,13 @@ class MinimumSpeedZoneEffect extends Effect{
     target.tempSpeed = Math.max(target.tempSpeed, this.minSpeed);
   }
 }
+
+class SafeZoneEffect extends Effect{
+  constructor(duration = 0){
+    super(duration, 0, false)
+  }
+  doEffect(target){
+    this.invincibility = true;
+    this.corrosiveBypass = true;
+  }
+}

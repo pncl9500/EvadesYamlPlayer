@@ -20,7 +20,7 @@ class Entity{
     if (typeof this.color === "string"){
       this.color = hexToRgb(this.color);
     }
-    this.tempColor = this.color;
+    this.tempColor = {r: this.color.r, g: this.color.g, b: this.color.b, a: this.color.a};
     this.renderType = renderType;
     this.restricted = false;
   }
@@ -51,6 +51,9 @@ class Entity{
   drawExtra(){
 
   }
+  drawAura(){
+    
+  }
   draw(){
     fill(this.tempColor.r, this.tempColor.g, this.tempColor.b, this.tempColor.a ?? 255);
     switch (this.renderType) {
@@ -75,7 +78,10 @@ class Entity{
       ellipse(this.x, this.y, this.radius - (this.renderType === "ring" ? ringEnemyStrokeWidth : 0));
     }
     this.drawExtra();
-    this.tempColor = this.color;
+    this.tempColor.r = this.color.r;
+    this.tempColor.g = this.color.g;
+    this.tempColor.b = this.color.b;
+    this.tempColor.a = this.color.a;
     this.tempRadius = this.radius;
   }
   update(){

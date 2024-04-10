@@ -72,7 +72,7 @@ class AuraEnemy extends Enemy{
     this.auraSize = auraSize;
     this.aura = new Aura(x, y, auraSize, auraColor);
   }
-  drawExtra(){
+  drawAura(){
     this.aura.draw();
   }
   updateAura(){
