@@ -15,7 +15,7 @@ class Player extends Entity{
     this.tempSpeed = 5;
     this.regen = 1;
     this.maxEnergy = 30;
-    this.energy = 30;
+    this.energy = this.maxEnergy;
     this.level = 1;
     this.levelProgress = 0;
     this.levelProgressNeeded = 4;
@@ -24,6 +24,7 @@ class Player extends Entity{
     this.ctrlVector = {x: 0, y: 0};
     this.effects = [];
     this.onTpZoneLastFrame = false;
+    this.energyBarColor = {r: settings.energyBarColor[0], g: settings.energyBarColor[1], b: settings.energyBarColor[2], a: settings.energyBarColor[3]};
   }
   //design this with the idea that it will be completely overriden in cent's code
   update(){
@@ -74,10 +75,35 @@ class Player extends Entity{
     this.area.enter(this);
     this.area.attemptLoad(true);
   }
+  drawExtra(){
+    this.drawName();
+    this.drawBar();
+  }
+  drawBar(){
+    let ebw = settings.energyBarWidth;
+    let rCenter = this.x;
+
+    noFill();
+    stroke(this.energyBarColor.r, this.energyBarColor.g, this.energyBarColor.b, this.energyBarColor.a);
+    strokeWeight(settings.energyBarOutlineWidth);
+
+    rect(rCenter - ebw / 2, this.y - this.radius - 10, ebw, settings.energyBarHeight);
+
+    let filledBarWidth = ebw * constrain(this.energy / this.maxEnergy, 0, 1);
+
+    noStroke();
+    fill(this.energyBarColor.r, this.energyBarColor.g, this.energyBarColor.b, this.energyBarColor.a);
+    rect(rCenter - ebw / 2, this.y - this.radius - 10, filledBarWidth, settings.energyBarHeight);
+  }
+  drawName(){
+    textAlign(CENTER);
+    fill(0);
+    textSize(12);
+    text(this.name, this.x, this.y - this.radius - 15);
+  }
   resetAllModifiers(){
     this.tempSpeed = this.speed;
   }
-
   getZonesTouched(){
     var zt = [];
     for (var i in this.area.zones){
@@ -87,7 +113,6 @@ class Player extends Entity{
     }
     return zt;
   }
-
   handleZonesTouched(){
     var onTpZoneThisFrame = false;
     for (var z in this.zonesTouched){
@@ -119,13 +144,10 @@ class Player extends Entity{
       this.onTpZoneLastFrame = false;
     }
   }
-
-
   updateAsMain(){
     cameraFocusX = this.x;
     cameraFocusY = this.y;
   }
-
   doExitTranslate(exitZone){
     //we are going to check if the translated exitZone (basically the rectangle where
     //players might go) is in another area, and then put the player in that area.

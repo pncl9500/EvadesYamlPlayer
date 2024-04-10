@@ -74,6 +74,7 @@ class Entity{
     if (!(this.renderType === "image")){
       ellipse(this.x, this.y, this.radius - (this.renderType === "ring" ? ringEnemyStrokeWidth : 0));
     }
+    this.drawExtra();
     this.tempColor = this.color;
     this.tempRadius = this.radius;
   }
