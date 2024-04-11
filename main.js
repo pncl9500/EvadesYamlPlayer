@@ -44,7 +44,7 @@ function draw() {
 
   drawCinemaBars();
 
-  drawDebugValueText();
+  //drawDebugValueText();
 }
 function drawDebugValueText(){
   fill(255);

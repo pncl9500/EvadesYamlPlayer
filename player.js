@@ -120,7 +120,6 @@ class Player extends Entity{
     }
   }
   playerCollision(player){
-    debugValue++;
     if (this.canRevivePlayers && player.dead){
       player.revive();
       player.timesSaved++;
