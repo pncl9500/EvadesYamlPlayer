@@ -6,6 +6,7 @@ ui = null;
  * Loaded before the game is opened
  */
 function preload(){
+  loadImageAssets();
   loadAllYAML();
 }
 /**

@@ -15,6 +15,11 @@ deathTimerDurations = [
 class Player extends Entity{
   constructor(x, y, radius, color, name, isMain, game, regionNum = 0, areaNum = 0, ctrlSets = []){
     super(x, y, radius, color, 1, "noOutline")
+    this.heroName = "Basic";
+
+    this.ability1 = new Ability(5);
+    this.ability2 = new Ability(1);
+
     this.isMain = isMain;
     this.game = game;
     this.regionNum = regionNum;
@@ -25,15 +30,15 @@ class Player extends Entity{
     this.area.attemptLoad(true);
     this.downed = false;
     this.name = name;
-    this.speed = 5;
-    this.tempSpeed = 5;
-    this.regen = 1;
-    this.maxEnergy = 30;
+    this.speed = gameConsts.startingSpeed;
+    this.tempSpeed = this.speed;
+    this.regen = gameConsts.startingRegen;
+    this.maxEnergy = gameConsts.startingEnergy;
     this.energy = this.maxEnergy;
     this.level = 1;
     this.levelProgress = 0;
     this.levelProgressNeeded = 4;
-    this.upgradePoints = 0;
+    this.upgradePoints = 3;
     this.restricted = true;
     this.ctrlSets = ctrlSets;
     this.ctrlVector = {x: 0, y: 0};
@@ -183,19 +188,19 @@ class Player extends Entity{
     stroke(this.energyBarColor.r, this.energyBarColor.g, this.energyBarColor.b, this.energyBarColor.a);
     strokeWeight(settings.energyBarOutlineWidth);
 
-    rect(rCenter - ebw / 2, this.y - this.radius - 10, ebw, settings.energyBarHeight);
+    rect(rCenter - ebw / 2, this.y - this.radius - 8, ebw, settings.energyBarHeight);
 
     let filledBarWidth = ebw * constrain(this.energy / this.maxEnergy, 0, 1);
 
     noStroke();
     fill(this.energyBarColor.r, this.energyBarColor.g, this.energyBarColor.b, this.energyBarColor.a);
-    rect(rCenter - ebw / 2, this.y - this.radius - 10, filledBarWidth, settings.energyBarHeight);
+    rect(rCenter - ebw / 2, this.y - this.radius - 8, filledBarWidth, settings.energyBarHeight);
   }
   drawName(){
     textAlign(CENTER);
     fill(0);
     textSize(12);
-    text(this.name, this.x, this.y - this.radius - 15);
+    text(this.name, this.x, this.y - this.radius - 12);
   }
   getZonesTouched(){
     var zt = [];

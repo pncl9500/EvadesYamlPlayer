@@ -24,6 +24,6 @@ settings = {
     255,
   ],
   energyBarOutlineWidth: 1,
-  energyBarWidth: 40,
-  energyBarHeight: 7,
+  energyBarWidth: 36,
+  energyBarHeight: 6,
 }
