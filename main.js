@@ -57,6 +57,3 @@ function updateAll(){
   game.update();
 }
 
-function keyPressed() {
-  if (keyCode === 81) { game.cycleMainPlayer(); }
-}
