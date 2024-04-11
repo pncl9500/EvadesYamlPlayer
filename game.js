@@ -52,8 +52,10 @@ function initGame(){
       break;
     }
   }
-  mainPlayer = new Player(176 + random(-64,64), 240 + random(-96,96), 16, {r: 255, g: 0, b: 0}, "TestPlayer", true, game, startingRegionId, startingAreaNum, [new WASDset, new ArrowSet]);
+  mainPlayer = new Player(176 + random(-64,64), 240 + random(-96,96), 16, {r: 255, g: 0, b: 0}, "Matthew Ag. Maximillian", true, game, startingRegionId, startingAreaNum, [new WASDset]);
+  newGuy = new Player(176 + random(-64,64), 240 + random(-96,96), 16, {r: 0, g: 0, b: 255}, "Ryan I. Ume", true, game, startingRegionId, startingAreaNum, [new ArrowSet]);
   game.setMainPlayer(mainPlayer);
   game.addPlayer(mainPlayer);
+  game.addPlayer(newGuy);
   return game;
 }

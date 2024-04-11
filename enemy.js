@@ -15,6 +15,13 @@ class Enemy extends Entity{
     this.angleToVel();
     //all enemies have parentZone property
   }
+  resetState(){
+    this.speedMultiplier = 1;
+    this.xSpeedMultiplier = 1;
+    this.ySpeedMultiplier = 1;
+    this.wallBounceDisabled = false;
+    this.harmless = false;
+  }
   velToAngle(){
     this.angle = atan2(this.yv, this.xv);
   }
@@ -35,6 +42,11 @@ class Enemy extends Entity{
     }
     this.updateAura();
   }
+  playerCollision(player){
+    if (!this.harmless){
+      player.enemyCollision();
+    }
+  }
   behavior(area, players){
 
   }
@@ -50,12 +62,6 @@ class Enemy extends Entity{
   }
   wallBounceEvent(){
 
-  }
-  resetState(){
-    this.speedMultiplier = 1;
-    this.xSpeedMultiplier = 1;
-    this.ySpeedMultiplier = 1;
-    this.wallBounceDisabled = false;
   }
 }
 

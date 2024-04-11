@@ -54,10 +54,19 @@ class Area{
     }
   }
   update(){
+    //basically everything loop
     for (var i in this.entities){
       this.entities[i].update(this, this.players);
       if (this.entities[i].restricted){
         this.restrict(this.entities[i]);
+      }
+      if (this.entities[i].checkForPlayerCollision){
+        this.entities[i].checkPlayerCollision(this, this.players);
+      }
+    }
+    for (var i in this.players){
+      if (this.players[i].checkForPlayerCollision){
+        this.players[i].checkPlayerCollision(this, this.players);
       }
     }
   }
@@ -113,9 +122,7 @@ class Area{
         const pelletMultiplier = aprop.pellet_multiplier ?? (pprop.pellet_multiplier ?? defaults.regionProps.pellet_multiplier);
         const zone = this.zones[i];
         for (var p = 0; p < pelletCount; p++){
-          let px = random(zone.x + pelletRadius, zone.x + zone.width - pelletRadius);
-          let py = random(zone.y + pelletRadius, zone.y + zone.height - pelletRadius);
-          this.entities.push(new Pellet(px, py, this.zones[i], pelletMultiplier));
+          this.entities.push(new Pellet(0, 0, this.zones[i], pelletMultiplier));
         }
         this.zones[i].initSpawners();
       }

@@ -23,6 +23,17 @@ class Entity{
     this.tempColor = {r: this.color.r, g: this.color.g, b: this.color.b, a: this.color.a};
     this.renderType = renderType;
     this.restricted = false;
+    this.checkForPlayerCollision = true;
+  }
+  checkPlayerCollision(area, players){
+    for(let i in players){
+      if (circleCircle(players[i], this)){
+        this.playerCollision(players[i]);
+      }
+    }
+  }
+  playerCollision(){
+    
   }
   getRadius(){
     return this.tempRadius;
@@ -52,7 +63,7 @@ class Entity{
 
   }
   drawAura(){
-    
+
   }
   draw(){
     fill(this.tempColor.r, this.tempColor.g, this.tempColor.b, this.tempColor.a ?? 255);

@@ -1,3 +1,17 @@
+deathTimerDurations = [
+  10000,
+  15000,
+  15000,
+  20000,
+  20000,
+  20000,
+  25000,
+  25000,
+  30000,
+  30000,
+  60000,
+]
+
 class Player extends Entity{
   constructor(x, y, radius, color, name, isMain, game, regionNum = 0, areaNum = 0, ctrlSets = []){
     super(x, y, radius, color, 1, "noOutline")
@@ -26,7 +40,11 @@ class Player extends Entity{
     this.effects = [];
     this.onTpZoneLastFrame = false;
     this.shifting = false;
+    this.deathEffect = null;
+    this.dead = false;
     this.resetAllModifiers();
+    this.saves = 0;
+    this.timesSaved = 0;
   }
   resetAllModifiers(){
     this.tempSpeed = this.speed;
@@ -39,6 +57,16 @@ class Player extends Entity{
     this.corrosiveBypass = false;
     this.effectVulnerability = 1;
     this.fullEffectImmunity = false;
+
+    this.deathTimerMultiplier = 1;
+    this.deathTimerColor = {
+      r: 255,
+      g: 0,
+      b: 0,
+      a: 255,
+    }
+
+    this.canRevivePlayers = true;
   }
   //design this with the idea that it will be completely overriden in cent's code
   update(){
@@ -84,6 +112,26 @@ class Player extends Entity{
     }
     return ctrlVector;
   }
+  checkPlayerCollision(area, players){
+    for(let i in players){
+      if (this !== players[i] && circleCircle(players[i], this)){
+        this.playerCollision(players[i]);
+      }
+    }
+  }
+  playerCollision(player){
+    debugValue++;
+    if (this.canRevivePlayers && player.dead){
+      player.revive();
+      player.timesSaved++;
+      this.saves++;
+    }
+  }
+  revive(){
+    this.deathEffect.toRemove = true;
+    this.deathEffect = null;
+    this.dead = false;
+  }
   resetToSpawn(){
     this.x = 176 + random(-64,64);
     this.y = 240 + random(-96,96);
@@ -100,9 +148,33 @@ class Player extends Entity{
     this.area.enter(this);
     this.area.attemptLoad(true);
   }
+  drawDeathTimer(time){
+    fill(this.deathTimerColor.r, this.deathTimerColor.g, this.deathTimerColor.b, this.deathTimerColor.a);
+    noStroke();
+    textSize(18);
+    textAlign(CENTER);
+    console.log(round(time / 1000));
+    text(round(time / 1000), this.x, this.y + 6);
+  }
   drawExtra(){
     this.drawName();
     this.drawBar();
+    if (this.deathEffect !== null){
+      this.drawDeathTimer(this.deathEffect.life);
+    }
+  }
+  enemyCollision(){
+    this.die();
+  }
+  die(){
+    if (this.dead){
+      return;
+    }
+    this.dead = true;
+    let deathTime = (this.region.properties.death_timer ?? deathTimerDurations[Math.min(deathTimerDurations.length - 1, this.areaNum)])
+    this.deathTimer = deathTime * this.deathTimerMultiplier;
+    this.deathEffect = new DeadEffect(this.deathTimer)
+    this.gainEffect(this.deathEffect)
   }
   drawBar(){
     let ebw = settings.energyBarWidth;

@@ -35,7 +35,8 @@ function rectRect(r1, r2){
          r1.y <= r2.y + r2.height;
 }
 function circleCircle(c1, c2){
-
+  let dist = sqrt((c1.x - c2.x) * (c1.x - c2.x) + (c1.y - c2.y) * (c1.y - c2.y));
+  return dist < c1.getRadius() + c2.getRadius();
 }
 
 

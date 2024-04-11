@@ -1,4 +1,4 @@
-debugValue = "no debug value yet";
+debugValue = 0;
 game = null;
 ui = null;
 
@@ -44,7 +44,7 @@ function draw() {
 
   drawCinemaBars();
 
-  //drawDebugValueText();
+  drawDebugValueText();
 }
 function drawDebugValueText(){
   fill(255);

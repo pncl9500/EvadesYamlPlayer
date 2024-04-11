@@ -24,7 +24,6 @@ class KeyCtrlSet extends ControlSet{
 }
 
 class WASDset extends KeyCtrlSet{constructor(){super(87, 83, 65, 68); this.ctrlType = "wasd";}}
-class IJKLset extends KeyCtrlSet{constructor(){super(73, 75, 74, 76); this.ctrlType = "ijkl";}}
 class ArrowSet extends KeyCtrlSet{constructor(){super(38, 40, 37, 39); this.ctrlType = "arrows";}}
 
 class MouseSet extends ControlSet{

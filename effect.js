@@ -16,9 +16,13 @@ class Effect{
       this.life -= dTime;
       if (this.life < 0){
         this.toRemove = true;
+        this.removeEffect(target);
         return;
       }
     }
+  }
+  removeEffect(){
+
   }
 }
 
@@ -37,7 +41,21 @@ class SafeZoneEffect extends Effect{
     super(duration, 0, false)
   }
   doEffect(target){
-    this.invincibility = true;
-    this.corrosiveBypass = true;
+    target.invincibility = true;
+    target.corrosiveBypass = true;
+    target.canRevivePlayers = false;
+  }
+}
+
+class DeadEffect extends Effect{
+  constructor(duration = 0){
+    super(duration, 1024, false)
+  }
+  doEffect(target){
+    target.speedMultiplier = 0;
+    target.tempColor.a = 80;
+  }
+  removeEffect(target){
+    target.revive();
   }
 }
