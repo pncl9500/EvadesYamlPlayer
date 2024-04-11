@@ -60,12 +60,10 @@ function initGame(){
       break;
     }
   }
-  mainPlayer = new Player(176 + random(-64,64), 240 + random(-96,96), 16, {r: 255, g: 0, b: 0}, "Matthew Ag. Maximillian", true, game, startingRegionId, startingAreaNum, [new WASDset]);
+  mainPlayer = new Player(176 + random(-64,64), 240 + random(-96,96), 16, pal.hero.magmax, "Player 1", true, game, startingRegionId, startingAreaNum, [new WASDset]);
   game.setMainPlayer(mainPlayer);
   game.addPlayer(mainPlayer);
-  newGuy = new Player(176 + random(-64,64), 240 + random(-96,96), 16, {r: 0, g: 0, b: 255}, "Ryan I. Ume", true, game, startingRegionId, startingAreaNum, [new ArrowSet]);
-  game.addPlayer(newGuy);
-  morf = new Player(176 + random(-64,64), 240 + random(-96,96), 16, {r: 0, g: 255, b: 0}, "Morgan Orpheus", true, game, 25, 479, []);
-  game.addPlayer(morf);
+  dummyPlayer = new Player(176 + random(-64,64), 240 + random(-96,96), 16, pal.hero.rime, "Player 2", true, game, startingRegionId, startingAreaNum, [new ArrowSet]);
+  game.addPlayer(dummyPlayer);
   return game;
 }

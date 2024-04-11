@@ -120,30 +120,39 @@ pal = {
     "barrier":"#29ffc64d",
     "reducing":"#2d323726",
     "blocking":"#bf52134d",
+  },
+  hero:{
+    magmax: "ff0000",
+    rime: "3333ff",
+    morfe: "00dd00",
+    aurora: "ff7f18",
+    necro: "ff00ff",
+    brute: "9b5800",
+    nexus: "29ffc6",
+    shade: "826565",
+    euclid: "5e4d66",
+    chrono: "00b270",
+    reaper: "424a59",
+    rameses: "989b4a",
+    jolt: "e1e100",
+    ghoul: "bad7d8",
+    cent: "727272",
+    jotunn: "5cacff",
+    candy: "ff80bd",
+    mirage: "020fa2",
+    boldrock: "a18446",
+    glob: "14a300",
+    magno: "ff005d",
+    ignis: "cd501f",
+    stella: "fefa8b",
+    viola: "d9b130",
+    mortuus: "7fb332",
+    echelon: "5786de",
+    demona: "7d3c9e",
+    stheno: "cfa6ec",
+    factorb: "6e391e",
+    alk: "8b0146",
+    aranes: "212121",
+    cybot: "926be3",
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

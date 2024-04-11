@@ -68,7 +68,7 @@ class Player extends Entity{
 
     this.canRevivePlayers = true;
   }
-  //design this with the idea that it will be completely overriden in cent's code
+  //design this with the idea that it will be completely overriden in cent's code (if i do a single className === "Cent" i will never forgive myself)
   update(){
     if (keyIsDown(32)){
       this.speed += 0.2;
