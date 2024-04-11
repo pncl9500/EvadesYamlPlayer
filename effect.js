@@ -43,7 +43,6 @@ class SafeZoneEffect extends Effect{
   doEffect(target){
     target.invincibility = true;
     target.corrosiveBypass = true;
-    target.canRevivePlayers = false;
   }
 }
 
@@ -54,6 +53,7 @@ class DeadEffect extends Effect{
   doEffect(target){
     target.speedMultiplier = 0;
     target.tempColor.a = 80;
+    target.canRevivePlayers = false;
   }
   removeEffect(target){
     target.revive();
