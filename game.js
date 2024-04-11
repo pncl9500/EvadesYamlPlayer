@@ -35,6 +35,14 @@ class Game{
   draw(){
     this.mainPlayer.area.draw(this.mainPlayer.region);
   }
+  cycleMainPlayer(){
+    this.mainPlayer.isMain = false;
+    let ind = this.players.indexOf(this.mainPlayer);
+    ind++;
+    ind %= this.players.length;
+    this.mainPlayer = this.players[ind];
+    this.mainPlayer.isMain = true;
+  }
 }
 
 startingRegionName = "Central Core";
@@ -53,9 +61,11 @@ function initGame(){
     }
   }
   mainPlayer = new Player(176 + random(-64,64), 240 + random(-96,96), 16, {r: 255, g: 0, b: 0}, "Matthew Ag. Maximillian", true, game, startingRegionId, startingAreaNum, [new WASDset]);
-  newGuy = new Player(176 + random(-64,64), 240 + random(-96,96), 16, {r: 0, g: 0, b: 255}, "Ryan I. Ume", true, game, startingRegionId, startingAreaNum, [new ArrowSet]);
   game.setMainPlayer(mainPlayer);
   game.addPlayer(mainPlayer);
+  newGuy = new Player(176 + random(-64,64), 240 + random(-96,96), 16, {r: 0, g: 0, b: 255}, "Ryan I. Ume", true, game, startingRegionId, startingAreaNum, [new ArrowSet]);
   game.addPlayer(newGuy);
+  morf = new Player(176 + random(-64,64), 240 + random(-96,96), 16, {r: 0, g: 255, b: 0}, "Morgan Orpheus", true, game, 25, 479, []);
+  game.addPlayer(morf);
   return game;
 }
