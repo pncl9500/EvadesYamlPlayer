@@ -79,12 +79,22 @@ class Ability{
   drainEnergy(player){
     player.energy -= this.cost;
   }
+  tryToggleOffThroughDeath(){
+    return;
+  }
 }
 
 class ToggleAbility extends Ability{
   constructor(maxTier = 5, cooldowns = 0, cost = 0, image = im.missingImage){
     super(maxTier, cooldowns, cost, image);
     this.toggled = false;
+    this.toggleOffOnDeath = true;
+  }
+  tryToggleOffThroughDeath(player){
+    if(this.toggleOffOnDeath){
+      let prms = this.getActivationParams(player);
+      this.toggleOff(player, prms.players, prms.pellets, prms.enemies, prms.miscEnts, prms.region, prms.area);
+    }
   }
   toggleOn(player, players, pellets, enemies, miscEnts, region, area){
 

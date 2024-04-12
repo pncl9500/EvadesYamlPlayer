@@ -195,6 +195,9 @@ class Player extends Entity{
     if (this.dead){
       return;
     }
+    this.ability1.tryToggleOffThroughDeath(this);
+    this.ability2.tryToggleOffThroughDeath(this);
+    this.ability3.tryToggleOffThroughDeath(this);
     this.dead = true;
     let deathTime = (this.region.properties.death_timer ?? deathTimerDurations[Math.min(deathTimerDurations.length - 1, this.areaNum)])
     this.deathTimer = deathTime * this.deathTimerMultiplier;

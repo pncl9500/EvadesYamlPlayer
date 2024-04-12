@@ -35,6 +35,8 @@ class Paralysis extends ToggleAbility{
   }
   toggleOff(player, players, pellets, enemies, miscEnts, region, area){
     this.aura.toRemove = true;
+  }
+  activate(player, players, pellets, enemies, miscEnts, region, area){
     let affectedEnts = getEntsInRadius(enemies, player.x, player.y, this.ranges[this.tier - 1]);
     for (var i in affectedEnts){
       affectedEnts[i].gainEffect(new FreezeEffect(2000));
