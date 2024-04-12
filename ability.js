@@ -114,6 +114,7 @@ class ToggleAbility extends Ability{
         if (this.toggled === true){
           this.toggled = false;
           let prms = this.getActivationParams(player);
+          this.activate(player, prms.players, prms.pellets, prms.enemies, prms.miscEnts, prms.region, prms.area);
           this.toggleOff(player, prms.players, prms.pellets, prms.enemies, prms.miscEnts, prms.region, prms.area);
           this.drainEnergy(player);
           this.startCooldown(player);
