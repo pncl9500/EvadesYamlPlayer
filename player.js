@@ -251,7 +251,6 @@ class Player extends Entity{
     }
   }
   enemyCollision(){
-    debugValue++;
     this.die();
   }
   drawBar(){
