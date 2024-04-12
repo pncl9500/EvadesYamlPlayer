@@ -58,6 +58,7 @@ class Entity{
     for (var i = 0; i < this.effects.length; i++){
       this.effects[i].apply(this);
       if (this.effects[i].toRemove){
+        this.effects.toRemove = false;
         this.effects.splice(i, 1);
         i--;
       }

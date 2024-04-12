@@ -27,7 +27,6 @@ class Player extends Entity{
     this.area = this.region.areas[areaNum];
     this.area.enter(this);
     this.area.attemptLoad(true);
-    this.downed = false;
     this.name = name;
     this.speed = gameConsts.startingSpeed;
     this.tempSpeed = this.speed;
@@ -54,6 +53,7 @@ class Player extends Entity{
     this.saves = 0;
     this.timesSaved = 0;
     this.lastDir = 0;
+    this.doCheatRevive = false;
     
     this.auras = [];
   }
@@ -98,7 +98,10 @@ class Player extends Entity{
 
     this.setAbilityUsages();
 
-    
+    if (this.doCheatRevive){
+      this.revive();
+      this.doCheatRevive = false;
+    }
     this.applyEffects();
 
     this.regenEnergy();
@@ -183,9 +186,22 @@ class Player extends Entity{
     }
   }
   revive(){
+    if (!this.dead) {return};
     this.deathEffect.toRemove = true;
     this.deathEffect = null;
     this.dead = false;
+  }
+  die(){
+    if (this.dead){
+      return;
+    }
+    this.dead = true;
+    let deathTime = (this.region.properties.death_timer ?? deathTimerDurations[Math.min(deathTimerDurations.length - 1, this.areaNum)])
+    this.deathTimer = deathTime * this.deathTimerMultiplier;
+    this.deathEffect = new DeadEffect(this.deathTimer);
+    console.log(this.deathEffect.toRemove);
+    console.log(this.deathEffect.life);
+    this.gainEffect(this.deathEffect);
   }
   resetToSpawn(){
     this.x = 176 + random(-64,64);
@@ -235,17 +251,8 @@ class Player extends Entity{
     }
   }
   enemyCollision(){
+    debugValue++;
     this.die();
-  }
-  die(){
-    if (this.dead){
-      return;
-    }
-    this.dead = true;
-    let deathTime = (this.region.properties.death_timer ?? deathTimerDurations[Math.min(deathTimerDurations.length - 1, this.areaNum)])
-    this.deathTimer = deathTime * this.deathTimerMultiplier;
-    this.deathEffect = new DeadEffect(this.deathTimer)
-    this.gainEffect(this.deathEffect)
   }
   drawBar(){
     let ebw = settings.energyBarWidth;

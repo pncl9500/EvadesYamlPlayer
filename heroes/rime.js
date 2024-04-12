@@ -39,7 +39,6 @@ class Paralysis extends ToggleAbility{
     for (var i in affectedEnts){
       affectedEnts[i].gainEffect(new FreezeEffect(2000));
     }
-    console.log(enemies);
   }
 }
 
@@ -48,7 +47,6 @@ class FreezeEffect extends Effect{
     super(duration, 1023, true);
   }
   doEffect(target){
-    console.log(target);
     target.speedMultiplier = 0;
   }
 }
