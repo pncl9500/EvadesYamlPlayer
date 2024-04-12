@@ -60,7 +60,7 @@ class HeroCard extends UIpanel{
     //this sucks and has a lot of magic numbers. fun
     //background
     noStroke();
-    fill(0, 152);
+    fill(0, 180);
     rect(-this.width / 2, -this.height, this.width, this.height);
     //bar
     fill(game.mainPlayer.color.r, game.mainPlayer.color.g, game.mainPlayer.color.b, 110);
@@ -97,12 +97,15 @@ class HeroCard extends UIpanel{
     }
     rectMode(CENTER);
     this.drawStatUpgraderText(-this.width / 2 + this.lineDistance + 40, -this.height + 37, round(game.mainPlayer.speed * 2) / 2, "Speed", "1", true, true)
-    this.drawStatUpgraderText(-this.width / 2 + this.lineDistance + 40 + 80, -this.height + 37, `${game.mainPlayer.energy} / ${game.mainPlayer.maxEnergy}`, "Energy", "2", true, true)
+    this.drawStatUpgraderText(-this.width / 2 + this.lineDistance + 40 + 80, -this.height + 37, `${round(game.mainPlayer.energy)} / ${game.mainPlayer.maxEnergy}`, "Energy", "2", true, true)
     this.drawStatUpgraderText(-this.width / 2 + this.lineDistance + 40 + 160, -this.height + 37, round(game.mainPlayer.regen * 5) / 5, "Regen", "3", true, true)
     this.drawStatUpgraderButton(-this.width / 2 + this.lineDistance + 40 + 240, -this.height + 37, "4", true);
     this.drawStatUpgraderButton(-this.width / 2 + this.lineDistance + 40 + 320, -this.height + 37, "5", true);
     image(game.mainPlayer.ability1.image, -this.width / 2 + this.lineDistance + 40 + 240 - 21, -this.height + 37 - 21 + 1, 42, 42);
     image(game.mainPlayer.ability2.image, -this.width / 2 + this.lineDistance + 40 + 320 - 21, -this.height + 37 - 21 + 1, 42, 42);
+    //how do we draw the spinny cd mask
+    (game.mainPlayer.ability1.currentCooldown > 0 && this.drawCooldownMask(game.mainPlayer.ability1.currentCooldown, game.mainPlayer.ability1.cooldownOfPreviousUse, -this.width / 2 + this.lineDistance + 40 + 240 - 21, -this.height + 37 - 21 + 1, 42, 42));
+    (game.mainPlayer.ability2.currentCooldown > 0 && this.drawCooldownMask(game.mainPlayer.ability2.currentCooldown, game.mainPlayer.ability2.cooldownOfPreviousUse, -this.width / 2 + this.lineDistance + 40 + 320 - 21, -this.height + 37 - 21 + 1, 42, 42));
     strokeWeight(1);
     for (var i = 0; i < game.mainPlayer.ability1.maxTier; i++){
       noFill();
@@ -111,7 +114,7 @@ class HeroCard extends UIpanel{
         fill(208, 208, 68);
         stroke(208, 208, 68);
       }
-      ellipse(-this.width / 2 + this.lineDistance + 40 + 240 - 6 * (game.mainPlayer.ability1.maxTier - 1) + i * 12, -this.height + 37 - 28, 4, 4);
+      ellipse(-this.width / 2 + this.lineDistance + 40 + 240 - 5 * (game.mainPlayer.ability1.maxTier - 1) + i * 10, -this.height + 37 - 28, 3.5, 3.5);
     }
     for (var i = 0; i < game.mainPlayer.ability2.maxTier; i++){
       noFill();
@@ -120,7 +123,7 @@ class HeroCard extends UIpanel{
         fill(208, 208, 68);
         stroke(208, 208, 68);
       }
-      ellipse(-this.width / 2 + this.lineDistance + 40 + 320 - 6 * (game.mainPlayer.ability2.maxTier - 1) + i * 12, -this.height + 37 - 28, 4, 4);
+      ellipse(-this.width / 2 + this.lineDistance + 40 + 320 - 5 * (game.mainPlayer.ability2.maxTier - 1) + i * 10, -this.height + 37 - 28, 3.5, 3.5);
     }
     rectMode(CORNER);
   }
@@ -144,5 +147,37 @@ class HeroCard extends UIpanel{
     textSize(11);
     fill(0);
     text(num, x, y + 37);
+  }
+  drawCooldownMask(ccd, mcd, l, u, w, h){
+    let r = l + w;
+    let d = u + h;
+    let cx = (l + r) / 2
+    let cy = (u + d) / 2
+    let rat = ccd / mcd;
+
+    fill(0, 125);
+    noStroke();
+
+    beginShape(TESS);
+    vertex(cx, cy);
+    vertex(cx, u);
+    if (rat > 1/8){
+      vertex(l, u);
+    }
+    if (rat > 3/8){
+      vertex(l, d);
+    }
+    if (rat > 5/8){
+      vertex(r, d);
+    }
+    if (rat > 7/8){
+      vertex(r, u);
+    }
+    let length = (r - cx);
+    let angle = -PI/2 + (1 - rat) * 2*PI;
+    let fvpx = cx + length * sqcos(angle);
+    let fvpy = cy + length * sqsin(angle);
+    vertex(fvpx, fvpy);
+    endShape(CLOSE);
   }
 }

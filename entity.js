@@ -24,6 +24,10 @@ class Entity{
     this.renderType = renderType;
     this.restricted = false;
     this.checkForPlayerCollision = true;
+    this.alphaMultiplier = 1;
+    this.mainType = "entity";
+    this.toRemove = false;
+    this.effects = [];
   }
   checkPlayerCollision(area, players){
     for(let i in players){
@@ -59,14 +63,18 @@ class Entity{
       }
     }
   }
-  drawExtra(){
+  drawBackExtra(){
+
+  }
+  drawFrontExtra(){
 
   }
   drawAura(){
 
   }
   draw(){
-    fill(this.tempColor.r, this.tempColor.g, this.tempColor.b, this.tempColor.a ?? 255);
+    this.drawBackExtra();
+    fill(this.tempColor.r, this.tempColor.g, this.tempColor.b, (this.tempColor.a ?? 255) * this.alphaMultiplier);
     switch (this.renderType) {
       case "noOutline":
         noStroke();
@@ -88,7 +96,7 @@ class Entity{
     if (!(this.renderType === "image")){
       ellipse(this.x, this.y, this.radius - (this.renderType === "ring" ? ringEnemyStrokeWidth : 0));
     }
-    this.drawExtra();
+    this.drawFrontExtra();
     this.tempColor.r = this.color.r;
     this.tempColor.g = this.color.g;
     this.tempColor.b = this.color.b;

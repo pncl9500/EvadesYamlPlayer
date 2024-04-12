@@ -36,7 +36,19 @@ function rectRect(r1, r2){
 }
 function circleCircle(c1, c2){
   let dist = sqrt((c1.x - c2.x) * (c1.x - c2.x) + (c1.y - c2.y) * (c1.y - c2.y));
-  return dist < c1.getRadius() + c2.getRadius();
+  let r1;
+  let r2;
+  try {
+    r1 = c1.getRadius();
+  } catch (error) {
+    r1 = c1.r;
+  }
+  try {
+    r2 = c2.getRadius();
+  } catch (error) {
+    r2 = c2.r;
+  }
+  return dist < r1 + r2;
 }
 
 
@@ -59,4 +71,16 @@ function hexToRgba(hex) {
     b: parseInt(result[3], 16),
     a: parseInt(result[4], 16),
   } : null;
+}
+
+//cosine... if it was a SQUARE
+function sqcos(ang){
+  let mul = (abs(cos(ang)) + abs(sin(ang)));
+  return constrain(cos(ang) * mul, -1, 1);
+}
+
+//sine... if it was a SQUARE
+function sqsin(ang){
+  let mul = (abs(cos(ang)) + abs(sin(ang)));
+  return constrain(sin(ang) * mul, -1, 1);
 }

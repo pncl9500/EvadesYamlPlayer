@@ -39,6 +39,9 @@ class Area{
       this.entities[i].draw();
     }
   }
+  addEnt(ent){
+    this.entities.push(ent);
+  }
   drawTiles(){
     let r = settings.gridColor[0];
     let g = settings.gridColor[1];
@@ -57,6 +60,12 @@ class Area{
     //basically everything loop
     for (var i in this.entities){
       this.entities[i].update(this, this.players);
+      if (this.entities[i].toRemove){
+        this.entities[i].toRemove = false;
+        this.entities.splice(i, 1);
+        i--;
+        continue;
+      }
       if (this.entities[i].restricted){
         this.restrict(this.entities[i]);
       }

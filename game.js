@@ -60,10 +60,8 @@ function initGame(){
       break;
     }
   }
-  mainPlayer = new Player(176 + random(-64,64), 240 + random(-96,96), 16, pal.hero.magmax, "Player 1", true, game, startingRegionId, startingAreaNum, [new WASDset]);
+  mainPlayer = new Rime(176 + random(-64,64), 240 + random(-96,96), 16, "Player 1", true, game, startingRegionId, startingAreaNum, [new WASDset, new ArrowSet]);
   game.setMainPlayer(mainPlayer);
   game.addPlayer(mainPlayer);
-  dummyPlayer = new Player(176 + random(-64,64), 240 + random(-96,96), 16, pal.hero.rime, "Player 2", true, game, startingRegionId, startingAreaNum, [new ArrowSet]);
-  game.addPlayer(dummyPlayer);
   return game;
 }

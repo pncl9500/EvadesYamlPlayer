@@ -26,6 +26,16 @@ class Effect{
   }
 }
 
+function getEntsInRadius(targetArray, x, y, radius){
+  let r = [];
+  for (let i in targetArray){
+    if (circleCircle(targetArray[i], {x: x, y: y, r: radius})){
+      r.push(targetArray[i]);
+    }
+  }
+  return r;
+}
+
 class MinimumSpeedZoneEffect extends Effect{
   constructor(minSpeed, duration = 0){
     super(duration, 0, false)

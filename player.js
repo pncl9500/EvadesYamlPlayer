@@ -17,9 +17,8 @@ class Player extends Entity{
     super(x, y, radius, color, 1, "noOutline")
     this.heroName = "Basic";
 
-    this.ability1 = new Ability(5);
-    this.ability2 = new Ability(1);
-
+    this.ability3 = new Ability();
+    this.mainType = "player";
     this.isMain = isMain;
     this.game = game;
     this.regionNum = regionNum;
@@ -33,8 +32,12 @@ class Player extends Entity{
     this.speed = gameConsts.startingSpeed;
     this.tempSpeed = this.speed;
     this.regen = gameConsts.startingRegen;
+    this.tempRegen = this.regen;
     this.maxEnergy = gameConsts.startingEnergy;
+    this.tempMaxEnergy = this.maxEnergy;
     this.energy = this.maxEnergy;
+    this.minEnergy = 0;
+    this.tempMinEnergy = this.minEnergy;
     this.level = 1;
     this.levelProgress = 0;
     this.levelProgressNeeded = 4;
@@ -50,18 +53,31 @@ class Player extends Entity{
     this.resetAllModifiers();
     this.saves = 0;
     this.timesSaved = 0;
+    this.lastDir = 0;
+    
+    this.auras = [];
+  }
+  addAura(aura){
+    this.auras.push(aura);
   }
   resetAllModifiers(){
     this.tempSpeed = this.speed;
     this.speedMultiplier = 1;
     this.xSpeedMultiplier = 1;
     this.ySpeedMultiplier = 1;
+    this.alphaMultiplier = 1;
     this.energyBarColor = {r: settings.energyBarColor[0], g: settings.energyBarColor[1], b: settings.energyBarColor[2], a: settings.energyBarColor[3]};
 
     this.invincibility = false;
     this.corrosiveBypass = false;
     this.effectVulnerability = 1;
     this.fullEffectImmunity = false;
+
+    this.tempMinEnergy = this.minEnergy;
+    this.tempMaxEnergy = this.maxEnergy;
+    this.tempRegen = this.regen;
+
+    this.abilitiesDisabled = false;
 
     this.deathTimerMultiplier = 1;
     this.deathTimerColor = {
@@ -79,23 +95,53 @@ class Player extends Entity{
       this.speed += 0.2;
     }
     this.resetAllModifiers();
+
+    this.setAbilityUsages();
+
     
     this.applyEffects();
 
+    this.regenEnergy();
 
 
     //final pass
     this.ctrlVector = this.getControls();
+    if (!(this.ctrlVector.x === 0 && this.ctrlVector.y === 0)){
+      this.lastDir = Math.atan2(this.ctrlVector.y, this.ctrlVector.x);
+    }
     this.speedMultiplier *= this.shifting ? 0.5 : 1;
     this.xv = this.ctrlVector.x * this.tempSpeed * tFix * this.speedMultiplier * this.xSpeedMultiplier;
     this.yv = this.ctrlVector.y * this.tempSpeed * tFix * this.speedMultiplier * this.ySpeedMultiplier;
     this.x += this.xv;
     this.y += this.yv;
     this.area.restrict(this);
+    this.updateAuras();
+
+    this.updateAbilities();
 
     this.zonesTouched = this.getZonesTouched();
 
     this.handleZonesTouched();
+  }
+  regenEnergy(){
+    if (this.energy < this.tempMaxEnergy){
+      this.energy += this.tempRegen * tFix * (1/30);
+      this.energy = min(this.energy, this.tempMaxEnergy)
+    }
+  }
+  setAbilityUsages(){
+    for (var i in this.ctrlSets){
+      this.ctrlSets[i].getAbKeyStates();
+      if (this.ctrlSets[i].ab1KeyTapped){
+        this.ability1.attemptUse(this);
+      }
+      if (this.ctrlSets[i].ab2KeyTapped){
+        this.ability2.attemptUse(this);
+      }
+      if (this.ctrlSets[i].ab3KeyTapped){
+        this.ability3.attemptUse(this);
+      }
+    }
   }
   getControls(){
     this.shifting = false;
@@ -116,6 +162,11 @@ class Player extends Entity{
       }
     }
     return ctrlVector;
+  }
+  updateAbilities(){
+    this.ability1.update(this);
+    this.ability2.update(this);
+    this.ability3.update(this);
   }
   checkPlayerCollision(area, players){
     for(let i in players){
@@ -157,14 +208,30 @@ class Player extends Entity{
     noStroke();
     textSize(18);
     textAlign(CENTER);
-    console.log(round(time / 1000));
     text(round(time / 1000), this.x, this.y + 6);
   }
-  drawExtra(){
+  drawBackExtra(){
+    this.drawAuras();
     this.drawName();
     this.drawBar();
     if (this.deathEffect !== null){
       this.drawDeathTimer(this.deathEffect.life);
+    }
+  }
+  updateAuras(){
+    for (var i = 0; i < this.auras.length; i++){
+      if (this.auras[i].toRemove){
+        this.auras[i].toRemove = false;
+        this.auras.splice(i, 1);
+        i--;
+        continue;
+      }
+      this.auras[i].update();
+    }
+  }
+  drawAuras(){
+    for (var i = 0; i < this.auras.length; i++){
+      this.auras[i].draw();
     }
   }
   enemyCollision(){
