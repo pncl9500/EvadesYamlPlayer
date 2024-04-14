@@ -9,6 +9,22 @@ class Pellet extends Entity{
     const selectedColor = this.colors[floor(random(0, this.colors.length))];
     this.color = hexToRgb(selectedColor);
     this.relocate();
+
+    let area = zone.parentRegion.areas[zone.parentAreaNum];
+    let region = zone.parentRegion;
+    let pelletMultiplier = 1;
+    try {
+      pelletMultiplier = region.properties.pellet_multiplier ?? 1;
+    } catch (error) {
+      pelletMultiplier = pelletMultiplier;
+    }
+    try {
+      pelletMultiplier = area.properties.pellet_multiplier ?? 1;
+    } catch (error) {
+      pelletMultiplier = pelletMultiplier;
+    }
+    console.log(pelletMultiplier);
+    this.xpValue = floor(2+(zone.parentAreaNum + 1))/3*pelletMultiplier;
   }
   update(){
 
@@ -18,10 +34,17 @@ class Pellet extends Entity{
     this.relocate();
   }
   collect(player){
-    
+    console.log(this.xpValue);
+    player.addXp(this.xpValue);
   }
   relocate(){
     this.x = random(this.zone.x + this.radius, this.zone.x + this.zone.width - this.radius);
     this.y = random(this.zone.y + this.radius, this.zone.y + this.zone.height - this.radius);
   }
+  //debug pellet value drawing
+  // drawFrontExtra(){
+  //   fill(0);
+  //   textSize(12);
+  //   text(this.xpValue, this.x, this.y - 10);
+  // }
 }

@@ -40,7 +40,7 @@ class Player extends Entity{
     this.level = 1;
     this.levelProgress = 0;
     this.levelProgressNeeded = 4;
-    this.upgradePoints = 99;
+    this.upgradePoints = 0;
     this.restricted = true;
     this.ctrlSets = ctrlSets;
     this.ctrlVector = {x: 0, y: 0};
@@ -58,6 +58,26 @@ class Player extends Entity{
     this.auras = [];
 
     this.statEpsilon = 0.01;
+  }
+  addXp(xp){
+    //levelup
+    this.levelProgress += xp;
+    while (this.levelProgress >= this.levelProgressNeeded){
+      this.level++;
+      this.upgradePoints++;
+      this.levelProgress -= this.levelProgressNeeded;
+      this.levelProgressNeeded = this.getRequiredEXP(this.level);
+    }
+  }
+  //what is even happening here
+  getRequiredEXP(e){
+    var t=[0,0,0,1,2,2,4,5,6,8,10,12,15,16,20,23,25,29,32,37],
+    i=(e)=>{return e*(e+1)/2},
+    a=e-100,
+    s=Math.floor;
+    if(e<1)return;
+    if(e<=100)return e*4;
+    return 400+80*(i(3+s(a/20))-6)+(14*((a%20)))+t[a%20]+4*s(a/20)*(e%20)
   }
   addAura(aura){
     this.auras.push(aura);
