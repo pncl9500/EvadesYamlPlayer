@@ -102,7 +102,7 @@ class ToggleAbility extends Ability{
     this.toggleOffOnDeath = true;
   }
   tryToggleOffThroughDeath(player){
-    if(this.toggleOffOnDeath){
+    if(this.toggleOffOnDeath && this.toggled){
       this.toggled = false;
       let prms = this.getActivationParams(player);
       this.toggleOff(player, prms.players, prms.pellets, prms.enemies, prms.miscEnts, prms.region, prms.area);
