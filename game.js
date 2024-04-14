@@ -37,11 +37,14 @@ class Game{
   }
   cycleMainPlayer(){
     this.mainPlayer.isMain = false;
+    let mainPlayerControls = this.mainPlayer.ctrlSets;
+    this.mainPlayer.ctrlSets = [];
     let ind = this.players.indexOf(this.mainPlayer);
     ind++;
     ind %= this.players.length;
     this.mainPlayer = this.players[ind];
     this.mainPlayer.isMain = true;
+    this.mainPlayer.ctrlSets = mainPlayerControls;
   }
 }
 
@@ -60,8 +63,9 @@ function initGame(){
       break;
     }
   }
-  mainPlayer = new Rime(176 + random(-64,64), 240 + random(-96,96), 16, "Player 1", true, game, startingRegionId, startingAreaNum, [new WASDset, new ArrowSet]);
+  mainPlayer = new Magmax(176 + random(-64,64), 240 + random(-96,96), 16, "Player 1", true, game, startingRegionId, startingAreaNum, [new WASDset, new ArrowSet]);
   game.setMainPlayer(mainPlayer);
   game.addPlayer(mainPlayer);
+  game.addPlayer(new Rime(176 + random(-64,64), 240 + random(-96,96), 16, "Player 2", true, game, startingRegionId, startingAreaNum, []));
   return game;
 }

@@ -25,7 +25,7 @@ class Ability{
   update(player){
     this.currentCooldown -= deltaTime;
   }
-  behavior(){
+  behavior(player){
 
   }
   //for things like rameses latch where you can only use it if you have bandages
@@ -133,6 +133,56 @@ class ToggleAbility extends Ability{
           return;
         }
       }
+    }
+  }
+}
+
+class ContinuousToggleAbility extends ToggleAbility{
+  constructor(maxTier = 5, cooldowns = 0, cost = 0, image = im.missingImage){
+    super(maxTier, cooldowns, cost, image);
+    this.energyUseEpsilon = 0.05;
+  }
+  canUseAbility(player){
+    return this.currentCooldown <= 0 && 
+           (abs(player.energy - player.tempMinEnergy)) > this.energyUseEpsilon && 
+           !player.abilitiesDisabled && 
+           (!player.dead || this.usableWhileDead) &&
+           this.tier !== 0;
+  }
+  update(player){
+    this.currentCooldown -= deltaTime;
+    if (this.toggled){
+      this.drainEnergy(player);
+    }
+  }
+  drainEnergy(player){
+    player.energy -= this.cost * tFix * (1/30);
+    if (abs(player.energy - player.tempMinEnergy) < this.energyUseEpsilon){
+      player.energy = player.tempMinEnergy;
+      let prms = this.getActivationParams(player);
+      this.toggled = false;
+      this.toggleOff(player, prms.players, prms.pellets, prms.enemies, prms.miscEnts, prms.region, prms.area);
+    }
+  }
+  attemptUse(player){
+    if (!this.useConditionSatisfied()){
+      return;
+    }
+    if (this.toggled === false){
+      if (this.canUseAbility(player)){
+        this.toggled = true;
+        let prms = this.getActivationParams(player);
+        this.toggleOn(player, prms.players, prms.pellets, prms.enemies, prms.miscEnts, prms.region, prms.area);
+        this.activate(player, prms.players, prms.pellets, prms.enemies, prms.miscEnts, prms.region, prms.area);
+        return;
+      }
+    }
+    if (this.toggled === true){
+      this.toggled = false;
+      let prms = this.getActivationParams(player);
+      this.toggleOff(player, prms.players, prms.pellets, prms.enemies, prms.miscEnts, prms.region, prms.area);
+      this.startCooldown(player);
+      return;
     }
   }
 }

@@ -46,7 +46,7 @@ class Enemy extends Entity{
   }
   playerCollision(player){
     if (!this.harmless){
-      player.enemyCollision();
+      player.enemyCollision(this);
     }
   }
   behavior(area, players){

@@ -103,6 +103,20 @@ class Player extends Entity{
       this.upgradePoints--;
     }
   }
+  toggleOffOtherAbility(exemptAbility){
+    if (this.ability2 !== exemptAbility){
+      let prms = this.ability2.getActivationParams(this);
+      this.ability2.toggled = false;
+      this.ability2.toggleOff(this, prms.players, prms.pellets, prms.enemies, prms.miscEnts, prms.region, prms.area);
+      return;
+    }
+    if (this.ability1 !== exemptAbility){
+      let prms = this.ability1.getActivationParams(this);
+      this.ability1.toggled = false;
+      this.ability1.toggleOff(this, prms.players, prms.pellets, prms.enemies, prms.miscEnts, prms.region, prms.area);
+      return;
+    }
+  }
   resetAllModifiers(){
     this.tempSpeed = this.speed;
     this.speedMultiplier = 1;
@@ -111,7 +125,7 @@ class Player extends Entity{
     this.alphaMultiplier = 1;
     this.energyBarColor = {r: settings.energyBarColor[0], g: settings.energyBarColor[1], b: settings.energyBarColor[2], a: settings.energyBarColor[3]};
 
-    this.invincibility = false;
+    this.invincible = false;
     this.corrosiveBypass = false;
     this.effectVulnerability = 1;
     this.fullEffectImmunity = false;
@@ -210,6 +224,9 @@ class Player extends Entity{
     this.ability1.update(this);
     this.ability2.update(this);
     this.ability3.update(this);
+    this.ability1.behavior(this);
+    this.ability2.behavior(this);
+    this.ability3.behavior(this);
   }
   checkPlayerCollision(area, players){
     for(let i in players){
@@ -291,7 +308,8 @@ class Player extends Entity{
       this.auras[i].draw();
     }
   }
-  enemyCollision(){
+  enemyCollision(enemy){
+    if (this.invincible && (!enemy.corrosive || this.corrosiveBypass)) {return;};
     this.die();
   }
   drawBar(){
