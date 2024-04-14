@@ -25,6 +25,7 @@ class Player extends Entity{
     this.region = game.regions[regionNum];
     this.areaNum = areaNum;
     this.area = this.region.areas[areaNum];
+    this.visitedAreas = [];
     this.area.enter(this);
     this.area.attemptLoad(true);
     this.name = name;

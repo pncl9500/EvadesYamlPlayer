@@ -23,7 +23,6 @@ class Pellet extends Entity{
     } catch (error) {
       pelletMultiplier = pelletMultiplier;
     }
-    console.log(pelletMultiplier);
     this.xpValue = floor(2+(zone.parentAreaNum + 1))/3*pelletMultiplier;
   }
   update(){
@@ -34,7 +33,6 @@ class Pellet extends Entity{
     this.relocate();
   }
   collect(player){
-    console.log(this.xpValue);
     player.addXp(this.xpValue);
   }
   relocate(){

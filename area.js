@@ -81,6 +81,13 @@ class Area{
   }
   enter(player){
     this.players.push(player);
+    if (!player.visitedAreas.includes(this)){
+      player.visitedAreas.push(this);
+      player.addXp(this.getXpValue());
+    }
+  }
+  getXpValue(){
+    return 12*(this.parent.areas.indexOf(this));
   }
   exit(player){
     this.players.splice(this.players.indexOf(player), 1);
