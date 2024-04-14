@@ -225,8 +225,6 @@ class Player extends Entity{
     let deathTime = (this.region.properties.death_timer ?? deathTimerDurations[Math.min(deathTimerDurations.length - 1, this.areaNum)])
     this.deathTimer = deathTime * this.deathTimerMultiplier;
     this.deathEffect = new DeadEffect(this.deathTimer);
-    console.log(this.deathEffect.toRemove);
-    console.log(this.deathEffect.life);
     this.gainEffect(this.deathEffect);
   }
   resetToSpawn(){

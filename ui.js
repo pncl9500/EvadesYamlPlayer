@@ -92,7 +92,6 @@ class HeroCard extends UIpanel{
     if (game.mainPlayer.upgradePoints > 8){
       fill(0);
       textSize(8);
-      text()
       text(game.mainPlayer.upgradePoints, -this.width / 2 + this.lineDistance + 55.5, -this.height + 12.5, 5.5)
     }
     rectMode(CENTER);
