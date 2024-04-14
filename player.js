@@ -59,64 +59,6 @@ class Player extends Entity{
     this.auras = [];
 
   }
-  addXp(xp){
-    //levelup
-    this.levelProgress += xp;
-    while (this.levelProgress >= this.levelProgressNeeded){
-      this.level++;
-      this.upgradePoints++;
-      this.levelProgress -= this.levelProgressNeeded;
-      this.levelProgressNeeded = this.getRequiredEXP(this.level);
-    }
-  }
-  //what is even happening here
-  getRequiredEXP(e){
-    var t=[0,0,0,1,2,2,4,5,6,8,10,12,15,16,20,23,25,29,32,37],
-    i=(e)=>{return e*(e+1)/2},
-    a=e-100,
-    s=Math.floor;
-    if(e<1)return;
-    if(e<=100)return e*4;
-    return 400+80*(i(3+s(a/20))-6)+(14*((a%20)))+t[a%20]+4*s(a/20)*(e%20)
-  }
-  addAura(aura){
-    this.auras.push(aura);
-  }
-  upgradeSpeed(){
-    if (this.upgradePoints > 0 && this.speed < gameConsts.maxSpeed){
-      this.speed += gameConsts.speedIncrement;
-      this.speed = min(this.speed, gameConsts.maxSpeed);
-      this.upgradePoints--;
-    }
-  }
-  upgradeEnergy(){
-    if (this.upgradePoints > 0 && this.energy < gameConsts.maxEnergy){
-      this.maxEnergy += gameConsts.energyIncrement;
-      this.maxEnergy = min(this.maxEnergy, gameConsts.maxEnergy);
-      this.upgradePoints--;
-    }
-  }
-  upgradeRegen(){
-    if (this.upgradePoints > 0 && this.regen < gameConsts.maxRegen){
-      this.regen += gameConsts.regenIncrement;
-      this.regen = min(this.regen, gameConsts.maxRegen);
-      this.upgradePoints--;
-    }
-  }
-  toggleOffOtherAbility(exemptAbility){
-    if (this.ability2 !== exemptAbility){
-      let prms = this.ability2.getActivationParams(this);
-      this.ability2.toggled = false;
-      this.ability2.toggleOff(this, prms.players, prms.pellets, prms.enemies, prms.miscEnts, prms.region, prms.area);
-      return;
-    }
-    if (this.ability1 !== exemptAbility){
-      let prms = this.ability1.getActivationParams(this);
-      this.ability1.toggled = false;
-      this.ability1.toggleOff(this, prms.players, prms.pellets, prms.enemies, prms.miscEnts, prms.region, prms.area);
-      return;
-    }
-  }
   resetAllModifiers(){
     this.tempSpeed = this.speed;
     this.speedMultiplier = 1;
@@ -179,6 +121,63 @@ class Player extends Entity{
     this.zonesTouched = this.getZonesTouched();
 
     this.handleZonesTouched();
+  }
+  addXp(xp){
+    //levelup
+    this.levelProgress += xp;
+    while (this.levelProgress >= this.levelProgressNeeded){
+      this.level++;
+      this.upgradePoints++;
+      this.levelProgress -= this.levelProgressNeeded;
+      this.levelProgressNeeded = this.getRequiredEXP(this.level);
+    }
+  }
+  getRequiredEXP(e){
+    var t=[0,0,0,1,2,2,4,5,6,8,10,12,15,16,20,23,25,29,32,37],
+    i=(e)=>{return e*(e+1)/2},
+    a=e-100,
+    s=Math.floor;
+    if(e<1)return;
+    if(e<=100)return e*4;
+    return 400+80*(i(3+s(a/20))-6)+(14*((a%20)))+t[a%20]+4*s(a/20)*(e%20)
+  }
+  addAura(aura){
+    this.auras.push(aura);
+  }
+  upgradeSpeed(){
+    if (this.upgradePoints > 0 && this.speed < gameConsts.maxSpeed){
+      this.speed += gameConsts.speedIncrement;
+      this.speed = min(this.speed, gameConsts.maxSpeed);
+      this.upgradePoints--;
+    }
+  }
+  upgradeEnergy(){
+    if (this.upgradePoints > 0 && this.energy < gameConsts.maxEnergy){
+      this.maxEnergy += gameConsts.energyIncrement;
+      this.maxEnergy = min(this.maxEnergy, gameConsts.maxEnergy);
+      this.upgradePoints--;
+    }
+  }
+  upgradeRegen(){
+    if (this.upgradePoints > 0 && this.regen < gameConsts.maxRegen){
+      this.regen += gameConsts.regenIncrement;
+      this.regen = min(this.regen, gameConsts.maxRegen);
+      this.upgradePoints--;
+    }
+  }
+  toggleOffOtherAbility(exemptAbility){
+    if (this.ability2 !== exemptAbility){
+      let prms = this.ability2.getActivationParams(this);
+      this.ability2.toggled = false;
+      this.ability2.toggleOff(this, prms.players, prms.pellets, prms.enemies, prms.miscEnts, prms.region, prms.area);
+      return;
+    }
+    if (this.ability1 !== exemptAbility){
+      let prms = this.ability1.getActivationParams(this);
+      this.ability1.toggled = false;
+      this.ability1.toggleOff(this, prms.players, prms.pellets, prms.enemies, prms.miscEnts, prms.region, prms.area);
+      return;
+    }
   }
   regenEnergy(){
     if (this.energy < this.tempMaxEnergy){
