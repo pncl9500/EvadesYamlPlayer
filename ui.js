@@ -60,7 +60,7 @@ class HeroCard extends UIpanel{
     //this sucks and has a lot of magic numbers. fun
     //background
     noStroke();
-    fill(0, 180);
+    fill(0, 200);
     rect(-this.width / 2, -this.height, this.width, this.height);
     //bar
     fill(game.mainPlayer.color.r, game.mainPlayer.color.g, game.mainPlayer.color.b, 110);
@@ -96,11 +96,15 @@ class HeroCard extends UIpanel{
       text(game.mainPlayer.upgradePoints, -this.width / 2 + this.lineDistance + 55.5, -this.height + 12.5, 5.5)
     }
     rectMode(CENTER);
-    this.drawStatUpgraderText(-this.width / 2 + this.lineDistance + 40, -this.height + 37, round(game.mainPlayer.speed * 2) / 2, "Speed", "1", true, true)
-    this.drawStatUpgraderText(-this.width / 2 + this.lineDistance + 40 + 80, -this.height + 37, `${round(game.mainPlayer.energy)} / ${game.mainPlayer.maxEnergy}`, "Energy", "2", true, true)
-    this.drawStatUpgraderText(-this.width / 2 + this.lineDistance + 40 + 160, -this.height + 37, round(game.mainPlayer.regen * 5) / 5, "Regen", "3", true, true)
-    this.drawStatUpgraderButton(-this.width / 2 + this.lineDistance + 40 + 240, -this.height + 37, "4", true);
-    this.drawStatUpgraderButton(-this.width / 2 + this.lineDistance + 40 + 320, -this.height + 37, "5", true);
+    this.drawStatUpgraderText(-this.width / 2 + this.lineDistance + 40, -this.height + 37, round(game.mainPlayer.speed * 2) / 2, "Speed", "1", true, game.mainPlayer.speed < gameConsts.maxSpeed)
+    this.drawStatUpgraderText(-this.width / 2 + this.lineDistance + 40 + 80, -this.height + 37, `${round(game.mainPlayer.energy)} / ${game.mainPlayer.maxEnergy}`, "Energy", "2", true, game.mainPlayer.maxEnergy < gameConsts.maxEnergy)
+    this.drawStatUpgraderText(-this.width / 2 + this.lineDistance + 40 + 160, -this.height + 37, round(game.mainPlayer.regen * 5) / 5, "Regen", "3", true, game.mainPlayer.regen < gameConsts.maxRegen)
+    this.drawStatUpgraderButton(-this.width / 2 + this.lineDistance + 40 + 240, -this.height + 37, "4", game.mainPlayer.ability1.tier < game.mainPlayer.ability1.maxTier);
+    this.drawStatUpgraderButton(-this.width / 2 + this.lineDistance + 40 + 320, -this.height + 37, "5", game.mainPlayer.ability2.tier < game.mainPlayer.ability2.maxTier);
+    if (game.mainPlayer.upgradePoints < 1){
+      this.drawAbilityUpgradeText(-this.width / 2 + this.lineDistance + 40 + 240, -this.height + 37, "Locked", "[Z] or [J]", game.mainPlayer.ability1.tier === 0);
+      this.drawAbilityUpgradeText(-this.width / 2 + this.lineDistance + 40 + 320, -this.height + 37, "Locked", "[X] or [K]", game.mainPlayer.ability2.tier === 0);
+    }
     image(game.mainPlayer.ability1.image, -this.width / 2 + this.lineDistance + 40 + 240 - 21, -this.height + 37 - 21 + 1, 42, 42);
     image(game.mainPlayer.ability2.image, -this.width / 2 + this.lineDistance + 40 + 320 - 21, -this.height + 37 - 21 + 1, 42, 42);
     //how do we draw the spinny cd mask
@@ -146,7 +150,15 @@ class HeroCard extends UIpanel{
     }
     this.drawStatUpgraderButton(x, y, num, highlightUpgradeNumber);
   }
+  drawAbilityUpgradeText(x, y, lockedText, keyText, lockedCondition){
+    textSize(11);
+    fill(255);
+    text(lockedCondition ? lockedText : keyText, x, y + 35);
+  }
   drawStatUpgraderButton(x, y, num, highlightUpgradeNumber){
+    if (game.mainPlayer.upgradePoints < 1){
+      return;
+    }
     fill(208, 208, 68);
     if (!highlightUpgradeNumber){
       fill(80, 80, 20);
