@@ -58,7 +58,6 @@ class Player extends Entity{
     
     this.auras = [];
 
-    this.statEpsilon = 0.01;
   }
   addXp(xp){
     //levelup
