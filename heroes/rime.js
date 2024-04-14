@@ -26,6 +26,9 @@ class Paralysis extends ToggleAbility{
     this.freezeTime = 2000;
     this.aura = new LockedAura({x: 0, y: 0}, this.ranges[this.tier - 1], "#00ffff39", 10);
   }
+  upgradeBehavior(player){
+    this.aura.radius = this.ranges[this.tier - 1];
+  }
   update(){
     this.aura.update();
   }

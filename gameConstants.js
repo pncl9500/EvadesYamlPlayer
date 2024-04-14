@@ -1,9 +1,12 @@
 //fundamental constants of the universe
 gameConsts = {
-  startingSpeed: 5,
   maxSpeed: 17,
-  startingEnergy: 30,
   maxEnergy: 300,
+  maxRegen: 7,
+  startingSpeed: 5,
+  startingEnergy: 30,
   startingRegen: 1,
-  maxRegen: 7
+  speedIncrement: 0.5,
+  energyIncrement: 5,
+  regenIncrement: 0.2,
 }

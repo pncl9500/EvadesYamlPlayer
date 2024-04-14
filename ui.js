@@ -106,6 +106,14 @@ class HeroCard extends UIpanel{
     //how do we draw the spinny cd mask
     (game.mainPlayer.ability1.currentCooldown > 0 && this.drawCooldownMask(game.mainPlayer.ability1.currentCooldown, game.mainPlayer.ability1.cooldownOfPreviousUse, -this.width / 2 + this.lineDistance + 40 + 240 - 21, -this.height + 37 - 21 + 1, 42, 42));
     (game.mainPlayer.ability2.currentCooldown > 0 && this.drawCooldownMask(game.mainPlayer.ability2.currentCooldown, game.mainPlayer.ability2.cooldownOfPreviousUse, -this.width / 2 + this.lineDistance + 40 + 320 - 21, -this.height + 37 - 21 + 1, 42, 42));
+    if (game.mainPlayer.ability1.tier === 0){
+      fill(0, 110);
+      rect(-this.width / 2 + this.lineDistance + 40 + 240, -this.height + 37 + 1, 42, 42);
+    }
+    if (game.mainPlayer.ability2.tier === 0){
+      fill(0, 110);
+      rect(-this.width / 2 + this.lineDistance + 40 + 320, -this.height + 37 + 1, 42, 42);
+    }
     strokeWeight(1);
     for (var i = 0; i < game.mainPlayer.ability1.maxTier; i++){
       noFill();

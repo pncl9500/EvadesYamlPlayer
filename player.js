@@ -40,7 +40,7 @@ class Player extends Entity{
     this.level = 1;
     this.levelProgress = 0;
     this.levelProgressNeeded = 4;
-    this.upgradePoints = 3;
+    this.upgradePoints = 99;
     this.restricted = true;
     this.ctrlSets = ctrlSets;
     this.ctrlVector = {x: 0, y: 0};
@@ -56,9 +56,32 @@ class Player extends Entity{
     this.doCheatRevive = false;
     
     this.auras = [];
+
+    this.statEpsilon = 0.01;
   }
   addAura(aura){
     this.auras.push(aura);
+  }
+  upgradeSpeed(){
+    if (this.upgradePoints > 0 && this.speed < gameConsts.maxSpeed){
+      this.speed += gameConsts.speedIncrement;
+      this.speed = min(this.speed, gameConsts.maxSpeed);
+      this.upgradePoints--;
+    }
+  }
+  upgradeEnergy(){
+    if (this.upgradePoints > 0 && this.energy < gameConsts.maxEnergy){
+      this.maxEnergy += gameConsts.energyIncrement;
+      this.maxEnergy = min(this.maxEnergy, gameConsts.maxEnergy);
+      this.upgradePoints--;
+    }
+  }
+  upgradeRegen(){
+    if (this.upgradePoints > 0 && this.regen < gameConsts.maxRegen){
+      this.regen += gameConsts.regenIncrement;
+      this.regen = min(this.regen, gameConsts.maxRegen);
+      this.upgradePoints--;
+    }
   }
   resetAllModifiers(){
     this.tempSpeed = this.speed;

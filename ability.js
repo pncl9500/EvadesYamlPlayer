@@ -1,7 +1,7 @@
 class Ability{
   constructor(maxTier = 5, cooldowns = 0, cost = 0, image = im.missingImage){
     this.image = image;
-    this.tier = 1;
+    this.tier = 0;
     this.maxTier = maxTier;
     this.cooldowns = cooldowns;
     this.cooldownOfPreviousUse = 0;
@@ -11,6 +11,16 @@ class Ability{
       this.cooldowns = [this.cooldowns,this.cooldowns,this.cooldowns,this.cooldowns,this.cooldowns];
     }
     this.cost = cost;
+  }
+  upgrade(player){
+    if (player.upgradePoints > 0 && this.tier < this.maxTier){
+      this.tier++;
+      player.upgradePoints--;
+      this.upgradeBehavior(player);
+    }
+  }
+  upgradeBehavior(player){
+
   }
   update(player){
     this.currentCooldown -= deltaTime;
@@ -26,7 +36,8 @@ class Ability{
     return this.currentCooldown <= 0 && 
            player.energy - player.tempMinEnergy > this.cost && 
            !player.abilitiesDisabled && 
-           (!player.dead || this.usableWhileDead);
+           (!player.dead || this.usableWhileDead) &&
+           this.tier != 0;
   }
   attemptUse(player){
     if (this.canUseAbility(player)){
