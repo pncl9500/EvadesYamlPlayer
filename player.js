@@ -134,9 +134,6 @@ class Player extends Entity{
   }
   //design this with the idea that it will be completely overriden in cent's code (if i do a single className === "Cent" i will never forgive myself)
   update(){
-    if (keyIsDown(32)){
-      this.speed += 0.2;
-    }
     this.resetAllModifiers();
 
     this.setAbilityUsages();
