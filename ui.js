@@ -65,6 +65,9 @@ class HeroCard extends UIpanel{
     //bar
     fill(game.mainPlayer.color.r, game.mainPlayer.color.g, game.mainPlayer.color.b, 110);
     rect(-this.width / 2, -this.height - this.xpBarHeight, this.width, this.xpBarHeight);
+    //filled bar 
+    fill(game.mainPlayer.color.r, game.mainPlayer.color.g, game.mainPlayer.color.b, 255);
+    rect(-this.width / 2, -this.height - this.xpBarHeight, this.width * (game.mainPlayer.levelProgress / game.mainPlayer.levelProgressNeeded), this.xpBarHeight);
     //line
     fill(125);
     rect(-this.width / 2 + this.lineDistance - 1, -this.height, 2, this.height);
