@@ -4,6 +4,7 @@ defaults = {
     pellet_multiplier: 1,
   },
   spawnerProps: {
+		count: 1,
     horizontal:false,
 		move_clockwise:true,
 		cone_angle:45,

@@ -67,5 +67,8 @@ function initGame(){
   game.setMainPlayer(mainPlayer);
   game.addPlayer(mainPlayer);
   game.addPlayer(new Rime(176 + random(-64,64), 240 + random(-96,96), 16, "Player 2", true, game, startingRegionId, startingAreaNum, []));
+  //game.addPlayer(new Morfe(176 + random(-64,64), 240 + random(-96,96), 16, "Player 3", true, game, startingRegionId, startingAreaNum, []));
+  game.cycleMainPlayer();
+  game.cycleMainPlayer();
   return game;
 }
