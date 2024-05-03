@@ -1,6 +1,6 @@
 class Enemy extends Entity{
   constructor(x, y, angle, speed, radius, color){
-    super(x, y, radius, color, 2000 - radius, "outline");
+    super(x, y, radius, color, z.enemy - z.enemyRadiusZfactor + random() * z.randEpsilon, "outline");
     
     this.normalMovementDisabled = false;
 
@@ -88,8 +88,8 @@ class AuraEnemy extends Enemy{
     this.auraSize = auraSize;
     this.aura = new LockedAura(this, auraSize, auraColor, 200 + auraSize);
   }
-  drawAura(){
+  getAura(){
     this.aura.update();
-    this.aura.draw();
+    return this.aura;
   }
 }

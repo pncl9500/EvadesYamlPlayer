@@ -8,7 +8,7 @@ class Area{
     this.parent = parent;
     this.bounds = this.findBounds();
     this.players = [];
-    //players do not go in the entities array
+    //players do not go in the entities array... for some reason
     this.entities = [];
   }
   draw(parentRegion){
@@ -27,16 +27,23 @@ class Area{
     if (settings.drawTiles){
       this.drawTiles();
     }
-    //sort entities
-    this.entities.sort((a, b) => (a.z > b.z) ? 1 : -1);
+
+    let toDraw = [];
     for (var i in this.entities){
-      this.entities[i].drawAura();
+      let a = this.entities[i].getAura();
+      if (a !== undefined){
+        toDraw.push(a);
+      }
     }
     for (var i in this.players){
-      this.players[i].draw();
+      toDraw.push(this.players[i]);
     }
     for (var i in this.entities){
-      this.entities[i].draw();
+      toDraw.push(this.entities[i]);
+    }
+    toDraw.sort((a, b) => (a.z > b.z) ? 1 : -1);
+    for (var i in toDraw){
+      toDraw[i].draw();
     }
   }
   addEnt(ent){

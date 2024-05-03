@@ -28,6 +28,7 @@ class Game{
   }
   setMainPlayer(player){
     this.mainPlayer = player;
+    this.mainPlayer.z = z.mainPlayer;
   }
   addRegion(region){
     this.regions.push(region);
@@ -37,6 +38,7 @@ class Game{
   }
   cycleMainPlayer(){
     this.mainPlayer.isMain = false;
+    this.mainPlayer.z = z.player;
     let mainPlayerControls = this.mainPlayer.ctrlSets;
     this.mainPlayer.ctrlSets = [];
     let ind = this.players.indexOf(this.mainPlayer);
@@ -44,6 +46,7 @@ class Game{
     ind %= this.players.length;
     this.mainPlayer = this.players[ind];
     this.mainPlayer.isMain = true;
+    this.mainPlayer.z = z.mainPlayer;
     this.mainPlayer.ctrlSets = mainPlayerControls;
   }
 }

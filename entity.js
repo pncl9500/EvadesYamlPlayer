@@ -70,7 +70,7 @@ class Entity{
   drawFrontExtra(){
 
   }
-  drawAura(){
+  getAura(){
 
   }
   draw(){

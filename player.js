@@ -14,7 +14,7 @@ deathTimerDurations = [
 
 class Player extends Entity{
   constructor(x, y, radius, color, name, isMain, game, regionNum = 0, areaNum = 0, ctrlSets = []){
-    super(x, y, radius, color, 1, "noOutline")
+    super(x, y, radius, color, isMain ? z.mainPlayer : z.player, "noOutline")
     this.heroName = "Basic";
 
     this.ability3 = new Ability();

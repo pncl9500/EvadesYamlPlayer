@@ -1,7 +1,7 @@
 pelletRadius = 8;
 class Pellet extends Entity{
   constructor(x, y, zone, multiplier){
-    super(x, y, pelletRadius, {r: 125, g: 125, b: 125}, 0, "noOutline")    
+    super(x, y, pelletRadius, {r: 125, g: 125, b: 125}, z.pellet, "noOutline")    
     this.multiplier = multiplier;
     this.zone = zone;
     this.mainType = "pellet";
