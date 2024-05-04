@@ -10,6 +10,13 @@ class Normal extends Enemy{
   }
 }
 
+class Immune extends Enemy{
+  constructor(x, y, angle, speed, radius){
+    super(x, y, angle, speed, radius, pal.nm.immune);
+    this.immune = true;
+  }
+}
+
 class Wall extends Enemy{
   constructor(speed, radius, ind, count, clockwise, zone){
     //speed is set to 0 since the wall is being moved manually
