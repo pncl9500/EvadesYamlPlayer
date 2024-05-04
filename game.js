@@ -72,6 +72,6 @@ function initGame(){
   game.addPlayer(new Rime(176 + random(-64,64), 240 + random(-96,96), 16, "Player 2", true, game, startingRegionId, startingAreaNum, []));
   game.addPlayer(new Morfe(176 + random(-64,64), 240 + random(-96,96), 16, "Player 3", true, game, startingRegionId, startingAreaNum, []));
   game.addPlayer(new Aurora(176 + random(-64,64), 240 + random(-96,96), 16, "Player 4", true, game, startingRegionId, startingAreaNum, []));
-  game.addPlayer(new Aurora(176 + random(-64,64), 240 + random(-96,96), 16, "Player 5", true, game, startingRegionId, startingAreaNum, []));
+  game.addPlayer(new Necro(176 + random(-64,64), 240 + random(-96,96), 16, "Player 5", true, game, startingRegionId, startingAreaNum, []));
   return game;
 }

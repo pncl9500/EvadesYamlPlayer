@@ -34,6 +34,7 @@ class Pellet extends Entity{
   }
   collect(player){
     player.addXp(this.xpValue);
+    player.rechargePelletBasedAbilities(this.multiplier);
   }
   relocate(){
     this.x = random(this.zone.x + this.radius, this.zone.x + this.zone.width - this.radius);

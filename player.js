@@ -220,6 +220,12 @@ class Player extends Entity{
     }
     return ctrlVector;
   }
+  rechargePelletBasedAbilities(pelletMultiplier){
+    console.log(this.ability1.pelletBased);
+    this.ability1.pelletBased && this.ability1.recharge(pelletMultiplier);
+    this.ability2.pelletBased && this.ability2.recharge(pelletMultiplier);
+    this.ability3.pelletBased && this.ability3.recharge(pelletMultiplier);
+  }
   updateAbilities(){
     let prms = this.ability1.getActivationParams(this);
     this.ability1.update(this, prms.players, prms.pellets, prms.enemies, prms.miscEnts, prms.region, prms.area);

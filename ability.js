@@ -7,6 +7,7 @@ class Ability{
     this.cooldownOfPreviousUse = 0;
     this.currentCooldown = 0;
     this.usableWhileDead = false;
+    this.usableWhileAlive = true;
     if (this.cooldowns.length === undefined){
       this.cooldowns = [this.cooldowns,this.cooldowns,this.cooldowns,this.cooldowns,this.cooldowns];
     }
@@ -23,7 +24,12 @@ class Ability{
 
   }
   update(player){
-    this.currentCooldown -= deltaTime;
+    if (!this.pelletBased){
+      this.currentCooldown -= deltaTime;
+    }
+  }
+  recharge(amount){
+    this.currentCooldown -= amount;
   }
   behavior(player){
 
@@ -37,6 +43,7 @@ class Ability{
            player.energy - player.tempMinEnergy > this.cost && 
            !player.abilitiesDisabled && 
            (!player.dead || this.usableWhileDead) &&
+           (player.dead || this.usableWhileAlive) &&
            this.tier != 0;
   }
   attemptUse(player){
@@ -49,7 +56,7 @@ class Ability{
     }
   }
   startCooldown(player){
-    this.currentCooldown = this.cooldowns[this.tier - 1] * player.cooldownMultiplier;
+    this.currentCooldown = this.cooldowns[this.tier - 1] * (this.pelletBased ? 1 : player.cooldownMultiplier);
     this.cooldownOfPreviousUse = this.currentCooldown;
   }
   use(player){
@@ -150,7 +157,9 @@ class ContinuousToggleAbility extends ToggleAbility{
            this.tier !== 0;
   }
   update(player){
-    this.currentCooldown -= deltaTime;
+    if (!this.pelletBased){
+      this.currentCooldown -= deltaTime;
+    }
     if (this.toggled){
       this.drainEnergy(player);
     }

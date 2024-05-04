@@ -65,7 +65,7 @@ class Area{
   }
   update(){
     //basically everything loop
-    for (var i in this.entities){
+    for (var i = 0; i < this.entities.length; i++){
       this.entities[i].update(this, this.players);
       if (this.entities[i].toRemove){
         this.entities[i].toRemove = false;
