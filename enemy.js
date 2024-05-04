@@ -6,6 +6,7 @@ class Enemy extends Entity{
 
     this.immune = false;
 
+    this.baseRadius = radius;
     this.mainType = "enemy";
     this.angle = angle;
     this.speed = speed;
@@ -15,8 +16,11 @@ class Enemy extends Entity{
     this.resetState();
     this.angleToVel();
     //all enemies have parentZone property
+
+    this.playerContactFunctions = [];
   }
   resetState(){
+    this.radiusMultiplier = 1;
     this.speedMultiplier = 1;
     this.xSpeedMultiplier = 1;
     this.ySpeedMultiplier = 1;
@@ -35,6 +39,7 @@ class Enemy extends Entity{
   update(area, players){
     this.resetState();
     this.applyEffects();
+    this.radius = this.baseRadius * this.radiusMultiplier;
     this.behavior(area, players);
     if (!this.normalMovementDisabled){
       this.x += this.xv * tFix * this.speedMultiplier * this.xSpeedMultiplier;
@@ -45,6 +50,9 @@ class Enemy extends Entity{
     }
   }
   playerCollision(player){
+    for (let i in this.playerContactFunctions){
+      this.playerContactFunctions[i](player);
+    }
     if (!this.harmless){
       player.enemyCollision(this);
     }
@@ -90,6 +98,7 @@ class AuraEnemy extends Enemy{
   }
   getAura(){
     this.aura.update();
+    this.aura.radius = this.auraSize * this.radiusMultiplier;
     return this.aura;
   }
 }

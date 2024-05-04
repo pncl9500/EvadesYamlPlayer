@@ -47,10 +47,15 @@ class Entity{
       for (var i in this.effects){
         if (this.effects[i].constructor.name === effect.constructor.name){
           //duplicate found, get outta there
+          //BUT if its refreshable, refresh it!
+          if (this.effects[i].refreshable){
+            this.effects[i].life = max(this.effects[i].life, effect.duration);
+          }
           return;
         }
       }
     }
+    effect.gainEffect(this);
     this.effects.push(effect);
   }
 
@@ -88,6 +93,9 @@ class Entity{
         noFill();
         strokeWeight(ringEnemyStrokeWidth);
         stroke(this.tempColor.r, this.tempColor.g, this.tempColor.b, this.tempColor.a ?? 255);
+        break;
+      case "none":
+        //dont render
         break;
       case "image":
         //do this later (this is for sweet tooth and experiorb)

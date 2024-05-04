@@ -1,5 +1,5 @@
 class Effect{
-  constructor(duration, priority, allowDuplicates = false){
+  constructor(duration, priority, allowDuplicates = false, refreshable = true){
     this.duration = duration;
     this.life = duration;
     this.noDuration = false;
@@ -8,6 +8,7 @@ class Effect{
     }
     this.priority = priority;
     this.allowDuplicates = allowDuplicates;
+    this.refreshable = refreshable;
     this.toRemove = false;
   }
   apply(target){
@@ -23,6 +24,9 @@ class Effect{
   }
   removeEffect(){
 
+  }
+  gainEffect(){
+    
   }
 }
 
