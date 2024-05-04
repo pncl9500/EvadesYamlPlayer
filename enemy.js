@@ -19,6 +19,12 @@ class Enemy extends Entity{
 
     this.playerContactFunctions = [];
   }
+  canGainEffect(effect){
+    if (this.immune && !effect.overrideEnemyImmunity){
+      return false;
+    }
+    return true;
+  }
   resetState(){
     this.radiusMultiplier = 1;
     this.speedMultiplier = 1;

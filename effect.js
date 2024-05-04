@@ -9,6 +9,7 @@ class Effect{
     this.priority = priority;
     this.allowDuplicates = allowDuplicates;
     this.refreshable = refreshable;
+    this.overrideEnemyImmunity = false;
     this.toRemove = false;
   }
   apply(target){
@@ -26,7 +27,7 @@ class Effect{
 
   }
   gainEffect(){
-    
+
   }
 }
 

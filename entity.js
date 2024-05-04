@@ -42,7 +42,13 @@ class Entity{
   getRadius(){
     return this.tempRadius;
   }
+  canGainEffect(effect){
+    return true;
+  }
   gainEffect(effect){
+    if (!this.canGainEffect(effect)){
+      return;
+    }
     if (!effect.allowDuplicates){
       for (var i in this.effects){
         if (this.effects[i].constructor.name === effect.constructor.name){
