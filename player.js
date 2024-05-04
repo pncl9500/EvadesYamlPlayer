@@ -55,6 +55,7 @@ class Player extends Entity{
     this.timesSaved = 0;
     this.lastDir = 0;
     this.doCheatRevive = false;
+    this.cooldownMultiplier = 1;
     
     this.auras = [];
 
@@ -220,12 +221,13 @@ class Player extends Entity{
     return ctrlVector;
   }
   updateAbilities(){
-    this.ability1.update(this);
-    this.ability2.update(this);
-    this.ability3.update(this);
-    this.ability1.behavior(this);
-    this.ability2.behavior(this);
-    this.ability3.behavior(this);
+    let prms = this.ability1.getActivationParams(this);
+    this.ability1.update(this, prms.players, prms.pellets, prms.enemies, prms.miscEnts, prms.region, prms.area);
+    this.ability2.update(this, prms.players, prms.pellets, prms.enemies, prms.miscEnts, prms.region, prms.area);
+    this.ability3.update(this, prms.players, prms.pellets, prms.enemies, prms.miscEnts, prms.region, prms.area);
+    this.ability1.behavior(this, prms.players, prms.pellets, prms.enemies, prms.miscEnts, prms.region, prms.area);
+    this.ability2.behavior(this, prms.players, prms.pellets, prms.enemies, prms.miscEnts, prms.region, prms.area);
+    this.ability3.behavior(this, prms.players, prms.pellets, prms.enemies, prms.miscEnts, prms.region, prms.area);
   }
   checkPlayerCollision(area, players){
     for(let i in players){

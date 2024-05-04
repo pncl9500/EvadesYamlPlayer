@@ -10,5 +10,6 @@ effectPriorities = {
   FreezeEffect: 1000,
   MinimizeEffect: 1000,
   RevivingEnemyEffect: 1000,
+  DistortEffect: 1000,
 
 }
