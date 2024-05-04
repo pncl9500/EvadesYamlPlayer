@@ -50,7 +50,7 @@ class Energize extends Ability{
   constructor(){
     super(5, 0, 0, im.ab.energize);
     this.regenBoosts = [1, 2, 3, 4, 5];
-    this.cooldownReduction = 0.1;
+    this.cooldownReduction = 0.9;
   }
   behavior(player, players, pellets, enemies, miscEnts, region, area){
     if (this.tier === 0){
