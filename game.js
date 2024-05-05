@@ -69,9 +69,9 @@ function initGame(){
   mainPlayer = new Magmax(176 + random(-64,64), 240 + random(-96,96), 16, "Player 1", true, game, startingRegionId, startingAreaNum, [new WASDset, new ArrowSet]);
   game.setMainPlayer(mainPlayer);
   game.addPlayer(mainPlayer);
-  game.addPlayer(new Rime(176 + random(-64,64), 240 + random(-96,96), 16, "Player 2", true, game, startingRegionId, startingAreaNum, []));
-  game.addPlayer(new Morfe(176 + random(-64,64), 240 + random(-96,96), 16, "Player 3", true, game, startingRegionId, startingAreaNum, []));
-  game.addPlayer(new Aurora(176 + random(-64,64), 240 + random(-96,96), 16, "Player 4", true, game, startingRegionId, startingAreaNum, []));
-  game.addPlayer(new Necro(176 + random(-64,64), 240 + random(-96,96), 16, "Player 5", true, game, startingRegionId, startingAreaNum, []));
+  game.addPlayer(new Rime(176 + random(-64,64), 240 + random(-96,96), 16, "Player 2", false, game, startingRegionId, startingAreaNum, []));
+  game.addPlayer(new Morfe(176 + random(-64,64), 240 + random(-96,96), 16, "Player 3", false, game, startingRegionId, startingAreaNum, []));
+  game.addPlayer(new Aurora(176 + random(-64,64), 240 + random(-96,96), 16, "Player 4", false, game, startingRegionId, startingAreaNum, []));
+  game.addPlayer(new Necro(176 + random(-64,64), 240 + random(-96,96), 16, "Player 5", false, game, startingRegionId, startingAreaNum, []));
   return game;
 }
