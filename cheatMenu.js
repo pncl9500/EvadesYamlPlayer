@@ -27,7 +27,10 @@ let maxMouseScroll = 0;
 function mouseWheel(event) {
   mouseScroll -= event.delta;
 }
+tooltipPadding = 2;
+tooltipHeight = 13;
 function drawCheatMenu(){
+  tooltipToRender = false;
   relMouseX = mouseX;
   relMouseY = mouseY;
   
@@ -61,6 +64,17 @@ function drawCheatMenu(){
     offset += cheatMenuPaddingBetween;
     //relMouseY += cheatMenuPaddingBetween;
     maxMouseScroll = -offset;
+  }
+  if (tooltipToRender){
+    stroke(0);
+    strokeWeight(1);
+    fill(255);
+    textSize(tooltipHeight - tooltipPadding * 2)
+    rect(relMouseX + 10, relMouseY, textWidth(tooltipToRender) + tooltipPadding * 2, tooltipHeight);
+    noStroke();
+    textAlign(LEFT, TOP);
+    fill(0);
+    text(tooltipToRender, relMouseX + tooltipPadding + 10, relMouseY + tooltipPadding);
   }
 
   pop();
@@ -112,11 +126,12 @@ class CheatMenuLine extends CheatMenuItem{
 }
 
 class CheatMenuButton extends CheatMenuItem{
-  constructor(text, width, height, func){
+  constructor(text, width, height, func, tooltip){
     super(height, width);
     this.text = text;
     this.width = width;
     this.func = func;
+    this.tooltip = tooltip;
   }
   hoveredByMouse(relMouseX, relMouseY, offset){
     return ptRect(relMouseX, relMouseY, 0, offset, this.width, this.height);
@@ -136,6 +151,9 @@ class CheatMenuButton extends CheatMenuItem{
     textAlign(LEFT, CENTER);
     text(this.text, cheatMenuButtonPadding, offset + this.height / 2 + 0.5);
     textAlign(LEFT, TOP);
+    if (this.tooltip !== undefined && this.hoveredByMouse(relMouseX, relMouseY, offset)){
+      tooltipToRender = this.tooltip;
+    }
   }
 }
 
@@ -169,13 +187,15 @@ class CheatMenuRow extends CheatMenuItem{
 }
 
 class CheatMenuToggle extends CheatMenuItem{
-  constructor(width, height, toggled, onFunc, offFunc, getStateFunc){
+  constructor(width, height, toggled, onFunc, offFunc, getStateFunc, tooltip){
     super(height, width);
     this.toggled = toggled;
     this.onFunc = onFunc;
     this.offFunc = offFunc;
     this.toggleBoxPadding = 2;
     this.getStateFunc = getStateFunc;
+    this.tooltip = tooltip;
+    console.log(this.tooltip);
   }
   hoveredByMouse(relMouseX, relMouseY, offset){
     return ptRect(relMouseX, relMouseY, 0, offset, this.width, this.height);
@@ -205,6 +225,10 @@ class CheatMenuToggle extends CheatMenuItem{
       noStroke();
       rect(0 + this.toggleBoxPadding, offset + this.toggleBoxPadding, this.width - this.toggleBoxPadding * 2, this.height - this.toggleBoxPadding * 2);
     }
+    console.log(this.tooltip);
+    if (this.tooltip !== undefined && this.hoveredByMouse(relMouseX, relMouseY, offset)){
+      tooltipToRender = this.tooltip;
+    }
   }
 }
 
@@ -214,16 +238,16 @@ function txt(text, height){
   return new CheatMenuText(text, height);
 }
 
-function btn(text, width, height, func){
-  return new CheatMenuButton(text, width, height, func);
+function btn(text, width, height, func, tooltip){
+  return new CheatMenuButton(text, width, height, func, tooltip);
 }
 
 function row(items){
   return new CheatMenuRow(items);
 }
 
-function tog(width, height, toggled, onFunc, offFunc, getStateFunc){
-  return new CheatMenuToggle(width, height, toggled, onFunc, offFunc, getStateFunc);
+function tog(width, height, toggled, onFunc, offFunc, getStateFunc, tooltip){
+  return new CheatMenuToggle(width, height, toggled, onFunc, offFunc, getStateFunc, tooltip);
 }
 
 let cheatMenuItems = [];
@@ -233,38 +257,38 @@ function setCheatMenuItems(){
     txt("Cheat Menu", 36), bigLine,
     txt("Vanilla settings", 20), bigLine,
     row([txt("Show tiles:", 12), 
-        tog(11, 11, true, () => {settings.drawTiles = true}, () => {settings.drawTiles = false}),]),
+        tog(11, 11, true, () => {settings.drawTiles = true}, () => {settings.drawTiles = false}, undefined, "Enables grid lines."),]),
     row([txt("Show outlines:", 12), 
-        tog(11, 11, true, () => {settings.drawOutlines = true}, () => {settings.drawOutlines = false}),]),
+        tog(11, 11, true, () => {settings.drawOutlines = true}, () => {settings.drawOutlines = false}, undefined, "Enables enemy outlines."),]),
     txt("Quick Cheats", 20), bigLine,
     row([txt("Change area:", 12), 
-        btn("-40", 18, 12, () => {game.mainPlayer.changeAreaCheat(-40); game.mainPlayer.moveToAreaStart()}),
-        btn("-10", 18, 12, () => {game.mainPlayer.changeAreaCheat(-10); game.mainPlayer.moveToAreaStart()}),
-        btn("-1", 18, 12, () => {game.mainPlayer.changeAreaCheat(-1); game.mainPlayer.moveToAreaStart()}),
-        btn("+1", 18, 12, () => {game.mainPlayer.changeAreaCheat(1); game.mainPlayer.moveToAreaStart()}),
-        btn("+10", 18, 12, () => {game.mainPlayer.changeAreaCheat(10); game.mainPlayer.moveToAreaStart()}),
-        btn("+40", 18, 12, () => {game.mainPlayer.changeAreaCheat(40); game.mainPlayer.moveToAreaStart()}),
-        btn("First", 20, 12, () => {game.mainPlayer.changeAreaCheat(-4000); game.mainPlayer.moveToAreaStart()}),
-        btn("Last", 20, 12, () => {game.mainPlayer.changeAreaCheat(4000); game.mainPlayer.moveToAreaStart()}),]),
+        btn("-40", 18, 12, () => {game.mainPlayer.changeAreaCheat(-40); game.mainPlayer.moveToAreaStart()}, "Move back 40 areas."),
+        btn("-10", 18, 12, () => {game.mainPlayer.changeAreaCheat(-10); game.mainPlayer.moveToAreaStart()}, "Move back 10 areas."),
+        btn("-1", 18, 12, () => {game.mainPlayer.changeAreaCheat(-1); game.mainPlayer.moveToAreaStart()}, "Move back 1 area."),
+        btn("+1", 18, 12, () => {game.mainPlayer.changeAreaCheat(1); game.mainPlayer.moveToAreaStart()}, "Move forward 1 area."),
+        btn("+10", 18, 12, () => {game.mainPlayer.changeAreaCheat(10); game.mainPlayer.moveToAreaStart()}, "Move forward 10 areas."),
+        btn("+40", 18, 12, () => {game.mainPlayer.changeAreaCheat(40); game.mainPlayer.moveToAreaStart()}, "Move forward 40 areas."),
+        btn("First", 20, 12, () => {game.mainPlayer.changeAreaCheat(-4000); game.mainPlayer.moveToAreaStart()}, "Move to the first area."),
+        btn("Last", 20, 12, () => {game.mainPlayer.changeAreaCheat(4000); game.mainPlayer.moveToAreaStart()}, "Move to the last area."),]),
     row([txt("Change region: ", 12), 
-        btn("Open list", 37, 12, () => {queueCheatMenuChange(getRegionSelectorMenu())}),]),
+        btn("Open list", 37, 12, () => {queueCheatMenuChange(getRegionSelectorMenu())}, "Teleport to a region."),]),
     row([txt("Move within area:", 12), 
-        btn("Start", 22, 12, () => {game.mainPlayer.moveToAreaStart()}),
-        btn("End", 22, 12, () => {game.mainPlayer.moveToAreaEnd()}),]),
+        btn("Start", 22, 12, () => {game.mainPlayer.moveToAreaStart()}, "Move to the start of the current area."),
+        btn("End", 22, 12, () => {game.mainPlayer.moveToAreaEnd()}, "Move to the end of the current area."),]),
     row([txt("Stats:", 12), 
-        btn("Fully max", 38, 12, () => {game.mainPlayer.speed = gameConsts.maxSpeed; game.mainPlayer.maxEnergy = gameConsts.maxEnergy; game.mainPlayer.regen = gameConsts.maxRegen; game.mainPlayer.upgradePoints += 150; for(var i = 0; i < 5; i++){game.mainPlayer.ability1.upgrade(game.mainPlayer)}; for(var i = 0; i < 5; i++){game.mainPlayer.ability2.upgrade(game.mainPlayer)};}),
-        btn("Max stats only", 56, 12, () => {game.mainPlayer.speed = gameConsts.maxSpeed; game.mainPlayer.maxEnergy = gameConsts.maxEnergy; game.mainPlayer.regen = gameConsts.maxRegen; game.mainPlayer.upgradePoints += 150}),
-        btn("Give points only", 62, 12, () => {game.mainPlayer.upgradePoints += 150;}),]),
+        btn("Fully max", 38, 12, () => {game.mainPlayer.speed = gameConsts.maxSpeed; game.mainPlayer.maxEnergy = gameConsts.maxEnergy; game.mainPlayer.regen = gameConsts.maxRegen; game.mainPlayer.upgradePoints += 150; for(var i = 0; i < 5; i++){game.mainPlayer.ability1.upgrade(game.mainPlayer)}; for(var i = 0; i < 5; i++){game.mainPlayer.ability2.upgrade(game.mainPlayer)};}, "Max out all stats and abilities."),
+        btn("Max stats only", 56, 12, () => {game.mainPlayer.speed = gameConsts.maxSpeed; game.mainPlayer.maxEnergy = gameConsts.maxEnergy; game.mainPlayer.regen = gameConsts.maxRegen; game.mainPlayer.upgradePoints += 150}, "Only max out stats."),
+        btn("Give points only", 62, 12, () => {game.mainPlayer.upgradePoints += 150;}, "Give points without upgrading anything."),]),
     row([txt("Set FPS:", 12), 
-        btn("30", 18, 12, () => {frameRate(30)}),
-        btn("60", 18, 12, () => {frameRate(60)}),]),
+        btn("30", 18, 12, () => {frameRate(30)}, "Set the framerate to 30."),
+        btn("60", 18, 12, () => {frameRate(60)}, "Set the framerate to 60."),]),
     row([txt("Dummy player control:", 12), 
-        btn("Cycle players", 54, 12, () => {game.cycleMainPlayer()}),]),
+        btn("Cycle players", 54, 12, () => {game.cycleMainPlayer()}, "Changes the main player to the next player."),]),
         //btn("Remove current player", 86, 12, () => {game.removeCurrentPlayer()}),]),
     row([txt("Invincibility:", 12), 
-        tog(11, 11, false, () => {settings.invincibilityCheat = true}, () => {settings.invincibilityCheat = false}, () => {return settings.invincibilityCheat;}),]),
+        tog(11, 11, false, () => {settings.invincibilityCheat = true}, () => {settings.invincibilityCheat = false}, () => {return settings.invincibilityCheat;}, "Makes the player invincible, bypassing corrosion."),]),
     row([txt("Infinite ability use:", 12), 
-        tog(11, 11, false, () => {settings.infiniteAbilityUseCheat = true}, () => {settings.infiniteAbilityUseCheat = false}, () => {return settings.infiniteAbilityUseCheat;}),]),
+        tog(11, 11, false, () => {settings.infiniteAbilityUseCheat = true}, () => {settings.infiniteAbilityUseCheat = false}, () => {return settings.infiniteAbilityUseCheat;}, "Removes all cooldowns and grants infinite energy."),]),
   ]
   baseCheatMenuItems = list;
   return list;
@@ -277,7 +301,7 @@ function queueCheatMenuChange(list){
 
 function getRegionSelectorMenu(){
   list = [
-    btn("Go back", 38, 12, () => {queueCheatMenuChange(baseCheatMenuItems)}),
+    btn("Go back", 38, 12, () => {queueCheatMenuChange(baseCheatMenuItems)}, "Return to the previous menu."),
     txt("Region List", 20), bigLine,
   ];
   for (let i in game.regions){
