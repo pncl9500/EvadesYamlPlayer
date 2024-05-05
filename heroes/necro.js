@@ -23,7 +23,7 @@ class Reanimate extends Ability{
   constructor(){
     super(5, [14000,12000,10000,8000,6000], 30, im.ab.reanimate);
     this.projectileCounts = [1,2,3,4,5];
-    this.fanAngles = [PI/180 * 0, PI/180 * 5, PI/180 * 10, PI/180 * 15, PI/180 * 20];
+    this.fanAngles = [PI/180 * 0, PI/180 * 20, PI/180 * 20, PI/180 * 20, PI/180 * 20];
   }
   activate(player, players, pellets, enemies, miscEnts, region, area){
     let projCount = this.projectileCounts[this.tier - 1];
