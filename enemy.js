@@ -107,4 +107,14 @@ class AuraEnemy extends Enemy{
     this.aura.radius = this.auraSize * this.radiusMultiplier;
     return this.aura;
   }
+  applyAuraEffectToPlayer(area, players, player){
+
+  }
+  behavior(area, players){
+    for (var i in players){
+      if (circleCircle(this.aura, players[i])){
+        this.applyAuraEffectToPlayer(area, players, players[i]);
+      }
+    }
+  }
 }

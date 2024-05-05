@@ -6,6 +6,9 @@ effectPriorities = {
   FlowEffect: 0,
   MinimumSpeedZoneEffect: -2000,
 
+  SlowingEnemyEffect: 500,
+  FreezingEnemyEffect: 500,
+
   //on enemy
   FreezeEffect: 1000,
   MinimizeEffect: 1000,

@@ -85,3 +85,39 @@ class Wall extends Enemy{
     return;
   }
 }
+
+class Slowing extends AuraEnemy{
+  constructor(x, y, angle, speed, radius, auraSize){
+    super(x, y, angle, speed, radius, pal.nm.slowing, pal.nmaur.slowing, auraSize)
+  }
+  applyAuraEffectToPlayer(area, players, player){
+    player.gainEffect(new SlowingEnemyEffect());
+  }
+}
+
+class SlowingEnemyEffect extends Effect{
+  constructor(){
+    super(0, effectPriorities.SlowingEnemyEffect, false, true);
+  }
+  doEffect(target){
+    target.speedMultiplier *= (1 - 0.3 * target.effectVulnerability);
+  }
+}
+
+class Freezing extends AuraEnemy{
+  constructor(x, y, angle, speed, radius, auraSize){
+    super(x, y, angle, speed, radius, pal.nm.freezing, pal.nmaur.freezing, auraSize)
+  }
+  applyAuraEffectToPlayer(area, players, player){
+    player.gainEffect(new FreezingEnemyEffect());
+  }
+}
+
+class FreezingEnemyEffect extends Effect{
+  constructor(){
+    super(0, effectPriorities.FreezingEnemyEffect, false, true);
+  }
+  doEffect(target){
+    target.speedMultiplier *= (1 - 0.85 * target.effectVulnerability);
+  }
+}
