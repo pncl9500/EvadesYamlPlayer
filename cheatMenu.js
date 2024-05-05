@@ -149,6 +149,42 @@ class CheatMenuRow extends CheatMenuItem{
   }
 }
 
+class CheatMenuToggle extends CheatMenuItem{
+  constructor(width, height, toggled, onFunc, offFunc){
+    super(height, width);
+    this.toggled = toggled;
+    this.onFunc = onFunc;
+    this.offFunc = offFunc;
+    this.toggleBoxPadding = 2;
+  }
+  hoveredByMouse(relMouseX, relMouseY, offset){
+    return ptRect(relMouseX, relMouseY, 0, offset, this.width, this.height);
+  }
+  draw(offset){
+    stroke(255);
+    strokeWeight(1);
+    noFill();
+    if (this.hoveredByMouse(relMouseX, relMouseY, offset)){
+      fill(255, 100);
+      if (mouseReleasedLastFrame){
+        if (this.toggled){
+          this.toggled = false;
+          this.offFunc();
+        } else {
+          this.toggled = true;
+          this.onFunc();
+        }
+      }
+    }
+    rect(0, offset, this.width, this.height);
+    if (this.toggled){
+      fill(255);
+      noStroke();
+      rect(0 + this.toggleBoxPadding, offset + this.toggleBoxPadding, this.width - this.toggleBoxPadding * 2, this.height - this.toggleBoxPadding * 2);
+    }
+  }
+}
+
 
 bigLine = new CheatMenuLine();
 function txt(text, height){
@@ -163,11 +199,20 @@ function row(items){
   return new CheatMenuRow(items);
 }
 
+function tog(width, height, toggled, onFunc, offFunc){
+  return new CheatMenuToggle(width, height, toggled, onFunc, offFunc);
+}
+
 let cheatMenuItems = [];
 
 function setCheatMenuItems(){
   return [
     txt("Cheat Menu", 36), bigLine,
+    txt("Vanilla settings", 20), bigLine,
+    row([txt("Show tiles:", 12), 
+        tog(11, 11, true, () => {settings.drawTiles = true}, () => {settings.drawTiles = false}),]),
+    row([txt("Show outlines:", 12), 
+        tog(11, 11, true, () => {settings.drawOutlines = true}, () => {settings.drawOutlines = false}),]),
     txt("Quick Cheats", 20), bigLine,
     row([txt("Change area:", 12), 
         btn("-40", 18, 12, () => {game.mainPlayer.changeAreaCheat(-40); game.mainPlayer.moveToAreaStart()}),
@@ -190,6 +235,7 @@ function setCheatMenuItems(){
         btn("60", 18, 12, () => {frameRate(60)}),]),
     row([txt("Dummy player control:", 12), 
         btn("Cycle players", 54, 12, () => {game.cycleMainPlayer()}),]),
+        //btn("Remove current player", 86, 12, () => {game.removeCurrentPlayer()}),]),
   ]
 }
 

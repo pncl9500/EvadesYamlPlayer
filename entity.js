@@ -85,15 +85,18 @@ class Entity{
 
   }
   draw(){
+    noStroke();
     this.drawBackExtra();
     fill(this.tempColor.r, this.tempColor.g, this.tempColor.b, (this.tempColor.a ?? 255) * this.alphaMultiplier);
+    noStroke();
     switch (this.renderType) {
       case "noOutline":
-        noStroke();
         break;
       case "outline":
-        stroke(0);
-        strokeWeight(enemyStrokeWidth);
+        if (settings.drawOutlines){
+          stroke(0);
+          strokeWeight(enemyStrokeWidth);
+        }
         break;
       case "ring":
         noFill();
