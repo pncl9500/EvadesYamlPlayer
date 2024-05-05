@@ -7,6 +7,7 @@ cheatMenuButtonPadding = 2;
 cheatMenuRowItemPadding = 4;
 
 function openCheatMenu(){
+  queueCheatMenuChange(baseCheatMenuItems);
   cheatMenuOpen = true;
   mouseScroll = 0;
 }
