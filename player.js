@@ -17,6 +17,7 @@ class Player extends Entity{
     super(x, y, radius, color, isMain ? z.mainPlayer : z.player, "noOutline")
     this.heroName = "Basic";
 
+    this.baseRadius = radius;
     this.ability3 = new Ability();
     this.mainType = "player";
     this.isMain = isMain;
@@ -61,6 +62,7 @@ class Player extends Entity{
 
   }
   resetAllModifiers(){
+    this.radiusMultiplier = 1;
     this.tempSpeed = this.speed;
     this.speedMultiplier = 1;
     this.xSpeedMultiplier = 1;
@@ -100,6 +102,7 @@ class Player extends Entity{
       this.doCheatRevive = false;
     }
     this.applyEffects();
+    this.radius = this.baseRadius * this.radiusMultiplier;
 
     this.regenEnergy();
 
@@ -221,7 +224,6 @@ class Player extends Entity{
     return ctrlVector;
   }
   rechargePelletBasedAbilities(pelletMultiplier){
-    console.log(this.ability1.pelletBased);
     this.ability1.pelletBased && this.ability1.recharge(pelletMultiplier);
     this.ability2.pelletBased && this.ability2.recharge(pelletMultiplier);
     this.ability3.pelletBased && this.ability3.recharge(pelletMultiplier);

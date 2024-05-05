@@ -16,6 +16,9 @@ function loadImageAssets(){
 
       resurrection: loadImage("imageAssets/ab/resurrection.png"),
       reanimate: loadImage("imageAssets/ab/reanimate.png"),
+
+      stomp: loadImage("imageAssets/ab/stomp.png"),
+      vigor: loadImage("imageAssets/ab/vigor.png"),
     }
   }
 }

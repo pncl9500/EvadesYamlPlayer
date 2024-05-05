@@ -187,7 +187,7 @@ class MinimizeEffect extends Effect{
 class RevivingEnemyEffect extends Effect{
   constructor(duration = 4000){
     super(duration, effectPriorities["RevivingEnemyEffect"], false);
-    this.pcf = (player) => {
+    this.pcf = (player, enemy) => {
       player.revive();
     }
   }

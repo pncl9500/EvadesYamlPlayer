@@ -84,3 +84,7 @@ function sqsin(ang){
   let mul = (abs(cos(ang)) + abs(sin(ang)));
   return constrain(sin(ang) * mul, -1, 1);
 }
+
+function sq(x){
+  return x * x;
+}

@@ -137,9 +137,7 @@ class DrainingEnemyEffect extends Effect{
   }
   doEffect(target){
     let newEnergy = target.energy - 15 * target.effectVulnerability * tFix * (1/30);
-    console.log(newEnergy)
     if (newEnergy < 0){
-      console.log("TO LOWWWWWWW")
       target.energy = Math.min(target.energy, 0);
     } else {
       target.energy = newEnergy;

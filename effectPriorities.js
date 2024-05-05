@@ -6,12 +6,18 @@ effectPriorities = {
   FlowEffect: 0,
   MinimumSpeedZoneEffect: -2000,
 
+  EnergizeEffect: 1000,
+  VigorEffect: 200,
+  FullVigorEffect: 200,
+
   SlowingEnemyEffect: 500,
   DrainingEnemyEffect: 500,
   FreezingEnemyEffect: 500,
 
   //on enemy
   FreezeEffect: 1000,
+  StompedEffect: 1010,
+  StompingEffect: 1010,
   MinimizeEffect: 1000,
   RevivingEnemyEffect: 1000,
   DistortEffect: 1000,
