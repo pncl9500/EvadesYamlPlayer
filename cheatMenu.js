@@ -8,6 +8,7 @@ cheatMenuRowItemPadding = 4;
 
 function openCheatMenu(){
   cheatMenuOpen = true;
+  mouseScroll = 0;
 }
 
 function closeCheatMenu(){
@@ -19,6 +20,11 @@ var relMouseY = 0;
 var mouseReleasedLastFrame = false;
 function mouseReleased(){
   mouseReleasedLastFrame = true;
+}
+let mouseScroll = 0;
+let maxMouseScroll = 0;
+function mouseWheel(event) {
+  mouseScroll -= event.delta;
 }
 function drawCheatMenu(){
   relMouseX = mouseX;
@@ -40,17 +46,29 @@ function drawCheatMenu(){
   relMouseX -= cheatMenuLeftPadding;
   relMouseY -= cheatMenuTopPadding;
   let offset = 0;
+  if (mouseScroll > 0){
+    mouseScroll = 0;
+  }
+  if (mouseScroll < maxMouseScroll){
+    mouseScroll = maxMouseScroll;
+  }
   for (var i in cheatMenuItems){
-    cheatMenuItems[i].draw(offset);
-    cheatMenuItems[i].behavior(offset);
+    cheatMenuItems[i].draw(offset + mouseScroll);
+    cheatMenuItems[i].behavior(offset + mouseScroll);
     offset += cheatMenuItems[i].height;
     //relMouseY += cheatMenuItems[i].height;
     offset += cheatMenuPaddingBetween;
     //relMouseY += cheatMenuPaddingBetween;
+    maxMouseScroll = -offset;
   }
 
   pop();
   mouseReleasedLastFrame = false;
+
+  if (newCheatMenu !== undefined){
+    cheatMenuItems = newCheatMenu;
+    newCheatMenu = undefined;
+  }
 }
 
 class CheatMenuItem{
@@ -208,9 +226,9 @@ function tog(width, height, toggled, onFunc, offFunc, getStateFunc){
 }
 
 let cheatMenuItems = [];
-
+let baseCheatMenuItems = [];
 function setCheatMenuItems(){
-  return [
+  let list = [
     txt("Cheat Menu", 36), bigLine,
     txt("Vanilla settings", 20), bigLine,
     row([txt("Show tiles:", 12), 
@@ -225,8 +243,10 @@ function setCheatMenuItems(){
         btn("+1", 18, 12, () => {game.mainPlayer.changeAreaCheat(1); game.mainPlayer.moveToAreaStart()}),
         btn("+10", 18, 12, () => {game.mainPlayer.changeAreaCheat(10); game.mainPlayer.moveToAreaStart()}),
         btn("+40", 18, 12, () => {game.mainPlayer.changeAreaCheat(40); game.mainPlayer.moveToAreaStart()}),
-        btn("first", 20, 12, () => {game.mainPlayer.changeAreaCheat(-4000); game.mainPlayer.moveToAreaStart()}),
-        btn("last", 20, 12, () => {game.mainPlayer.changeAreaCheat(4000); game.mainPlayer.moveToAreaStart()}),]),
+        btn("First", 20, 12, () => {game.mainPlayer.changeAreaCheat(-4000); game.mainPlayer.moveToAreaStart()}),
+        btn("Last", 20, 12, () => {game.mainPlayer.changeAreaCheat(4000); game.mainPlayer.moveToAreaStart()}),]),
+    row([txt("Change region: ", 12), 
+        btn("Open list", 37, 12, () => {queueCheatMenuChange(getRegionSelectorMenu())}),]),
     row([txt("Move within area:", 12), 
         btn("Start", 22, 12, () => {game.mainPlayer.moveToAreaStart()}),
         btn("End", 22, 12, () => {game.mainPlayer.moveToAreaEnd()}),]),
@@ -245,6 +265,32 @@ function setCheatMenuItems(){
     row([txt("Infinite ability use:", 12), 
         tog(11, 11, false, () => {settings.infiniteAbilityUseCheat = true}, () => {settings.infiniteAbilityUseCheat = false}, () => {return settings.infiniteAbilityUseCheat;}),]),
   ]
+  baseCheatMenuItems = list;
+  return list;
+}
+
+let newCheatMenu = undefined;
+function queueCheatMenuChange(list){
+  newCheatMenu = list;
+}
+
+function getRegionSelectorMenu(){
+  list = [
+    btn("Go back", 38, 12, () => {queueCheatMenuChange(baseCheatMenuItems)}),
+    txt("Region List", 20), bigLine,
+  ];
+  for (let i in game.regions){
+    list.push(btn(game.regions[i].name, 180, 12, () => {
+      game.mainPlayer.area.exit(game.mainPlayer);
+      game.mainPlayer.area.attemptUnload(game.mainPlayer);
+      game.mainPlayer.goToRegionFromId(i);
+      game.mainPlayer.goToAreaFromId(0);
+      game.mainPlayer.area.enter(game.mainPlayer);
+      game.mainPlayer.area.attemptLoad(true);
+      game.mainPlayer.moveToAreaStart();
+    }));
+  }
+  return list;
 }
 
 class CheatInvincibilityEffect extends Effect{
