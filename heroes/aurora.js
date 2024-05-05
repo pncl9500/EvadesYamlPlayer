@@ -49,7 +49,7 @@ class DistortEffect extends Effect{
 class Energize extends Ability{
   constructor(){
     super(5, 0, 0, im.ab.energize);
-    this.regenBoosts = [1, 2, 3, 4, 5];
+    this.regenBoosts = [2, 2.25, 2.5, 2.75, 3];
     this.cooldownReduction = 0.9;
   }
   behavior(player, players, pellets, enemies, miscEnts, region, area){
