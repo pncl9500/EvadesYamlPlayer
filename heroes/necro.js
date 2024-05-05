@@ -36,8 +36,8 @@ class Reanimate extends Ability{
 }
 
 class ReanimateProjectile extends Projectile{
-  constructor(x, y, angle, area, player, entitiesAffectedByAbility = [], lifetime = 1800){
-    super(x, y, angle, 22, lifetime, 0, 12, "ff00ff", area, player, z.genericProjectile, entitiesAffectedByAbility, "noOutline");
+  constructor(x, y, angle, area, player, entitiesAffectedByAbility = [], lifetime = 1500){
+    super(x, y, angle, 26, lifetime, 0, 12, "ff00ff", area, player, z.genericProjectile, entitiesAffectedByAbility, "noOutline");
   }
   detectContact(){
     this.detectPlayerContact();
