@@ -6,6 +6,9 @@ effectPriorities = {
   FlowEffect: 0,
   MinimumSpeedZoneEffect: -2000,
 
+  CheatInvincibilityEffect: 4000,
+  CheatInfiniteAbilityEffect: 4000,
+
   EnergizeEffect: 1000,
   VigorEffect: 200,
   FullVigorEffect: 200,

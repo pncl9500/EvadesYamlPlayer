@@ -505,7 +505,6 @@ class Player extends Entity{
     }
   }
   changeAreaCheat(areaOffset){
-    console.log("fuckinggghgjh shit")
     this.area.exit(this);
     this.area.attemptUnload(this);
     this.areaNum += areaOffset;

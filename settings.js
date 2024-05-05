@@ -28,4 +28,7 @@ settings = {
   energyBarOutlineWidth: 1,
   energyBarWidth: 36,
   energyBarHeight: 6,
+
+  invincibilityCheat: false,
+  infiniteAbilityUseCheat: false,
 }

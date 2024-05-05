@@ -5,6 +5,12 @@ class Game{
     this.mainPlayer = null;
   }
   update(){
+    if (settings.invincibilityCheat){
+      this.mainPlayer.gainEffect(new CheatInvincibilityEffect());
+    }
+    if (settings.infiniteAbilityUseCheat){
+      this.mainPlayer.gainEffect(new CheatInfiniteAbilityEffect());
+    }
     //loop through every player and update their areas
     var areasToUpdate = [];
     for (var i in this.players){

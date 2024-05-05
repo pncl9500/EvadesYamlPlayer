@@ -150,17 +150,21 @@ class CheatMenuRow extends CheatMenuItem{
 }
 
 class CheatMenuToggle extends CheatMenuItem{
-  constructor(width, height, toggled, onFunc, offFunc){
+  constructor(width, height, toggled, onFunc, offFunc, getStateFunc){
     super(height, width);
     this.toggled = toggled;
     this.onFunc = onFunc;
     this.offFunc = offFunc;
     this.toggleBoxPadding = 2;
+    this.getStateFunc = getStateFunc;
   }
   hoveredByMouse(relMouseX, relMouseY, offset){
     return ptRect(relMouseX, relMouseY, 0, offset, this.width, this.height);
   }
   draw(offset){
+    if (this.getStateFunc !== undefined){
+      this.toggled = this.getStateFunc();
+    }
     stroke(255);
     strokeWeight(1);
     noFill();
@@ -199,8 +203,8 @@ function row(items){
   return new CheatMenuRow(items);
 }
 
-function tog(width, height, toggled, onFunc, offFunc){
-  return new CheatMenuToggle(width, height, toggled, onFunc, offFunc);
+function tog(width, height, toggled, onFunc, offFunc, getStateFunc){
+  return new CheatMenuToggle(width, height, toggled, onFunc, offFunc, getStateFunc);
 }
 
 let cheatMenuItems = [];
@@ -236,8 +240,37 @@ function setCheatMenuItems(){
     row([txt("Dummy player control:", 12), 
         btn("Cycle players", 54, 12, () => {game.cycleMainPlayer()}),]),
         //btn("Remove current player", 86, 12, () => {game.removeCurrentPlayer()}),]),
+    row([txt("Invincibility:", 12), 
+        tog(11, 11, false, () => {settings.invincibilityCheat = true}, () => {settings.invincibilityCheat = false}, () => {return settings.invincibilityCheat;}),]),
+    row([txt("Infinite ability use:", 12), 
+        tog(11, 11, false, () => {settings.infiniteAbilityUseCheat = true}, () => {settings.infiniteAbilityUseCheat = false}, () => {return settings.infiniteAbilityUseCheat;}),]),
   ]
 }
+
+class CheatInvincibilityEffect extends Effect{
+  constructor(){
+    super(0, effectPriorities["CheatInvincibilityEffect"], false, true);
+  }
+  doEffect(target){
+    target.invincible = true;
+    target.corrosiveBypass = true;
+    let mag = 60;
+    let f = 0.1;
+    target.tempColor = {r: target.tempColor.r + mag + sin(frameCount * f) * mag, g: target.tempColor.g + mag + sin(frameCount * f) * mag, b: target.tempColor.b + mag + sin(frameCount * f) * mag}
+  }
+}
+
+class CheatInfiniteAbilityEffect extends Effect{
+  constructor(){
+    super(0, effectPriorities["CheatInfiniteAbilityEffect"], false, true);
+  }
+  doEffect(target){
+    target.energy = target.maxEnergy;
+    target.cooldownMultiplier = 0;
+    target.energyBarColor = {r: 200, g: 235, b: 255};
+  }
+}
+
 
 function ptRect(ptx, pty, rectx, recty, rectw, recth){
   return ptx >= rectx &&

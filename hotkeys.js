@@ -16,4 +16,6 @@ function keyPressed() {
       game.mainPlayer.changeAreaCheat(10); game.mainPlayer.moveToAreaStart()
     }; 
   }
+  if (keyCode === 86) { settings.invincibilityCheat = !settings.invincibilityCheat; }
+  if (keyCode === 66) { settings.infiniteAbilityUseCheat = !settings.infiniteAbilityUseCheat; }
 }
