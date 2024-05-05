@@ -1,6 +1,6 @@
 class Enemy extends Entity{
   constructor(x, y, angle, speed, radius, color){
-    super(x, y, radius, color, z.enemy - z.enemyRadiusZfactor + random() * z.randEpsilon, "outline");
+    super(x, y, radius, color, radius - z.enemyRadiusZfactor + random() * z.randEpsilon, "outline");
     
     this.normalMovementDisabled = false;
 
