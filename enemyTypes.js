@@ -121,3 +121,28 @@ class FreezingEnemyEffect extends Effect{
     target.speedMultiplier *= (1 - 0.85 * target.effectVulnerability);
   }
 }
+
+class Draining extends AuraEnemy{
+  constructor(x, y, angle, speed, radius, auraSize){
+    super(x, y, angle, speed, radius, pal.nm.draining, pal.nmaur.draining, auraSize)
+  }
+  applyAuraEffectToPlayer(area, players, player){
+    player.gainEffect(new DrainingEnemyEffect());
+  }
+}
+
+class DrainingEnemyEffect extends Effect{
+  constructor(){
+    super(0, effectPriorities.DrainingEnemyEffect, false, true);
+  }
+  doEffect(target){
+    let newEnergy = target.energy - 15 * target.effectVulnerability * tFix * (1/30);
+    console.log(newEnergy)
+    if (newEnergy < 0){
+      console.log("TO LOWWWWWWW")
+      target.energy = Math.min(target.energy, 0);
+    } else {
+      target.energy = newEnergy;
+    }
+  }
+}

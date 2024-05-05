@@ -100,6 +100,7 @@ class AuraEnemy extends Enemy{
     super(x, y, angle, speed, radius, color)
     this.auraColor = auraColor;
     this.auraSize = auraSize;
+    this.affectsDeadPlayers = false;
     this.aura = new LockedAura(this, auraSize, auraColor, 200 + auraSize);
   }
   getAura(){
@@ -112,6 +113,9 @@ class AuraEnemy extends Enemy{
   }
   behavior(area, players){
     for (var i in players){
+      if (players[i].dead && !this.affectsDeadPlayers){
+        continue;
+      }
       if (circleCircle(this.aura, players[i])){
         this.applyAuraEffectToPlayer(area, players, players[i]);
       }
