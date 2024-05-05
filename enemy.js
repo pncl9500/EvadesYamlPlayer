@@ -101,7 +101,7 @@ class AuraEnemy extends Enemy{
     this.auraColor = auraColor;
     this.auraSize = auraSize;
     this.affectsDeadPlayers = false;
-    this.aura = new LockedAura(this, auraSize, auraColor, 200 + auraSize);
+    this.aura = new LockedAura(this, auraSize, auraColor, z.genericAura + auraSize * z.auraRadiusZfactor + random() * z.randEpsilon);
   }
   getAura(){
     this.aura.update();

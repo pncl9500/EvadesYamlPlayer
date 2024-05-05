@@ -1,6 +1,7 @@
 debugValue = 0;
 game = null;
 ui = null;
+cheatMenuOpen = false;
 
 /**
  * Loaded before the game is opened
@@ -21,6 +22,7 @@ function setup() {
   initCanvas();
   game = initGame();
   ui = initUI();
+  cheatMenuItems = setCheatMenuItems();
 }
 
 var tFix = 0.5;
@@ -45,6 +47,9 @@ function draw() {
 
   drawCinemaBars();
 
+  if (cheatMenuOpen){
+    drawCheatMenu();
+  }
   //drawDebugValueText();
 }
 function drawDebugValueText(){

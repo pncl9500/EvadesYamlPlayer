@@ -1,0 +1,201 @@
+cheatMenuPaddingBetween = 6;
+cheatMenuLeftPadding = 6;
+cheatMenuTopPadding = 10;
+cheatMenuWidth = 500;
+cheatMenuHeightScale = 720;
+cheatMenuButtonPadding = 2;
+cheatMenuRowItemPadding = 4;
+
+function openCheatMenu(){
+  cheatMenuOpen = true;
+}
+
+function closeCheatMenu(){
+  cheatMenuOpen = false;
+}
+
+var relMouseX = 0;
+var relMouseY = 0;
+var mouseReleasedLastFrame = false;
+function mouseReleased(){
+  mouseReleasedLastFrame = true;
+}
+function drawCheatMenu(){
+  relMouseX = mouseX;
+  relMouseY = mouseY;
+  
+  noStroke();
+  fill(0, 0, 0, 150);
+  rect(0, 0, windowWidth, windowHeight);
+
+  push();
+  fill(0, 0, 0, 160);
+  scale(windowHeight / cheatMenuHeightScale);
+  relMouseX /= windowHeight / cheatMenuHeightScale;
+  relMouseY /= windowHeight / cheatMenuHeightScale;
+  rect(0, 0, cheatMenuWidth, cheatMenuHeightScale);
+
+  textAlign(LEFT, TOP);
+  translate(cheatMenuLeftPadding, cheatMenuTopPadding);
+  relMouseX -= cheatMenuLeftPadding;
+  relMouseY -= cheatMenuTopPadding;
+  let offset = 0;
+  for (var i in cheatMenuItems){
+    cheatMenuItems[i].draw(offset);
+    cheatMenuItems[i].behavior(offset);
+    offset += cheatMenuItems[i].height;
+    //relMouseY += cheatMenuItems[i].height;
+    offset += cheatMenuPaddingBetween;
+    //relMouseY += cheatMenuPaddingBetween;
+  }
+
+  pop();
+  mouseReleasedLastFrame = false;
+}
+
+class CheatMenuItem{
+  constructor(height, width){
+    this.height = height;
+    this.width = width;
+  }
+  draw(offset){
+
+  }
+  behavior(offset){
+
+  }
+}
+
+class CheatMenuText extends CheatMenuItem{
+  constructor(text, height){
+    super(height, 0);
+    textSize(height);
+    this.width = textWidth(text);
+    this.text = text;
+  }
+  draw(offset){
+    noStroke();
+    textSize(this.height);
+    fill(255);
+    text(this.text, 0, offset);
+  }
+}
+
+class CheatMenuLine extends CheatMenuItem{
+  constructor(){
+    super(2, cheatMenuWidth - cheatMenuLeftPadding * 2);
+  }
+  draw(offset){
+    stroke(255);
+    strokeWeight(2);
+    line(0, offset, cheatMenuWidth - cheatMenuLeftPadding * 2, offset);
+  }
+}
+
+class CheatMenuButton extends CheatMenuItem{
+  constructor(text, width, height, func){
+    super(height, width);
+    this.text = text;
+    this.width = width;
+    this.func = func;
+  }
+  hoveredByMouse(relMouseX, relMouseY, offset){
+    return ptRect(relMouseX, relMouseY, 0, offset, this.width, this.height);
+  }
+  draw(offset){
+    noStroke();
+    fill(255);
+    if (this.hoveredByMouse(relMouseX, relMouseY, offset)){
+      fill(125);
+      if (mouseReleasedLastFrame){
+        this.func();
+      }
+    }
+    rect(0, offset, this.width, this.height);
+    textSize(this.height - cheatMenuButtonPadding * 2);
+    fill(0);
+    textAlign(LEFT, CENTER);
+    text(this.text, cheatMenuButtonPadding, offset + this.height / 2 + 0.5);
+    textAlign(LEFT, TOP);
+  }
+}
+
+class CheatMenuRow extends CheatMenuItem{
+  constructor(items){
+    super(0);
+    this.items = items;
+    let greatestHeight = 0;
+    let width = 0;
+    for (var i in items){
+      if (items[i].height > greatestHeight){
+        greatestHeight = items[i].height;
+        width += items[i].width;
+        width += cheatMenuRowItemPadding;
+      }
+    }
+    this.height = greatestHeight;
+  }
+  draw(offset){
+    push();
+    let initialRelMouseX = relMouseX;
+    for (var i in this.items){
+      this.items[i].draw(offset);
+      this.items[i].behavior();
+      translate(this.items[i].width + cheatMenuRowItemPadding, 0)
+      relMouseX -= this.items[i].width + cheatMenuRowItemPadding;
+    }
+    relMouseX = initialRelMouseX;
+    pop();
+  }
+}
+
+
+bigLine = new CheatMenuLine();
+function txt(text, height){
+  return new CheatMenuText(text, height);
+}
+
+function btn(text, width, height, func){
+  return new CheatMenuButton(text, width, height, func);
+}
+
+function row(items){
+  return new CheatMenuRow(items);
+}
+
+let cheatMenuItems = [];
+
+function setCheatMenuItems(){
+  return [
+    txt("Cheat Menu", 36), bigLine,
+    txt("Quick Cheats", 20), bigLine,
+    row([txt("Change area:", 12), 
+        btn("-40", 18, 12, () => {game.mainPlayer.changeAreaCheat(-40); game.mainPlayer.moveToAreaStart()}),
+        btn("-10", 18, 12, () => {game.mainPlayer.changeAreaCheat(-10); game.mainPlayer.moveToAreaStart()}),
+        btn("-1", 18, 12, () => {game.mainPlayer.changeAreaCheat(-1); game.mainPlayer.moveToAreaStart()}),
+        btn("+1", 18, 12, () => {game.mainPlayer.changeAreaCheat(1); game.mainPlayer.moveToAreaStart()}),
+        btn("+10", 18, 12, () => {game.mainPlayer.changeAreaCheat(10); game.mainPlayer.moveToAreaStart()}),
+        btn("+40", 18, 12, () => {game.mainPlayer.changeAreaCheat(40); game.mainPlayer.moveToAreaStart()}),
+        btn("first", 20, 12, () => {game.mainPlayer.changeAreaCheat(-4000); game.mainPlayer.moveToAreaStart()}),
+        btn("last", 20, 12, () => {game.mainPlayer.changeAreaCheat(4000); game.mainPlayer.moveToAreaStart()}),]),
+    row([txt("Move within area:", 12), 
+        btn("Start", 22, 12, () => {game.mainPlayer.moveToAreaStart()}),
+        btn("End", 22, 12, () => {game.mainPlayer.moveToAreaEnd()}),]),
+    row([txt("Stats:", 12), 
+        btn("Fully max", 38, 12, () => {game.mainPlayer.speed = gameConsts.maxSpeed; game.mainPlayer.maxEnergy = gameConsts.maxEnergy; game.mainPlayer.regen = gameConsts.maxRegen; game.mainPlayer.upgradePoints += 150; for(var i = 0; i < 5; i++){game.mainPlayer.ability1.upgrade(game.mainPlayer)}; for(var i = 0; i < 5; i++){game.mainPlayer.ability2.upgrade(game.mainPlayer)};}),
+        btn("Max stats only", 56, 12, () => {game.mainPlayer.speed = gameConsts.maxSpeed; game.mainPlayer.maxEnergy = gameConsts.maxEnergy; game.mainPlayer.regen = gameConsts.maxRegen; game.mainPlayer.upgradePoints += 150}),
+        btn("Give points only", 62, 12, () => {game.mainPlayer.upgradePoints += 150;}),]),
+    row([txt("Set FPS:", 12), 
+        btn("30", 18, 12, () => {frameRate(30)}),
+        btn("60", 18, 12, () => {frameRate(60)}),]),
+    row([txt("Dummy player control:", 12), 
+        btn("Cycle players", 54, 12, () => {game.cycleMainPlayer()}),]),
+  ]
+}
+
+function ptRect(ptx, pty, rectx, recty, rectw, recth){
+  return ptx >= rectx &&
+         ptx <= rectx + rectw &&
+         pty >= recty &&
+         pty <= recty + recth;
+}

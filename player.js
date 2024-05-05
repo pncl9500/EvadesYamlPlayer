@@ -156,7 +156,7 @@ class Player extends Entity{
     }
   }
   upgradeEnergy(){
-    if (this.upgradePoints > 0 && this.energy < gameConsts.maxEnergy){
+    if (this.upgradePoints > 0 && this.maxEnergy < gameConsts.maxEnergy){
       this.maxEnergy += gameConsts.energyIncrement;
       this.maxEnergy = min(this.maxEnergy, gameConsts.maxEnergy);
       this.upgradePoints--;
@@ -500,6 +500,34 @@ class Player extends Entity{
           this.y = y;
           this.y += (this.y < 0) ? this.area.bounds.bottom : this.area.bounds.top;
         }
+        return;
+      }
+    }
+  }
+  changeAreaCheat(areaOffset){
+    console.log("fuckinggghgjh shit")
+    this.area.exit(this);
+    this.area.attemptUnload(this);
+    this.areaNum += areaOffset;
+    this.areaNum = max(min(this.areaNum, this.region.areas.length - 1), 0);
+    this.area = this.region.areas[this.areaNum];
+    this.area.enter(this);
+    this.area.attemptLoad(true);
+  }
+  moveToAreaStart(){
+    for (var i = 0; i < this.area.zones.length; i++){
+      if (this.area.zones[i].type === "safe"){
+        this.x = this.area.zones[i].x + this.area.zones[i].width * 0.5;
+        this.y = this.area.zones[i].y + this.area.zones[i].height * 0.5;
+        return;
+      }
+    }
+  }
+  moveToAreaEnd(){
+    for (var i = this.area.zones.length - 1; i >= 0; i--){
+      if (this.area.zones[i].type === "safe"){
+        this.x = this.area.zones[i].x + this.area.zones[i].width * 0.5;
+        this.y = this.area.zones[i].y + this.area.zones[i].height * 0.5;
         return;
       }
     }

@@ -85,6 +85,6 @@ function sqsin(ang){
   return constrain(sin(ang) * mul, -1, 1);
 }
 
-function sq(x){
-  return x * x;
-}
+// function sq(x){
+//   return x * x;
+// }
