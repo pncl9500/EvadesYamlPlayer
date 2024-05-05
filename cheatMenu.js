@@ -257,6 +257,7 @@ class CheatInvincibilityEffect extends Effect{
     let mag = 60;
     let f = 0.1;
     target.tempColor = {r: target.tempColor.r + mag + sin(frameCount * f) * mag, g: target.tempColor.g + mag + sin(frameCount * f) * mag, b: target.tempColor.b + mag + sin(frameCount * f) * mag}
+    target.doCheatRevive = true;
   }
 }
 
