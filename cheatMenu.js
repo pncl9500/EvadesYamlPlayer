@@ -360,7 +360,7 @@ class CheatInfiniteAbilityEffect extends Effect{
   doEffect(target){
     target.energy = target.maxEnergy;
     target.cooldownMultiplier = 0;
-    target.energyBarColor = {r: 200, g: 235, b: 255};
+    target.energyBarColor = {r: 200, g: 235, b: 255, a: 255};
   }
 }
 

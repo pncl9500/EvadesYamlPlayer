@@ -56,7 +56,6 @@ class Player extends Entity{
     this.timesSaved = 0;
     this.lastDir = 0;
     this.doCheatRevive = false;
-    this.cooldownMultiplier = 1;
     this.mostRecentSafeZone = null;
     this.mostRecentSafeX = 0;
     this.mostRecentSafeY = 0;
@@ -99,6 +98,7 @@ class Player extends Entity{
     this.resetAllModifiers();
 
     this.setAbilityUsages();
+    this.cooldownMultiplier = 1;
 
     if (this.doCheatRevive){
       this.revive();
