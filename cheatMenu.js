@@ -255,7 +255,6 @@ let cheatMenuItems = [];
 let baseCheatMenuItems = [];
 function setCheatMenuItems(){
   let list = [
-    txt("Cheat Menu", 36), bigLine,
     txt("Vanilla settings", 20), bigLine,
     row([txt("Show tiles:", 12), 
         tog(11, 11, true, () => {settings.drawTiles = true}, () => {settings.drawTiles = false}, undefined, "Enable grid lines."),]),
