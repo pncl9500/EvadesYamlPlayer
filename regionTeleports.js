@@ -339,4 +339,9 @@ regionTeleports = {
       "zone_0": {dest: "Mysterious Mansion", x: -80, area: 60},
     }
   },
+  "Dusty Depths":{
+    "area_0": {
+      "zone_2": {dest: "Dusty Depths", x: 60, y: 120, area: 1},
+    }
+  },
 }
