@@ -222,7 +222,7 @@ class LavaEnemyEffect extends Effect{
     let newEnergy = target.energy + 15 * target.effectVulnerability * tFix * (1/30);
     if (newEnergy > target.maxEnergy){
       target.energy = 0;
-      if (!target.corrosiveBypass){
+      if (!(target.isMain && settings.invincibilityCheat)){
         target.die();
       }
     } else {
