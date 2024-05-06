@@ -230,3 +230,70 @@ class LavaEnemyEffect extends Effect{
     }
   }
 }
+
+class Dasher extends Enemy{
+  constructor(x, y, angle, speed, radius){
+    super(x, y, angle, speed, radius, pal.nm.dasher);
+    this.time_to_prepare = 750;
+    this.time_to_dash = 3000;
+    this.time_between_dashes = 750;
+    this.normal_speed = speed;
+    this.base_speed = this.normal_speed / 5;
+    this.prepare_speed = this.normal_speed / 5;
+    this.dash_speed = this.normal_speed;
+    this.time_dashing = 0;
+    this.time_preparing = 0;
+    this.time_since_last_dash = 0;
+    this.velToAngle();
+    this.oldAngle = this.angle;
+    this.dasher = true;
+  }
+  compute_speed(){
+    this.speed = (this.time_since_last_dash < this.time_between_dashes && this.time_dashing == 0 && this.time_preparing == 0) ? 0 : (this.time_dashing == 0) ? this.prepare_speed : this.base_speed//(this.time_preparing>0) ? this.prepare_speed : this.base_speed
+    this.speedToVel();
+    this.oldAngle = this.angle;
+  }
+  wallBounce(){
+    this.angle = this.oldAngle;
+    this.x - this.radius < this.parentZone.x && (this.x = this.parentZone.x + this.radius, this.angleToVel(), this.xv *= -1, this.velToAngle());
+    this.x + this.radius > this.parentZone.x + this.parentZone.width && (this.x = this.parentZone.x + this.parentZone.width - this.radius, this.angleToVel(), this.xv *= -1, this.velToAngle());
+    this.y - this.radius < this.parentZone.y && (this.y = this.parentZone.y + this.radius, this.angleToVel(), this.yv *= -1, this.velToAngle());
+    this.y + this.radius > this.parentZone.y + this.parentZone.height && (this.y = this.parentZone.y + this.parentZone.height - this.radius, this.angleToVel(), this.yv *= -1, this.velToAngle());
+    this.wallBounceEvent();
+    this.oldAngle = this.angle;
+  }
+  behavior(area, players, player) {
+    this.angle = this.oldAngle;
+    if(this.time_preparing == 0){
+      if(this.time_dashing == 0){
+        if(this.time_since_last_dash < this.time_between_dashes){
+          this.time_since_last_dash += dTime;
+        }
+        else{
+          this.time_since_last_dash = 0;
+          this.time_preparing += dTime;
+          this.base_speed = this.prepare_speed;
+        }
+      }
+      else {
+        this.time_dashing += dTime;
+        if (this.time_dashing > this.time_to_dash){
+          this.time_dashing = 0;
+          this.base_speed = this.normal_speed;
+        } else {
+          this.base_speed = this.dash_speed * ( 1 - (this.time_dashing / this.time_to_dash ) );
+        }
+      }
+    } else {
+      this.time_preparing += dTime;
+      if (this.time_preparing > this.time_to_prepare){
+        this.time_preparing = 0;
+        this.time_dashing += dTime;
+        this.base_speed = this.dash_speed;
+      } else {
+        this.base_speed = this.prepare_speed * ( 1 - (this.time_preparing / this.time_to_prepare) );
+      }
+    }
+    this.compute_speed();
+  }
+}

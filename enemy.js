@@ -43,6 +43,11 @@ class Enemy extends Entity{
     this.xv = mag * cos(this.angle);
     this.yv = mag * sin(this.angle);
   }
+  speedToVel(){
+    this.xv = this.speed;
+    this.yv = 0;
+    this.angleToVel();
+  }
   update(area, players){
     this.resetState();
     this.applyEffects();
