@@ -201,4 +201,30 @@ class DisablingEnemyEffect extends Effect{
     try {if (target.ability3.toggled) {target.ability3.toggled = false; target.ability3.toggleOff(target, prms.players, prms.pellets, prms.enemies, prms.miscEnts, prms.region, prms.area); }} catch (error) {}
   }
 }
-//finish disabling enemy
+
+class Lava extends AuraEnemy{
+  constructor(x, y, angle, speed, radius, auraSize){
+    super(x, y, angle, speed, radius, pal.nm.lava, pal.nmaur.lava, auraSize)
+  }
+  applyAuraEffectToPlayer(area, players, player){
+    player.gainEffect(new LavaEnemyEffect());
+  }
+}
+
+class LavaEnemyEffect extends Effect{
+  constructor(){
+    super(0, effectPriorities.LavaEnemyEffect, false, true);
+  }
+  doEffect(target){
+    if (target.fullEffectImmunity){
+      return;
+    }
+    let newEnergy = target.energy + 15 * target.effectVulnerability * tFix * (1/30);
+    if (newEnergy > target.maxEnergy){
+      target.energy = 0;
+      target.die();
+    } else {
+      target.energy = newEnergy;
+    }
+  }
+}

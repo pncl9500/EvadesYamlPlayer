@@ -18,6 +18,7 @@ effectPriorities = {
   FreezingEnemyEffect: 500,
   EnlargingEnemyEffect: 500,
   DisablingEnemyEffect: 500, //after vigor (important)
+  LavaEnemyEffect: 500,
 
   //on enemy
   FreezeEffect: 1000,

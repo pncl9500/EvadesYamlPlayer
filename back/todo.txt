@@ -11,7 +11,6 @@ cycling
 dabot
 dasher
 disabling ghost
-disabling
 eabot
 elbot
 electrical
@@ -33,7 +32,6 @@ icbot
 ice ghost
 ice sniper
 icicle
-lava
 lead sniper
 libot
 liquid
