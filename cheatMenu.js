@@ -225,7 +225,7 @@ class CheatMenuToggle extends CheatMenuItem{
     if (this.toggled){
       fill(255);
       noStroke();
-      rect(0 + this.toggleBoxPadding, offset + this.toggleBoxPadding, this.width - this.toggleBoxPadding * 2, this.height - this.toggleBoxPadding * 2);
+      rect(0 + this.toggleBoxPadding, offset + this.toggleBoxPadding, this.width - this.toggleBoxPadding * 2 - 0.40, this.height - this.toggleBoxPadding * 2 - 0.40);
     }
     if (this.tooltip !== undefined && this.hoveredByMouse(relMouseX, relMouseY, offset)){
       tooltipToRender = this.tooltip;
