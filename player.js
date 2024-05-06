@@ -276,6 +276,11 @@ class Player extends Entity{
       this.x = this.mostRecentSafeZone.x + this.mostRecentSafeZone.width / 2;
       this.y = this.mostRecentSafeZone.y + this.mostRecentSafeZone.height / 2;
       this.revive();
+      if (settings.rechargeCooldownOnDeath){
+        this.ability1.recharge(100000);
+        this.ability2.recharge(100000);
+        this.ability3.recharge(100000);
+      }
     }
   }
   instantRespawnAppropriate(){

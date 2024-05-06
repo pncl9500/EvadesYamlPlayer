@@ -5,6 +5,26 @@ class Morfe extends Player{
     this.ability1 = new Reverse();
     this.ability2 = new Minimize();
   }
+  instantRespawnAppropriate(){
+    let longestReverseEffect = -1;
+    for (let i in this.area.entities){
+      let e = this.area.entities[i];
+      for (let ef in (e.effects ?? [])){
+        let effect = e.effects[ef];
+        if (effect.constructor.name === "RevivingEnemyEffect"){
+          if (effect.life > longestReverseEffect){
+            longestReverseEffect = effect.life;
+          }
+        }
+      }
+    }
+    if (longestReverseEffect === -1){
+      return true;
+    }
+    this.deathEffect.life = longestReverseEffect;
+    this.deathTimer = longestReverseEffect;
+    return false;
+  }
 }
 
 class Reverse extends Ability{

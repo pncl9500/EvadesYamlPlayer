@@ -57,7 +57,6 @@ class Ability{
   }
   startCooldown(player){
     this.currentCooldown = this.cooldowns[this.tier - 1] * (this.pelletBased ? 1 : player.cooldownMultiplier);
-    console.log(this.currentCooldown);
     this.cooldownOfPreviousUse = this.currentCooldown;
   }
   use(player){
