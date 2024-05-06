@@ -18,6 +18,7 @@ class Player extends Entity{
     this.heroName = "Basic";
 
     this.baseRadius = radius;
+    this.tempRadius = this.baseRadius;
     this.ability3 = new Ability();
     this.mainType = "player";
     this.isMain = isMain;
@@ -66,6 +67,7 @@ class Player extends Entity{
   resetAllModifiers(){
     this.radiusMultiplier = 1;
     this.tempSpeed = this.speed;
+    this.tempRadius = this.baseRadius;
     this.speedMultiplier = 1;
     this.xSpeedMultiplier = 1;
     this.ySpeedMultiplier = 1;
@@ -105,7 +107,7 @@ class Player extends Entity{
       this.doCheatRevive = false;
     }
     this.applyEffects();
-    this.radius = this.baseRadius * this.radiusMultiplier;
+    this.radius = this.tempRadius * this.radiusMultiplier;
 
     this.regenEnergy();
 

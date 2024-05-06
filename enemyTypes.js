@@ -153,3 +153,21 @@ class Toxic extends AuraEnemy{
     player.energy = min(player.energy, player.maxEnergy * 0.7);
   }
 }
+
+class Enlarging extends AuraEnemy{
+  constructor(x, y, angle, speed, radius, auraSize){
+    super(x, y, angle, speed, radius, pal.nm.enlarging, pal.nmaur.enlarging, auraSize)
+  }
+  applyAuraEffectToPlayer(area, players, player){
+    player.gainEffect(new EnlargingEnemyEffect());
+  }
+}
+
+class EnlargingEnemyEffect extends Effect{
+  constructor(){
+    super(0, effectPriorities.EnlargingEnemyEffect, false, true);
+  }
+  doEffect(target){
+    target.tempRadius += 10;
+  }
+}

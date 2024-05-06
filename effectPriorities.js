@@ -16,6 +16,7 @@ effectPriorities = {
   SlowingEnemyEffect: 500,
   DrainingEnemyEffect: 500,
   FreezingEnemyEffect: 500,
+  EnlargingEnemyEffect: 500,
 
   //on enemy
   FreezeEffect: 1000,
