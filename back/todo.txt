@@ -1,88 +1,176 @@
-aibot
-barrier
-blocking
-cactus
-charging
-corrosive sniper
-corrosive
-crumbling
-cybot
-cycling
-dabot
+-----------------------------------------------------------
+features:
+friction
+mouse control
+area banner
+minimap
+chat box
+leaderboard
+
+-----------------------------------------------------------
+regions/enemies:
+
+cc:
 dasher
-disabling ghost
-eabot
-elbot
-electrical
-experience drain
-fake pumpkin
-fibot
-fire trail
-firefly
-flower
-force sniper a
-force sniper b
-frost giant
-glowy
-grass
-gravity ghost
-gravity
 homing
-icbot
+
+vv:
+sniper
+turning
+sizing
+
+gg:
 ice ghost
 ice sniper
 icicle
-lead sniper
-libot
 liquid
-lunging
-magnetic nullification
-magnetic reduction
-mebot
-mist
-negative magnetic ghost
-negative magnetic sniper
-oscillating
-phantom
-plbot
-poison ghost
-poison sniper
-positive magnetic ghost
-positive magnetic sniper
-prediction sniper
-pumpkin
-quicksand
-radar
-radiating bullets
-reducing
-regen ghost
+slippery
+
+ff:
+frost giant
+snowman
+
+dd:
+speed sniper
+speed ghost
 regen sniper
-repelling ghost
-repelling
+regen ghost
+disabling ghost
+radiating bullets
+
+cc4:
+charging
+lead sniper
+reducing
+
+ss2:
+quicksand
+cactus
+crumbling
 residue
-ring sniper
 sand
 sandrock
-seedling
-sizing
-slippery
-sniper
-snowman
-sparking
-speed ghost
-speed sniper
-spiral
+
+dd2:
 stalactite
-star
-static
-switch
-teleporting
-thunderbolt
+
+hh2:
+fake pumpkin
+pumpkin
 tree
-turning
-wabot
+
+ww2:
+force sniper a
+force sniper b
+blocking
+experience drain
+
+bb:
+fire trail
+lunging
+
+mm3:
+firefly
+glowy
+phantom
+mist
+
+gg2:
+flower
+grass
+seedling
+
+mm2:
+magnetic nullification
+magnetic reduction
+negative magnetic ghost
+negative magnetic sniper
+positive magnetic ghost
+positive magnetic sniper
+
+ee:
+gravity ghost
+gravity
+repelling ghost
+repelling
+star
+teleporting
+
+ii:
+cycling
+
+tt:
+corrosive sniper
+corrosive
+enlarging
+poison ghost
+poison sniper
+
+ww:
 wavy
-wind ghost
-wind sniper
 zigzag
 zoning
+spiral
+oscillating
+switch
+
+cc2:
+radar
+barrier
+wind ghost
+wind sniper
+aibot
+eabot
+fibot
+wabot
+cybot
+
+cc2h:
+electrical
+sparking
+thunderbolt
+static
+prediction sniper
+ring sniper
+icbot
+elbot
+libot
+mebot
+plbot
+dabot
+cybot (hard mode)
+
+implement ee2
+implement ee2h
+implement magnetism
+implement partial magnetism
+
+-----------------------------------------------------------
+heroes:
+nexus
+shade
+euclid
+chrono
+reaper
+rameses
+jolt
+ghoul
+cent
+jotunn
+candy
+mirage
+boldrock
+glob
+magno
+ignis
+stella
+viola
+mortuus
+echelon
+demona
+stheno
+factorb
+cybot
+alk
+aranes
+custom
