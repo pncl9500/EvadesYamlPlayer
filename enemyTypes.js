@@ -150,7 +150,7 @@ class Toxic extends AuraEnemy{
     super(x, y, angle, speed, radius, pal.nm.toxic, pal.nmaur.toxic, auraSize)
   }
   applyAuraEffectToPlayer(area, players, player){
-    player.energy = min(player.energy, player.maxEnergy * 0.7);
+    player.energy = min(player.energy, player.maxEnergy * (1 - 0.3 * player.effectVulnerability));
   }
 }
 
@@ -168,6 +168,37 @@ class EnlargingEnemyEffect extends Effect{
     super(0, effectPriorities.EnlargingEnemyEffect, false, true);
   }
   doEffect(target){
-    target.tempRadius += 10;
+    target.tempRadius += 10 * target.effectVulnerability;
   }
 }
+
+class Disabling extends AuraEnemy{
+  constructor(x, y, angle, speed, radius, auraSize){
+    super(x, y, angle, speed, radius, pal.nm.disabling, pal.nmaur.disabling, auraSize)
+  }
+  applyAuraEffectToPlayer(area, players, player){
+    player.gainEffect(new DisablingEnemyEffect());
+  }
+}
+
+class DisablingEnemyEffect extends Effect{
+  constructor(){
+    super(0, effectPriorities.DisablingEnemyEffect, false, true);
+  }
+  doEffectBeforeAbilities(target){
+    if (target.fullEffectImmunity){
+      return;
+    }
+    target.abilitiesDisabled = true;
+  }
+  doEffect(target){
+    if (target.fullEffectImmunity){
+      return;
+    }
+    let prms = target.ability1.getActivationParams(target);
+    try {if (target.ability1.toggled) {target.ability1.toggled = false; target.ability1.toggleOff(target, prms.players, prms.pellets, prms.enemies, prms.miscEnts, prms.region, prms.area); }} catch (error) {}
+    try {if (target.ability2.toggled) {target.ability2.toggled = false; target.ability2.toggleOff(target, prms.players, prms.pellets, prms.enemies, prms.miscEnts, prms.region, prms.area); }} catch (error) {}
+    try {if (target.ability3.toggled) {target.ability3.toggled = false; target.ability3.toggleOff(target, prms.players, prms.pellets, prms.enemies, prms.miscEnts, prms.region, prms.area); }} catch (error) {}
+  }
+}
+//finish disabling enemy

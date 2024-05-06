@@ -31,7 +31,7 @@ class VigorEffect extends Effect{
     this.size = size;
     this.full = full;
   }
-  doEffect(target){
+  doEffectBeforeAbilities(target){
     target.radiusMultiplier *= this.size;
     target.effectVulnerability *= this.vuln;
     if (this.full){

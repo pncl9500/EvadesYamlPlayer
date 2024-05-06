@@ -13,6 +13,7 @@ function getEnemyFromSpawner(x, y, d, enemyType, spawner, spawnIndex, zone){
     case "freezing": return new Freezing(x, y, d, s, r, auraSize);
     case "toxic": return new Toxic(x, y, d, s, r, auraSize);
     case "enlarging": return new Enlarging(x, y, d, s, r, auraSize);
+    case "disabling": return new Disabling(x, y, d, s, r, auraSize);
     
     //wall
     case "wall": return new Wall(s, r, spawnIndex, spawner.count, spawner.move_clockwise ?? defaults.spawnerProps.move_clockwise, zone);

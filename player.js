@@ -95,10 +95,15 @@ class Player extends Entity{
 
     this.canRevivePlayers = true;
   }
+  applyEffectsBeforeAbilities(){
+    for (var i = 0; i < this.effects.length; i++){
+      this.effects[i].applyBeforeAbilities(this);
+    }
+  }
   //design this with the idea that it will be completely overriden in cent's code (if i do a single className === "Cent" i will never forgive myself)
   update(){
     this.resetAllModifiers();
-
+    this.applyEffectsBeforeAbilities();
     this.setAbilityUsages();
     this.cooldownMultiplier = 1;
 

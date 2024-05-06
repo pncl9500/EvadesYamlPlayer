@@ -23,6 +23,15 @@ class Effect{
       }
     }
   }
+  applyBeforeAbilities(target){
+    this.doEffectBeforeAbilities(target);
+  }
+  doEffectBeforeAbilities(target){
+
+  }
+  doEffect(target){
+
+  }
   removeEffect(){
 
   }

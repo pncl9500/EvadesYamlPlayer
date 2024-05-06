@@ -63,6 +63,7 @@ class Entity{
     }
     effect.gainEffect(this);
     this.effects.push(effect);
+    this.effects.sort((a, b) => (a.priority > b.priority) ? 1 : -1);
   }
 
   applyEffects(){
