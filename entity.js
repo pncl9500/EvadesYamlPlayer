@@ -85,6 +85,10 @@ class Entity{
 
   }
   draw(){
+    // noStroke();
+    // fill(0);
+    // textSize(12);
+    // text(this.z, this.x, this.y - this.radius);
     noStroke();
     this.drawBackExtra();
     fill(this.tempColor.r, this.tempColor.g, this.tempColor.b, (this.tempColor.a ?? 255) * this.alphaMultiplier);

@@ -47,7 +47,7 @@ class Stomp extends ToggleAbility{
     this.stompTravelTime = 200;
     this.freezeTime = 4000;
     this.recoveryDistance = 512;
-    this.aura = new LockedAura({x: 0, y: 0}, this.ranges[this.tier - 1], "#9b580039", 10);
+    this.aura = new LockedAura({x: 0, y: 0}, this.ranges[this.tier - 1], "#9b580039", z.genericAura + random() * z.randEpsilon);
     //player property given by the player
   }
   upgradeBehavior(player){

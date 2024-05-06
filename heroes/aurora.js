@@ -12,7 +12,7 @@ class Distort extends ContinuousToggleAbility{
     super(5, 0, 7, im.ab.distort);
     this.ranges = [180, 210, 240, 270, 300];
     this.slowEffect = [0.7, 0.65, 0.6, 0.55, 0.5];
-    this.aura = new LockedAura({x: 0, y: 0}, this.ranges[this.tier - 1], "#ff000030", 10);
+    this.aura = new LockedAura({x: 0, y: 0}, this.ranges[this.tier - 1], "#ff000030", z.genericAura + random() * z.randEpsilon);
   }
   upgradeBehavior(player){
     this.aura.radius = this.ranges[this.tier - 1];
