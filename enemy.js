@@ -32,6 +32,7 @@ class Enemy extends Entity{
     this.ySpeedMultiplier = 1;
     this.wallBounceDisabled = false;
     this.harmless = false;
+    this.disabled = false;
     this.alphaMultiplier = 1;
   }
   velToAngle(){
@@ -106,6 +107,9 @@ class AuraEnemy extends Enemy{
   getAura(){
     this.aura.update();
     this.aura.radius = this.auraSize * this.radiusMultiplier;
+    if (this.disabled){
+      this.aura.radius = 0;
+    }
     return this.aura;
   }
   applyAuraEffectToPlayer(area, players, player){
@@ -116,7 +120,7 @@ class AuraEnemy extends Enemy{
       if (players[i].dead && !this.affectsDeadPlayers){
         continue;
       }
-      if (circleCircle(this.aura, players[i])){
+      if (circleCircle(this.aura, players[i]) && !this.disabled){
         this.applyAuraEffectToPlayer(area, players, players[i]);
       }
     }

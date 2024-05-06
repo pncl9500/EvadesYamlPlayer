@@ -92,6 +92,9 @@ class StompingEffect extends Effect{
     let moveDist = ((this.targetDist - this.initialDist) / this.travelTime) * deltaTime;
     target.x += cos(this.stompAngle) * moveDist;
     target.y += sin(this.stompAngle) * moveDist;
+    target.harmless = true;
+    target.disabled = true;
+    target.alphaMultiplier = 0.5;
   }
 }
 
