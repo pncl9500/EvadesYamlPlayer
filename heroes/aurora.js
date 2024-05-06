@@ -38,7 +38,7 @@ class Distort extends ContinuousToggleAbility{
 
 class DistortEffect extends Effect{
   constructor(speedMul, duration = 0){
-    super(duration, effectPriorities["DistortEffect"], true);
+    super(duration, getEffectPriority("DistortEffect"), true);
     this.speedMul = speedMul;
   }
   doEffect(target){
@@ -64,7 +64,7 @@ class Energize extends Ability{
 
 class EnergizeEffect extends Effect{
   constructor(regenBoost, cooldownReduction, duration = 0){
-    super(duration, effectPriorities["EnergizeEffect"], true);
+    super(duration, getEffectPriority("EnergizeEffect"), true);
     this.regenBoost = regenBoost;
     this.cooldownReduction = cooldownReduction;
   }

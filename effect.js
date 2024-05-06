@@ -1,5 +1,6 @@
 class Effect{
   constructor(duration, priority, allowDuplicates = false, refreshable = true){
+    this.name = this.constructor.name;
     this.duration = duration;
     this.life = duration;
     this.noDuration = false;
@@ -52,7 +53,7 @@ function getEntsInRadius(targetArray, x, y, radius){
 
 class MinimumSpeedZoneEffect extends Effect{
   constructor(minSpeed, duration = 0){
-    super(duration, effectPriorities["MinimumSpeedZoneEffect"], false)
+    super(duration, getEffectPriority("MinimumSpeedZoneEffect"), false)
     this.minSpeed = minSpeed;
   }
   doEffect(target){
@@ -62,19 +63,19 @@ class MinimumSpeedZoneEffect extends Effect{
 
 class SafeZoneEffect extends Effect{
   constructor(duration = 0){
-    super(duration, effectPriorities["SafeZoneEffect"], false)
+    super(duration, getEffectPriority("SafeZoneEffect"), false)
   }
   doEffect(target){
     target.invincible = true;
     target.corrosiveBypass = true;
-    target.effectVulnerabiliy = 0;
+    target.effectVulnerability = 0;
     target.fullEffectImmunity = true;
   }
 }
 
 class DeadEffect extends Effect{
   constructor(duration = 0){
-    super(duration, effectPriorities["DeadEffect"], false)
+    super(duration, getEffectPriority("DeadEffect"), false)
   }
   doEffect(target){
     target.speedMultiplier = 0;

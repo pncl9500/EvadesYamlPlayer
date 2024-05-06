@@ -97,7 +97,7 @@ class Slowing extends AuraEnemy{
 
 class SlowingEnemyEffect extends Effect{
   constructor(){
-    super(0, effectPriorities.SlowingEnemyEffect, false, true);
+    super(0, getEffectPriority("SlowingEnemyEffect"), false, true);
   }
   doEffect(target){
     target.speedMultiplier *= (1 - 0.3 * target.effectVulnerability);
@@ -115,7 +115,7 @@ class Freezing extends AuraEnemy{
 
 class FreezingEnemyEffect extends Effect{
   constructor(){
-    super(0, effectPriorities.FreezingEnemyEffect, false, true);
+    super(0, getEffectPriority("FreezingEnemyEffect"), false, true);
   }
   doEffect(target){
     target.speedMultiplier *= (1 - 0.85 * target.effectVulnerability);
@@ -133,7 +133,7 @@ class Draining extends AuraEnemy{
 
 class DrainingEnemyEffect extends Effect{
   constructor(){
-    super(0, effectPriorities.DrainingEnemyEffect, false, true);
+    super(0, getEffectPriority("DrainingEnemyEffect"), false, true);
   }
   doEffect(target){
     let newEnergy = target.energy - 15 * target.effectVulnerability * tFix * (1/30);
@@ -165,7 +165,7 @@ class Enlarging extends AuraEnemy{
 
 class EnlargingEnemyEffect extends Effect{
   constructor(){
-    super(0, effectPriorities.EnlargingEnemyEffect, false, true);
+    super(0, getEffectPriority("EnlargingEnemyEffect"), false, true);
   }
   doEffect(target){
     target.tempRadius += 10 * target.effectVulnerability;
@@ -183,7 +183,7 @@ class Disabling extends AuraEnemy{
 
 class DisablingEnemyEffect extends Effect{
   constructor(){
-    super(0, effectPriorities.DisablingEnemyEffect, false, true);
+    super(0, getEffectPriority("DisablingEnemyEffect"), false, true);
   }
   doEffectBeforeAbilities(target){
     if (target.fullEffectImmunity){
@@ -213,7 +213,7 @@ class Lava extends AuraEnemy{
 
 class LavaEnemyEffect extends Effect{
   constructor(){
-    super(0, effectPriorities.LavaEnemyEffect, false, true);
+    super(0, getEffectPriority("LavaEnemyEffect"), false, true);
   }
   doEffect(target){
     if (target.fullEffectImmunity){

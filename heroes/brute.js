@@ -26,7 +26,7 @@ class Vigor extends Ability{
 
 class VigorEffect extends Effect{
   constructor(vuln, size, full){
-    super(0, effectPriorities["VigorEffect"], true);
+    super(0, getEffectPriority("VigorEffect"), true);
     this.vuln = vuln;
     this.size = size;
     this.full = full;
@@ -75,7 +75,7 @@ class Stomp extends ToggleAbility{
 
 class StompingEffect extends Effect{
   constructor(player, range, travelTime, enemy){
-    super(travelTime, effectPriorities["StompingEffect"], true);
+    super(travelTime, getEffectPriority("StompingEffect"), true);
     this.player = player;
     this.playerInitialX = player.x;
     this.playerInitialY = player.y;
@@ -100,7 +100,7 @@ class StompingEffect extends Effect{
 
 class StompedEffect extends Effect{
   constructor(player, duration, recoveryDistance){
-    super(duration, effectPriorities["StompedEffect"], true);
+    super(duration, getEffectPriority("StompedEffect"), true);
     this.player = player;
     this.recoveryDistance = recoveryDistance;
     this.pcf = (player, enemy) => {

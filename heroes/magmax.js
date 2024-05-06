@@ -42,7 +42,7 @@ class Harden extends ContinuousToggleAbility{
 
 class HardenEffect extends Effect{
   constructor(duration = 0){
-    super(duration, effectPriorities["HardenEffect"], false);
+    super(duration, getEffectPriority("HardenEffect"), false);
   }
   doEffect(target){
     target.invincible = true;
@@ -54,7 +54,7 @@ class HardenEffect extends Effect{
 
 class FlowEffect extends Effect{
   constructor(duration = 0, speedGain){
-    super(duration, effectPriorities["FlowEffect"], false);
+    super(duration, getEffectPriority("FlowEffect"), false);
     this.speedGain = speedGain;
   }
   doEffect(target){

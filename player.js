@@ -400,7 +400,7 @@ class Player extends Entity{
           break;
         case "safe":
           //check again if the player is completely 100% inside the safe zone, and then apply safe zone effect
-          if (circleRect({x: this.x, y: this.y, radius: this.getRadius()}, {x: zone.x + this.getRadius() * 2, y: zone.y + this.getRadius() * 2, width: zone.width - this.getRadius() * 4, height: zone.height - this.getRadius() * 4})){
+          if (circleRect({x: this.x, y: this.y, radius: this.getRadius() + 1}, {x: zone.x + this.getRadius() * 2, y: zone.y + this.getRadius() * 2, width: zone.width - this.getRadius() * 4, height: zone.height - this.getRadius() * 4})){
             this.gainEffect(new SafeZoneEffect(), false);
           }
           this.mostRecentSafeX = this.x;

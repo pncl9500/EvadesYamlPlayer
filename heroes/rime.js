@@ -49,7 +49,7 @@ class Paralysis extends ToggleAbility{
 
 class FreezeEffect extends Effect{
   constructor(duration = 0){
-    super(duration, effectPriorities["FreezeEffect"], true);
+    super(duration, getEffectPriority("FreezeEffect"), true);
   }
   doEffect(target){
     target.speedMultiplier = 0;

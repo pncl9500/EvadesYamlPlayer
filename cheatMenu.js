@@ -344,7 +344,7 @@ function getRegionSelectorMenu(){
 
 class CheatInvincibilityEffect extends Effect{
   constructor(){
-    super(0, effectPriorities["CheatInvincibilityEffect"], false, true);
+    super(0, getEffectPriority("CheatInvincibilityEffect"), false, true);
   }
   doEffect(target){
     target.invincible = true;
@@ -358,7 +358,7 @@ class CheatInvincibilityEffect extends Effect{
 
 class CheatInfiniteAbilityEffect extends Effect{
   constructor(){
-    super(0, effectPriorities["CheatInfiniteAbilityEffect"], false, true);
+    super(0, getEffectPriority("CheatInfiniteAbilityEffect"), false, true);
   }
   doEffect(target){
     target.energy = target.maxEnergy;

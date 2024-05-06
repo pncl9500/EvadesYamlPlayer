@@ -1,7 +1,7 @@
 effectPriorities = {
   //on player
   DeadEffect: 2000,
-  SafeZoneEffect: 1999,
+  SafeZoneEffect: -200,
   HardenEffect: 1000,
   FlowEffect: 0,
   MinimumSpeedZoneEffect: -2000,
@@ -28,4 +28,8 @@ effectPriorities = {
   RevivingEnemyEffect: 1000,
   DistortEffect: 1000,
 
+}
+
+function getEffectPriority(effectName){
+  return effectPriorities[effectName];
 }

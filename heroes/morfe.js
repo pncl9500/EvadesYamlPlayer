@@ -196,7 +196,7 @@ class MinimizeProjectile extends Projectile{
 
 class MinimizeEffect extends Effect{
   constructor(duration = 4000){
-    super(duration, effectPriorities["MinimizeEffect"], false);
+    super(duration, getEffectPriority("MinimizeEffect"), false);
   }
   doEffect(target){
     target.speedMultiplier *= 0.25;
@@ -206,7 +206,7 @@ class MinimizeEffect extends Effect{
 
 class RevivingEnemyEffect extends Effect{
   constructor(duration = 4000){
-    super(duration, effectPriorities["RevivingEnemyEffect"], false);
+    super(duration, getEffectPriority("RevivingEnemyEffect"), false);
     this.pcf = (player, enemy) => {
       player.revive();
     }
