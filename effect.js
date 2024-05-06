@@ -74,5 +74,9 @@ class DeadEffect extends Effect{
   }
   removeEffect(target){
     target.revive();
+    if (settings.instantRespawn){
+      target.x = target.mostRecentSafeZone.x + target.mostRecentSafeZone.width / 2;
+      target.y = target.mostRecentSafeZone.y + target.mostRecentSafeZone.height / 2;
+    }
   }
 }
