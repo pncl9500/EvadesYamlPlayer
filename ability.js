@@ -25,7 +25,7 @@ class Ability{
   }
   update(player){
     if (!this.pelletBased){
-      this.currentCooldown -= deltaTime;
+      this.currentCooldown -= dTime;
     }
   }
   recharge(amount){
@@ -158,7 +158,7 @@ class ContinuousToggleAbility extends ToggleAbility{
   }
   update(player){
     if (!this.pelletBased){
-      this.currentCooldown -= deltaTime;
+      this.currentCooldown -= dTime;
     }
     if (this.toggled){
       this.drainEnergy(player);

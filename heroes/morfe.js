@@ -81,7 +81,7 @@ class Projectile extends Entity{
   }
   update(){
     if (this.lifetime !== -1){
-      this.lifetime -= deltaTime;
+      this.lifetime -= dTime;
       if (this.lifetime < 0){
         this.toRemove = true;
         return;

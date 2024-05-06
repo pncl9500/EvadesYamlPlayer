@@ -54,7 +54,7 @@ class Stomp extends ToggleAbility{
     this.aura.radius = this.ranges[this.tier - 1];
   }
   update(){
-    this.currentCooldown -= deltaTime;
+    this.currentCooldown -= dTime;
     this.aura.update();
   }
   toggleOn(player, players, pellets, enemies, miscEnts, region, area){
@@ -89,7 +89,7 @@ class StompingEffect extends Effect{
     this.targetDist = range + enemy.radius;
   }
   doEffect(target){
-    let moveDist = ((this.targetDist - this.initialDist) / this.travelTime) * deltaTime;
+    let moveDist = ((this.targetDist - this.initialDist) / this.travelTime) * dTime;
     target.x += cos(this.stompAngle) * moveDist;
     target.y += sin(this.stompAngle) * moveDist;
     target.harmless = true;
