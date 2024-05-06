@@ -26,6 +26,7 @@ function getRptl(){
     qq: "regionFiles/vanilla/quiet-quarry.yaml",
     qqh: "regionFiles/vanilla/quiet-quarry-hard.yaml",
     mm: "regionFiles/vanilla/monumental-migration.yaml",
+    mmh: "regionFiles/vanilla/monumental-migration-hard.yaml",
     oo: "regionFiles/vanilla/ominous-occult.yaml",
     ooh: "regionFiles/vanilla/ominous-occult-hard.yaml",
     ff: "regionFiles/vanilla/frozen-fjord.yaml",

@@ -285,6 +285,11 @@ regionTeleports = {
       "zone_0": {dest: "Grand Garden", x: 144},
     }
   },
+  "Monumental Migration Hard":{
+    "area_0": {
+      "zone_0": {dest: "Monumental Migration", x: 144},
+    }
+  },
   "Cyber Castle Hard":{
     "area_0": {
       "zone_1": {dest: "Cyber Castle", x: 144},
