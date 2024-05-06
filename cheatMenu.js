@@ -132,22 +132,25 @@ class CheatMenuButton extends CheatMenuItem{
     this.width = width;
     this.func = func;
     this.tooltip = tooltip;
+    this.color = {r: 255, g: 255, b: 255};
+    this.hoverColor = {r: 125, g: 125, b: 125};
+    this.textColor = {r: 0, g: 0, b: 0};
   }
   hoveredByMouse(relMouseX, relMouseY, offset){
     return ptRect(relMouseX, relMouseY, 0, offset, this.width, this.height);
   }
   draw(offset){
     noStroke();
-    fill(255);
+    fill(this.color.r, this.color.g, this.color.b);
     if (this.hoveredByMouse(relMouseX, relMouseY, offset)){
-      fill(125);
+      fill(this.hoverColor.r, this.hoverColor.g, this.hoverColor.b);
       if (mouseReleasedLastFrame){
         this.func();
       }
     }
     rect(0, offset, this.width, this.height);
     textSize(this.height - cheatMenuButtonPadding * 2);
-    fill(0);
+    fill(this.textColor.r, this.textColor.g, this.textColor.b);
     textAlign(LEFT, CENTER);
     text(this.text, cheatMenuButtonPadding, offset + this.height / 2 + 0.5);
     textAlign(LEFT, TOP);
@@ -195,7 +198,6 @@ class CheatMenuToggle extends CheatMenuItem{
     this.toggleBoxPadding = 2;
     this.getStateFunc = getStateFunc;
     this.tooltip = tooltip;
-    console.log(this.tooltip);
   }
   hoveredByMouse(relMouseX, relMouseY, offset){
     return ptRect(relMouseX, relMouseY, 0, offset, this.width, this.height);
@@ -225,7 +227,6 @@ class CheatMenuToggle extends CheatMenuItem{
       noStroke();
       rect(0 + this.toggleBoxPadding, offset + this.toggleBoxPadding, this.width - this.toggleBoxPadding * 2, this.height - this.toggleBoxPadding * 2);
     }
-    console.log(this.tooltip);
     if (this.tooltip !== undefined && this.hoveredByMouse(relMouseX, relMouseY, offset)){
       tooltipToRender = this.tooltip;
     }
@@ -305,7 +306,7 @@ function getRegionSelectorMenu(){
     txt("Region List", 20), bigLine,
   ];
   for (let i in game.regions){
-    list.push(btn(game.regions[i].name, 180, 12, () => {
+    let nb = btn(game.regions[i].name, 180, 12, () => {
       game.mainPlayer.area.exit(game.mainPlayer);
       game.mainPlayer.area.attemptUnload(game.mainPlayer);
       game.mainPlayer.goToRegionFromId(i);
@@ -313,7 +314,23 @@ function getRegionSelectorMenu(){
       game.mainPlayer.area.enter(game.mainPlayer);
       game.mainPlayer.area.attemptLoad(true);
       game.mainPlayer.moveToAreaStart();
-    }));
+    })
+    try {
+      nb.color.r = game.regions[i].properties.background_color[0];
+      nb.color.g = game.regions[i].properties.background_color[1];
+      nb.color.b = game.regions[i].properties.background_color[2];
+      nb.hoverColor.r = game.regions[i].properties.background_color[0] + 40;
+      nb.hoverColor.g = game.regions[i].properties.background_color[1] + 40;
+      nb.hoverColor.b = game.regions[i].properties.background_color[2] + 40;
+      if (game.regions[i].properties.background_color[0] + game.regions[i].properties.background_color[1] + game.regions[i].properties.background_color[2] < 216){
+        nb.textColor.r = 255;
+        nb.textColor.g = 255;
+        nb.textColor.b = 255;
+      }
+    } catch (error) {
+      //do nothing
+    }
+    list.push(nb);
   }
   return list;
 }
