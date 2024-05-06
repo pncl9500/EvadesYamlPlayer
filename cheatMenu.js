@@ -292,6 +292,8 @@ function setCheatMenuItems(){
         tog(11, 11, false, () => {settings.invincibilityCheat = true}, () => {settings.invincibilityCheat = false}, () => {return settings.invincibilityCheat;}, "Become truly invincible, bypassing corrosion. Hotkey: [V]"),]),
     row([txt("Infinite ability use:", 12), 
         tog(11, 11, false, () => {settings.infiniteAbilityUseCheat = true}, () => {settings.infiniteAbilityUseCheat = false}, () => {return settings.infiniteAbilityUseCheat;}, "Remove all cooldowns and gain infinite energy. Hotkey: [B]"),]),
+    row([txt("Instant respawn:", 12), 
+        tog(11, 11, true, () => {settings.instantRespawn = true}, () => {settings.instantRespawn = false}, () => {return settings.instantRespawn;}, "Instantly respawn at the most recent safe zone when appropriate."),]),
   ]
   baseCheatMenuItems = list;
   return list;

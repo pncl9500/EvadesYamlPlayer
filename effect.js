@@ -58,6 +58,8 @@ class SafeZoneEffect extends Effect{
   doEffect(target){
     target.invincible = true;
     target.corrosiveBypass = true;
+    target.effectVulnerabiliy = 0;
+    target.fullEffectImmunity = true;
   }
 }
 

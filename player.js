@@ -57,6 +57,9 @@ class Player extends Entity{
     this.lastDir = 0;
     this.doCheatRevive = false;
     this.cooldownMultiplier = 1;
+    this.mostRecentSafeZone = null;
+    this.mostRecentSafeX = 0;
+    this.mostRecentSafeY = 0;
     
     this.auras = [];
 
@@ -269,6 +272,14 @@ class Player extends Entity{
     this.deathTimer = deathTime * this.deathTimerMultiplier;
     this.deathEffect = new DeadEffect(this.deathTimer);
     this.gainEffect(this.deathEffect);
+    if (settings.instantRespawn && this.instantRespawnAppropriate()){
+      this.x = this.mostRecentSafeZone.x + this.mostRecentSafeZone.width / 2;
+      this.y = this.mostRecentSafeZone.y + this.mostRecentSafeZone.height / 2;
+      this.revive();
+    }
+  }
+  instantRespawnAppropriate(){
+    return true;
   }
   resetToSpawn(){
     this.x = 176 + random(-64,64);
@@ -380,6 +391,10 @@ class Player extends Entity{
           if (circleRect({x: this.x, y: this.y, radius: this.getRadius()}, {x: zone.x + this.getRadius() * 2, y: zone.y + this.getRadius() * 2, width: zone.width - this.getRadius() * 4, height: zone.height - this.getRadius() * 4})){
             this.gainEffect(new SafeZoneEffect(), false);
           }
+          this.mostRecentSafeX = this.x;
+          this.mostRecentSafeY = this.x;
+          this.mostRecentSafeZone = zone;
+          break;
         default:
           break;
       }

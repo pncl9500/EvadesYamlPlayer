@@ -31,4 +31,5 @@ settings = {
 
   invincibilityCheat: false,
   infiniteAbilityUseCheat: false,
+  instantRespawn: true,
 }

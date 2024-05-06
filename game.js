@@ -10,6 +10,7 @@ class Game{
     }
     if (settings.infiniteAbilityUseCheat){
       this.mainPlayer.gainEffect(new CheatInfiniteAbilityEffect());
+      this.mainPlayer.rechargePelletBasedAbilities(1000);
     }
     //loop through every player and update their areas
     var areasToUpdate = [];

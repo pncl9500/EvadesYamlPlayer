@@ -5,6 +5,9 @@ class Necro extends Player{
     this.ability1 = new Resurrection();
     this.ability2 = new Reanimate();
   }
+  instantRespawnAppropriate(){
+    return this.ability1.currentCooldown > 0;
+  }
 }
 
 class Resurrection extends Ability{
