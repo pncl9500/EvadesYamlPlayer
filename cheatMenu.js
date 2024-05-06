@@ -258,9 +258,9 @@ function setCheatMenuItems(){
     txt("Cheat Menu", 36), bigLine,
     txt("Vanilla settings", 20), bigLine,
     row([txt("Show tiles:", 12), 
-        tog(11, 11, true, () => {settings.drawTiles = true}, () => {settings.drawTiles = false}, undefined, "Enables grid lines."),]),
+        tog(11, 11, true, () => {settings.drawTiles = true}, () => {settings.drawTiles = false}, undefined, "Enable grid lines."),]),
     row([txt("Show outlines:", 12), 
-        tog(11, 11, true, () => {settings.drawOutlines = true}, () => {settings.drawOutlines = false}, undefined, "Enables enemy outlines."),]),
+        tog(11, 11, true, () => {settings.drawOutlines = true}, () => {settings.drawOutlines = false}, undefined, "Enable enemy outlines."),]),
     txt("Quick Cheats", 20), bigLine,
     row([txt("Change area:", 12), 
         btn("-40", 18, 12, () => {game.mainPlayer.changeAreaCheat(-40); game.mainPlayer.moveToAreaStart()}, "Move back 40 areas."),
@@ -284,12 +284,12 @@ function setCheatMenuItems(){
         btn("30", 18, 12, () => {frameRate(30)}, "Set the framerate to 30."),
         btn("60", 18, 12, () => {frameRate(60)}, "Set the framerate to 60."),]),
     row([txt("Dummy player control:", 12), 
-        btn("Cycle players", 54, 12, () => {game.cycleMainPlayer()}, "Changes the main player to the next player."),]),
+        btn("Cycle players", 54, 12, () => {game.cycleMainPlayer()}, "Change the main player to the next player."),]),
         //btn("Remove current player", 86, 12, () => {game.removeCurrentPlayer()}),]),
     row([txt("Invincibility:", 12), 
-        tog(11, 11, false, () => {settings.invincibilityCheat = true}, () => {settings.invincibilityCheat = false}, () => {return settings.invincibilityCheat;}, "Makes the player invincible, bypassing corrosion."),]),
+        tog(11, 11, false, () => {settings.invincibilityCheat = true}, () => {settings.invincibilityCheat = false}, () => {return settings.invincibilityCheat;}, "Become truly invincible, bypassing corrosion."),]),
     row([txt("Infinite ability use:", 12), 
-        tog(11, 11, false, () => {settings.infiniteAbilityUseCheat = true}, () => {settings.infiniteAbilityUseCheat = false}, () => {return settings.infiniteAbilityUseCheat;}, "Removes all cooldowns and grants infinite energy."),]),
+        tog(11, 11, false, () => {settings.infiniteAbilityUseCheat = true}, () => {settings.infiniteAbilityUseCheat = false}, () => {return settings.infiniteAbilityUseCheat;}, "Remove all cooldowns and gain infinite energy."),]),
   ]
   baseCheatMenuItems = list;
   return list;
