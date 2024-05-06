@@ -2,7 +2,7 @@ cheatMenuPaddingBetween = 6;
 cheatMenuLeftPadding = 6;
 cheatMenuTopPadding = 10;
 cheatMenuWidth = 500;
-cheatMenuHeightScale = 720;
+cheatMenuHeightScale = 600;
 cheatMenuButtonPadding = 2;
 cheatMenuRowItemPadding = 4;
 
