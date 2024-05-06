@@ -144,3 +144,12 @@ class DrainingEnemyEffect extends Effect{
     }
   }
 }
+
+class Toxic extends AuraEnemy{
+  constructor(x, y, angle, speed, radius, auraSize){
+    super(x, y, angle, speed, radius, pal.nm.toxic, pal.nmaur.toxic, auraSize)
+  }
+  applyAuraEffectToPlayer(area, players, player){
+    player.energy = min(player.energy, player.maxEnergy * 0.7);
+  }
+}

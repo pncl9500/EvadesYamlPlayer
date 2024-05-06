@@ -1,0 +1,91 @@
+aibot
+barrier
+blocking
+cactus
+charging
+corrosive sniper
+corrosive
+crumbling
+cybot
+cycling
+dabot
+dasher
+disabling ghost
+disabling
+eabot
+elbot
+electrical
+enlarging
+experience drain
+fake pumpkin
+fibot
+fire trail
+firefly
+flower
+force sniper a
+force sniper b
+frost giant
+glowy
+grass
+gravity ghost
+gravity
+homing
+icbot
+ice ghost
+ice sniper
+icicle
+lava
+lead sniper
+libot
+liquid
+lunging
+magnetic nullification
+magnetic reduction
+mebot
+mist
+negative magnetic ghost
+negative magnetic sniper
+oscillating
+phantom
+plbot
+poison ghost
+poison sniper
+positive magnetic ghost
+positive magnetic sniper
+prediction sniper
+pumpkin
+quicksand
+radar
+radiating bullets
+reducing
+regen ghost
+regen sniper
+repelling ghost
+repelling
+residue
+ring sniper
+sand
+sandrock
+seedling
+sizing
+slippery
+sniper
+snowman
+sparking
+speed ghost
+speed sniper
+spiral
+stalactite
+star
+static
+switch
+teleporting
+thunderbolt
+tree
+turning
+wabot
+wavy
+wind ghost
+wind sniper
+zigzag
+zoning

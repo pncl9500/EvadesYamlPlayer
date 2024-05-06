@@ -11,6 +11,7 @@ function getEnemyFromSpawner(x, y, d, enemyType, spawner, spawnIndex, zone){
     case "slowing": return new Slowing(x, y, d, s, r, auraSize);
     case "draining": return new Draining(x, y, d, s, r, auraSize);
     case "freezing": return new Freezing(x, y, d, s, r, auraSize);
+    case "toxic": return new Toxic(x, y, d, s, r, auraSize);
     
     //wall
     case "wall": return new Wall(s, r, spawnIndex, spawner.count, spawner.move_clockwise ?? defaults.spawnerProps.move_clockwise, zone);
