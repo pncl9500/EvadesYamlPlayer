@@ -688,7 +688,7 @@ class PoisonSniperEffect extends Effect{
   }
   doEffect(target){
     let t = this.life / this.duration;
-    target.speedMultiplier *= 3;
+    target.speedMultiplier *= 3 * target.effectVulnerability;
     target.tempColor = {r: floor(map(t, 0, 1, target.tempColor.r, 140)), g: floor(map(t, 0, 1, target.tempColor.g, 1)), b:  floor(map(t, 0, 1, target.tempColor.b, 183))};
   }
 }
@@ -705,5 +705,45 @@ class PoisonGhost extends Enemy{
         player.gainEffect(new PoisonSniperEffect(100));
       }
     }
+  }
+}
+
+class IceSniper extends GenericSniper{
+  constructor(x, y, angle, speed, radius){
+    super(x, y, angle, speed, radius, pal.nm.ice_sniper, 3000, 600);
+  } 
+  createBullet(angle, target, area){
+    let bullet = new IceSniperBullet(this.x, this.y, angle, 16, 10, pal.nmp.ice_sniper, this.loss);
+    bullet.parentZone = this.parentZone;
+    area.addEnt(bullet);
+  }
+}
+
+class IceSniperBullet extends Bullet{
+  constructor(x, y, angle, speed, radius, color){
+    super(x, y, angle, speed, radius, color);
+    this.inherentlyHarmless = true;
+  }
+  playerCollisionEvent(player){
+    if (player.ignoreBullets){
+      return;
+    }
+    player.gainEffect(new IceSniperEffect(1000 * player.effectVulnerability));
+    this.toRemove = true;
+  }
+}
+
+class IceSniperEffect extends Effect{
+  constructor(duration){
+    super(duration, getEffectPriority("IceSniperEffect"), false, true);
+  }
+  doEffect(target){
+    if (target.fullEffectImmunity){
+      return;
+    }
+    let t = this.life / this.duration;
+    target.speedMultiplier = 0;
+    target.tempSpeed = 0;
+    target.tempColor = {r: floor(map(t, 0, 1, target.tempColor.r, 135)), g: floor(map(t, 0, 1, target.tempColor.g, 235)), b:  floor(map(t, 0, 1, target.tempColor.b, 255))};
   }
 }

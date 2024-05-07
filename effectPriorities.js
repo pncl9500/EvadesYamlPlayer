@@ -6,7 +6,7 @@ effectPriorities = {
   FlowEffect: 0,
   MinimumSpeedZoneEffect: -2000,
 
-  PoisonSniperEffect: 1900,
+  PoisonSniperEffect: 1700,
 
   CheatInvincibilityEffect: 4000,
   CheatInfiniteAbilityEffect: 4000,
@@ -21,6 +21,7 @@ effectPriorities = {
   EnlargingEnemyEffect: 500,
   DisablingEnemyEffect: 500, //after vigor (important)
   LavaEnemyEffect: 500,
+  IceSniperEffect: 1900,
 
   //on enemy
   FreezeEffect: 1000,

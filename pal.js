@@ -100,6 +100,9 @@ pal = {
     force_sniper_a: "#0a5557",
     force_sniper_b: "#914d83",
   },
+  nmp:{
+    ice_sniper:"be89ff",
+  },
   nmaur:{
     "slowing":"#ff000026",
     "draining":"#0000ff26",
