@@ -46,6 +46,6 @@ class ReanimateProjectile extends Projectile{
     this.detectPlayerContact();
   }
   contactEffect(player){
-    player.revive();
+    player.doRevive = true;
   }
 }

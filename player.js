@@ -56,7 +56,7 @@ class Player extends Entity{
     this.saves = 0;
     this.timesSaved = 0;
     this.lastDir = 0;
-    this.doCheatRevive = false;
+    this.doRevive = false;
     this.mostRecentSafeZone = null;
     this.mostRecentSafeX = 0;
     this.mostRecentSafeY = 0;
@@ -108,9 +108,9 @@ class Player extends Entity{
     this.setAbilityUsages();
     this.cooldownMultiplier = 1;
 
-    if (this.doCheatRevive){
+    if (this.doRevive){
       this.revive();
-      this.doCheatRevive = false;
+      this.doRevive = false;
     }
     this.applyEffects();
     this.radius = this.tempRadius * this.radiusMultiplier;

@@ -11,7 +11,7 @@ function keyPressed() {
   if (keyCode === 84) { game.mainPlayer.moveToAreaEnd(); }
   if (keyCode === 82) { 
     if (game.mainPlayer.dead){
-      game.mainPlayer.doCheatRevive = true;
+      game.mainPlayer.doRevive = true;
     } else {
       game.mainPlayer.changeAreaCheat(10); game.mainPlayer.moveToAreaStart()
     }; 

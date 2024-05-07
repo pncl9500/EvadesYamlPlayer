@@ -294,7 +294,7 @@ function setCheatMenuItems(){
             //btn("Remove current player", 86, 12, () => {game.removeCurrentPlayer()}),]),
         row([txt("Player control:", 12), 
             btn("Kill", 17, 12, () => {game.mainPlayer.die()}, "Become downed."),
-            btn("Revive", 31, 12, () => {game.mainPlayer.doCheatRevive = true}, "Revive yourself. Hotkey: [R] (only while downed)"),]),
+            btn("Revive", 31, 12, () => {game.mainPlayer.doRevive = true}, "Revive yourself. Hotkey: [R] (only while downed)"),]),
         row([txt("Invincibility:", 12), 
             tog(11, 11, false, () => {settings.invincibilityCheat = true}, () => {settings.invincibilityCheat = false}, () => {return settings.invincibilityCheat;}, "Become truly invincible, bypassing corrosion. Hotkey: [V]"),]),
         row([txt("Infinite ability use:", 12), 
@@ -354,7 +354,7 @@ class CheatInvincibilityEffect extends Effect{
     let mag = 60;
     let f = 0.1;
     target.tempColor = {r: target.tempColor.r + mag + sin(frameCount * f) * mag, g: target.tempColor.g + mag + sin(frameCount * f) * mag, b: target.tempColor.b + mag + sin(frameCount * f) * mag}
-    target.doCheatRevive = true;
+    target.doRevive = true;
   }
 }
 

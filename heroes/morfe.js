@@ -208,7 +208,7 @@ class RevivingEnemyEffect extends Effect{
   constructor(duration = 4000){
     super(duration, getEffectPriority("RevivingEnemyEffect"), false);
     this.pcf = (player, enemy) => {
-      player.revive();
+      player.doRevive = true;
     }
   }
   doEffect(target){
