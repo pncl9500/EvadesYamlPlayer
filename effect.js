@@ -65,7 +65,7 @@ class SafeZoneEffect extends Effect{
   constructor(duration = 0){
     super(duration, getEffectPriority("SafeZoneEffect"), false)
   }
-  doEffect(target){
+  doEffectBeforeAbilities(target){
     target.invincible = true;
     target.corrosiveBypass = true;
     target.effectVulnerability = 0;
