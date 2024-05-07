@@ -9,16 +9,9 @@ leaderboard
 
 -----------------------------------------------------------
 feature complete regions:
-cc, cch, cc3, vv, vvh, oo, ooh, dd, ddh, tt, tth
+cc, cch, cc3, vv, vvh, oo, ooh, dd, ddh, tt, tth, gg, ggh
 
 regions/enemies:
-
-gg:
-ice ghost
-ice sniper
-icicle
-liquid
-slippery
 
 ff:
 frost giant
