@@ -684,11 +684,26 @@ class PoisonSniperBullet extends Bullet{
 
 class PoisonSniperEffect extends Effect{
   constructor(duration){
-    super(duration, getEffectPriority("PoisonSniperEffect"), false);
+    super(duration, getEffectPriority("PoisonSniperEffect"), false, true);
   }
   doEffect(target){
     let t = this.life / this.duration;
     target.speedMultiplier *= 3;
     target.tempColor = {r: floor(map(t, 0, 1, target.tempColor.r, 140)), g: floor(map(t, 0, 1, target.tempColor.g, 1)), b:  floor(map(t, 0, 1, target.tempColor.b, 183))};
+  }
+}
+
+class PoisonGhost extends Enemy{
+  constructor(x, y, angle, speed, radius){
+    super(x, y, angle, speed, radius, pal.nm.poison_ghost)
+    this.gainEffect(new IsGhostEffect());
+  }
+  behavior(area, players){
+    for (var i in players){
+      if (circleCircle(this, players[i]) && !this.disabled){
+        let player = players[i];
+        player.gainEffect(new PoisonSniperEffect(100));
+      }
+    }
   }
 }

@@ -40,6 +40,7 @@ function getEnemyFromSpawner(x, y, d, enemyType, spawner, spawnIndex, zone){
     case "disabling_ghost": return new DisablingGhost(x, y, d, s, r);
     case "speed_ghost": return new SpeedGhost(x, y, d, s, r);
     case "regen_ghost": return new RegenGhost(x, y, d, s, r);
+    case "poison_ghost": return new PoisonGhost(x, y, d, s, r);
 
     //wall
     case "wall": return new Wall(s, r, spawnIndex, spawner.count, spawner.move_clockwise ?? defaults.spawnerProps.move_clockwise, zone);
