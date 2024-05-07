@@ -214,7 +214,7 @@ class RevivingEnemyEffect extends Effect{
   doEffect(target){
     target.harmless = true;
     target.tempColor = {r: 0, g: 180, b: 0};
-    target.alphaMultiplier = 0.5;
+    target.alphaMultiplier = 0.4;
   }
   gainEffect(target){
     target.playerContactFunctions.push(this.pcf)

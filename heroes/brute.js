@@ -94,7 +94,7 @@ class StompingEffect extends Effect{
     target.y += sin(this.stompAngle) * moveDist;
     target.harmless = true;
     target.disabled = true;
-    target.alphaMultiplier = 0.5;
+    target.alphaMultiplier = 0.4;
   }
 }
 
