@@ -149,6 +149,20 @@ class Area{
         }
         this.zones[i].initSpawners();
       }
+      if (this.zones[i].type === "victory"){
+        const pprop = this.parent.properties ?? {};
+        const aprop = this.properties ?? {};
+        let pelletCount = aprop.pellet_count ?? (pprop.pellet_count ?? defaults.regionProps.pellet_count);
+        const pelletMultiplier = aprop.pellet_multiplier ?? (pprop.pellet_multiplier ?? defaults.regionProps.pellet_multiplier);
+        const zone = this.zones[i];
+        if (pelletCount === 25){
+          pelletCount *= 10;
+        }
+        for (var p = 0; p < pelletCount; p++){
+          this.entities.push(new Pellet(0, 0, this.zones[i], pelletMultiplier));
+        }
+        this.zones[i].initSpawners();
+      }
     }
   }
   unload(){
