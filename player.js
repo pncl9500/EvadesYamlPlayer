@@ -141,7 +141,7 @@ class Player extends Entity{
   addXp(xp){
     //levelup
     this.levelProgress += xp;
-    while (this.levelProgress >= this.levelProgressNeeded){
+    while (this.levelProgress > this.levelProgressNeeded){
       let maxLevel = 100;
       if (this.region.hasOwnProperty("properties") && this.region.properties.hasOwnProperty("max_level")){
         maxLevel = this.region.properties.max_level;
