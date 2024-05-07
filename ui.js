@@ -181,7 +181,7 @@ class HeroCard extends UIpanel{
     let cy = (u + d) / 2
     let rat = ccd / mcd;
 
-    fill(0, 125);
+    fill(0, 150);
     noStroke();
 
     beginShape(TESS);
