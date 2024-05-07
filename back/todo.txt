@@ -13,14 +13,26 @@ cc, cch, cc3, vv, vvh, oo, ooh, dd, ddh, tt, tth, gg, ggh
 
 regions/enemies:
 
+ee:
+gravity ghost
+gravity
+repelling ghost
+repelling
+star
+teleporting
+
+ww:
+wavy
+zigzag
+zoning
+spiral
+oscillating
+switch
+
 ff:
 frost giant
 snowman
 
-cc4:
-charging
-lead sniper
-reducing
 
 ss2:
 quicksand
@@ -54,6 +66,11 @@ glowy
 phantom
 mist
 
+cc4:
+charging
+lead sniper
+reducing
+
 gg2:
 flower
 grass
@@ -67,24 +84,8 @@ negative magnetic sniper
 positive magnetic ghost
 positive magnetic sniper
 
-ee:
-gravity ghost
-gravity
-repelling ghost
-repelling
-star
-teleporting
-
 ii:
 cycling
-
-ww:
-wavy
-zigzag
-zoning
-spiral
-oscillating
-switch
 
 cc2:
 radar
