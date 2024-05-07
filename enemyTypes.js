@@ -446,13 +446,34 @@ class Sniper extends GenericSniper{
 }
 
 class Bullet extends Enemy{
-  constructor(x, y, angle, speed, radius, color){
+  constructor(x, y, angle, speed, radius, color, maxLife){
     super(x, y, angle, speed, radius, color);
     this.renderType = "noOutline";
     this.immune = true;
+    this.clock = 0;
+    this.maxLife = maxLife;
   }
   playerCollisionEvent(player){
 
+  }
+  update(area, players){
+    if (this.maxLife >= 0){
+      this.clock += dTime;
+      if (this.clock > this.maxLife){
+        this.toRemove = true;
+      }
+    }
+    this.resetState();
+    this.applyEffects();
+    this.radius = this.baseRadius * this.radiusMultiplier;
+    this.behavior(area, players);
+    if (!this.normalMovementDisabled){
+      this.x += this.xv * tFix * this.speedMultiplier * this.xSpeedMultiplier;
+      this.y += this.yv * tFix * this.speedMultiplier * this.ySpeedMultiplier;
+    }
+    if (!this.wallBounceDisabled){
+      this.wallBounce();
+    }
   }
   wallBounce(){
     this.x - this.radius < this.parentZone.x && (this.x = this.parentZone.x + this.radius, this.toRemove = true);
@@ -580,6 +601,38 @@ class DisablingGhost extends Enemy{
         let player = players[i];
         player.gainEffect(new DisablingEnemyEffect());
       }
+    }
+  }
+}
+
+class RadiatingBullets extends GenericSniper{
+  constructor(x, y, angle, speed, radius, releaseTime, releaseInterval){
+    super(x, y, angle, speed, radius, pal.nm.radiating_bullets, releaseInterval, null);
+    if (releaseTime !== undefined){
+      this.clock = releaseTime;
+    }
+  }
+  sniperBehavior(area, players){
+    this.clock += dTime;
+    if (this.clock >= this.fireInterval * (2/3)){
+      let min = this.fireInterval * (2/3);
+      let max = this.fireInterval;
+      let mul = map(this.clock, min, max, 0, 1, true)
+      console.log(mul);
+      this.tempColor.r *= (1 - mul * 0.3); this.tempColor.r = floor(this.tempColor.r);
+      this.tempColor.g *= (1 - mul * 0.3); this.tempColor.g = floor(this.tempColor.g);
+      this.tempColor.b *= (1 - mul * 0.3); this.tempColor.b = floor(this.tempColor.b);
+    }
+    if (this.clock > this.fireInterval) {
+      this.createBullet(area);
+      this.clock = 0;
+    }
+  }
+  createBullet(area){
+    for (var i = 0; i < 8; i++){
+      let bullet = new Bullet(this.x, this.y, i * PI/4, 8, 8, pal.nm.radiating_bullets, 3000);
+      bullet.parentZone = this.parentZone;
+      area.addEnt(bullet);
     }
   }
 }
