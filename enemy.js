@@ -65,9 +65,13 @@ class Enemy extends Entity{
     for (let i in this.playerContactFunctions){
       this.playerContactFunctions[i](player, this);
     }
+    this.playerCollisionEvent(player);
     if (!this.harmless){
       player.enemyCollision(this);
     }
+  }
+  playerCollisionEvent(player){
+    
   }
   behavior(area, players){
 

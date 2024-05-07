@@ -374,3 +374,91 @@ class Sizing extends Enemy{
     }
   }
 }
+
+class GenericSniper extends Enemy{
+  constructor(x, y, angle, speed, radius, color, fireInterval, range){
+    super(x, y, angle, speed, radius, color);
+    this.fireInterval = fireInterval;
+    this.range = range;
+    this.clock = random() * this.fireInterval;
+  }
+  update(area, players){
+    this.resetState();
+    this.applyEffects();
+    this.radius = this.baseRadius * this.radiusMultiplier;
+    this.sniperBehavior(area, players);
+    this.behavior(area, players);
+    if (!this.normalMovementDisabled){
+      this.x += this.xv * tFix * this.speedMultiplier * this.xSpeedMultiplier;
+      this.y += this.yv * tFix * this.speedMultiplier * this.ySpeedMultiplier;
+    }
+    if (!this.wallBounceDisabled){
+      this.wallBounce();
+    }
+  }
+  sniperBehavior(area, players){
+    this.clock += dTime;
+    if (this.clock >= this.fireInterval * (2/3)){
+      let min = this.fireInterval * (2/3);
+      let max = this.fireInterval;
+      let mul = map(this.clock, min, max, 0, 1, true)
+      console.log(mul);
+      this.tempColor.r *= (1 - mul * 0.3); this.tempColor.r = floor(this.tempColor.r);
+      this.tempColor.g *= (1 - mul * 0.3); this.tempColor.g = floor(this.tempColor.g);
+      this.tempColor.b *= (1 - mul * 0.3); this.tempColor.b = floor(this.tempColor.b);
+    }
+    if (this.clock > this.fireInterval) {
+      var min = this.range;
+      var index;
+      for (var i in players) {
+        let dist = sqrt(sq(players[i].x - this.x) + sq(players[i].y - this.y))
+        if (dist < min && players[i].detectable) {
+          min = dist;
+          index = i;
+        }
+      }
+      if (index != undefined) {
+        var dX = (players[index].x) - this.x;
+        var dY = (players[index].y) - this.y;
+        this.createBullet(atan2(dY, dX), players[index], area);
+        this.clock = 0;
+      }
+    }
+  }
+  createBullet(angle, target, area){
+
+  }
+  behavior(area, players){
+    
+  }
+}
+
+
+class Sniper extends GenericSniper{
+  constructor(x, y, angle, speed, radius){
+    super(x, y, angle, speed, radius, pal.nm.sniper, 3000, 600);
+  } 
+  createBullet(angle, target, area){
+    let bullet = new Bullet(this.x, this.y, angle, 10, this.radius / 2, pal.nm.sniper);
+    bullet.parentZone = this.parentZone;
+    area.addEnt(bullet);
+  }
+}
+
+class Bullet extends Enemy{
+  constructor(x, y, angle, speed, radius, color){
+    super(x, y, angle, speed, radius, color);
+    this.renderType = "noOutline";
+    this.immune = true;
+  }
+  playerCollisionEvent(player){
+    
+  }
+  wallBounce(){
+    this.x - this.radius < this.parentZone.x && (this.x = this.parentZone.x + this.radius, this.toRemove = true);
+    this.x + this.radius > this.parentZone.x + this.parentZone.width && (this.x = this.parentZone.x + this.parentZone.width - this.radius, this.toRemove = true);
+    this.y - this.radius < this.parentZone.y && (this.y = this.parentZone.y + this.radius, this.toRemove = true);
+    this.y + this.radius > this.parentZone.y + this.parentZone.height && (this.y = this.parentZone.y + this.parentZone.height - this.radius, this.toRemove = true);
+    this.wallBounceEvent();
+  }
+}
