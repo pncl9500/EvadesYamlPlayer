@@ -32,6 +32,7 @@ function getEnemyFromSpawner(x, y, d, enemyType, spawner, spawnIndex, zone){
     case "disabling": return new Disabling(x, y, d, s, r, auraSize);
     case "lava": return new Lava(x, y, d, s, r, auraSize);
     case "slippery": return new Slippery(x, y, d, s, r, auraSize);
+    case "gravity": return new Gravity(x, y, d, s, r, auraSize, property("gravity"));
 
     //sniper
     case "sniper": return new Sniper(x, y, d, s, r);
@@ -50,6 +51,7 @@ function getEnemyFromSpawner(x, y, d, enemyType, spawner, spawnIndex, zone){
     case "regen_ghost": return new RegenGhost(x, y, d, s, r);
     case "poison_ghost": return new PoisonGhost(x, y, d, s, r);
     case "ice_ghost": return new IceGhost(x, y, d, s, r);
+    case "gravity_ghost": return new GravityGhost(x, y, d, s, r);
 
     //wall
     case "wall": return new Wall(s, r, spawnIndex, spawner.count, spawner.move_clockwise ?? defaults.spawnerProps.move_clockwise, zone);

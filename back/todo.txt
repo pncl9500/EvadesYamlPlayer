@@ -14,8 +14,6 @@ cc, cch, cc3, vv, vvh, oo, ooh, dd, ddh, tt, tth, gg, ggh
 regions/enemies:
 
 ee:
-gravity ghost
-gravity
 repelling ghost
 repelling
 
@@ -30,7 +28,6 @@ switch
 ff:
 frost giant
 snowman
-
 
 ss2:
 quicksand
