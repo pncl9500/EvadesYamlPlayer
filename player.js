@@ -142,10 +142,19 @@ class Player extends Entity{
     //levelup
     this.levelProgress += xp;
     while (this.levelProgress >= this.levelProgressNeeded){
-      this.level++;
-      this.upgradePoints++;
-      this.levelProgress -= this.levelProgressNeeded;
-      this.levelProgressNeeded = this.getRequiredEXP(this.level);
+      let maxLevel = 100;
+      if (this.region.hasOwnProperty("properties") && this.region.properties.hasOwnProperty("max_level")){
+        maxLevel = this.region.properties.max_level;
+      }
+      if (this.level < maxLevel){
+        this.level++;
+        this.upgradePoints++;
+        this.levelProgress -= this.levelProgressNeeded;
+        this.levelProgressNeeded = this.getRequiredEXP(this.level);
+      } else {
+        this.levelProgress = this.levelProgressNeeded;
+        break;
+      }
     }
   }
   getRequiredEXP(e){
