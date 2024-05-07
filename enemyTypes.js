@@ -777,3 +777,19 @@ class IceGhostEffect extends Effect{
     target.tempColor = {r: floor(map(t, 0, 1, target.tempColor.r, 135)), g: floor(map(t, 0, 1, target.tempColor.g, 235)), b:  floor(map(t, 0, 1, target.tempColor.b, 255))};
   }
 }
+
+class Liquid extends Enemy{
+  constructor(x, y, angle, speed, radius, detectionRadius){
+    super(x, y, angle, speed, radius, pal.nm.liquid);
+    this.detectionRadius = detectionRadius;
+  }
+  behavior(area, players){
+    for (var i in players) {
+      let dist = sqrt(sq(players[i].x - this.x) + sq(players[i].y - this.y))
+      if (dist < this.detectionRadius && players[i].detectable) {
+        this.speedMultiplier *= 5;
+        return;
+      }
+    }
+  }
+}
