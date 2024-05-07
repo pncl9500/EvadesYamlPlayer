@@ -452,7 +452,7 @@ class Bullet extends Enemy{
     this.immune = true;
   }
   playerCollisionEvent(player){
-    
+
   }
   wallBounce(){
     this.x - this.radius < this.parentZone.x && (this.x = this.parentZone.x + this.radius, this.toRemove = true);
@@ -460,5 +460,65 @@ class Bullet extends Enemy{
     this.y - this.radius < this.parentZone.y && (this.y = this.parentZone.y + this.radius, this.toRemove = true);
     this.y + this.radius > this.parentZone.y + this.parentZone.height && (this.y = this.parentZone.y + this.parentZone.height - this.radius, this.toRemove = true);
     this.wallBounceEvent();
+  }
+}
+
+class SpeedSniper extends GenericSniper{
+  constructor(x, y, angle, speed, radius, loss){
+    super(x, y, angle, speed, radius, pal.nm.speed_sniper, 3000, 600);
+    this.loss = loss;
+  } 
+  createBullet(angle, target, area){
+    let bullet = new SpeedSniperBullet(this.x, this.y, angle, 16, 10, pal.nm.speed_sniper, this.loss);
+    bullet.parentZone = this.parentZone;
+    area.addEnt(bullet);
+  }
+}
+
+class SpeedSniperBullet extends Bullet{
+  constructor(x, y, angle, speed, radius, color, loss){
+    super(x, y, angle, speed, radius, color);
+    this.loss = loss;
+    this.inherentlyHarmless = true;
+  }
+  playerCollisionEvent(player){
+    if (player.ignoreBullets){
+      return;
+    }
+    player.speed -= this.loss * player.effectVulnerability;
+    if (player.speed < gameConsts.startingSpeed){
+      player.speed = gameConsts.startingSpeed;
+    }
+    this.toRemove = true;
+  }
+}
+
+class RegenSniper extends GenericSniper{
+  constructor(x, y, angle, speed, radius, loss){
+    super(x, y, angle, speed, radius, pal.nm.regen_sniper, 3000, 600);
+    this.loss = loss;
+  } 
+  createBullet(angle, target, area){
+    let bullet = new RegenSniperBullet(this.x, this.y, angle, 16, 10, pal.nm.regen_sniper, this.loss);
+    bullet.parentZone = this.parentZone;
+    area.addEnt(bullet);
+  }
+}
+
+class RegenSniperBullet extends Bullet{
+  constructor(x, y, angle, speed, radius, color, loss){
+    super(x, y, angle, speed, radius, color);
+    this.loss = loss;
+    this.inherentlyHarmless = true;
+  }
+  playerCollisionEvent(player){
+    if (player.ignoreBullets){
+      return;
+    }
+    player.regen -= this.loss * player.effectVulnerability;
+    if (player.regen < gameConsts.startingRegen){
+      player.regen = gameConsts.startingRegen;
+    }
+    this.toRemove = true;
   }
 }

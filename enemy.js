@@ -6,6 +6,7 @@ class Enemy extends Entity{
 
     this.immune = false;
 
+    this.inherentlyHarmless = false;
     this.baseRadius = radius;
     this.mainType = "enemy";
     this.angle = angle;
@@ -32,6 +33,9 @@ class Enemy extends Entity{
     this.ySpeedMultiplier = 1;
     this.wallBounceDisabled = false;
     this.harmless = false;
+    if (this.inherentlyHarmless){
+      this.harmless = true;
+    }
     this.disabled = false;
     this.alphaMultiplier = 1;
   }
@@ -71,7 +75,7 @@ class Enemy extends Entity{
     }
   }
   playerCollisionEvent(player){
-    
+
   }
   behavior(area, players){
 

@@ -79,6 +79,7 @@ class Player extends Entity{
     this.corrosiveBypass = false;
     this.effectVulnerability = 1;
     this.fullEffectImmunity = false;
+    this.ignoreBullets = false;
 
     this.tempMinEnergy = this.minEnergy;
     this.tempMaxEnergy = this.maxEnergy;

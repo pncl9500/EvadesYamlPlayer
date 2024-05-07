@@ -45,6 +45,7 @@ class HardenEffect extends Effect{
     super(duration, getEffectPriority("HardenEffect"), false);
   }
   doEffect(target){
+    target.ignoreBullets = true;
     target.invincible = true;
     target.speedMultiplier = 0;
     target.tempSpeed = 0;
