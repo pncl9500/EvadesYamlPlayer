@@ -9,7 +9,7 @@ leaderboard
 
 -----------------------------------------------------------
 feature complete regions:
-cc, cch, cc3, vv, vvh, oo, ooh
+cc, cch, cc3, vv, vvh, oo, ooh, dd, ddh
 
 regions/enemies:
 
@@ -23,9 +23,6 @@ slippery
 ff:
 frost giant
 snowman
-
-dd:
-radiating bullets
 
 cc4:
 charging
