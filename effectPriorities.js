@@ -22,6 +22,7 @@ effectPriorities = {
   DisablingEnemyEffect: 500, //after vigor (important)
   LavaEnemyEffect: 500,
   IceSniperEffect: 1900,
+  SlipperyEnemyEffect: 900,
 
   //on enemy
   FreezeEffect: 1000,

@@ -105,6 +105,7 @@ class Player extends Entity{
   //design this with the idea that it will be completely overriden in cent's code (if i do a single className === "Cent" i will never forgive myself)
   update(){
     this.resetAllModifiers();
+    this.ctrlVector = this.getControls();
     this.applyEffectsBeforeAbilities();
     this.setAbilityUsages();
     this.cooldownMultiplier = 1;
@@ -120,7 +121,6 @@ class Player extends Entity{
 
 
     //final pass
-    this.ctrlVector = this.getControls();
     if (!(this.ctrlVector.x === 0 && this.ctrlVector.y === 0)){
       this.lastDir = Math.atan2(this.ctrlVector.y, this.ctrlVector.x);
     }

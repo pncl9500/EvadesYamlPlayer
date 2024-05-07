@@ -27,6 +27,7 @@ function getEnemyFromSpawner(x, y, d, enemyType, spawner, spawnIndex, zone){
     case "enlarging": return new Enlarging(x, y, d, s, r, auraSize);
     case "disabling": return new Disabling(x, y, d, s, r, auraSize);
     case "lava": return new Lava(x, y, d, s, r, auraSize);
+    case "slippery": return new Slippery(x, y, d, s, r, auraSize);
 
     //sniper
     case "sniper": return new Sniper(x, y, d, s, r);

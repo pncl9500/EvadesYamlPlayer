@@ -814,3 +814,33 @@ class Icicle extends Enemy{
     this.wallBounceEvent();
   }
 }
+
+class Slippery extends AuraEnemy{
+  constructor(x, y, angle, speed, radius, auraSize){
+    super(x, y, angle, speed, radius, pal.nm.slippery, pal.nmaur.slippery, auraSize)
+  }
+  applyAuraEffectToPlayer(area, players, player){
+    player.gainEffect(new SlipperyEnemyEffect(player));
+  }
+}
+
+class SlipperyEnemyEffect extends Effect{
+  constructor(player){
+    super(0, getEffectPriority("SlipperyEnemyEffect"), false, true);
+    this.playerLastXv = player.xv;
+    this.playerLastYv = player.yv;
+  }
+  doEffect(target){
+    if (target.fullEffectImmunity){
+      return;
+    }
+    console.log(this.playerLastXv);
+    if (sqrt(sq(this.playerLastXv) + sq(this.playerLastYv)) < 0.4){
+      return;
+    }
+    target.ctrlVector = {x: this.playerLastXv, y: this.playerLastYv};
+    let mag = sqrt(sq(target.ctrlVector.x) + sq(target.ctrlVector.y));
+    target.ctrlVector.x /= mag;
+    target.ctrlVector.y /= mag;
+  }
+}
