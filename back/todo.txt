@@ -18,8 +18,6 @@ gravity ghost
 gravity
 repelling ghost
 repelling
-star
-teleporting
 
 ww:
 wavy

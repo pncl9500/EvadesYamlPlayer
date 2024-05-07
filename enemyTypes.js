@@ -853,3 +853,39 @@ class SlipperyEnemyEffect extends Effect{
     target.ctrlVector.y /= mag;
   }
 }
+
+class Teleporting extends Enemy{
+  constructor(x, y, angle, speed, radius){
+    super(x, y, angle, speed, radius, pal.nm.teleporting);
+    this.clock = 0;
+    this.teleportPeriod = 22e3/30;
+  }
+  behavior(area, players){
+    this.clock += dTime;
+    if (this.clock >= this.teleportPeriod){
+      this.clock = this.clock % this.teleportPeriod;
+    } else {
+      this.speedMultiplier = 0;
+    }
+  }
+}
+
+class Star extends Enemy{
+  constructor(x, y, angle, speed, radius){
+    super(x, y, angle, speed, radius, pal.nm.star);
+    this.clock = 0;
+    this.teleportPeriod = 400;
+  }
+  behavior(area, players){
+    this.clock += dTime;
+    if (this.clock >= this.teleportPeriod){
+      this.speedMultiplier *= 3;
+      this.velToAngle();
+      this.angle += PI;
+      this.angleToVel();
+      this.clock = this.clock % this.teleportPeriod;
+    } else {
+      this.speedMultiplier = 0;
+    }
+  }
+}
