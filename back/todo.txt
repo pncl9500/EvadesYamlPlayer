@@ -85,13 +85,6 @@ teleporting
 ii:
 cycling
 
-tt:
-corrosive sniper
-corrosive
-enlarging
-poison ghost
-poison sniper
-
 ww:
 wavy
 zigzag
