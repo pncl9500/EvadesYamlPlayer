@@ -31,6 +31,7 @@ function getEnemyFromSpawner(x, y, d, enemyType, spawner, spawnIndex, zone){
     case "regen_sniper": return new RegenSniper(x, y, d, s, r, property("regen_loss"));
 
     //ghost
+    case "disabling_ghost": return new DisablingGhost(x, y, d, s, r);
     case "speed_ghost": return new SpeedGhost(x, y, d, s, r);
     case "regen_ghost": return new RegenGhost(x, y, d, s, r);
 

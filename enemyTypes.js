@@ -568,3 +568,18 @@ class RegenGhost extends Enemy{
     }
   }
 }
+
+class DisablingGhost extends Enemy{
+  constructor(x, y, angle, speed, radius){
+    super(x, y, angle, speed, radius, pal.nm.disabling_ghost)
+    this.gainEffect(new IsGhostEffect());
+  }
+  behavior(area, players){
+    for (var i in players){
+      if (circleCircle(this, players[i]) && !this.disabled){
+        let player = players[i];
+        player.gainEffect(new DisablingEnemyEffect());
+      }
+    }
+  }
+}
