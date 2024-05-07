@@ -183,4 +183,12 @@ regionOffsets = {
     x: 1952,
     y: 173712
   },
+  "Assorted Alcove": {
+    x: 0,
+    y: 0
+  },
+  "Assorted Alcove Hard": {
+    x: 0,
+    y: 0
+  },
 }

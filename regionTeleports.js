@@ -176,6 +176,13 @@ regionTeleports = {
       "zone_1": {dest: "Central Core", y: 80},
     }
   },
+  "Assorted Alcove":{
+    "area_0": {
+      "zone_0": {dest: "Magnetic Monopole", y: -48},
+      "zone_1": {dest: "Burning Bunker", y: 80},
+      "zone_2": {dest: "Assorted Alcove Hard", x: 144}
+    }
+  },
 
 
 
@@ -303,6 +310,11 @@ regionTeleports = {
     },
     "area_21":{
       "zone_2": {dest: "Cyber Castle Hard", x: 256, y: -128, area: 22},
+    }
+  },
+  "Assorted Alcove Hard":{
+    "area_0": {
+      "zone_0": {dest: "Assorted Alcove", x: 144},
     }
   },
 

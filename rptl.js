@@ -37,6 +37,8 @@ function getRptl(){
     tth: "regionFiles/vanilla/toxic-territory-hard.yaml",
     mm2: "regionFiles/vanilla/magnetic-monopole.yaml",
     mm2h: "regionFiles/vanilla/magnetic-monopole-hard.yaml",
+    aa: "regionFiles/vanilla/assorted-alcove.yaml",
+    aah: "regionFiles/vanilla/assorted-alcove-hard.yaml",
     bb: "regionFiles/vanilla/burning-bunker.yaml",
     bbh: "regionFiles/vanilla/burning-bunker-hard.yaml",
     gg2: "regionFiles/vanilla/grand-garden.yaml",
