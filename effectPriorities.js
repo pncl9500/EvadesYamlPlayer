@@ -6,6 +6,8 @@ effectPriorities = {
   FlowEffect: 0,
   MinimumSpeedZoneEffect: -2000,
 
+  PoisonSniperEffect: 1900,
+
   CheatInvincibilityEffect: 4000,
   CheatInfiniteAbilityEffect: 4000,
 
