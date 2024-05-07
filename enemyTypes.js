@@ -453,7 +453,7 @@ class Sniper extends GenericSniper{
 }
 
 class Bullet extends Enemy{
-  constructor(x, y, angle, speed, radius, color, maxLife){
+  constructor(x, y, angle, speed, radius, color, maxLife = -1){
     super(x, y, angle, speed, radius, color);
     this.renderType = "noOutline";
     this.immune = true;
@@ -641,5 +641,20 @@ class RadiatingBullets extends GenericSniper{
       bullet.parentZone = this.parentZone;
       area.addEnt(bullet);
     }
+  }
+}
+
+class CorrosiveSniper extends GenericSniper{
+  constructor(x, y, angle, speed, radius){
+    super(x, y, angle, speed, radius, pal.nm.corrosive_sniper, 3000, 600);
+    this.corrosive = true;
+  } 
+  createBullet(angle, target, area){
+    let bullet = new Bullet(this.x, this.y, angle, 10, this.radius / 2, pal.nm.corrosive_sniper);
+    bullet.renderType = "outline";
+    bullet.corrosive = true;
+    bullet.immune = false;
+    bullet.parentZone = this.parentZone;
+    area.addEnt(bullet);
   }
 }
