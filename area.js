@@ -176,15 +176,19 @@ class Area{
   restrict(entity){
     if (entity.x - entity.getRadius() < this.bounds.left){
       entity.x = this.bounds.left + entity.getRadius();
+      entity.restrictedLastFrame = true;
     }
     if (entity.x + entity.getRadius() > this.bounds.right){
       entity.x = this.bounds.right - entity.getRadius();
+      entity.restrictedLastFrame = true;
     }
     if (entity.y - entity.getRadius() < this.bounds.top){
       entity.y = this.bounds.top + entity.getRadius();
+      entity.restrictedLastFrame = true;
     }
     if (entity.y + entity.getRadius() > this.bounds.bottom){
       entity.y = this.bounds.bottom - entity.getRadius();
+      entity.restrictedLastFrame = true;
     }
   }
   findBounds(){

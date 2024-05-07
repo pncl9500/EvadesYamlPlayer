@@ -28,6 +28,7 @@ class Entity{
     this.mainType = "entity";
     this.toRemove = false;
     this.effects = [];
+    this.restrictedLastFrame = false;
   }
   checkPlayerCollision(area, players){
     for(let i in players){

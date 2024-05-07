@@ -834,8 +834,17 @@ class SlipperyEnemyEffect extends Effect{
     if (target.fullEffectImmunity){
       return;
     }
-    console.log(this.playerLastXv);
     if (sqrt(sq(this.playerLastXv) + sq(this.playerLastYv)) < 0.4){
+      return;
+    }
+    if (target.restrictedLastFrame){
+      let newCtrlVector = {x: this.playerLastXv, y: this.playerLastYv};
+      let mag = sqrt(sq(newCtrlVector.x) + sq(newCtrlVector.y));
+      newCtrlVector.x /= mag;
+      newCtrlVector.y /= mag;
+      target.ctrlVector.x += newCtrlVector.x;
+      target.ctrlVector.y += newCtrlVector.y;
+
       return;
     }
     target.ctrlVector = {x: this.playerLastXv, y: this.playerLastYv};

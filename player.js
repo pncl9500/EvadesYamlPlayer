@@ -129,6 +129,7 @@ class Player extends Entity{
     this.yv = this.ctrlVector.y * this.tempSpeed * tFix * this.speedMultiplier * this.ySpeedMultiplier;
     this.x += this.xv;
     this.y += this.yv;
+    this.restrictedLastFrame = false;
     this.area.restrict(this);
     this.updateAuras();
 
