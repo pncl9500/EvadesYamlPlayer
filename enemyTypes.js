@@ -17,6 +17,13 @@ class Immune extends Enemy{
   }
 }
 
+class Corrosive extends Enemy{
+  constructor(x, y, angle, speed, radius){
+    super(x, y, angle, speed, radius, pal.nm.corrosive);
+    this.corrosive = true;
+  }
+}
+
 class Wall extends Enemy{
   constructor(speed, radius, ind, count, clockwise, zone){
     //speed is set to 0 since the wall is being moved manually
