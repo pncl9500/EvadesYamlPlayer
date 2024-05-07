@@ -648,7 +648,7 @@ class CorrosiveSniper extends GenericSniper{
     this.corrosive = true;
   } 
   createBullet(angle, target, area){
-    let bullet = new Bullet(this.x, this.y, angle, 10, this.radius / 2, pal.nm.corrosive_sniper, -1);
+    let bullet = new Bullet(this.x, this.y, angle, 10, this.radius / 2, pal.nm.corrosive_sniper, 7000);
     bullet.renderType = "outline";
     bullet.corrosive = true;
     bullet.immune = false;
