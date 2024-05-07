@@ -98,9 +98,9 @@ class HeroCard extends UIpanel{
       text(game.mainPlayer.upgradePoints, -this.width / 2 + this.lineDistance + 55.5, -this.height + 12.5, 5.5)
     }
     rectMode(CENTER);
-    this.drawStatUpgraderText(-this.width / 2 + this.lineDistance + 40, -this.height + 37, round(game.mainPlayer.speed * 2) / 2, "Speed", "1", true, game.mainPlayer.speed < gameConsts.maxSpeed)
+    this.drawStatUpgraderText(-this.width / 2 + this.lineDistance + 40, -this.height + 37, round(game.mainPlayer.speed * 10) / 10, "Speed", "1", true, game.mainPlayer.speed < gameConsts.maxSpeed)
     this.drawStatUpgraderText(-this.width / 2 + this.lineDistance + 40 + 80, -this.height + 37, `${round(game.mainPlayer.energy)} / ${game.mainPlayer.maxEnergy}`, "Energy", "2", true, game.mainPlayer.maxEnergy < gameConsts.maxEnergy)
-    this.drawStatUpgraderText(-this.width / 2 + this.lineDistance + 40 + 160, -this.height + 37, round(game.mainPlayer.regen * 5) / 5, "Regen", "3", true, game.mainPlayer.regen < gameConsts.maxRegen)
+    this.drawStatUpgraderText(-this.width / 2 + this.lineDistance + 40 + 160, -this.height + 37, round(game.mainPlayer.regen * 10) / 10, "Regen", "3", true, game.mainPlayer.regen < gameConsts.maxRegen)
     this.drawStatUpgraderButton(-this.width / 2 + this.lineDistance + 40 + 240, -this.height + 37, "4", game.mainPlayer.ability1.tier < game.mainPlayer.ability1.maxTier);
     this.drawStatUpgraderButton(-this.width / 2 + this.lineDistance + 40 + 320, -this.height + 37, "5", game.mainPlayer.ability2.tier < game.mainPlayer.ability2.maxTier);
     if (game.mainPlayer.upgradePoints < 1){

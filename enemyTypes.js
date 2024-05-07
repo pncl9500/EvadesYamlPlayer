@@ -522,3 +522,49 @@ class RegenSniperBullet extends Bullet{
     this.toRemove = true;
   }
 }
+
+class IsGhostEffect extends Effect{
+  constructor(){
+    super(-1, getEffectPriority("IsGhostEffect"), false, false);
+  }
+  doEffect(target){
+    target.harmless = true;
+    target.immune = true;
+    target.alphaMultiplier = 0.4;
+  }
+}
+class SpeedGhost extends Enemy{
+  constructor(x, y, angle, speed, radius){
+    super(x, y, angle, speed, radius, pal.nm.speed_ghost)
+    this.gainEffect(new IsGhostEffect());
+  }
+  behavior(area, players){
+    for (var i in players){
+      if (circleCircle(this, players[i]) && !this.disabled){
+        let player = players[i];
+        player.speed -= 0.1 * player.effectVulnerability * tFix;
+        if (player.speed < gameConsts.startingSpeed){
+          player.speed = gameConsts.startingSpeed;
+        }
+      }
+    }
+  }
+}
+
+class RegenGhost extends Enemy{
+  constructor(x, y, angle, speed, radius){
+    super(x, y, angle, speed, radius, pal.nm.regen_ghost)
+    this.gainEffect(new IsGhostEffect());
+  }
+  behavior(area, players){
+    for (var i in players){
+      if (circleCircle(this, players[i]) && !this.disabled){
+        let player = players[i];
+        player.regen -= 0.04 * player.effectVulnerability * tFix;
+        if (player.regen < gameConsts.startingRegen){
+          player.regen = gameConsts.startingRegen;
+        }
+      }
+    }
+  }
+}

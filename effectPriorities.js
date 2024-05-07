@@ -28,6 +28,8 @@ effectPriorities = {
   RevivingEnemyEffect: 1000,
   DistortEffect: 1000,
 
+  IsGhostEffect: 2000,
+
 }
 
 function getEffectPriority(effectName){

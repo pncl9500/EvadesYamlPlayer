@@ -99,7 +99,7 @@ class Entity{
         break;
       case "outline":
         if (settings.drawOutlines){
-          stroke(0);
+          stroke(0, (this.tempColor.a ?? 255) * this.alphaMultiplier);
           strokeWeight(enemyStrokeWidth);
         }
         break;

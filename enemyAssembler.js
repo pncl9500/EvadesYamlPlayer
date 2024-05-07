@@ -30,6 +30,10 @@ function getEnemyFromSpawner(x, y, d, enemyType, spawner, spawnIndex, zone){
     case "speed_sniper": return new SpeedSniper(x, y, d, s, r, property("speed_loss"));
     case "regen_sniper": return new RegenSniper(x, y, d, s, r, property("regen_loss"));
 
+    //ghost
+    case "speed_ghost": return new SpeedGhost(x, y, d, s, r);
+    case "regen_ghost": return new RegenGhost(x, y, d, s, r);
+
     //wall
     case "wall": return new Wall(s, r, spawnIndex, spawner.count, spawner.move_clockwise ?? defaults.spawnerProps.move_clockwise, zone);
     default: return new MysteryEnemy(x, y, d, s, r, pal.nmaur[enemyType] ?? {r: 0, b: 0, g: 0}, pal.nmaur.hasOwnProperty(enemyType) ? auraSize : 0, enemyType);
