@@ -932,3 +932,46 @@ class GravityGhost extends Enemy{
     }
   }
 }
+
+class Repelling extends AuraEnemy{
+  constructor(x, y, angle, speed, radius, auraSize, repulsion){
+    super(x, y, angle, speed, radius, pal.nm.repelling, pal.nmaur.repelling, auraSize)
+    this.repulsion = repulsion;
+  }
+  applyAuraEffectToPlayer(area, players, player){
+    if (player.fullEffectImmunity){
+      return;
+    }
+    var dx = player.x - this.x;
+    var dy = player.y - this.y;
+    var dist = sqrt(sq(dx) + sq(dy));
+    var attractionAmplitude = pow(2, -(dist / 100));
+    var moveDist = (this.repulsion * attractionAmplitude * player.effectVulnerability);
+    var angleToPlayer = atan2(dy, dx);
+    player.x += (moveDist * cos(angleToPlayer)) * tFix;
+    player.y += (moveDist * sin(angleToPlayer)) * tFix;
+  }
+}
+
+class RepellingGhost extends Enemy{
+  constructor(x, y, angle, speed, radius){
+    super(x, y, angle, speed, radius, pal.nm.repelling_ghost)
+    this.gainEffect(new IsGhostEffect());
+    this.repulsion = 12;
+  }
+  behavior(area, players){
+    for (var i in players){
+      if (circleCircle(this, players[i]) && !this.disabled){
+        let player = players[i];
+        var dx = player.x - this.x;
+        var dy = player.y - this.y;
+        var dist = sqrt(sq(dx) + sq(dy));
+        var attractionAmplitude = pow(2, -(dist / 100));
+        var moveDist = (this.repulsion * attractionAmplitude * player.effectVulnerability);
+        var angleToPlayer = atan2(dy, dx);
+        player.x += (moveDist * cos(angleToPlayer)) * tFix;
+        player.y += (moveDist * sin(angleToPlayer)) * tFix;
+      }
+    }
+  }
+}
