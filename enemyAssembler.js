@@ -11,6 +11,7 @@ function getEnemyFromSpawner(x, y, d, enemyType, spawner, spawnIndex, zone){
     case "immune": return new Immune(x, y, d, s, r);
     case "dasher": return new Dasher(x, y, d, s, r);
     case "homing": return new Homing(x, y, d, s, r);
+    case "sizing": return new Sizing(x, y, d, s, r);
     
     case "turning": return new Turning(x, y, d, s, r, property("circle_size"));
 
