@@ -2,12 +2,17 @@ function getEnemyFromSpawner(x, y, d, enemyType, spawner, spawnIndex, zone){
   let r = spawner.radius;
   let s = spawner.speed;
   let auraSize = spawner[enemyType + "_radius"] ?? (defaults.spawnerProps[enemyType + "_radius"] ?? 150);
+  function property(prop){
+    return spawner[prop] ?? defaults.spawnerProps[prop];
+  }
   switch (enemyType) {
     //shove new enemies here
     case "normal": return new Normal(x, y, d, s, r);
     case "immune": return new Immune(x, y, d, s, r);
     case "dasher": return new Dasher(x, y, d, s, r);
     case "homing": return new Homing(x, y, d, s, r);
+    
+    case "turning": return new Turning(x, y, d, s, r, property("circle_size"));
 
     //aura
     case "slowing": return new Slowing(x, y, d, s, r, auraSize);

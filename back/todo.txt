@@ -15,7 +15,6 @@ regions/enemies:
 
 vv:
 sniper
-turning
 sizing
 
 gg:
