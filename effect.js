@@ -70,6 +70,7 @@ class SafeZoneEffect extends Effect{
     target.corrosiveBypass = true;
     target.effectVulnerability = 0;
     target.fullEffectImmunity = true;
+    target.detectable = false;
   }
 }
 

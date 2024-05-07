@@ -65,6 +65,7 @@ class Player extends Entity{
 
   }
   resetAllModifiers(){
+    this.detectable = true;
     this.radiusMultiplier = 1;
     this.tempSpeed = this.speed;
     this.tempRadius = this.baseRadius;

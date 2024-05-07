@@ -8,11 +8,10 @@ chat box
 leaderboard
 
 -----------------------------------------------------------
-regions/enemies:
+feature complete regions:
+cc, cch, cc3
 
-cc:
-dasher
-homing
+regions/enemies:
 
 vv:
 sniper

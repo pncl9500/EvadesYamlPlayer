@@ -262,7 +262,7 @@ class Dasher extends Enemy{
     this.wallBounceEvent();
     this.oldAngle = this.angle;
   }
-  behavior(area, players, player) {
+  behavior(area, players) {
     this.angle = this.oldAngle;
     if(this.time_preparing == 0){
       if(this.time_dashing == 0){
@@ -295,5 +295,41 @@ class Dasher extends Enemy{
       }
     }
     this.compute_speed();
+  }
+}
+
+class Homing extends Enemy{
+  constructor(x, y, angle, speed, radius){
+    super(x, y, angle, speed, radius, pal.nm.homing);
+    this.targetAngle = angle;
+  }
+  behavior(area, players) {
+    var min = 180;
+    var index;
+    this.targetAngle = this.angle;
+    for (var i in players) {
+      let dist = sqrt(sq(this.x - players[i].x) + sq(this.y - players[i].y))
+      if (players[i].detectable && dist < min) {
+        min = sqrt(sq(this.x - players[i].x) + sq(this.y - players[i].y));
+        index = i;
+      }
+    }
+    this.velToAngle();
+    if (index != undefined) {
+      var dX = players[index].x - this.x
+      var dY = players[index].y - this.y
+      this.targetAngle = atan2(dY, dX);
+    }
+    var dif = this.targetAngle - this.angle;
+    var angleDif = Math.atan2(Math.sin(dif), Math.cos(dif));
+    var angleIncrement = 0.04
+    if (Math.abs(angleDif) >= angleIncrement) {
+      if (angleDif < 0) {
+        this.angle -= angleIncrement * tFix
+      } else {
+        this.angle += angleIncrement * tFix
+      }
+    }
+    this.angleToVel();
   }
 }
