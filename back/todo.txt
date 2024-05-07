@@ -123,6 +123,8 @@ implement ee2
 implement ee2h
 implement magnetism
 implement partial magnetism
+implement walls
+implement lighting
 
 -----------------------------------------------------------
 heroes:
