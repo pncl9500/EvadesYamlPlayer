@@ -793,3 +793,24 @@ class Liquid extends Enemy{
     }
   }
 }
+
+class Icicle extends Enemy{
+  constructor(x, y, speed, radius, horizontal){
+    super(x, y, horizontal ? random([0, PI]) : random([PI/2, 3*PI/2]), speed, radius, pal.nm.icicle);
+    this.pauseLength = 1000;
+    this.pauseTimer = 0;
+  }
+  behavior(area, players){
+    this.pauseTimer -= dTime;
+    if (this.pauseTimer > 0){
+      this.speedMultiplier = 0;
+    }
+  }
+  wallBounce(){
+    this.x - this.radius < this.parentZone.x && (this.x = this.parentZone.x + this.radius, this.angleToVel(), this.xv *= -1, this.pauseTimer = this.pauseLength, this.velToAngle());
+    this.x + this.radius > this.parentZone.x + this.parentZone.width && (this.x = this.parentZone.x + this.parentZone.width - this.radius, this.angleToVel(), this.xv *= -1, this.pauseTimer = this.pauseLength, this.velToAngle());
+    this.y - this.radius < this.parentZone.y && (this.y = this.parentZone.y + this.radius, this.angleToVel(), this.yv *= -1, this.pauseTimer = this.pauseLength, this.velToAngle());
+    this.y + this.radius > this.parentZone.y + this.parentZone.height && (this.y = this.parentZone.y + this.parentZone.height - this.radius, this.angleToVel(), this.yv *= -1, this.pauseTimer = this.pauseLength, this.velToAngle());
+    this.wallBounceEvent();
+  }
+}
