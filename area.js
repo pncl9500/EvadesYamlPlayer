@@ -137,6 +137,7 @@ class Area{
     }
   }
   addPellets(){
+    let vzPelletsSpawned = false;
     for (var i in this.zones){
       if (this.zones[i].type === "active"){
         const pprop = this.parent.properties ?? {};
@@ -149,7 +150,8 @@ class Area{
         }
         this.zones[i].initSpawners();
       }
-      if (this.zones[i].type === "victory"){
+      if (this.zones[i].type === "victory" && !vzPelletsSpawned){
+        vzPelletsSpawned = true;
         const pprop = this.parent.properties ?? {};
         const aprop = this.properties ?? {};
         let pelletCount = aprop.pellet_count ?? (pprop.pellet_count ?? defaults.regionProps.pellet_count);
@@ -159,7 +161,9 @@ class Area{
           pelletCount *= 10;
         }
         for (var p = 0; p < pelletCount; p++){
-          this.entities.push(new Pellet(0, 0, this.zones[i], pelletMultiplier));
+          //create an invisible dummy zone that spans the entirety of the area
+          let fakeZone = new Zone("dummy", 0, 0, this.bounds.right, this.bounds.bottom, {}, [], {x: 0, y: 0}, this.parent, this.parent.areas.indexOf(this));
+          this.entities.push(new Pellet(0, 0, fakeZone, pelletMultiplier, true));
         }
         this.zones[i].initSpawners();
       }
