@@ -747,3 +747,33 @@ class IceSniperEffect extends Effect{
     target.tempColor = {r: floor(map(t, 0, 1, target.tempColor.r, 135)), g: floor(map(t, 0, 1, target.tempColor.g, 235)), b:  floor(map(t, 0, 1, target.tempColor.b, 255))};
   }
 }
+
+class IceGhost extends Enemy{
+  constructor(x, y, angle, speed, radius){
+    super(x, y, angle, speed, radius, pal.nm.ice_ghost)
+    this.gainEffect(new IsGhostEffect());
+  }
+  behavior(area, players){
+    for (var i in players){
+      if (circleCircle(this, players[i]) && !this.disabled){
+        let player = players[i];
+        player.gainEffect(new IceGhostEffect());
+      }
+    }
+  }
+}
+
+class IceGhostEffect extends Effect{
+  constructor(){
+    super(0, getEffectPriority("IceGhostEffect"), false, true);
+  }
+  doEffect(target){
+    if (target.fullEffectImmunity){
+      return;
+    }
+    let t = frameCount % 10 < 5 ? 0.8 : 0.7;
+    target.speedMultiplier = 0;
+    target.tempSpeed = 0;
+    target.tempColor = {r: floor(map(t, 0, 1, target.tempColor.r, 135)), g: floor(map(t, 0, 1, target.tempColor.g, 235)), b:  floor(map(t, 0, 1, target.tempColor.b, 255))};
+  }
+}
