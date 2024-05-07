@@ -82,6 +82,7 @@ class DeadEffect extends Effect{
     target.speedMultiplier = 0;
     target.tempColor.a = 80;
     target.canRevivePlayers = false;
+    target.detectable = false;
   }
   removeEffect(target){
     target.revive();
