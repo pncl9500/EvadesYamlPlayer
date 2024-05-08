@@ -391,13 +391,15 @@ function getHeroSelectorMenu(){
 function getPlayerCreationMenu(){
   list = [
     btn("Go back", 38, 12, () => {queueCheatMenuChange(baseCheatMenuItems)}, "Return to the previous menu."),
+    row([txt("Random Variation:", 12), 
+      tog(11, 11, true, () => {settings.randomDummySpawn = true}, () => {settings.randomDummySpawn = false}, () => {return settings.randomDummySpawn;}, "If enabled, dummy players will be spawned with a random positional variation."),]),
     txt("Hero List", 20), bigLine,
   ];
   for (const [key, value] of Object.entries(heroList)){
     let n = new(heroDict.get(key))(-99999, -99999, 0, "", false, game, 0, 0, []);
     n.toRemove = true;
     let nb = btn(n.heroName, 180, 12, () => {
-      let newPlayer = new(heroDict.get(key))(game.mainPlayer.x + random(-32,32), game.mainPlayer.y + random(-32, 32), 16, "Dummy player", false, game, game.mainPlayer.regionId, game.mainPlayer.areaId, []);
+      let newPlayer = new(heroDict.get(key))(game.mainPlayer.x + random(-32,32) * settings.randomDummySpawn, game.mainPlayer.y + random(-32, 32) * settings.randomDummySpawn, 16, "Dummy player", false, game, game.mainPlayer.regionId, game.mainPlayer.areaId, []);
       game.addPlayer(newPlayer);
     })
     try {

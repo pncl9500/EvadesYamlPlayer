@@ -33,4 +33,6 @@ settings = {
   infiniteAbilityUseCheat: false,
   instantRespawn: true,
   rechargeCooldownOnDeath: true,
+
+  randomDummySpawn: true,
 }

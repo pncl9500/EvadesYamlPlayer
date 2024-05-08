@@ -57,7 +57,7 @@ class Player extends Entity{
     this.timesSaved = 0;
     this.lastDir = 0;
     this.doRevive = false;
-    this.mostRecentSafeZone = null;
+    this.mostRecentSafeZone = this.area.zones[1] ?? this.area.zones[0];
     this.mostRecentSafeX = 0;
     this.mostRecentSafeY = 0;
     
