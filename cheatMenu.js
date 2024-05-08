@@ -306,7 +306,7 @@ function setCheatMenuItems(){
     txt("Dummy Players", 20), bigLine,
         row([txt("Dummy player control:", 12), 
             btn("Create new player", 70, 12, () => {queueCheatMenuChange(getPlayerCreationMenu())}, "Create a new dummy player."),
-            btn("Delete current player", 79, 12, () => {let m = game.mainPlayer; game.cycleMainPlayer(), m.removeSelf()}, "Delete the main player."),
+            btn("Delete current player", 79, 12, () => {let m = game.mainPlayer; game.cycleMainPlayer(), m.removeSelf();if (game.players.length === 0){queueCheatMenuChange(getPlayerlessCheatMenuItems());}}, "Delete the main player."),
             btn("Clear dummy players", 80, 12, () => {clearDummyPlayers()}, "Delete all players except for the currently controlled one."),
             btn("Cycle players", 54, 12, () => {game.cycleMainPlayer()}, "Change the main player to the next player. Hotkey: [Q]"),]),
   ]
