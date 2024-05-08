@@ -54,7 +54,7 @@ function draw() {
   if (cheatMenuOpen){
     drawCheatMenu();
   }
-  //drawDebugValueText();
+  drawDebugValueText();
 }
 function drawDebugValueText(){
   fill(255);

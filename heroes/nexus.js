@@ -50,7 +50,7 @@ class BarrierEffect extends Effect{
 class Stream extends Ability{
   constructor(){
     super(5, 2000, 5, im.ab.stream);
-    this.duration = 12000;
+    this.duration = 8000;
     this.speedBoosts = [0, 1.25, 2.5, 3.75, 5];
   }
   activate(player, players, pellets, enemies, miscEnts, region, area){
@@ -67,6 +67,26 @@ class StreamProjectile extends Projectile{
     this.player = player;
     this.maxLifetime = lifetime;
     this.speedBoost = speedBoost;
+    //get angle of player
+    let dir = player.lastDir;
+    dir = ((round(dir /= PI/2)) + 4) % 4;
+    debugValue = dir;
+    this.x = player.x;
+    this.y = player.y - 100;
+    this.width = 1400;
+    if (dir === 2){
+      this.x -= this.width;
+    }
+    this.height = 200;
+    if (dir % 2 === 1){
+      this.x = player.x - 100;
+      this.y = player.y;
+      this.height = 1400;
+      this.width = 200;
+      if (dir === 3){
+        this.y -= this.height;
+      }
+    }
   }
   detectContact(){
     this.detectPlayerContact();
@@ -78,11 +98,11 @@ class StreamProjectile extends Projectile{
   behavior(area, players){
     this.clock += dTime;
     let t = this.clock/this.maxLifetime;
-    this.alphaMultiplier = 0.7 - 0.7 * t;
+    this.alphaMultiplier = 0.5 - 0.5 * t;
   }
   detectPlayerContact(){
     for (var i in this.area.players){
-      if (circleCircle(this, this.area.players[i])){
+      if (circleRect(this.area.players[i], this)){
         if (this.entitiesAffectedByAbility.includes(this.area.players[i])){
           continue;
         }
@@ -92,6 +112,19 @@ class StreamProjectile extends Projectile{
         }
       }
     }
+  }
+  draw(){
+    noStroke();
+    this.drawBackExtra();
+    fill(this.tempColor.r, this.tempColor.g, this.tempColor.b, (this.tempColor.a ?? 255) * this.alphaMultiplier);
+    noStroke();
+    rect(this.x, this.y, this.width, this.height);
+    this.drawFrontExtra();
+    this.tempColor.r = this.color.r;
+    this.tempColor.g = this.color.g;
+    this.tempColor.b = this.color.b;
+    this.tempColor.a = this.color.a;
+    this.tempRadius = this.radius;
   }
 }
 
