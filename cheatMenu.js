@@ -404,7 +404,7 @@ function getPlayerCreationMenu(){
     n.toRemove = true;
     let nb = btn(n.heroName, 180, 12, () => {
       let dummyNum = max(1, game.players.length);
-      let newPlayer = new(heroDict.get(key))(game.mainPlayer.x + random(-32,32) * settings.randomDummySpawn, game.mainPlayer.y + random(-32, 32) * settings.randomDummySpawn, 16, `Dummy player ${dummyNum}`, false, game, game.mainPlayer.regionId, game.mainPlayer.areaId, []);
+      let newPlayer = new(heroDict.get(key))(game.mainPlayer.x + random(-32,32) * settings.randomDummySpawn, game.mainPlayer.y + random(-32, 32) * settings.randomDummySpawn, 16, `Dummy player ${dummyNum}`, false, game, game.mainPlayer.regionNum, game.mainPlayer.areaNum, []);
       game.addPlayer(newPlayer);
     })
     try {
@@ -432,6 +432,7 @@ function getPlayerlessCheatMenuItems(){
     btn("Click here to fix that.", 78, 12, () => {
       game.addPlayer(new Magmax(176 + random(-64,64), 240 + random(-96,96), 16, "Player 1", true, game, startingRegionId, startingAreaNum, [new WASDset, new ArrowSet]));
       game.cycleMainPlayer();
+      queueCheatMenuChange(baseCheatMenuItems);
     }, "Fix that."),
     txt("", 3000),
     btn("No thanks, I'll handle it myself", 111, 12, () => {
