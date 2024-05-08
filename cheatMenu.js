@@ -7,7 +7,11 @@ cheatMenuButtonPadding = 2;
 cheatMenuRowItemPadding = 4;
 
 function openCheatMenu(){
-  queueCheatMenuChange(baseCheatMenuItems);
+  if (game.players.length === 0){
+    queueCheatMenuChange(getPlayerlessCheatMenuItems());
+  } else {
+    queueCheatMenuChange(baseCheatMenuItems);
+  }
   cheatMenuOpen = true;
   mouseScroll = 0;
 }
@@ -399,7 +403,8 @@ function getPlayerCreationMenu(){
     let n = new(heroDict.get(key))(-99999, -99999, 0, "", false, game, 0, 0, []);
     n.toRemove = true;
     let nb = btn(n.heroName, 180, 12, () => {
-      let newPlayer = new(heroDict.get(key))(game.mainPlayer.x + random(-32,32) * settings.randomDummySpawn, game.mainPlayer.y + random(-32, 32) * settings.randomDummySpawn, 16, "Dummy player", false, game, game.mainPlayer.regionId, game.mainPlayer.areaId, []);
+      let dummyNum = max(1, game.players.length);
+      let newPlayer = new(heroDict.get(key))(game.mainPlayer.x + random(-32,32) * settings.randomDummySpawn, game.mainPlayer.y + random(-32, 32) * settings.randomDummySpawn, 16, `Dummy player ${dummyNum}`, false, game, game.mainPlayer.regionId, game.mainPlayer.areaId, []);
       game.addPlayer(newPlayer);
     })
     try {
@@ -417,6 +422,23 @@ function getPlayerCreationMenu(){
     }
     list.push(nb);
   }
+  return list;
+}
+
+function getPlayerlessCheatMenuItems(){
+  list = [
+    txt("Oh no!", 20),
+    txt("It appears that you have no body. Wanna fix that?", 12),
+    btn("Click here to fix that.", 78, 12, () => {
+      game.addPlayer(new Magmax(176 + random(-64,64), 240 + random(-96,96), 16, "Player 1", true, game, startingRegionId, startingAreaNum, [new WASDset, new ArrowSet]));
+      game.cycleMainPlayer();
+    }, "Fix that."),
+    txt("", 3000),
+    btn("No thanks, I'll handle it myself", 111, 12, () => {
+      queueCheatMenuChange(baseCheatMenuItems);
+      mouseScroll = 0;
+    }, "Return to the default menu and try to regain a body on your own. Oddities and crashes may occur!"),
+  ]
   return list;
 }
 
