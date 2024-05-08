@@ -46,6 +46,9 @@ class Game{
     this.mainPlayer.area.draw(this.mainPlayer.region);
   }
   cycleMainPlayer(){
+    if (this.players.length === 0){
+      return;
+    }
     this.mainPlayer.isMain = false;
     this.mainPlayer.z = z.player;
     let mainPlayerControls = this.mainPlayer.ctrlSets;
