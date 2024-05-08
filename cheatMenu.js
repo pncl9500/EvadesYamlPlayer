@@ -261,6 +261,8 @@ function setCheatMenuItems(){
         row([txt("Show outlines:", 12), 
             tog(11, 11, true, () => {settings.drawOutlines = true}, () => {settings.drawOutlines = false}, undefined, "Enable enemy outlines."),]),
     txt("Sandbox settings", 20), bigLine,
+        row([txt("Change hero: ", 12), 
+            btn("Open list", 37, 12, () => {queueCheatMenuChange(getHeroSelectorMenu())}, "Select a hero."),]),
         row([txt("Instant respawn:", 12), 
             tog(11, 11, true, () => {settings.instantRespawn = true}, () => {settings.instantRespawn = false}, () => {return settings.instantRespawn;}, "Instantly respawn at the most recent safe zone when appropriate."),]),
         row([txt("Recharge cooldown on respawn:", 12), 
@@ -332,6 +334,35 @@ function getRegionSelectorMenu(){
       nb.hoverColor.g = game.regions[i].properties.background_color[1] + 40;
       nb.hoverColor.b = game.regions[i].properties.background_color[2] + 40;
       if (game.regions[i].properties.background_color[0] + game.regions[i].properties.background_color[1] + game.regions[i].properties.background_color[2] < 216){
+        nb.textColor.r = 255;
+        nb.textColor.g = 255;
+        nb.textColor.b = 255;
+      }
+    } catch (error) {
+      //do nothing
+    }
+    list.push(nb);
+  }
+  return list;
+}
+
+function getHeroSelectorMenu(){
+  list = [
+    btn("Go back", 38, 12, () => {queueCheatMenuChange(baseCheatMenuItems)}, "Return to the previous menu."),
+    txt("Hero List", 20), bigLine,
+  ];
+  for (const [key, value] of Object.entries(heroList)){
+    let n = new(heroDict.get(key))(-99999, -99999, 0, "", false, game, 0, 0, []);
+    n.toRemove = true;
+    let nb = btn(n.heroName, 180, 12, () => {
+      game.mainPlayer.swapHero(key);
+    })
+    try {
+      nb.color = hexToRgb(pal.hero[key]);
+      nb.hoverColor.r = nb.color.r + 40;
+      nb.hoverColor.g = nb.color.g + 40;
+      nb.hoverColor.b = nb.color.b + 40;
+      if (nb.color.r + nb.color.g + nb.color.b < 216){
         nb.textColor.r = 255;
         nb.textColor.g = 255;
         nb.textColor.b = 255;

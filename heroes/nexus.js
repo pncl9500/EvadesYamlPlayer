@@ -1,7 +1,7 @@
 class Nexus extends Player{
   constructor(x, y, radius, name, isMain, game, regionNum = 0, areaNum = 0, ctrlSets = []){
     super(x, y, radius, pal.hero.nexus, name, isMain, game, regionNum, areaNum, ctrlSets);
-    this.heroName = "Morfe";
+    this.heroName = "Nexus";
     this.ability1 = new Barrier();
     this.ability2 = new Stream();
   }
@@ -70,7 +70,6 @@ class StreamProjectile extends Projectile{
     //get angle of player
     let dir = player.lastDir;
     dir = ((round(dir /= PI/2)) + 4) % 4;
-    debugValue = dir;
     this.x = player.x;
     this.y = player.y - 100;
     this.width = 1400;

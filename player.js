@@ -570,6 +570,50 @@ class Player extends Entity{
       }
     }
   }
+  swapHero(newHeroName){
+    let newPlayer = new(heroDict.get(newHeroName))(this.x, this.y, this.baseRadius, this.name, this.isMain, game, this.regionNum, this.areaNum, this.ctrlSets);
+
+    for (var i = 0; i < min(this.ability1.tier, newPlayer.ability1.maxTier); i++){
+      newPlayer.ability1.upgrade(newPlayer, true);
+    }
+    for (var i = 0; i < min(this.ability2.tier, newPlayer.ability2.maxTier); i++){
+      newPlayer.ability2.upgrade(newPlayer, true);
+    }
+    try {
+      for (var i = 0; i < min(this.ability3.tier, newPlayer.ability3.maxTier); i++){
+        newPlayer.ability3.upgrade(newPlayer, true);
+      }
+    } catch (error) {
+      
+    }
+    // let prms = this.ability1.getActivationParams(this);
+    // this.ability1.toggleOff(this, prms.players, prms.pellets, prms.enemies, prms.miscEnts, prms.region, prms.area);
+    // this.ability2.toggleOff(this, prms.players, prms.pellets, prms.enemies, prms.miscEnts, prms.region, prms.area);
+    // try {this.ability3.toggleOff(this, prms.players, prms.pellets, prms.enemies, prms.miscEnts, prms.region, prms.area);} catch (error) {}
+    newPlayer.energy = this.energy;
+    newPlayer.maxEnergy = this.maxEnergy;
+    newPlayer.speed = this.speed;
+    newPlayer.regen = this.regen;
+    newPlayer.upgradePoints = this.upgradePoints;
+    newPlayer.level = this.level;
+    newPlayer.levelProgress = this.levelProgress;
+    newPlayer.levelProgressNeeded = this.levelProgressNeeded;
+    newPlayer.saves = this.saves;
+    newPlayer.timesSaved = this.timesSaved;
+    newPlayer.mostRecentSafeZone = this.mostRecentSafeZone;
+    newPlayer.mostRecentSafeX = this.mostRecentSafeX;
+    newPlayer.mostRecentSafeY = this.mostRecentSafeY;
+    newPlayer.lastDir = this.lastDir;
+
+    this.area.players.splice(this.area.players.indexOf(this), 1);
+    this.game.players.splice(this.game.players.indexOf(this), 1);
+    
+    //this.area.players.push(newPlayer);
+    this.game.addPlayer(newPlayer);
+    if (this.isMain){
+      this.game.setMainPlayer(newPlayer);
+    }
+  }
 }
 //this is actually helpful somehow
 tpZoneEpsilon = 8;

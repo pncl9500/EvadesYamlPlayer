@@ -13,10 +13,12 @@ class Ability{
     }
     this.cost = cost;
   }
-  upgrade(player){
-    if (player.upgradePoints > 0 && this.tier < this.maxTier){
+  upgrade(player, forceUpgrade = false){
+    if ((player.upgradePoints > 0 || forceUpgrade) && this.tier < this.maxTier){
       this.tier++;
-      player.upgradePoints--;
+      if (!forceUpgrade){
+        player.upgradePoints--;
+      }
       this.upgradeBehavior(player);
     }
   }
@@ -99,6 +101,12 @@ class Ability{
   }
   tryToggleOffThroughDeath(){
     return;
+  }
+  toggleOn(player, players, pellets, enemies, miscEnts, region, area){
+
+  }
+  toggleOff(player, players, pellets, enemies, miscEnts, region, area){
+    
   }
 }
 
