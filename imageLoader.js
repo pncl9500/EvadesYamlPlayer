@@ -19,6 +19,9 @@ function loadImageAssets(){
 
       stomp: loadImage("imageAssets/ab/stomp.png"),
       vigor: loadImage("imageAssets/ab/vigor.png"),
+
+      barrier: loadImage("imageAssets/ab/barrier.png"),
+      stream: loadImage("imageAssets/ab/stream.png"),
     }
   }
 }

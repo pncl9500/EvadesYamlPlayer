@@ -113,7 +113,7 @@ implement lighting
 
 -----------------------------------------------------------
 heroes:
-nexus
+figure out which effects nexus shield is supposed to block and make the shield effect remove them (maybe sonic.exe knows?)
 shade
 euclid
 chrono

@@ -63,7 +63,7 @@ class Minimize extends Ability{
 }
 
 class Projectile extends Entity{
-  constructor(x, y, angle, speed, lifetime, bounces, radius, color, area, player, z, entitiesAffectedByAbility = [], renderType = "noOutline", fireOffset = 32){
+  constructor(x, y, angle, speed, lifetime, bounces, radius, color, area, player, z, entitiesAffectedByAbility = [], renderType = "noOutline", fireOffset = 32, restricted = true){
     super(x, y, radius, color, z, renderType);
     this.angle = angle;
     this.xv = speed * cos(this.angle);
@@ -76,8 +76,18 @@ class Projectile extends Entity{
     this.x += fireOffset * cos(this.angle);
     this.y += fireOffset * sin(this.angle);
     this.entitiesAffectedByAbility = entitiesAffectedByAbility;
-    this.wallBounce();
+    this.restricted = restricted;
+    this.ignorePreviousTargets = true;
+    if (this.restricted){
+      this.wallBounce();
+    }
     //bounce count of -1: infinite bounces
+  }
+  behavior(area, players){
+
+  }
+  resetKnownTargets(){
+    this.entitiesAffectedByAbility = [];
   }
   update(){
     if (this.lifetime !== -1){
@@ -87,9 +97,12 @@ class Projectile extends Entity{
         return;
       }
     }
+    this.behavior(this.area, this.area.players);
     this.x += this.speed * cos(this.angle) * tFix;
     this.y += this.speed * sin(this.angle) * tFix;
-    this.wallBounce();
+    if (this.restricted){
+      this.wallBounce();
+    }
     this.detectContact();
   }
   wallBounce(){
@@ -129,7 +142,9 @@ class Projectile extends Entity{
           continue;
         }
         this.contactEffect(this.area.players[i]);
-        this.entitiesAffectedByAbility.push(this.area.players[i]);
+        if (this.ignorePreviousTargets){
+          this.entitiesAffectedByAbility.push(this.area.players[i]);
+        }
       }
     }
   }
@@ -140,7 +155,9 @@ class Projectile extends Entity{
           continue;
         }
         this.contactEffect(this.area.entities[i]);
-        this.entitiesAffectedByAbility.push(this.area.entities[i]);
+        if (this.ignorePreviousTargets){
+          this.entitiesAffectedByAbility.push(this.area.entities[i]);
+        }
       }
     }
   }
@@ -151,7 +168,9 @@ class Projectile extends Entity{
           continue;
         }
         this.contactEffect(this.area.entities[i]);
-        this.entitiesAffectedByAbility.push(this.area.entities[i]);
+        if (this.ignorePreviousTargets){
+          this.entitiesAffectedByAbility.push(this.area.entities[i]);
+        }
       }
     }
   }
