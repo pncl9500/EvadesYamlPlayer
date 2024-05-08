@@ -291,16 +291,20 @@ function setCheatMenuItems(){
         row([txt("Set FPS:", 12), 
             btn("30", 18, 12, () => {frameRate(30)}, "Set the framerate to 30."),
             btn("60", 18, 12, () => {frameRate(60)}, "Set the framerate to 60."),]),
-        row([txt("Dummy player control:", 12), 
-            btn("Cycle players", 54, 12, () => {game.cycleMainPlayer()}, "Change the main player to the next player. Hotkey: [Q]"),]),
             //btn("Remove current player", 86, 12, () => {game.removeCurrentPlayer()}),]),
-        row([txt("Player control:", 12), 
+            row([txt("Player control:", 12), 
             btn("Kill", 17, 12, () => {game.mainPlayer.die()}, "Become downed."),
             btn("Revive", 31, 12, () => {game.mainPlayer.doRevive = true}, "Revive yourself. Hotkey: [R] (only while downed)"),]),
-        row([txt("Invincibility:", 12), 
+            row([txt("Invincibility:", 12), 
             tog(11, 11, false, () => {settings.invincibilityCheat = true}, () => {settings.invincibilityCheat = false}, () => {return settings.invincibilityCheat;}, "Become truly invincible, bypassing corrosion. Hotkey: [V]"),]),
-        row([txt("Infinite ability use:", 12), 
+            row([txt("Infinite ability use:", 12), 
             tog(11, 11, false, () => {settings.infiniteAbilityUseCheat = true}, () => {settings.infiniteAbilityUseCheat = false}, () => {return settings.infiniteAbilityUseCheat;}, "Remove all cooldowns and gain infinite energy. Hotkey: [B]"),]),
+    txt("Dummy Players", 20), bigLine,
+        row([txt("Dummy player control:", 12), 
+            btn("Create new player", 70, 12, () => {queueCheatMenuChange(getPlayerCreationMenu())}, "Create a new dummy player."),
+            btn("Delete current player", 79, 12, () => {let m = game.mainPlayer; game.cycleMainPlayer(), m.removeSelf()}, "Delete the main player."),
+            btn("Clear dummy players", 80, 12, () => {clearDummyPlayers()}, "Delete all players except for the currently controlled one."),
+            btn("Cycle players", 54, 12, () => {game.cycleMainPlayer()}, "Change the main player to the next player. Hotkey: [Q]"),]),
   ]
   baseCheatMenuItems = list;
   return list;
@@ -309,6 +313,15 @@ function setCheatMenuItems(){
 let newCheatMenu = undefined;
 function queueCheatMenuChange(list){
   newCheatMenu = list;
+}
+
+function clearDummyPlayers(){
+  for (var i = 0; i < game.players.length; i++){
+    if (game.players[i] !== game.mainPlayer){
+      game.players[i].removeSelf();
+      i--;
+    }
+  }
 }
 
 function getRegionSelectorMenu(){
@@ -356,6 +369,36 @@ function getHeroSelectorMenu(){
     n.toRemove = true;
     let nb = btn(n.heroName, 180, 12, () => {
       game.mainPlayer.swapHero(key);
+    })
+    try {
+      nb.color = hexToRgb(pal.hero[key]);
+      nb.hoverColor.r = nb.color.r + 40;
+      nb.hoverColor.g = nb.color.g + 40;
+      nb.hoverColor.b = nb.color.b + 40;
+      if (nb.color.r + nb.color.g + nb.color.b < 216){
+        nb.textColor.r = 255;
+        nb.textColor.g = 255;
+        nb.textColor.b = 255;
+      }
+    } catch (error) {
+      //do nothing
+    }
+    list.push(nb);
+  }
+  return list;
+}
+
+function getPlayerCreationMenu(){
+  list = [
+    btn("Go back", 38, 12, () => {queueCheatMenuChange(baseCheatMenuItems)}, "Return to the previous menu."),
+    txt("Hero List", 20), bigLine,
+  ];
+  for (const [key, value] of Object.entries(heroList)){
+    let n = new(heroDict.get(key))(-99999, -99999, 0, "", false, game, 0, 0, []);
+    n.toRemove = true;
+    let nb = btn(n.heroName, 180, 12, () => {
+      let newPlayer = new(heroDict.get(key))(game.mainPlayer.x + random(-32,32), game.mainPlayer.y + random(-32, 32), 16, "Dummy player", false, game, game.mainPlayer.regionId, game.mainPlayer.areaId, []);
+      game.addPlayer(newPlayer);
     })
     try {
       nb.color = hexToRgb(pal.hero[key]);

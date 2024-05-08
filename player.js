@@ -614,6 +614,11 @@ class Player extends Entity{
       this.game.setMainPlayer(newPlayer);
     }
   }
+  removeSelf(){
+    this.area.players.splice(this.area.players.indexOf(this), 1);
+    this.area.attemptUnload();
+    this.game.players.splice(this.game.players.indexOf(this), 1);
+  }
 }
 //this is actually helpful somehow
 tpZoneEpsilon = 8;
