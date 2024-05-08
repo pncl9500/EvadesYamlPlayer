@@ -9,6 +9,7 @@ effectPriorities = {
   PoisonSniperEffect: 1700,
   
   BarrierEffect: -1000,
+  StreamEffect: 1950,
 
   CheatInvincibilityEffect: 4000,
   CheatInfiniteAbilityEffect: 4000,

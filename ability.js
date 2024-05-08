@@ -40,7 +40,7 @@ class Ability{
   }
   canUseAbility(player){
     return this.currentCooldown <= 0 && 
-           player.energy - player.tempMinEnergy > this.cost && 
+           (player.energy - player.tempMinEnergy) >= this.cost && 
            !player.abilitiesDisabled && 
            (!player.dead || this.usableWhileDead) &&
            (player.dead || this.usableWhileAlive) &&

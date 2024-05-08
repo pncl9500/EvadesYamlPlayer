@@ -73,11 +73,25 @@ class StreamProjectile extends Projectile{
   }
   contactEffect(player){
     player.gainEffect(new StreamEffect(this.speedBoost, this.player));
+    player.gainEffect(new StreamNegativeEnergyEffect());
   }
   behavior(area, players){
     this.clock += dTime;
     let t = this.clock/this.maxLifetime;
     this.alphaMultiplier = 0.7 - 0.7 * t;
+  }
+  detectPlayerContact(){
+    for (var i in this.area.players){
+      if (circleCircle(this, this.area.players[i])){
+        if (this.entitiesAffectedByAbility.includes(this.area.players[i])){
+          continue;
+        }
+        this.contactEffect(this.area.players[i]);
+        if (this.ignorePreviousTargets){
+          this.entitiesAffectedByAbility.push(this.area.players[i]);
+        }
+      }
+    }
   }
 }
 
@@ -91,10 +105,19 @@ class StreamEffect extends Effect{
     if (target === this.player){
       target.tempSpeed += this.speedBoost;
     }
-    target.tempMinEnergy = -target.maxEnergy;
     if (target.speedMultiplier === 0){
       return;
     }
     target.speedMultiplier = max(target.speedMultiplier, 1);
+  }
+}
+
+
+class StreamNegativeEnergyEffect extends Effect{
+  constructor(){
+    super(0, getEffectPriority("StreamEffect"), false);
+  }
+  doEffectBeforeAbilities(target){
+    target.tempMinEnergy = -target.maxEnergy;
   }
 }
