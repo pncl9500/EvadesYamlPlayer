@@ -606,10 +606,11 @@ class Player extends Entity{
     newPlayer.lastDir = this.lastDir;
 
     this.area.players.splice(this.area.players.indexOf(this), 1);
+    let ind = this.game.players.indexOf(this);
     this.game.players.splice(this.game.players.indexOf(this), 1);
     
     //this.area.players.push(newPlayer);
-    this.game.addPlayer(newPlayer);
+    this.game.addPlayer(newPlayer, ind);
     if (this.isMain){
       this.game.setMainPlayer(newPlayer);
     }

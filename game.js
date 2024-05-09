@@ -32,8 +32,12 @@ class Game{
     }
     this.mainPlayer.updateAsMain();
   }
-  addPlayer(player){
-    this.players.push(player);
+  addPlayer(player, ind = null){
+    if (ind === null){
+      this.players.push(player);
+      return;
+    }
+    this.players.splice(ind, 0, player);
   }
   setMainPlayer(player){
     this.mainPlayer = player;
