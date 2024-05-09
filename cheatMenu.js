@@ -384,14 +384,14 @@ function setCheatMenuItems(){
             btn("Tiny auras", null, 12, () => {
               for (var i in game.mainPlayer.area.entities){
                 if (game.mainPlayer.area.entities[i].mainType === "enemy"){
-                  game.mainPlayer.area.entities[i].auraSize = Min(30, game.mainPlayer.area.entities[i].auraSize);
+                  game.mainPlayer.area.entities[i].auraSize = min(30, game.mainPlayer.area.entities[i].auraSize);
                 }
               }
             }, "Make all enemy auras tiny."),
             btn("Huge auras", null, 12, () => {
               for (var i in game.mainPlayer.area.entities){
                 if (game.mainPlayer.area.entities[i].mainType === "enemy"){
-                  game.mainPlayer.area.entities[i].auraSize = Max(450, game.mainPlayer.area.entities[i].auraSize);
+                  game.mainPlayer.area.entities[i].auraSize = max(450, game.mainPlayer.area.entities[i].auraSize);
                 }
               }
             }, "Make all enemy auras huge."),
