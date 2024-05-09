@@ -11,9 +11,24 @@ class Barrier extends Ability{
   constructor(){
     super(5, 10000, 30, im.ab.barrier);
     this.durations = [2500, 2700, 2900, 3100, 3300];
+    this.usableWhileDead = true;
   }
   activate(player, players, pellets, enemies, miscEnts, region, area){
-    let barrier = new BarrierProjectile(player.x, player.y, area, player, [], this.durations[this.tier - 1]);
+    let x = player.x;
+    let y = player.y;
+    if (player.dead){
+      let maxDist = 99999;
+      for (var i in players){
+        if (players[i].dead){ continue };
+        let dist = sqrt(sq(players[i].x - player.x) + sq(players[i].y - player.y));
+        if (dist < maxDist){
+          maxDist = dist;
+          x = players[i].x;
+          y = players[i].y;
+        }
+      }
+    }
+    let barrier = new BarrierProjectile(x, y, area, player, [], this.durations[this.tier - 1]);
     area.addEnt(barrier);
   }
 }
