@@ -157,6 +157,14 @@ class ContinuousToggleAbility extends ToggleAbility{
     super(maxTier, cooldowns, cost, image);
     this.energyUseEpsilon = 0.05;
   }
+  tryToggleOffThroughDeath(player){
+    if(this.toggleOffOnDeath && this.toggled){
+      this.toggled = false;
+      this.startCooldown(player);
+      let prms = this.getActivationParams(player);
+      this.toggleOff(player, prms.players, prms.pellets, prms.enemies, prms.miscEnts, prms.region, prms.area);
+    }
+  }
   canUseAbility(player){
     return this.currentCooldown <= 0 && 
            (abs(player.energy - player.tempMinEnergy)) > this.energyUseEpsilon && 

@@ -195,12 +195,14 @@ class Player extends Entity{
     if (this.ability2 !== exemptAbility){
       let prms = this.ability2.getActivationParams(this);
       this.ability2.toggled = false;
+      this.ability2.startCooldown(this);
       this.ability2.toggleOff(this, prms.players, prms.pellets, prms.enemies, prms.miscEnts, prms.region, prms.area);
       return;
     }
     if (this.ability1 !== exemptAbility){
       let prms = this.ability1.getActivationParams(this);
       this.ability1.toggled = false;
+      this.ability1.startCooldown(this);
       this.ability1.toggleOff(this, prms.players, prms.pellets, prms.enemies, prms.miscEnts, prms.region, prms.area);
       return;
     }
