@@ -515,7 +515,29 @@ function getRegionSelectorMenu(){
     } catch (error) {
       //do nothing
     }
-    list.push(nb);
+    let unknownEnemyTypes = game.regions[i].areas[0].scanForUnknownEnemyTypes();
+    let items = [nb];
+    if (unknownEnemyTypes.length > 0){
+      let str;
+      if (unknownEnemyTypes.length === 1){
+        str = `${game.regions[i].name} has ${unknownEnemyTypes.length} missing enemy type (`
+      } else {
+        str = `${game.regions[i].name} has ${unknownEnemyTypes.length} missing enemy types (`
+      }
+      for (let i = 0; i < unknownEnemyTypes.length; i++){
+        str += unknownEnemyTypes[i];
+        if (i === unknownEnemyTypes.length - 1){
+          str += ")"
+          continue;
+        }
+        str += ", "
+      }
+      items.push(btn(" ! ", null, 12, () => {}, str))
+    }
+    if (game.regions[i].name === "Stellar Square"){
+      items.push(btn(" ! ", null, 12, () => {}, `${game.regions[i].name}'s mechanics have not been fully implemented.`))
+    }
+    list.push(row(items));
   }
   return list;
 }
