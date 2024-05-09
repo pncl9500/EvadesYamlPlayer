@@ -118,7 +118,7 @@ class Entity{
         break;
     }
     if (!(this.renderType === "image")){
-      ellipse(this.x, this.y, this.radius - (this.renderType === "ring" ? ringEnemyStrokeWidth : 0));
+      ellipse(this.x, this.y, this.radius - (this.renderType === "ring" ? ringEnemyStrokeWidth / 2 : 0));
     }
     this.drawFrontExtra();
     this.tempColor.r = this.color.r;
