@@ -486,6 +486,8 @@ function clearDummyPlayers(exception = game.mainPlayer){
 }
 
 function getRegionSelectorMenu(){
+  let totalMissingEnemies = ["ring_sniper"];
+  let totalEnemyTypes = 98;
   list = [
     btn("Go back", 38, 12, () => {queueCheatMenuChange(baseCheatMenuItems)}, "Return to the previous menu."),
     txt("Region List", 20), bigLine,
@@ -520,11 +522,14 @@ function getRegionSelectorMenu(){
     if (unknownEnemyTypes.length > 0){
       let str;
       if (unknownEnemyTypes.length === 1){
-        str = `${game.regions[i].name} has ${unknownEnemyTypes.length} missing enemy type (`
+        str = game.regions[i].name + ` has ${unknownEnemyTypes.length} missing enemy type (`;
       } else {
-        str = `${game.regions[i].name} has ${unknownEnemyTypes.length} missing enemy types (`
+        str = game.regions[i].name + ` has ${unknownEnemyTypes.length} missing enemy types (`;
       }
       for (let i = 0; i < unknownEnemyTypes.length; i++){
+        if (!totalMissingEnemies.includes(unknownEnemyTypes[i])){
+          totalMissingEnemies.push(unknownEnemyTypes[i]);
+        }
         str += unknownEnemyTypes[i];
         if (i === unknownEnemyTypes.length - 1){
           str += ")"
@@ -539,6 +544,14 @@ function getRegionSelectorMenu(){
       items.push(but);
     }
     list.push(row(items));
+  }
+  list.push(txt("", 8));
+  list.push(txt(`Total missing enemies (${totalMissingEnemies.length}/${totalEnemyTypes}, ${round((totalMissingEnemies.length/totalEnemyTypes) * 1000) / 10}% missing):`, 12));
+  for (let i in totalMissingEnemies){
+    list.push(txt(totalMissingEnemies[i], 8));
+  }
+  if (totalMissingEnemies.length === 0){
+    list.push(txt("All enemies have been implemented, and I can finally rest.", 8));
   }
   return list;
 }
