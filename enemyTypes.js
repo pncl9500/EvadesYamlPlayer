@@ -975,3 +975,31 @@ class RepellingGhost extends Enemy{
     }
   }
 }
+
+class Wavy extends Enemy{
+  constructor(x, y, angle, speed, radius){
+    super(x, y, angle ?? 0, speed, radius, pal.nm.wavy);
+    this.circleSize = 100;
+    this.dir = 1;
+    this.switchInterval = 800;
+    this.switchTime = 0;
+    this.angleIncrement = (this.speed + 6) / this.circleSize;
+  }
+  behavior(area, players) {
+    this.switchTime += dTime;
+    if (this.switchTime > this.switchInterval) {
+      this.dir *= -1;
+      this.switchTime %= this.switchInterval;
+    }
+    this.velToAngle();
+    this.angle += this.angleIncrement * this.dir * tFix;
+    this.angleToVel();
+  }
+  wallBounce(){
+    this.x - this.radius < this.parentZone.x && (this.x = this.parentZone.x + this.radius, this.angleToVel(), this.xv *= -1, this.dir *= -1, this.velToAngle());
+    this.x + this.radius > this.parentZone.x + this.parentZone.width && (this.x = this.parentZone.x + this.parentZone.width - this.radius, this.angleToVel(), this.xv *= -1, this.dir *= -1, this.velToAngle());
+    this.y - this.radius < this.parentZone.y && (this.y = this.parentZone.y + this.radius, this.angleToVel(), this.yv *= -1, this.dir *= -1, this.velToAngle());
+    this.y + this.radius > this.parentZone.y + this.parentZone.height && (this.y = this.parentZone.y + this.parentZone.height - this.radius, this.angleToVel(), this.yv *= -1, this.dir *= -1, this.velToAngle());
+    this.wallBounceEvent();
+  }
+}

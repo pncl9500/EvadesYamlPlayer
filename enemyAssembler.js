@@ -14,14 +14,15 @@ function getEnemyFromSpawner(x, y, d, enemyType, spawner, spawnIndex, zone){
     case "sizing": return new Sizing(x, y, d, s, r);
     case "corrosive": return new Corrosive(x, y, d, s, r);
     case "liquid": return new Liquid(x, y, d, s, r, property("player_detection_radius"));
-    case "icicle": return new Icicle(x, y, s, r, property("horizontal"));
-
+    
     //blinking movement
     case "teleporting": return new Teleporting(x, y, d, s, r);
     case "star": return new Star(x, y, d, s, r);
     
     //altered movement
+    case "icicle": return new Icicle(x, y, s, r, property("horizontal"));
     case "turning": return new Turning(x, y, d, s, r, property("circle_size"));
+    case "wavy": return new Wavy(x, y, spawner.angle === undefined ? undefined : d, s, r);
 
     //aura
     case "slowing": return new Slowing(x, y, d, s, r, auraSize);
