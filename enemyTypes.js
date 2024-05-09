@@ -702,7 +702,7 @@ class PoisonGhost extends Enemy{
     for (var i in players){
       if (circleCircle(this, players[i]) && !this.disabled){
         let player = players[i];
-        player.gainEffect(new PoisonSniperEffect(100));
+        player.gainEffect(new PoisonSniperEffect(150));
       }
     }
   }
@@ -1124,6 +1124,63 @@ class Switch extends Enemy{
     if (this.switched){
       this.harmless = true;
       this.alphaMultiplier = 0.5;
+    }
+  }
+}
+
+class Reducing extends AuraEnemy{
+  constructor(x, y, angle, speed, radius, auraSize){
+    super(x, y, angle, speed, radius, pal.nm.reducing, pal.nmaur.reducing, auraSize)
+  }
+  applyAuraEffectToPlayer(area, players, player){
+    player.gainEffect(new ReducingEnemyEffect());
+  }
+}
+
+class ReducingEnemyEffect extends Effect{
+  constructor(){
+    super(0, getEffectPriority("ReducingEnemyEffect"), false, true);
+
+  }
+  doEffect(target){
+    if (target.fullEffectImmunity){
+      return;
+    }
+    if (!target.hasOwnProperty("reduction")){
+      target.reduction = 0;
+    }
+    target.reduction += 1 * target.effectVulnerability * (8/30) * tFix;
+    target.tempRadius -= target.reduction;
+    if (target.tempRadius <= 0){
+      target.tempRadius = 0;
+      target.die();
+    }
+    for (var i = 0; i < target.effects.length; i++){
+      if (target.effects[i].constructor.name === "ReducingEnemyPostEffect"){
+        target.effects.splice(i, 1);
+        i--;
+      }
+    }
+  }
+  removeEffectLate(target){
+    target.gainEffect(new ReducingEnemyPostEffect());
+  }
+}
+
+class ReducingEnemyPostEffect extends Effect{
+  constructor(){
+    super(-1, getEffectPriority("ReducingEnemyPostEffect"), false, false);
+  }
+  doEffect(target){
+    for (let i in target.effects){
+      if (!target.effects[i].toRemove && target.effects[i].constructor.name === "ReducingEffect"){
+        this.toRemove = true;
+      }
+    }
+    target.reduction -= 1 * (8/30) * tFix;
+    target.tempRadius -= target.reduction;
+    if (target.reduction <= 0){
+      this.toRemove = true;
     }
   }
 }

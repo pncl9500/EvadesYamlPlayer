@@ -26,6 +26,8 @@ effectPriorities = {
   LavaEnemyEffect: 500,
   IceSniperEffect: 1900,
   SlipperyEnemyEffect: 900,
+  ReducingEnemyEffect: 480, //before enlarging (important), before post effect (important)
+  ReducingEnemyPostEffect: 490, //before enlarging (important)
 
   //on enemy
   FreezeEffect: 1000,

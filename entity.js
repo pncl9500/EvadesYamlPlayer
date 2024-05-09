@@ -29,6 +29,7 @@ class Entity{
     this.toRemove = false;
     this.effects = [];
     this.restrictedLastFrame = false;
+    this.effectRemovalQueue = [];
   }
   checkPlayerCollision(area, players){
     for(let i in players){
@@ -50,6 +51,12 @@ class Entity{
     if (!this.canGainEffect(effect)){
       return;
     }
+    for (let j = 0; j < this.effectRemovalQueue.length; j++){
+      if (this.effectRemovalQueue[j].constructor.name === effect.constructor.name){
+        this.effectRemovalQueue.splice(this.effectRemovalQueue.indexOf(this.effectRemovalQueue[j]), 1);
+        j--;
+      }
+    }
     if (!effect.allowDuplicates){
       for (var i in this.effects){
         if (this.effects[i].constructor.name === effect.constructor.name){
@@ -68,10 +75,17 @@ class Entity{
   }
 
   applyEffects(){
+    //loop through ERQ
+    for (let j = 0; j < this.effectRemovalQueue.length; j++){
+      this.effectRemovalQueue[j].removeEffectLate(this);
+    }
+    this.effectRemovalQueue = [];
     for (var i = 0; i < this.effects.length; i++){
       this.effects[i].apply(this);
       if (this.effects[i].toRemove){
-        this.effects.toRemove = false;
+        //this.effects[i].toRemove = false; is this good? will this cause weird stuff to happen? i have no idea
+        this.effects[i].removeEffect(this);
+        this.effectRemovalQueue.push(this.effects[i]);
         this.effects.splice(i, 1);
         i--;
       }

@@ -14,12 +14,14 @@ class Effect{
     this.toRemove = false;
   }
   apply(target){
+    if (this.toRemove){
+      return;
+    }
     this.doEffect(target);
     if (!this.noDuration){
       this.life -= dTime;
       if (this.life < 0){
         this.toRemove = true;
-        this.removeEffect(target);
         return;
       }
     }
@@ -38,6 +40,9 @@ class Effect{
   }
   gainEffect(){
 
+  }
+  removeEffectLate(target){
+    
   }
 }
 

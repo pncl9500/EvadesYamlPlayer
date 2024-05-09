@@ -71,7 +71,7 @@ class Game{
   }
 }
 
-startingRegionName = "Central Core";
+startingRegionName = "Coupled Corridors";
 startingAreaNum = 0;
 // startingRegionName = "Monumental Migration";
 // startingAreaNum = 479;
