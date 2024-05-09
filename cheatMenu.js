@@ -534,8 +534,9 @@ function getRegionSelectorMenu(){
       }
       items.push(btn(" ! ", null, 12, () => {}, str))
     }
-    if (game.regions[i].name === "Stellar Square"){
-      items.push(btn(" ! ", null, 12, () => {}, `${game.regions[i].name}'s mechanics have not been fully implemented.`))
+    if (game.regions[i].name === "Stellar Square" || game.regions[i].name === "Endless Echo" || game.regions[i].name === "Endless Echo Hard"){
+      let but = btn(" ! ", null, 12, () => {}, `${game.regions[i].name}'s mechanics have not been fully implemented.`);
+      items.push(but);
     }
     list.push(row(items));
   }
