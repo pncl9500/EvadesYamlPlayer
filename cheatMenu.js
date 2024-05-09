@@ -467,12 +467,12 @@ function getPlayerEditMenu(player){
     btn("Go back", 38, 12, () => {queueCheatMenuChange(getPlayerSelectorMenu())}, "Return to the previous menu."),
     txt(`Editing ${player.name}`, 20), bigLine,
     row([txt("Player management:", 12), 
-        btn("Set as main", null, 12, () => {let oldSets = game.mainPlayer.ctrlSets; game.mainPlayer.ctrlSets = [], game.setMainPlayer(editedPlayer), editedPlayer.ctrlSets = oldSets}, `Make ${pname} the main player, letting you control it.`),
-        btn("Set as main (ignore controls)", null, 12, () => {game.setMainPlayer(editedPlayer);}, `Make ${pname} the main player without changing any controls.`),
-        btn("Delete player", null, 12, () => {game.cycleMainPlayer(), editedPlayer.removeSelf();if (game.players.length === 0){queueCheatMenuChange(getPlayerlessCheatMenuItems())} else {queueCheatMenuChange(getPlayerSelectorMenu())}}, `Delete ${pname}.`),
-        btn("Clear other players", null, 12, () => {clearDummyPlayers(editedPlayer)}, `Delete all players except for ${pname}.`),]),
+        btn("Set as main", null, 12, () => {let oldSets = game.mainPlayer.ctrlSets; game.mainPlayer.ctrlSets = [], game.setMainPlayer(editedPlayer), editedPlayer.ctrlSets = oldSets}, "Make " + pname + " the main player, letting you control it."),
+        btn("Set as main (ignore controls)", null, 12, () => {game.setMainPlayer(editedPlayer);}, "Make " + pname + " the main player without changing any controls."),
+        btn("Delete player", null, 12, () => {game.cycleMainPlayer(), editedPlayer.removeSelf();if (game.players.length === 0){queueCheatMenuChange(getPlayerlessCheatMenuItems())} else {queueCheatMenuChange(getPlayerSelectorMenu())}}, "Delete " + pname + "."),
+        btn("Clear other players", null, 12, () => {clearDummyPlayers(editedPlayer)}, "Delete all players except for " + pname + "."),]),
     row([txt("Change hero: ", 12), 
-        btn("Open list", 37, 12, () => {queueCheatMenuChange(getHeroSelectorMenu(editedPlayer, getPlayerSelectorMenu))}, "Select a hero."),]), 
+        btn("Open list", 37, 12, () => {queueCheatMenuChange(getHeroSelectorMenu(editedPlayer, getPlayerSelectorMenu))}, "Select a hero for " + pname + " to be."),]), 
   ];
   return list;
 }
