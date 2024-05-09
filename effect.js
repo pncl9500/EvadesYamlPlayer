@@ -85,8 +85,12 @@ class DeadEffect extends Effect{
     target.detectable = false;
   }
   removeEffect(target){
+    if (settings.removeDeadPlayers && !target.isMain){
+      target.removeSelf();
+      return;
+    }
     target.revive();
-    if (settings.instantRespawn){
+    if (settings.instantRespawn && target.isMain){
       target.x = target.mostRecentSafeZone.x + target.mostRecentSafeZone.width / 2;
       target.y = target.mostRecentSafeZone.y + target.mostRecentSafeZone.height / 2;
     }

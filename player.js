@@ -293,7 +293,7 @@ class Player extends Entity{
     this.deathTimer = deathTime * this.deathTimerMultiplier;
     this.deathEffect = new DeadEffect(this.deathTimer);
     this.gainEffect(this.deathEffect);
-    if (settings.instantRespawn && this.instantRespawnAppropriate()){
+    if (settings.instantRespawn && this.instantRespawnAppropriate() && this.isMain){
       this.x = this.mostRecentSafeZone.x + this.mostRecentSafeZone.width / 2;
       this.y = this.mostRecentSafeZone.y + this.mostRecentSafeZone.height / 2;
       this.revive();
