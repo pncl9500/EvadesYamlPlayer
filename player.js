@@ -568,7 +568,7 @@ class Player extends Entity{
     this.area.exit(this);
     this.area.attemptUnload(this);
     this.areaNum += areaOffset;
-    this.areaNum = max(min(this.areaNum, this.region.areas.length - 1), 0);
+    this.areaNum = max(min(this.areaNum, this.region.areas.length - 2), 0);
     this.area = this.region.areas[this.areaNum];
     this.area.enter(this);
     this.area.attemptLoad(true);
