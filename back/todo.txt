@@ -13,8 +13,27 @@ cc, cch, cc3, vv, vvh, oo, ooh, dd, ddh, tt, tth, gg, ggh, ee, eeh, pp, pph, ww,
 regions/enemies:
 
 ff:
+walls
 frost giant
 snowman
+
+mm2:
+magnetism and partial magnetism
+magnetic nullification
+magnetic reduction
+negative magnetic ghost
+negative magnetic sniper
+positive magnetic ghost
+positive magnetic sniper
+
+bb:
+fire trail
+lunging
+
+gg2:
+flower
+grass
+seedling
 
 ss2:
 quicksand
@@ -27,20 +46,17 @@ sandrock
 dd2:
 stalactite
 
-hh2:
-fake pumpkin
-pumpkin
-tree
-
 ww2:
 force sniper a
 force sniper b
 blocking
 experience drain
 
-bb:
-fire trail
-lunging
+hh2:
+implement lighting
+fake pumpkin
+pumpkin
+tree
 
 mm3:
 firefly
@@ -53,21 +69,11 @@ charging
 lead sniper
 reducing
 
-gg2:
-flower
-grass
-seedling
-
-mm2:
-magnetic nullification
-magnetic reduction
-negative magnetic ghost
-negative magnetic sniper
-positive magnetic ghost
-positive magnetic sniper
-
 ii:
 cycling
+
+ee2:
+infinite map behavior
 
 cc2:
 radar
@@ -95,12 +101,7 @@ plbot
 dabot
 cybot (hard mode)
 
-implement ee2
-implement ee2h
-implement magnetism
-implement partial magnetism
-implement walls
-implement lighting
+
 
 -----------------------------------------------------------
 heroes:
