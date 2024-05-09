@@ -1067,3 +1067,40 @@ class Oscillating extends Enemy{
     }
   }
 }
+
+class Spiral extends Enemy{
+  constructor(x, y, angle, speed, radius){
+    super(x, y, angle, speed, radius, pal.nm.spiral);
+    this.angleIncrement = 0.15;
+    this.angleIncrementChange = 0.004;
+    this.angleAdd = false;
+    this.dir = 1
+  }
+  behavior(area, players) {
+    if (this.angleIncrement < 0.001) {
+      this.angleAdd = true;
+    } else if (this.angleIncrement > 0.35) {
+      this.angleAdd = false;
+    }
+    if (this.angleIncrement < 0.05) {
+      this.angleIncrementChange = 0.0022;
+    } else {
+      this.angleIncrementChange = 0.004;
+    }
+    if (this.angleAdd) {
+      this.angleIncrement += this.angleIncrementChange * tFix;
+    } else {
+      this.angleIncrement -= this.angleIncrementChange * tFix;
+    }
+    this.velToAngle();
+    this.angle += this.angleIncrement * this.dir * tFix;
+    this.angleToVel();
+  }
+  wallBounce(){
+    this.x - this.radius < this.parentZone.x && (this.x = this.parentZone.x + this.radius, this.angleToVel(), this.xv *= -1, this.turningSpeed *= -1, this.velToAngle());
+    this.x + this.radius > this.parentZone.x + this.parentZone.width && (this.x = this.parentZone.x + this.parentZone.width - this.radius, this.angleToVel(), this.xv *= -1, this.turningSpeed *= -1, this.velToAngle());
+    this.y - this.radius < this.parentZone.y && (this.y = this.parentZone.y + this.radius, this.angleToVel(), this.yv *= -1, this.turningSpeed *= -1, this.velToAngle());
+    this.y + this.radius > this.parentZone.y + this.parentZone.height && (this.y = this.parentZone.y + this.parentZone.height - this.radius, this.angleToVel(), this.yv *= -1, this.turningSpeed *= -1, this.velToAngle());
+    this.wallBounceEvent();
+  }
+}
