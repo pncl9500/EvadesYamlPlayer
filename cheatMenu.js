@@ -321,6 +321,7 @@ function setCheatMenuItems(){
             tog(11, 11, false, () => {settings.removeDeadPlayers = true}, () => {settings.removeDeadPlayers = false}, () => {return settings.removeDeadPlayers;}, "Remove players if their death timer reaches zero (does not affect the main player)."),]),
         btn("Restore controls", null, 12, () => {for (let i in defaultControls){game.mainPlayer.ctrlSets.push(defaultControls[i])}}, "Give default controls to the main player. If you can't control anything, press this button."),
     txt("Fun", 20), bigLine,
+      txt("Certain settings (particularly rainbow mode when used multiple times) may cause flashing light effects.", 8), 
         row([txt("Enemy speed:", 12), 
             btn("Frozen", null, 12, () => {massChangeEnemySpeed(0)}, "Change the speed of all enemies to 0."),
             btn("Frigid", null, 12, () => {massChangeEnemySpeed(1)}, "Change the speed of all enemies to 1."),
