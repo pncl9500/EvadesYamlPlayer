@@ -14,6 +14,7 @@ function getEnemyFromSpawner(x, y, d, enemyType, spawner, spawnIndex, zone){
     case "sizing": return new Sizing(x, y, d, s, r);
     case "corrosive": return new Corrosive(x, y, d, s, r);
     case "liquid": return new Liquid(x, y, d, s, r, property("player_detection_radius"));
+    case "switch": return new Switch(x, y, d, s, r, spawnIndex, property("switch_interval"));
     
     //blinking movement
     case "teleporting": return new Teleporting(x, y, d, s, r);
@@ -27,7 +28,6 @@ function getEnemyFromSpawner(x, y, d, enemyType, spawner, spawnIndex, zone){
     case "zoning": return new Zoning(x, y, d, s, r);
     case "spiral": return new Spiral(x, y, d, s, r);
     case "oscillating": return new Oscillating(x, y, d, s, r);
-    //then add switch
 
     //aura
     case "slowing": return new Slowing(x, y, d, s, r, auraSize);

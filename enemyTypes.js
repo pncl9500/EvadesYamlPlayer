@@ -1104,3 +1104,26 @@ class Spiral extends Enemy{
     this.wallBounceEvent();
   }
 }
+
+class Switch extends Enemy{
+  constructor(x, y, angle, speed, radius, index, switchInterval){
+    super(x, y, angle, speed, radius, pal.nm.switch);
+    this.switched = false;
+    this.switchInterval = switchInterval;
+    this.clock = 0;
+    if (index % 2 === 0){
+      this.switched = true;
+    }
+  }
+  behavior(area, players){
+    this.clock += dTime;
+    if (this.clock > this.switchInterval){
+      this.switched = !this.switched;
+      this.clock %= this.switchInterval;
+    }
+    if (this.switched){
+      this.harmless = true;
+      this.alphaMultiplier = 0.5;
+    }
+  }
+}

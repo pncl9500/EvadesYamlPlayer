@@ -8,17 +8,9 @@ leaderboard
 
 -----------------------------------------------------------
 feature complete regions:
-cc, cch, cc3, vv, vvh, oo, ooh, dd, ddh, tt, tth, gg, ggh, ee, eeh, pp, pph
+cc, cch, cc3, vv, vvh, oo, ooh, dd, ddh, tt, tth, gg, ggh, ee, eeh, pp, pph, ww, mm
 
 regions/enemies:
-
-ww:
-wavy
-zigzag
-zoning
-spiral
-oscillating
-switch
 
 ff:
 frost giant
