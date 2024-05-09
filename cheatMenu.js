@@ -315,7 +315,7 @@ function setCheatMenuItems(){
             btn("Cycle players", null, 12, () => {game.cycleMainPlayer()}, "Change the main player to the next player. Hotkey: [Q]"),]),
         row([txt("Edit players:", 12), 
             btn("Open list", 37, 12, () => {queueCheatMenuChange(getPlayerSelectorMenu())}, "Select a player to edit."),]),
-        row([txt("Change ctrls on cycle:", 12), 
+        row([txt("Change controls on cycle:", 12), 
             tog(11, 11, true, () => {settings.changeCtrlsOnCycle = true}, () => {settings.changeCtrlsOnCycle = false}, () => {return settings.changeCtrlsOnCycle;}, "Automatically transfer the controls of the current main player to the new main player when cycling main players. Disable if you're editing controls and want to keep your changes consistent."),]),
     btn("Restore controls", null, 12, () => {
       for (let i in defaultControls){
