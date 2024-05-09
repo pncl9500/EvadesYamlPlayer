@@ -134,6 +134,10 @@ class CheatMenuButton extends CheatMenuItem{
     super(height, width);
     this.text = text;
     this.width = width;
+    if (width === null){
+      textSize(this.height - cheatMenuButtonPadding * 2);
+      this.width = textWidth(this.text) + cheatMenuButtonPadding * 2 + 1;
+    }
     this.func = func;
     this.tooltip = tooltip;
     this.color = {r: 255, g: 255, b: 255};
@@ -304,11 +308,13 @@ function setCheatMenuItems(){
             row([txt("Infinite ability use:", 12), 
             tog(11, 11, false, () => {settings.infiniteAbilityUseCheat = true}, () => {settings.infiniteAbilityUseCheat = false}, () => {return settings.infiniteAbilityUseCheat;}, "Remove all cooldowns and gain infinite energy. Hotkey: [B]"),]),
     txt("Dummy Players", 20), bigLine,
-        row([txt("Dummy player control:", 12), 
+        row([txt("Dummy player management:", 12), 
             btn("Create new player", 70, 12, () => {queueCheatMenuChange(getPlayerCreationMenu())}, "Create a new dummy player."),
             btn("Delete current player", 79, 12, () => {let m = game.mainPlayer; game.cycleMainPlayer(), m.removeSelf();if (game.players.length === 0){queueCheatMenuChange(getPlayerlessCheatMenuItems());}}, "Delete the main player."),
             btn("Clear dummy players", 80, 12, () => {clearDummyPlayers()}, "Delete all players except for the currently controlled one."),
             btn("Cycle players", 54, 12, () => {game.cycleMainPlayer()}, "Change the main player to the next player. Hotkey: [Q]"),]),
+        row([txt("Edit players:", 12), 
+            btn("Open list", 37, 12, () => {queueCheatMenuChange(getPlayerSelectorMenu())}, "Select a player to edit."),]),
   ]
   baseCheatMenuItems = list;
   return list;
@@ -319,13 +325,14 @@ function queueCheatMenuChange(list){
   newCheatMenu = list;
 }
 
-function clearDummyPlayers(){
+function clearDummyPlayers(exception = game.mainPlayer){
   for (var i = 0; i < game.players.length; i++){
-    if (game.players[i] !== game.mainPlayer){
+    if (game.players[i] !== exception){
       game.players[i].removeSelf();
       i--;
     }
   }
+  game.cycleMainPlayer();
 }
 
 function getRegionSelectorMenu(){
@@ -363,16 +370,17 @@ function getRegionSelectorMenu(){
   return list;
 }
 
-function getHeroSelectorMenu(){
+function getHeroSelectorMenu(playerToChange = game.mainPlayer, backMenuDestination = baseCheatMenuItems){
+  let bmd = backMenuDestination;
   list = [
-    btn("Go back", 38, 12, () => {queueCheatMenuChange(baseCheatMenuItems)}, "Return to the previous menu."),
+    btn("Go back", 38, 12, () => {if (typeof bmd === "function"){bmd = bmd()}queueCheatMenuChange(bmd)}, "Return to the previous menu."),
     txt("Hero List", 20), bigLine,
   ];
   for (const [key, value] of Object.entries(heroList)){
     let n = new(heroDict.get(key))(-99999, -99999, 0, "", false, game, 0, 0, []);
     n.toRemove = true;
     let nb = btn(n.heroName, 180, 12, () => {
-      game.mainPlayer.swapHero(key);
+      playerToChange.swapHero(key);
     })
     try {
       nb.color = hexToRgb(pal.hero[key]);
@@ -422,6 +430,50 @@ function getPlayerCreationMenu(){
     }
     list.push(nb);
   }
+  return list;
+}
+
+function getPlayerSelectorMenu(){
+  list = [
+    btn("Go back", 38, 12, () => {queueCheatMenuChange(baseCheatMenuItems)}, "Return to the previous menu."),
+    txt("Player List", 20), bigLine,
+  ];
+  for (let i in game.players){
+    let nb = btn(game.players[i].name, 180, 12, () => {
+      queueCheatMenuChange(getPlayerEditMenu(game.players[i]));
+    })
+    try {
+      nb.color = game.players[i].color;
+      nb.hoverColor.r = nb.color.r + 40;
+      nb.hoverColor.g = nb.color.g + 40;
+      nb.hoverColor.b = nb.color.b + 40;
+      if (nb.color.r + nb.color.g + nb.color.b < 216){
+        nb.textColor.r = 255;
+        nb.textColor.g = 255;
+        nb.textColor.b = 255;
+      }
+    } catch (error) {
+      //do nothing
+    }
+    list.push(nb);
+  }
+  return list;
+}
+
+function getPlayerEditMenu(player){
+  var editedPlayer = player;
+  let pname = editedPlayer.name;
+  list = [
+    btn("Go back", 38, 12, () => {queueCheatMenuChange(getPlayerSelectorMenu())}, "Return to the previous menu."),
+    txt(`Editing ${player.name}`, 20), bigLine,
+    row([txt("Player management:", 12), 
+        btn("Set as main", null, 12, () => {let oldSets = game.mainPlayer.ctrlSets; game.mainPlayer.ctrlSets = [], game.setMainPlayer(editedPlayer), editedPlayer.ctrlSets = oldSets}, `Make ${pname} the main player, letting you control it.`),
+        btn("Set as main (ignore controls)", null, 12, () => {game.setMainPlayer(editedPlayer);}, `Make ${pname} the main player without changing any controls.`),
+        btn("Delete player", null, 12, () => {game.cycleMainPlayer(), editedPlayer.removeSelf();if (game.players.length === 0){queueCheatMenuChange(getPlayerlessCheatMenuItems())} else {queueCheatMenuChange(getPlayerSelectorMenu())}}, `Delete ${pname}.`),
+        btn("Clear other players", null, 12, () => {clearDummyPlayers(editedPlayer)}, `Delete all players except for ${pname}.`),]),
+    row([txt("Change hero: ", 12), 
+        btn("Open list", 37, 12, () => {queueCheatMenuChange(getHeroSelectorMenu(editedPlayer, getPlayerSelectorMenu))}, "Select a hero."),]), 
+  ];
   return list;
 }
 
