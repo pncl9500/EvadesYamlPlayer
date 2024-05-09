@@ -23,6 +23,11 @@ function getEnemyFromSpawner(x, y, d, enemyType, spawner, spawnIndex, zone){
     case "icicle": return new Icicle(x, y, s, r, property("horizontal"));
     case "turning": return new Turning(x, y, d, s, r, property("circle_size"));
     case "wavy": return new Wavy(x, y, spawner.angle === undefined ? undefined : d, s, r);
+    case "zigzag": return new Zigzag(x, y, d, s, r, property("circle_size"));
+    // case "zoning": return new Zoning(x, y, d, s, r, property("circle_size"));
+    // case "spiral": return new Spiral(x, y, d, s, r, property("circle_size"));
+    // case "oscillating": return new Oscillating(x, y, d, s, r, property("circle_size"));
+    //then add switch
 
     //aura
     case "slowing": return new Slowing(x, y, d, s, r, auraSize);

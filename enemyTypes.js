@@ -1003,3 +1003,30 @@ class Wavy extends Enemy{
     this.wallBounceEvent();
   }
 }
+
+class Zigzag extends Enemy{
+  constructor(x, y, angle, speed, radius){
+    super(x, y, angle, speed, radius, pal.nm.zigzag);
+    this.switchInterval = 500;
+    this.switchTime = 500;
+    this.switchAdd = false;
+    this.turnAngle = Math.PI / 2;
+  }
+  behavior(area, players) {
+    this.switchTime += dTime;
+    if (this.switchTime > this.switchInterval){
+      this.switchTime %= this.switchInterval;
+      if (!this.switchAdd) {
+        this.velToAngle();
+        this.angle -= this.turnAngle
+        this.angleToVel();
+        this.switchAdd = true;
+      } else {
+        this.velToAngle();
+        this.angle += this.turnAngle
+        this.angleToVel();
+        this.switchAdd = false;
+      }
+    }
+  }
+}
