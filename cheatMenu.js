@@ -465,7 +465,7 @@ function getPlayerEditMenu(player){
   let pname = editedPlayer.name;
   list = [
     btn("Go back", 38, 12, () => {queueCheatMenuChange(getPlayerSelectorMenu())}, "Return to the previous menu."),
-    txt("Editing" + pname, 20), bigLine,
+    txt("Editing " + pname, 20), bigLine,
     row([txt("Player management:", 12), 
         btn("Set as main", null, 12, () => {let oldSets = game.mainPlayer.ctrlSets; game.mainPlayer.ctrlSets = [], game.setMainPlayer(editedPlayer), editedPlayer.ctrlSets = oldSets}, "Make " + pname + " the main player, letting you control it."),
         btn("Set as main (ignore controls)", null, 12, () => {game.setMainPlayer(editedPlayer);}, "Make " + pname + " the main player without changing any controls."),
