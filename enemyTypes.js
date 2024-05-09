@@ -1049,3 +1049,21 @@ class Zoning extends Enemy{
     }
   }
 }
+
+class Oscillating extends Enemy{
+  constructor(x, y, angle, speed, radius){
+    super(x, y, angle, speed, radius, pal.nm.oscillating);
+    this.switchInterval = 1000;
+    this.switchTime = 0;
+    this.turnAngle = Math.PI;
+  }
+  behavior(area, players) {
+    this.switchTime += dTime;
+    if (this.switchTime > this.switchInterval){
+      this.switchTime %= this.switchInterval;
+      this.velToAngle();
+      this.angle += this.turnAngle
+      this.angleToVel();
+    }
+  }
+}
