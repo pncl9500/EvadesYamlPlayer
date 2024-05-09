@@ -59,3 +59,8 @@ class MouseSet extends ControlSet{
     return null;
   }
 }
+
+defaultControls = [
+  new WASDset(),
+  new ArrowSet()
+]
