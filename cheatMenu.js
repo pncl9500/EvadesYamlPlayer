@@ -503,7 +503,7 @@ function getPlayerEditMenu(player){
           }
           return false;
         }, "Control " + pname + " with WASD for movement and JKL for abilities."),]),
-    row([txt("Controlled by arrow:", 12), 
+    row([txt("Controlled by arrows:", 12), 
         tog(11, 11, false, () => {
           for (let i in editedPlayer.ctrlSets){
             if (editedPlayer.ctrlSets[i].constructor.name === "ArrowSet"){
