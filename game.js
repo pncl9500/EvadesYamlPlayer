@@ -55,15 +55,19 @@ class Game{
     }
     this.mainPlayer.isMain = false;
     this.mainPlayer.z = z.player;
-    let mainPlayerControls = this.mainPlayer.ctrlSets;
-    this.mainPlayer.ctrlSets = [];
+    if (settings.changeCtrlsOnCycle){
+      var mainPlayerControls = this.mainPlayer.ctrlSets;
+      this.mainPlayer.ctrlSets = [];
+    }
     let ind = this.players.indexOf(this.mainPlayer);
     ind++;
     ind %= this.players.length;
     this.mainPlayer = this.players[ind];
     this.mainPlayer.isMain = true;
     this.mainPlayer.z = z.mainPlayer;
-    this.mainPlayer.ctrlSets = mainPlayerControls;
+    if (settings.changeCtrlsOnCycle){
+      this.mainPlayer.ctrlSets = mainPlayerControls;
+    }
   }
 }
 

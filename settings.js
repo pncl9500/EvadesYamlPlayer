@@ -35,4 +35,5 @@ settings = {
   rechargeCooldownOnDeath: true,
 
   randomDummySpawn: true,
+  changeCtrlsOnCycle: true,
 }

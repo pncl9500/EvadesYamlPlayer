@@ -307,14 +307,16 @@ function setCheatMenuItems(){
             tog(11, 11, false, () => {settings.invincibilityCheat = true}, () => {settings.invincibilityCheat = false}, () => {return settings.invincibilityCheat;}, "Become truly invincible, bypassing corrosion. Hotkey: [V]"),]),
             row([txt("Infinite ability use:", 12), 
             tog(11, 11, false, () => {settings.infiniteAbilityUseCheat = true}, () => {settings.infiniteAbilityUseCheat = false}, () => {return settings.infiniteAbilityUseCheat;}, "Remove all cooldowns and gain infinite energy. Hotkey: [B]"),]),
-    txt("Dummy Players", 20), bigLine,
-        row([txt("Dummy player management:", 12), 
-            btn("Create new player", 70, 12, () => {queueCheatMenuChange(getPlayerCreationMenu())}, "Create a new dummy player."),
-            btn("Delete current player", 79, 12, () => {let m = game.mainPlayer; game.cycleMainPlayer(), m.removeSelf();if (game.players.length === 0){queueCheatMenuChange(getPlayerlessCheatMenuItems());}}, "Delete the main player."),
-            btn("Clear dummy players", 80, 12, () => {clearDummyPlayers()}, "Delete all players except for the currently controlled one."),
+    txt("Players", 20), bigLine,
+        row([txt("Player management:", 12), 
+            btn("Create new", 70, 12, () => {queueCheatMenuChange(getPlayerCreationMenu())}, "Create a new player."),
+            btn("Delete current", 79, 12, () => {let m = game.mainPlayer; game.cycleMainPlayer(), m.removeSelf();if (game.players.length === 0){queueCheatMenuChange(getPlayerlessCheatMenuItems());}}, "Delete the main player."),
+            btn("Clear players", 80, 12, () => {clearDummyPlayers()}, "Delete all players except for the currently controlled one."),
             btn("Cycle players", 54, 12, () => {game.cycleMainPlayer()}, "Change the main player to the next player. Hotkey: [Q]"),]),
         row([txt("Edit players:", 12), 
             btn("Open list", 37, 12, () => {queueCheatMenuChange(getPlayerSelectorMenu())}, "Select a player to edit."),]),
+        row([txt("Change ctrls on cycle:", 12), 
+            tog(11, 11, true, () => {settings.changeCtrlsOnCycle = true}, () => {settings.changeCtrlsOnCycle = false}, () => {return settings.changeCtrlsOnCycle;}, "Automatically transfer the controls of the current main player to the new main player when cycling main players. Disable if you're editing controls and want to keep your changes consistent."),]),
   ]
   baseCheatMenuItems = list;
   return list;
@@ -473,6 +475,52 @@ function getPlayerEditMenu(player){
         btn("Clear other players", null, 12, () => {clearDummyPlayers(editedPlayer)}, "Delete all players except for " + pname + "."),]),
     row([txt("Change hero: ", 12), 
         btn("Open list", 37, 12, () => {queueCheatMenuChange(getHeroSelectorMenu(editedPlayer, getPlayerSelectorMenu))}, "Select a hero for " + pname + " to be."),]), 
+    row([txt("Controlled by WASD:", 12), 
+        tog(11, 11, false, () => {
+          for (let i in editedPlayer.ctrlSets){
+            if (editedPlayer.ctrlSets[i].constructor.name === "WASDset"){
+              return;
+            }
+          }
+          editedPlayer.ctrlSets.push(new WASDset());
+        }, () => {
+          for (let i = 0; i < editedPlayer.ctrlSets.length; i++){
+            if (editedPlayer.ctrlSets[i].constructor.name === "WASDset"){
+              editedPlayer.ctrlSets.splice(i, 1);
+              i--;
+            }
+          }
+        }, () => {
+          for (let i in editedPlayer.ctrlSets){
+            if (editedPlayer.ctrlSets[i].constructor.name === "WASDset"){
+              return true;
+            }
+          }
+          return false;
+        }, "Control " + pname + " with WASD for movement and JKL for abilities."),]),
+    row([txt("Controlled by arrow:", 12), 
+        tog(11, 11, false, () => {
+          for (let i in editedPlayer.ctrlSets){
+            if (editedPlayer.ctrlSets[i].constructor.name === "ArrowSet"){
+              return;
+            }
+          }
+          editedPlayer.ctrlSets.push(new ArrowSet());
+        }, () => {
+          for (let i = 0; i < editedPlayer.ctrlSets.length; i++){
+            if (editedPlayer.ctrlSets[i].constructor.name === "ArrowSet"){
+              editedPlayer.ctrlSets.splice(i, 1);
+              i--;
+            }
+          }
+        }, () => {
+          for (let i in editedPlayer.ctrlSets){
+            if (editedPlayer.ctrlSets[i].constructor.name === "ArrowSet"){
+              return true;
+            }
+          }
+          return false;
+        }, "Control " + pname + " with the arrow keys for movement and ZXC for abilities."),]),
   ];
   return list;
 }
