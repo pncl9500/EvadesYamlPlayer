@@ -1030,3 +1030,22 @@ class Zigzag extends Enemy{
     }
   }
 }
+
+class Zoning extends Enemy{
+  constructor(x, y, angle, speed, radius){
+    super(x, y, angle, speed, radius, pal.nm.zoning);
+    this.switchInterval = 1000;
+    this.switchTime = Math.random() * this.switchInterval;
+    this.turnAngle = Math.PI / 2
+    this.turnAngle *= (Math.floor(Math.random() * 2) * 2) - 1
+  }
+  behavior(area, players) {
+    this.switchTime += dTime;
+    if (this.switchTime > this.switchInterval){
+      this.switchTime %= this.switchInterval;
+      this.velToAngle();
+      this.angle += this.turnAngle
+      this.angleToVel();
+    }
+  }
+}
