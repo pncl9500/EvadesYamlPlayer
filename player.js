@@ -62,7 +62,8 @@ class Player extends Entity{
     this.mostRecentSafeY = 0;
     
     this.auras = [];
-
+    this.prevMovementX = 0;
+    this.prevMovementY = 0;
   }
   resetAllModifiers(){
     this.detectable = true;
@@ -124,11 +125,29 @@ class Player extends Entity{
     if (!(this.ctrlVector.x === 0 && this.ctrlVector.y === 0)){
       this.lastDir = Math.atan2(this.ctrlVector.y, this.ctrlVector.x);
     }
+    let dim = (1 - this.region.properties.friction ?? defaults.regionProps.friction);
+    if (this.speedMultiplier === 0){
+      dim = 0;
+    }
+    let sx = this.prevMovementX;
+    let sy = this.prevMovementY;
+
+    sx *= 1-((1-dim)*tFix);
+    sy *= 1-((1-dim)*tFix);
+
     this.speedMultiplier *= this.shifting ? 0.5 : 1;
     this.xv = this.ctrlVector.x * this.tempSpeed * tFix * this.speedMultiplier * this.xSpeedMultiplier;
     this.yv = this.ctrlVector.y * this.tempSpeed * tFix * this.speedMultiplier * this.ySpeedMultiplier;
+    let mxv = 1 * this.tempSpeed * tFix * this.speedMultiplier * this.xSpeedMultiplier;
+    let myv = 1 * this.tempSpeed * tFix * this.speedMultiplier * this.xSpeedMultiplier;
+    this.xv += sx;
+    this.yv += sy;
+    this.xv = max(-mxv, min(mxv, this.xv));
+    this.yv = max(-myv, min(myv, this.yv));
     this.x += this.xv;
     this.y += this.yv;
+    this.prevMovementX = this.xv;
+    this.prevMovementY = this.yv;
     this.restrictedLastFrame = false;
     this.area.restrict(this);
     this.updateAuras();
