@@ -57,6 +57,9 @@ class MinimumSpeedZoneEffect extends Effect{
     this.minSpeed = minSpeed;
   }
   doEffect(target){
+    if (target.speed < 0){
+      return;
+    }
     target.tempSpeed = Math.max(target.tempSpeed, this.minSpeed);
   }
 }

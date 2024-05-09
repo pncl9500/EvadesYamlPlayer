@@ -320,9 +320,151 @@ function setCheatMenuItems(){
         row([txt("Remove dead players:", 12), 
             tog(11, 11, false, () => {settings.removeDeadPlayers = true}, () => {settings.removeDeadPlayers = false}, () => {return settings.removeDeadPlayers;}, "Remove players if their death timer reaches zero (does not affect the main player)."),]),
         btn("Restore controls", null, 12, () => {for (let i in defaultControls){game.mainPlayer.ctrlSets.push(defaultControls[i])}}, "Give default controls to the main player. If you can't control anything, press this button."),
+    txt("Fun", 20), bigLine,
+        row([txt("Enemy speed:", 12), 
+            btn("Frozen", null, 12, () => {massChangeEnemySpeed(0)}, "Change the speed of all enemies to 0."),
+            btn("Frigid", null, 12, () => {massChangeEnemySpeed(1)}, "Change the speed of all enemies to 1."),
+            btn("Slow", null, 12, () => {massChangeEnemySpeed(3)}, "Change the speed of all enemies to 3."),
+            btn("Moderate", null, 12, () => {massChangeEnemySpeed(5)}, "Change the speed of all enemies to 5."),
+            btn("Speedy", null, 12, () => {massChangeEnemySpeed(9)}, "Change the speed of all enemies to 9."),
+            btn("Fast", null, 12, () => {massChangeEnemySpeed(17)}, "Change the speed of all enemies to 17."),
+            btn("Subsonic", null, 12, () => {massChangeEnemySpeed(30)}, "Change the speed of all enemies to 30."),
+            btn("Supersonic", null, 12, () => {massChangeEnemySpeed(60)}, "Change the speed of all enemies to 60."),
+            btn("Hypersonic", null, 12, () => {massChangeEnemySpeed(120)}, "Change the speed of all enemies to 120."),]),
+        row([txt("Enemy size:", 12), 
+            btn("Microscopic", null, 12, () => {massChangeEnemySize(2)}, "Change the size of most enemies to 2."),
+            btn("Tiny", null, 12, () => {massChangeEnemySize(6)}, "Change the size of most enemies to 6."),
+            btn("Small", null, 12, () => {massChangeEnemySize(10)}, "Change the size of most enemies to 10."),
+            btn("Normal", null, 12, () => {massChangeEnemySize(18)}, "Change the size of most enemies to 18."),
+            btn("Sizeable", null, 12, () => {massChangeEnemySize(32)}, "Change the size of most enemies to 32."),
+            btn("Big", null, 12, () => {massChangeEnemySize(48)}, "Change the size of most enemies to 48."),
+            btn("Huge", null, 12, () => {massChangeEnemySize(90)}, "Change the size of most enemies to 90."),
+            btn("Enormous", null, 12, () => {massChangeEnemySize(135)}, "Change the size of most enemies to 135."),
+            btn("Titanic", null, 12, () => {massChangeEnemySize(210)}, "Change the size of most enemies to 210."),]),
+        row([txt("Player size:", 12), 
+            btn("Tiny", null, 12, () => {game.mainPlayer.baseRadius = 3;}, "Become a very small size."),
+            btn("Small", null, 12, () => {game.mainPlayer.baseRadius = 8;}, "Become a small size."),
+            btn("Normal", null, 12, () => {game.mainPlayer.baseRadius = 16;}, "Become a normal size."),
+            btn("Big", null, 12, () => {game.mainPlayer.baseRadius = 32;}, "Become a large size."),
+            btn("Huge", null, 12, () => {game.mainPlayer.baseRadius = 64;}, "Become a very large size."),]),
+        row([txt("Player speed:", 12), 
+            btn("Backwards", null, 12, () => {game.mainPlayer.speed *= -1;}, "Reverse your speed."),
+            btn("Base min", null, 12, () => {game.mainPlayer.speed = 5;}, "Become your starting speed."),
+            btn("x1/2", null, 12, () => {game.mainPlayer.speed = 8.5;}, "Become half of maximum speed."),
+            btn("+0", null, 12, () => {game.mainPlayer.speed = 17;}, "Become your maximum speed."),
+            btn("+2", null, 12, () => {game.mainPlayer.speed = 19;}, "Become the speed of a player with factorb's speed buff."),
+            btn("+3", null, 12, () => {game.mainPlayer.speed = 20;}, "Become the speed of a factorb with its own speed buff."),
+            btn("+5", null, 12, () => {game.mainPlayer.speed = 22;}, "Become the speed of a speed-boosted shade, candy, or nexus."),
+            btn("+6", null, 12, () => {game.mainPlayer.speed = 23;}, "Become the speed of a magmax with flow active."),
+            btn("x2", null, 12, () => {game.mainPlayer.speed = 34;}, "Become double base maximum speed."),
+            btn("x3", null, 12, () => {game.mainPlayer.speed = 51;}, "Become triple base maximum speed."),
+            btn("x4", null, 12, () => {game.mainPlayer.speed = 68;}, "Become quadruple base maximum speed."),
+            btn("x8", null, 12, () => {game.mainPlayer.speed = 136;}, "Become octuple base maximum speed."),]),
+        row([txt("Misc. Enemy modifiers:", 12), 
+            btn("Invisible Mode", null, 12, () => {
+              for (var i in game.mainPlayer.area.entities){
+                if (game.mainPlayer.area.entities[i].mainType === "enemy"){
+                  game.mainPlayer.area.entities[i].color.a = 0;
+                }
+              }
+            }, "Make all enemies invisible. Not sure why you would want to do this..."),
+            btn("Immune mode", null, 12, () => {for (var i in game.mainPlayer.area.entities){if (game.mainPlayer.area.entities[i].mainType === "enemy"){
+              game.mainPlayer.area.entities[i].immune = true;
+              game.mainPlayer.area.entities[i].color = {r: 0, g: 0, b: 0};
+            }}}, "Make all enemies immune."),
+            btn("Ring Mode", null, 12, () => {
+              for (var i in game.mainPlayer.area.entities){
+                if (game.mainPlayer.area.entities[i].mainType === "enemy"){
+                  game.mainPlayer.area.entities[i].renderType = "ring";
+                  game.mainPlayer.area.entities[i].corrosive = true;
+                  game.mainPlayer.area.entities[i].immune = true;
+                }
+              }
+            }, "Make all enemies look like rings, as well as making them immune and corrosive."),
+            btn("Tiny auras", null, 12, () => {
+              for (var i in game.mainPlayer.area.entities){
+                if (game.mainPlayer.area.entities[i].mainType === "enemy"){
+                  game.mainPlayer.area.entities[i].auraSize = Min(30, game.mainPlayer.area.entities[i].auraSize);
+                }
+              }
+            }, "Make all enemy auras tiny."),
+            btn("Huge auras", null, 12, () => {
+              for (var i in game.mainPlayer.area.entities){
+                if (game.mainPlayer.area.entities[i].mainType === "enemy"){
+                  game.mainPlayer.area.entities[i].auraSize = Max(450, game.mainPlayer.area.entities[i].auraSize);
+                }
+              }
+            }, "Make all enemy auras huge."),
+            btn("Horizontal mode", null, 12, () => {
+              for (var i in game.mainPlayer.area.entities){
+                if (game.mainPlayer.area.entities[i].mainType === "enemy"){
+                  game.mainPlayer.area.entities[i].angle = random() < 0.5 ? 0 : PI;
+                  game.mainPlayer.area.entities[i].angleToVel();
+                }
+              }
+            }, "Make all enemies move horizontally."),
+        ]),
+      row([ 
+      btn("Vertical mode", null, 12, () => {
+        for (var i in game.mainPlayer.area.entities){
+          if (game.mainPlayer.area.entities[i].mainType === "enemy"){
+            game.mainPlayer.area.entities[i].angle = random() < 0.5 ? PI/2 : 3*PI/2;
+            game.mainPlayer.area.entities[i].angleToVel();
+          }
+        }
+      }, "Make all enemies move vertically."),
+      btn("Orthogonal mode", null, 12, () => {for (var i in game.mainPlayer.area.entities){if (game.mainPlayer.area.entities[i].mainType === "enemy"){
+        game.mainPlayer.area.entities[i].angle = floor(random() * 4) * Math.PI/2;
+        game.mainPlayer.area.entities[i].angleToVel();
+      }}}, "Make all enemies move in an orthogonal direction."),
+      btn("45 degree mode", null, 12, () => {for (var i in game.mainPlayer.area.entities){if (game.mainPlayer.area.entities[i].mainType === "enemy"){
+        game.mainPlayer.area.entities[i].angle = floor(random() * 4) * Math.PI/2 + Math.PI/4;
+        game.mainPlayer.area.entities[i].angleToVel();
+      }}}, "Make all enemies move in a diagonal direction 45 degrees off of an orthogonal one."),
+      btn("Rainbow mode", null, 12, () => {for (var i in game.mainPlayer.area.entities){if (game.mainPlayer.area.entities[i].mainType === "enemy"){
+        game.mainPlayer.area.entities[i].color = {r: random(80, 255), g: random(80, 255), b: random(80, 255)}
+        game.mainPlayer.area.entities[i].speed *= random(0.4,2);
+        if (random() < 0.08){
+          game.mainPlayer.area.entities[i].speed *= random(1,2);
+        }
+        game.mainPlayer.area.entities[i].speedToVel();
+        if (game.mainPlayer.area.entities[i].constructor.name === "Wall"){
+          return;
+        }
+        game.mainPlayer.area.entities[i].baseRadius *= random(0.4,1.6);
+        if (random() < 0.3){
+          game.mainPlayer.area.entities[i].baseRadius *= random(0.2,2.5);
+        }
+      }}}, "Make all enemies a random color and randomizes their properties."),
+    ]),
+    
   ]
   baseCheatMenuItems = list;
   return list;
+}
+
+function massChangeEnemySpeed(speed){
+  let player = game.mainPlayer;
+  for (var i in player.area.entities){
+    if (player.area.entities[i].mainType === "enemy"){
+      player.area.entities[i].speed = speed;
+      player.area.entities[i].speedToVel();
+      //for dasher...
+      player.area.entities[i].normal_speed = speed;
+      player.area.entities[i].base_speed = speed / 5;
+      player.area.entities[i].prepare_speed = speed / 5;
+      player.area.entities[i].dash_speed = speed;
+    }
+  }
+}
+
+function massChangeEnemySize(size){
+  let player = game.mainPlayer;
+  for (var i in player.area.entities){
+    if (player.area.entities[i].mainType === "enemy" && player.area.entities[i].constructor.name !== "Wall"){
+      player.area.entities[i].baseRadius = size;
+    }
+  }
 }
 
 let newCheatMenu = undefined;

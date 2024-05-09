@@ -185,6 +185,9 @@ class ReverseProjectile extends Projectile{
     this.detectEnemyContact();
   }
   contactEffect(enemy){
+    if (enemy.immune){
+      return;
+    }
     enemy.angleToVel();
     enemy.xv *= -1;
     enemy.yv *= -1;
