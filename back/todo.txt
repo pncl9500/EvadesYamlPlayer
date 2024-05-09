@@ -1,6 +1,5 @@
 -----------------------------------------------------------
 features:
-friction
 mouse control
 area banner
 minimap
