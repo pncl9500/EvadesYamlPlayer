@@ -1582,3 +1582,29 @@ class FireTrailProjectile extends Enemy{
     }
   }
 }
+
+class WindGhost extends Enemy{
+  constructor(x, y, angle, speed, radius){
+    super(x, y, angle, speed, radius, pal.nm.wind_ghost)
+    this.gainEffect(new IsGhostEffect());
+    this.gravity = 16;
+  }
+  behavior(area, players){
+    for (var i in players){
+      if (circleCircle(this, players[i]) && !this.disabled){
+        let player = players[i];
+        while (circleCircle(this, players[i]) && !this.disabled) {
+          let dx = player.x - this.x;
+          let dy = player.y - this.y;
+          let dist = dst(player, this);
+          let attractionAmplitude = pow(2, -(dist / (this.radius/2)));
+          let angleToPlayer = atan2(dy, dx);
+          let moveDist = this.gravity * attractionAmplitude;
+          player.x += (moveDist * cos(angleToPlayer)) * tFix;
+          player.y += (moveDist * sin(angleToPlayer)) * tFix;
+          player.area.restrict(player);
+        }
+      }
+    }
+  }
+}
