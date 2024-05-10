@@ -1345,7 +1345,7 @@ class ExperienceDrainEffect extends Effect{
     this.blockable = true;
   }
   doEffect(target){
-    target.levelProgress -= 2 * target.level * dTime / 1000;
+    target.levelProgress -= 2 * target.effectVulnerability * target.level * dTime / 1000;
     if (target.levelProgress < 0){
       target.levelProgressNeeded += abs(target.levelProgress);
       target.levelProgress = 0;
