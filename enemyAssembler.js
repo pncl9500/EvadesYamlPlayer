@@ -23,6 +23,9 @@ function getEnemyFromSpawner(x, y, d, enemyType, spawner, spawnIndex, zone){
     //blinking movement
     case "teleporting": return new Teleporting(x, y, d, s, r);
     case "star": return new Star(x, y, d, s, r);
+
+    //accelerative
+    case "sand": return new Sand(x, y, d, s, r);
     
     //altered movement
     case "icicle": return new Icicle(x, y, s, r, property("horizontal"));
