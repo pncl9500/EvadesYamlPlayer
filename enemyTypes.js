@@ -1703,6 +1703,7 @@ class QuicksandEnemyEffect extends Effect{
     super(0, getEffectPriority("QuicksandEnemyEffect"), false, true);
     this.direction = direction;
     this.strength = strength;
+    this.blockable = true;
   }
   doEffect(target){
     target.x += cos(this.direction) * this.strength;
