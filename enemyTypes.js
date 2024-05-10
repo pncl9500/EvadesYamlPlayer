@@ -1487,3 +1487,59 @@ class FlowerPetal extends Enemy{
     this.y = this.parent.y + y * this.radius;
   }
 }
+
+class Seedling extends Enemy{
+  constructor(x, y, angle, speed, radius){
+    super(x, y, angle, speed, radius, pal.nm.seedling);
+    this.immune = true;
+    this.spawned = false;
+    this.child = null;
+  }
+  behavior(area, players){
+    if (this.spawned){
+      return;
+    }
+    this.spawned = true;
+    this.createChild(area);
+  }
+  createChild(area){
+    let child = new SeedlingProjectile(this.x, this.y, random(0, 2*PI), this.speed, this.radius, this);
+    area.addEnt(child);
+    this.child = child;
+  }
+}
+
+class SeedlingProjectile extends Enemy{
+  constructor(x, y, angle, speed, radius, parent){
+    super(x, y, angle, speed, radius, pal.nm.seedling);
+    this.z = parent.z + 0.0001;
+    this.parent = parent;
+    this.speed = 5;
+    this.speedToVel();
+    this.restricted = false;
+    this.immune = true;
+    this.seedOffsetX = 0;
+    this.seedOffsetY = -this.radius * 1.5;
+    this.dir = this.speed / 30;
+    if (random() < 0.5){
+      this.dir *= -1;
+    }
+  }
+  wallBounce(){
+    //disable default behavior (they don't bounce)
+  }
+  behavior(area, players){
+    this.x = this.parent.x;
+    this.y = this.parent.y;
+    this.velToAngle();
+    this.angle += this.dir * (dTime / 30);
+    this.angleToVel();
+    this.seedOffsetX = this.xv * this.radius / 3;
+    this.seedOffsetY = this.yv * this.radius / 3;
+    this.findNewPosition(this.seedOffsetX,this.seedOffsetY);
+  }
+  findNewPosition(x,y){
+    this.x = this.parent.x + x;
+    this.y = this.parent.y + y;
+  }
+}
