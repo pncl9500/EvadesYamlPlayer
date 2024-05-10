@@ -1185,18 +1185,18 @@ class ReducingEnemyPostEffect extends Effect{
   }
 }
 
-class Barrier extends AuraEnemy{
+class Invin extends AuraEnemy{
   constructor(x, y, angle, speed, radius, auraSize){
     super(x, y, angle, speed, radius, pal.nm.barrier, pal.nmaur.barrier, auraSize)
   }
   applyAuraEffectToPlayer(area, players, player){
-    player.gainEffect(new BarrierEnemyEffect());
+    player.gainEffect(new InvinEnemyEffect());
   }
 }
 
-class BarrierEnemyEffect extends Effect{
+class InvinEnemyEffect extends Effect{
   constructor(){
-    super(0, getEffectPriority("BarrierEnemyEffect"), false, true);
+    super(0, getEffectPriority("InvinEnemyEffect"), false, true);
   }
   doEffect(target){
     target.invincible = true;
