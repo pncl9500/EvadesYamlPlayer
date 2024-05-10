@@ -543,6 +543,10 @@ function getRegionSelectorMenu(){
       let but = btn(" ! ", null, 12, () => {}, `${game.regions[i].name}'s mechanics have not been fully implemented.`);
       items.push(but);
     }
+    if (game.regions[i].name === "Shifting Sands" || game.regions[i].name === "Withering Wasteland"){
+      let but = btn(" ! ", null, 12, () => {}, `${game.regions[i].name}'s map file is outdated.`);
+      items.push(but);
+    }
     list.push(row(items));
   }
   list.push(txt("", 8));
