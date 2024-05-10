@@ -1407,3 +1407,83 @@ class IsGrassEffect extends Effect{
     target.alphaMultiplier = this.alphaState;
   }
 }
+
+class Flower extends Enemy{
+  constructor(x, y, angle, speed, radius, growthMultiplier){
+    super(x, y, angle, speed, radius, pal.nm.flower);
+    this.growthMultiplier = growthMultiplier;
+    this.children = [];
+    this.spawned = false;
+  }
+  behavior(area, players){
+    if (this.spawned){
+      return;
+    }
+    this.spawned = true;
+    for (let i = 0; i < 5; i++){
+      this.spawnPetal(area, i);
+    }
+  }
+  spawnPetal(area, id){
+    let p = new FlowerPetal(this.x, this.y, this.baseRadius, id, this, this.growthMultiplier);
+    p.parentZone = this.parentZone;
+    area.addEnt(p);
+  }
+}
+
+class FlowerPetal extends Enemy{
+  constructor(x, y, r, id, parent, growthMultiplier){
+    super(x, y, 0, 0, r, "#e084e8");
+    this.renderType = "noOutline";
+    this.restricted = false;
+    this.z = parent.z - 0.0001;
+    
+    this.triggerRadius = 150;
+    this.radiusRatio = 1;
+    this.growthMultiplier = growthMultiplier;
+    this.immune = true;
+    this.id = id;
+    this.parent = parent;
+  }
+  wallBounce(){
+    //disable default behavior (they don't bounce)
+  }
+  behavior(area, players){
+    //literally what could possibly be the correct value for this?
+    //ravel's... definitely isn't right. this is close enough i guess
+    const growth = (1 / 20) * this.growthMultiplier * 0.6;
+    switch (this.id) {
+      case 0: this.setPosition(1, -0.25); break;
+      case 1: this.setPosition(-1, -0.25); break;
+      case 2: this.setPosition(0, -1); break;
+      case 3: this.setPosition(0.6, 0.9); break;
+      case 4: this.setPosition(-0.6, 0.9); break;
+      default:
+        break;
+    }
+    this.harmless = this.parent.harmless;
+    this.alphaMultiplier = this.parent.alphaMultiplier;
+    let playerInRange = false;
+    for (var i in players){
+      if (!players[i].detectable){
+        continue;
+      }
+      if (dst(players[i], this.parent) < players[i].radius + this.triggerRadius + this.parent.radius){
+        playerInRange = true;
+      }
+    }
+    if (playerInRange){
+      this.radiusRatio -= growth / 2 * tFix;
+    } else {
+      this.radiusRatio += growth / 2 * tFix;
+    }
+    if(this.radiusRatio > 1){
+      this.radiusRatio = 1;
+    }
+    this.radiusMultiplier *= max(this.radiusRatio, 0);
+  }
+  setPosition(x, y){
+    this.x = this.parent.x + x * this.radius;
+    this.y = this.parent.y + y * this.radius;
+  }
+}

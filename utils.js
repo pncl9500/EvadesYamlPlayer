@@ -88,3 +88,7 @@ function sqsin(ang){
 // function sq(x){
 //   return x * x;
 // }
+
+function dst(e1, e2){
+  return sqrt(sq(e2.x - e1.x) + sq(e2.y - e1.y));
+}

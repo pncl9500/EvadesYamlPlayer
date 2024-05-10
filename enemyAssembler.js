@@ -16,6 +16,7 @@ function getEnemyFromSpawner(x, y, d, enemyType, spawner, spawnIndex, zone){
     case "liquid": return new Liquid(x, y, d, s, r, property("player_detection_radius"));
     case "switch": return new Switch(x, y, d, s, r, spawnIndex, property("switch_interval"));
     case "grass": return new Grass(x, y, d, s, r);
+    case "flower": return new Flower(x, y, d, s, r, property("growth_multiplier"));
     
     //blinking movement
     case "teleporting": return new Teleporting(x, y, d, s, r);

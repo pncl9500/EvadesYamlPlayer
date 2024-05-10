@@ -57,6 +57,7 @@ class Enemy extends Entity{
     this.applyEffects();
     this.radius = this.baseRadius * this.radiusMultiplier;
     this.behavior(area, players);
+    this.radius = this.baseRadius * this.radiusMultiplier;
     if (!this.normalMovementDisabled){
       this.x += this.xv * tFix * this.speedMultiplier * this.xSpeedMultiplier;
       this.y += this.yv * tFix * this.speedMultiplier * this.ySpeedMultiplier;
