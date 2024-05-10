@@ -1543,3 +1543,42 @@ class SeedlingProjectile extends Enemy{
     this.y = this.parent.y + y;
   }
 }
+
+class FireTrail extends Enemy{
+  constructor(x, y, angle, speed, radius){
+    super(x, y, angle, speed, radius, pal.nm.fire_trail);
+    this.clock = 0;
+  }
+  behavior(area, players){
+    this.clock += dTime;
+    if (this.clock >= (1000 * (this.radius * 2 * (1/32)) / this.speed)) {
+      this.spawnTrail(area);
+      this.clock %= (1000 * (this.radius * 2 * (1/32)) / this.speed);
+    }
+  }
+  spawnTrail(area){
+    let trail = new FireTrailProjectile(this.x, this.y, 0, 0, this.radius, this);
+    trail.parentZone = this.parentZone;
+    area.addEnt(trail);
+  }
+}
+
+class FireTrailProjectile extends Enemy{
+  constructor(x, y, angle, speed, radius, parent){
+    super(x, y, angle, speed, radius, pal.nm.fire_trail);
+    this.alpha = 1;
+    this.clock = 0;
+    this.z = parent.z - 0.0001;
+  }
+  behavior(area, players){
+    this.clock += dTime;
+    if(this.clock >= 1000){
+      this.alpha -= dTime / 500;
+      if(this.alpha <= 0){this.alpha = 0.001}
+    }
+    this.alphaMultiplier = this.alpha;
+    if(this.clock >= 1500){
+      this.toRemove = true;
+    }
+  }
+}
