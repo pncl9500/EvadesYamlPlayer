@@ -28,6 +28,7 @@ effectPriorities = {
   SlipperyEnemyEffect: 900,
   ReducingEnemyEffect: 480, //before enlarging (important), before post effect (important)
   ReducingEnemyPostEffect: 490, //before enlarging (important)
+  BarrierEnemyEffect: 500,
 
   //on enemy
   FreezeEffect: 1000,

@@ -41,6 +41,7 @@ function getEnemyFromSpawner(x, y, d, enemyType, spawner, spawnIndex, zone){
     case "gravity": return new Gravity(x, y, d, s, r, auraSize, property("gravity"));
     case "repelling": return new Repelling(x, y, d, s, r, auraSize, property("repulsion"));
     case "reducing": return new Reducing(x, y, d, s, r, auraSize);
+    case "barrier": return new Barrier(x, y, d, s, r, auraSize);
 
     //sniper
     case "sniper": return new Sniper(x, y, d, s, r);
