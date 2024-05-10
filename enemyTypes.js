@@ -1258,7 +1258,6 @@ class BlockingEnemyEffect extends Effect{
       if (cancelEffect){
         continue;
       }
-      debugValue = target.blockedEffects.life;
       target.gainEffect(target.blockedEffects[i]);
       target.blockedEffects[i].life = 0;
       target.blockedEffects[i].toRemove = false;
