@@ -1267,3 +1267,65 @@ class BlockingEnemyEffect extends Effect{
     target.blockedEffects = [];
   }
 }
+
+class ForceSniperA extends GenericSniper{
+  constructor(x, y, angle, speed, radius, loss){
+    super(x, y, angle, speed, radius, pal.nm.force_sniper_a, 3000, 600);
+    this.loss = loss;
+  } 
+  createBullet(angle, target, area){
+    let bullet = new ForceSniperABullet(this.x, this.y, angle, 16, 10, pal.nm.force_sniper_a, this.loss);
+    bullet.parentZone = this.parentZone;
+    area.addEnt(bullet);
+  }
+}
+
+class ForceSniperABullet extends Bullet{
+  constructor(x, y, angle, speed, radius, color, loss){
+    super(x, y, angle, speed, radius, color);
+    this.loss = loss;
+    this.inherentlyHarmless = true;
+    this.touchedPlayers = [];
+  }
+  playerCollisionEvent(player){
+    if (player.ignoreBullets){
+      return;
+    }
+    if (this.touchedPlayers.includes(player)){
+      return;
+    }
+    this.touchedPlayers.push(player);
+    player.ability1.attemptUse(player);
+  }
+}
+
+class ForceSniperB extends GenericSniper{
+  constructor(x, y, angle, speed, radius, loss){
+    super(x, y, angle, speed, radius, pal.nm.force_sniper_b, 3000, 600);
+    this.loss = loss;
+  } 
+  createBullet(angle, target, area){
+    let bullet = new ForceSniperBBullet(this.x, this.y, angle, 16, 10, pal.nm.force_sniper_b, this.loss);
+    bullet.parentZone = this.parentZone;
+    area.addEnt(bullet);
+  }
+}
+
+class ForceSniperBBullet extends Bullet{
+  constructor(x, y, angle, speed, radius, color, loss){
+    super(x, y, angle, speed, radius, color);
+    this.loss = loss;
+    this.inherentlyHarmless = true;
+    this.touchedPlayers = [];
+  }
+  playerCollisionEvent(player){
+    if (player.ignoreBullets){
+      return;
+    }
+    if (this.touchedPlayers.includes(player)){
+      return;
+    }
+    this.touchedPlayers.push(player);
+    player.ability2.attemptUse(player);
+  }
+}

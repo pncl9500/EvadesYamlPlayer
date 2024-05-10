@@ -51,6 +51,8 @@ function getEnemyFromSpawner(x, y, d, enemyType, spawner, spawnIndex, zone){
     case "corrosive_sniper": return new CorrosiveSniper(x, y, d, s, r);
     case "poison_sniper": return new PoisonSniper(x, y, d, s, r);
     case "ice_sniper": return new IceSniper(x, y, d, s, r);
+    case "force_sniper_a": return new ForceSniperA(x, y, d, s, r);
+    case "force_sniper_b": return new ForceSniperB(x, y, d, s, r);
 
     //pseudo sniper
     case "radiating_bullets": return new RadiatingBullets(x, y, d, s, r, property("release_time"), property("release_interval"));
