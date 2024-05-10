@@ -29,6 +29,7 @@ effectPriorities = {
   ReducingEnemyEffect: 480, //before enlarging (important), before post effect (important)
   ReducingEnemyPostEffect: 490, //before enlarging (important)
   InvinEnemyEffect: 500,
+  BlockingEnemyEffect: -99999, //REALLY low (important)
 
   //on enemy
   FreezeEffect: 1000,

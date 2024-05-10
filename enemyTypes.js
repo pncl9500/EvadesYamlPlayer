@@ -105,6 +105,7 @@ class Slowing extends AuraEnemy{
 class SlowingEnemyEffect extends Effect{
   constructor(){
     super(0, getEffectPriority("SlowingEnemyEffect"), false, true);
+    this.blockable = true;
   }
   doEffect(target){
     target.speedMultiplier *= (1 - 0.3 * target.effectVulnerability);
@@ -123,6 +124,7 @@ class Freezing extends AuraEnemy{
 class FreezingEnemyEffect extends Effect{
   constructor(){
     super(0, getEffectPriority("FreezingEnemyEffect"), false, true);
+    this.blockable = true;
   }
   doEffect(target){
     target.speedMultiplier *= (1 - 0.85 * target.effectVulnerability);
@@ -141,6 +143,7 @@ class Draining extends AuraEnemy{
 class DrainingEnemyEffect extends Effect{
   constructor(){
     super(0, getEffectPriority("DrainingEnemyEffect"), false, true);
+    this.blockable = true;
   }
   doEffect(target){
     let newEnergy = target.energy - 15 * target.effectVulnerability * tFix * (1/30);
@@ -173,6 +176,7 @@ class Enlarging extends AuraEnemy{
 class EnlargingEnemyEffect extends Effect{
   constructor(){
     super(0, getEffectPriority("EnlargingEnemyEffect"), false, true);
+    this.blockable = true;
   }
   doEffect(target){
     target.tempRadius += 10 * target.effectVulnerability;
@@ -191,6 +195,7 @@ class Disabling extends AuraEnemy{
 class DisablingEnemyEffect extends Effect{
   constructor(){
     super(0, getEffectPriority("DisablingEnemyEffect"), false, true);
+    this.blockable = true;
   }
   doEffectBeforeAbilities(target){
     if (target.fullEffectImmunity){
@@ -221,6 +226,7 @@ class Lava extends AuraEnemy{
 class LavaEnemyEffect extends Effect{
   constructor(){
     super(0, getEffectPriority("LavaEnemyEffect"), false, true);
+    this.blockable = true;
   }
   doEffect(target){
     if (target.fullEffectImmunity){
@@ -829,6 +835,7 @@ class SlipperyEnemyEffect extends Effect{
     super(0, getEffectPriority("SlipperyEnemyEffect"), false, true);
     this.playerLastXv = player.xv;
     this.playerLastYv = player.yv;
+    this.blockable = true;
   }
   doEffect(target){
     if (target.fullEffectImmunity){
@@ -1140,7 +1147,7 @@ class Reducing extends AuraEnemy{
 class ReducingEnemyEffect extends Effect{
   constructor(){
     super(0, getEffectPriority("ReducingEnemyEffect"), false, true);
-
+    this.blockable = true;
   }
   doEffect(target){
     if (target.fullEffectImmunity){
@@ -1197,8 +1204,67 @@ class Invin extends AuraEnemy{
 class InvinEnemyEffect extends Effect{
   constructor(){
     super(0, getEffectPriority("InvinEnemyEffect"), false, true);
+    this.blockable = true;
   }
   doEffect(target){
     target.invincible = true;
+  }
+}
+
+class Blocking extends AuraEnemy{
+  constructor(x, y, angle, speed, radius, auraSize){
+    super(x, y, angle, speed, radius, pal.nm.blocking, pal.nmaur.blocking, auraSize)
+  }
+  applyAuraEffectToPlayer(area, players, player){
+    player.gainEffect(new BlockingEnemyEffect());
+  }
+}
+
+class BlockingEnemyEffect extends Effect{
+  constructor(){
+    super(0, getEffectPriority("BlockingEnemyEffect"), false, true);
+  }
+  doEffect(target){
+    if (target.fullEffectImmunity){
+      return;
+    }
+    if (!target.hasOwnProperty("blockedEffects")){
+      target.blockedEffects = [];
+    }
+    for (let i in target.effects){
+      if (target.effects[i].blockable){
+        console.log(target.effects[i]);
+        console.log(target.blockedEffects);
+        let noPush = false;
+        for (let j in target.blockedEffects){
+          if (target.blockedEffects[j].constructor.name === target.effects[i].constructor.name){
+            noPush = true;
+            break;
+          }
+        }
+        if (noPush){
+          continue;
+        }
+        target.blockedEffects.push(target.effects[i]);
+      }
+    }
+    for (let i in target.blockedEffects){
+      let cancelEffect = false;
+      for (let j in target.effects){
+        if (target.effects[j].constructor.name === target.blockedEffects[i].constructor.name){
+          cancelEffect = true;
+        }
+      }
+      if (cancelEffect){
+        continue;
+      }
+      debugValue = target.blockedEffects.life;
+      target.gainEffect(target.blockedEffects[i]);
+      target.blockedEffects[i].life = 0;
+      target.blockedEffects[i].toRemove = false;
+    }
+  }
+  removeEffectLate(target){
+    target.blockedEffects = [];
   }
 }

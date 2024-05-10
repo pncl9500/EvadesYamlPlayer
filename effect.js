@@ -12,6 +12,7 @@ class Effect{
     this.refreshable = refreshable;
     this.overrideEnemyImmunity = false;
     this.toRemove = false;
+    this.blockable = false;
   }
   apply(target){
     if (this.toRemove){
