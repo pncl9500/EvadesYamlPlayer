@@ -537,14 +537,21 @@ function getRegionSelectorMenu(){
         }
         str += ", "
       }
-      items.push(btn(" ! ", null, 12, () => {}, str))
+      let but = btn(" ! ", null, 12, () => {}, str);
+      but.color = {r: 255, g: 220, b: 255};
+      but.hoveredColor = {r: 90, g: 40, b: 90};
+      items.push(but)
     }
-    if (game.regions[i].name === "Stellar Square" || game.regions[i].name === "Endless Echo" || game.regions[i].name === "Endless Echo Hard"){
+    if (unimplementedGimmickMapNames.includes(game.regions[i].name)){
       let but = btn(" ! ", null, 12, () => {}, `${game.regions[i].name}'s mechanics have not been fully implemented.`);
+      but.color = {r: 220, g: 255, b: 255};
+      but.hoveredColor = {r: 40, g: 90, b: 90};
       items.push(but);
     }
-    if (game.regions[i].name === "Shifting Sands" || game.regions[i].name === "Withering Wasteland"){
+    if (outdatedMapNames.includes(game.regions[i].name)){
       let but = btn(" ! ", null, 12, () => {}, `${game.regions[i].name}'s map file is outdated.`);
+      but.color = {r: 255, g: 255, b: 220};
+      but.hoveredColor = {r: 90, g: 90, b: 40};
       items.push(but);
     }
     list.push(row(items));
@@ -723,7 +730,7 @@ function getPlayerlessCheatMenuItems(){
       queueCheatMenuChange(baseCheatMenuItems);
     }, "Fix that."),
     txt("", 3000),
-    btn("No thanks, I'll handle it myself", 111, 12, () => {
+    btn("Relax, I'll handle it.", null, 12, () => {
       queueCheatMenuChange(baseCheatMenuItems);
       mouseScroll = 0;
     }, "Return to the default menu and try to regain a body on your own. Oddities and crashes may occur!"),
@@ -763,3 +770,27 @@ function ptRect(ptx, pty, rectx, recty, rectw, recth){
          pty >= recty &&
          pty <= recty + recth;
 }
+
+outdatedMapNames = [
+  "Shifting Sands",
+  "Withering Wasteland",
+  "Research Lab"
+]
+
+unimplementedGimmickMapNames = [
+  "Cyber Castle",
+  "Cyber Castle Hard",
+  "Magnetic Monopole",
+  "Magnetic Monopole Hard",
+  "Infinite Inferno",
+  "Stellar Square",
+  "Endless Echo",
+  "Endless Echo Hard",
+  "Burning Bunker",
+  "Burning Bunker Hard",
+  "Mysterious Mansion",
+  "Haunted Halls",
+  "Frozen Fjord",
+  "Frozen Fjord Hard",
+  "Research Lab",
+]
