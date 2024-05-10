@@ -1807,3 +1807,35 @@ class Residue extends Enemy{
     }
   }
 }
+
+// class Cactus extends Enemy{
+//   constructor(x, y, angle, speed, radius){
+//     super(x, y, angle, speed, radius, pal.nm.cactus);
+//     this.inherentlyHarmless = true;
+//     this.pushTime = 200;
+//     this.staticRadius = radius;
+//   }
+//   behavior(area, players){
+//     this.baseRadius += tFix * this.staticRadius / 2 / 2000 * 30;
+//     if(this.baseRadius > this.staticRadius) this.baseRadius = this.staticRadius;
+//     for (let i in players){
+//       if (circleCircle(this, players[i]) && !players[i].invincible) {
+//         player.gainEffect(new CactusKnockbackEffect(this, this.pushTime, this.radius * 8 + 50))
+//         this.baseRadius = this.staticRadius / 2;
+//       }
+//     }
+//   }
+// }
+
+// class CactusKnockbackEffect extends Effect{
+//   constructor(enemy, pushTime, enemyRadius){
+//     super(pushTime, getEffectPriority("CactusKnockbackEffect"), true, true);
+//     this.pushTime = pushTime;
+//     this.enemy = enemy;
+//     this.enemyRadius = enemyRadius;
+//   }
+//   doEffect(target){
+//     target.x += this.knockbackX * target.effectVulnerability;
+//     target.y += this.knockbackY * target.effectVulnerability;
+//   }
+// }

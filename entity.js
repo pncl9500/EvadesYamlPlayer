@@ -47,6 +47,14 @@ class Entity{
   getRadius(){
     return this.tempRadius;
   }
+  hasEffect(effectConstructorName){
+    for (var i in this.effects){
+      if(this.effects[i].constructor.name === effectConstructorName){
+        return this.effects[i];
+      }
+    }
+    return false;
+  }
   canGainEffect(effect){
     return true;
   }

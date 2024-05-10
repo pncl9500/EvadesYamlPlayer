@@ -66,6 +66,7 @@ class Player extends Entity{
     this.prevMovementY = 0;
     this.sx = 0;
     this.sy = 0;
+    this.defStepParams();
   }
   resetAllModifiers(){
     this.detectable = true;
@@ -89,6 +90,7 @@ class Player extends Entity{
     this.tempRegen = this.regen;
 
     this.abilitiesDisabled = false;
+    this.stepMovement = false;
 
     this.deathTimerMultiplier = 1;
     this.deathTimerColor = {
@@ -123,14 +125,99 @@ class Player extends Entity{
     this.regenEnergy();
 
 
-    //final pass
     if (!(this.ctrlVector.x === 0 && this.ctrlVector.y === 0)){
       this.lastDir = Math.atan2(this.ctrlVector.y, this.ctrlVector.x);
     }
+
     let dim = (1 - (this.region.properties.friction ?? defaults.regionProps.friction));
     if (this.speedMultiplier === 0){
       dim = 0;
     }
+    //final pass
+    if (this.stepMovement){
+      this.moveWithSteps(dim);
+    } else {
+      this.move(dim);
+    }
+    this.restrictedLastFrame = false;
+    this.area.restrict(this);
+    this.updateAuras();
+
+    this.updateAbilities();
+
+    this.zonesTouched = this.getZonesTouched();
+
+    this.handleZonesTouched();
+  }
+  defStepParams(){
+    this.canStepMove = true;
+    this.stepAccelerating = false;
+    this.stepMoving = false;
+    this.stepAcceleration = 0.333;
+    this.stepDeceleration = 0.666;
+    this.stepMaxDistance = 10;
+    this.stepDistance = 0;
+    this.stepCtrlVector = {x: 0, y: 0};
+  }
+  //do cent movememnt later this is dumb
+  //issues with cent movement:
+  //harden + cent movement sucks
+  //you move 1px in the perpendicular direction after each step
+  moveWithSteps(dim){
+    //cent movement. we can't just override the standard move function for the Cent class because of lead sniper, which
+    //requires all players to be capable of cent movement.
+    if (this.canStepMove && !(this.ctrlVector.x === 0 && this.ctrlVector.y === 0)){
+      //start step movement.
+      this.canStepMove = false;
+      this.stepAccelerating = true;
+      this.stepMoving = true;
+      //test?
+      this.stepDistance = 0;
+      this.stepCtrlVector = {x: this.ctrlVector.x, y: this.ctrlVector.y};
+    }
+    this.moveDist = (this.speed) * this.speedMultiplier + (this.tempSpeed - this.speed);
+    this.stepMaxDistance = this.moveDist * 2;
+    debugValue = this.stepAccelerating;
+    //get acceleraty stuff
+    if (this.stepAccelerating){
+      if (this.stepDistance < this.stepMaxDistance){
+        this.stepDistance += this.moveDist * this.stepAcceleration * tFix;
+      } else {
+        this.stepDistance = this.stepMaxDistance;
+        this.stepAccelerating = false;
+      }
+    } else {
+      if (this.stepDistance > 0){
+        this.stepDistance -= this.stepDeceleration * this.moveDist * tFix;
+      } else {
+        this.stepDistance = 0;
+        //this.stepAccelerating = true; //???
+        this.stepMoving = false
+        this.canStepMove = true;
+      }
+    }
+
+    let sx = this.prevMovementX;
+    let sy = this.prevMovementY;
+    this.sx = sx;
+    this.sy = sy;
+    sx *= 1-((1-dim)*tFix);
+    sy *= 1-((1-dim)*tFix);
+
+    this.xv = this.stepCtrlVector.x * tFix * this.xSpeedMultiplier * this.moveDist;
+    this.yv = this.stepCtrlVector.y * tFix * this.ySpeedMultiplier * this.moveDist;
+    let mxv = 1 * tFix * this.xSpeedMultiplier * this.stepDistance;
+    let myv = 1 * tFix * this.ySpeedMultiplier * this.stepDistance;
+    this.xv += sx;
+    this.yv += sy;
+    this.xv = max(-mxv, min(mxv, this.xv));
+    this.yv = max(-myv, min(myv, this.yv));
+    this.x += this.xv;
+    this.y += this.yv;
+    this.prevMovementX = this.xv;
+    this.prevMovementY = this.yv;
+  }
+  move(dim){
     let sx = this.prevMovementX;
     let sy = this.prevMovementY;
     this.sx = sx;
@@ -152,15 +239,6 @@ class Player extends Entity{
     this.y += this.yv;
     this.prevMovementX = this.xv;
     this.prevMovementY = this.yv;
-    this.restrictedLastFrame = false;
-    this.area.restrict(this);
-    this.updateAuras();
-
-    this.updateAbilities();
-
-    this.zonesTouched = this.getZonesTouched();
-
-    this.handleZonesTouched();
   }
   addXp(xp){
     //levelup
