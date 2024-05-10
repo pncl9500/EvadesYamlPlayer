@@ -1329,3 +1329,26 @@ class ForceSniperBBullet extends Bullet{
     player.ability2.attemptUse(player);
   }
 }
+
+class ExperienceDrain extends AuraEnemy{
+  constructor(x, y, angle, speed, radius, auraSize){
+    super(x, y, angle, speed, radius, pal.nm.experience_drain, pal.nmaur.experience_drain, auraSize)
+  }
+  applyAuraEffectToPlayer(area, players, player){
+    player.gainEffect(new ExperienceDrainEffect());
+  }
+}
+
+class ExperienceDrainEffect extends Effect{
+  constructor(){
+    super(0, getEffectPriority("ExperienceDrainEffect"), false, true);
+    this.blockable = true;
+  }
+  doEffect(target){
+    target.levelProgress -= 2 * target.level * dTime / 1000;
+    if (target.levelProgress < 0){
+      target.levelProgressNeeded += abs(target.levelProgress);
+      target.levelProgress = 0;
+    }
+  }
+}
