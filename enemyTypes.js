@@ -668,7 +668,7 @@ class PoisonSniper extends GenericSniper{
     super(x, y, angle, speed, radius, pal.nm.poison_sniper, 3000, 600);
   } 
   createBullet(angle, target, area){
-    let bullet = new PoisonSniperBullet(this.x, this.y, angle, 16, 10, pal.nm.poison_sniper, this.loss);
+    let bullet = new PoisonSniperBullet(this.x, this.y, angle, 16, 10, pal.nm.poison_sniper);
     bullet.parentZone = this.parentZone;
     area.addEnt(bullet);
   }
@@ -1605,6 +1605,38 @@ class WindGhost extends Enemy{
           player.area.restrict(player);
         }
       }
+    }
+  }
+}
+
+class WindSniper extends GenericSniper{
+  constructor(x, y, angle, speed, radius){
+    super(x, y, angle, speed, radius, pal.nm.wind_sniper, 3000, 600);
+  } 
+  createBullet(angle, target, area){
+    let bullet = new WindSniperBullet(this.x, this.y, angle, 16, this.radius / 2, pal.nm.wind_sniper);
+    bullet.parentZone = this.parentZone;
+    area.addEnt(bullet);
+  }
+}
+
+class WindSniperBullet extends Bullet{
+  constructor(x, y, angle, speed, radius, color){
+    super(x, y, angle, speed, radius, color);
+    this.inherentlyHarmless = true;
+    this.gravity = 16;
+  }
+  playerCollisionEvent(player){
+    while (circleCircle(this, player) && !this.disabled) {
+      let dx = player.x - this.x;
+      let dy = player.y - this.y;
+      let dist = dst(player, this);
+      let attractionAmplitude = pow(2, -(dist / (this.radius/2)));
+      let angleToPlayer = atan2(dy, dx);
+      let moveDist = this.gravity * attractionAmplitude;
+      player.x += (moveDist * cos(angleToPlayer)) * tFix;
+      player.y += (moveDist * sin(angleToPlayer)) * tFix;
+      player.area.restrict(player);
     }
   }
 }
