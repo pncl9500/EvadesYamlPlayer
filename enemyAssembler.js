@@ -26,6 +26,7 @@ function getEnemyFromSpawner(x, y, d, enemyType, spawner, spawnIndex, zone){
 
     //accelerative
     case "sand": return new Sand(x, y, d, s, r);
+    case "sandrock": return new SandRock(x, y, d, s, r);
     
     //altered movement
     case "icicle": return new Icicle(x, y, s, r, property("horizontal"));

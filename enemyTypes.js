@@ -1717,13 +1717,9 @@ class Sand extends Enemy{
     this.friction = 1;
   }
   behavior(area, players){
-    this.friction += dTime / 1000;
+    this.friction -= dTime / 1000;
     if(this.friction>3){
       this.friction = 3;
-    }
-    if(this.collision){
-      this.collision = false;
-      this.friction = 0;
     }
     this.xv = this.speedMultiplier * this.speed * cos(this.angle) * this.friction;
     this.yv = this.speedMultiplier * this.speed * sin(this.angle) * this.friction;
@@ -1733,6 +1729,29 @@ class Sand extends Enemy{
     this.x + this.radius > this.parentZone.x + this.parentZone.width && (this.x = this.parentZone.x + this.parentZone.width - this.radius, this.angleToVel(), this.xv *= -1, this.friction = 0, this.velToAngle());
     this.y - this.radius < this.parentZone.y && (this.y = this.parentZone.y + this.radius, this.angleToVel(), this.yv *= -1, this.friction = 0, this.velToAngle());
     this.y + this.radius > this.parentZone.y + this.parentZone.height && (this.y = this.parentZone.y + this.parentZone.height - this.radius, this.angleToVel(), this.yv *= -1, this.friction = 0, this.velToAngle());
+    this.wallBounceEvent();
+  }
+}
+
+class SandRock extends Enemy{
+  constructor(x, y, angle, speed, radius){
+    super(x, y, angle, speed, radius, pal.nm.sandrock);
+    this.friction = 1;
+    this.minFriction = 0.1;
+  }
+  behavior(area, players){
+    this.friction -= dTime / 3000;
+    if(this.friction < this.minFriction){
+      this.friction = this.minFriction;
+    }
+    this.xv = this.speedMultiplier * this.speed * cos(this.angle) * this.friction;
+    this.yv = this.speedMultiplier * this.speed * sin(this.angle) * this.friction;
+  }
+  wallBounce(){
+    this.x - this.radius < this.parentZone.x && (this.x = this.parentZone.x + this.radius, this.angleToVel(), this.xv *= -1, this.friction = 1, this.velToAngle());
+    this.x + this.radius > this.parentZone.x + this.parentZone.width && (this.x = this.parentZone.x + this.parentZone.width - this.radius, this.angleToVel(), this.xv *= -1, this.friction = 1, this.velToAngle());
+    this.y - this.radius < this.parentZone.y && (this.y = this.parentZone.y + this.radius, this.angleToVel(), this.yv *= -1, this.friction = 1, this.velToAngle());
+    this.y + this.radius > this.parentZone.y + this.parentZone.height && (this.y = this.parentZone.y + this.parentZone.height - this.radius, this.angleToVel(), this.yv *= -1, this.friction = 1, this.velToAngle());
     this.wallBounceEvent();
   }
 }
