@@ -33,6 +33,9 @@ class Entity{
   }
   checkPlayerCollision(area, players){
     for(let i in players){
+      if (this.radius === 0){
+        continue;
+      }
       if (circleCircle(players[i], this)){
         this.playerCollision(players[i]);
       }

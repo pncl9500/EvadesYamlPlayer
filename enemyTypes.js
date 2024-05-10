@@ -1686,3 +1686,26 @@ class RadarBullet extends Bullet{
     }
   }
 }
+
+class Quicksand extends AuraEnemy{
+  constructor(x, y, angle, speed, radius, auraSize, dir, strength){
+    super(x, y, angle, speed, radius, pal.nm.quicksand, pal.nmaur.quicksand, auraSize)
+    this.dir = dir * (PI/180) ?? floor(random(0, 2*PI) / (PI/2)) * PI/2;
+    this.strength = strength;
+  }
+  applyAuraEffectToPlayer(area, players, player){
+    player.gainEffect(new QuicksandEnemyEffect(this.dir, this.strength));
+  }
+}
+
+class QuicksandEnemyEffect extends Effect{
+  constructor(direction, strength){
+    super(0, getEffectPriority("QuicksandEnemyEffect"), false, true);
+    this.direction = direction;
+    this.strength = strength;
+  }
+  doEffect(target){
+    target.x += cos(this.direction) * this.strength;
+    target.y += sin(this.direction) * this.strength;
+  }
+}

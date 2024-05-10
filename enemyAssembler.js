@@ -1,6 +1,6 @@
 function getEnemyFromSpawner(x, y, d, enemyType, spawner, spawnIndex, zone){
   let r = spawner.radius;
-  let s = spawner.speed;
+  let s = spawner.speed ?? 0;
   let auraSize = spawner[enemyType + "_radius"] ?? (defaults.spawnerProps[enemyType + "_radius"] ?? 150);
   function property(prop){
     return spawner[prop] ?? defaults.spawnerProps[prop];
@@ -49,6 +49,7 @@ function getEnemyFromSpawner(x, y, d, enemyType, spawner, spawnIndex, zone){
     case "blocking": return new Blocking(x, y, d, s, r, auraSize);
     case "experience_drain": return new ExperienceDrain(x, y, d, s, r, auraSize);
     case "radar": return new Radar(x, y, d, s, r, auraSize);
+    case "quicksand": return new Quicksand(x, y, d, s, r, auraSize, property("push_direction"), property("quicksand_strength"));
 
     //sniper
     case "sniper": return new Sniper(x, y, d, s, r);

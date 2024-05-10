@@ -62,7 +62,11 @@ class Zone{
     }
   }
   spawn(spawner){
-    for (var spawnIndex = 0; spawnIndex < spawner.count ?? 1; spawnIndex++){
+    let enemyCount = spawner.count;
+    if (enemyCount === undefined){
+      enemyCount = 1;
+    }
+    for (var spawnIndex = 0; spawnIndex < enemyCount; spawnIndex++){
       let enemyType = random(spawner.types);
       let area = this.parentRegion.areas[this.parentAreaNum]
       let x = spawner.x ?? random(this.x + spawner.radius, this.x + this.width - spawner.radius);
@@ -79,6 +83,7 @@ class Zone{
       let enemy = getEnemyFromSpawner(x, y, d * (Math.PI/180), enemyType, spawner, spawnIndex, this);
       enemy.parentZone = this;
       area.entities.push(enemy);
+      console.log(enemy);
     }
   }
 }
