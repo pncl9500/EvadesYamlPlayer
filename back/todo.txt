@@ -8,7 +8,9 @@ leaderboard
 
 -----------------------------------------------------------
 feature complete regions:
-cc, cch, cc3, vv, vvh, oo, ooh, dd, ddh, tt, tth, gg, ggh, ee, eeh, pp, pph, hh, hhh, ww, mm,
+cc, cch, cc3, pp, pph, ww, gg, ggh, vv, vvh, hh, hhh, ee, eeh, dd, ddh, mm, mmh, oo, ooh, tt, tth, aah, gg2, gg2h, ww2
+regions with outdated map file:
+ss, ww2, rl
 
 regions/enemies:
 
@@ -27,30 +29,13 @@ positive magnetic ghost
 positive magnetic sniper
 
 bb:
-fire trail
 lunging
 
-gg2:
-flower
-grass
-seedling
-
 ss2:
-quicksand
 cactus
-crumbling
-residue
-sand
-sandrock
 
 dd2:
 stalactite
-
-ww2:
-force sniper a
-force sniper b
-blocking
-experience drain
 
 hh2:
 implement lighting
@@ -67,7 +52,6 @@ mist
 cc4:
 charging
 lead sniper
-reducing
 
 ii:
 cycling
@@ -76,10 +60,6 @@ ee2:
 infinite map behavior
 
 cc2:
-radar
-barrier
-wind ghost
-wind sniper
 aibot
 eabot
 fibot
