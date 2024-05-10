@@ -833,28 +833,28 @@ class Slippery extends AuraEnemy{
 class SlipperyEnemyEffect extends Effect{
   constructor(player){
     super(0, getEffectPriority("SlipperyEnemyEffect"), false, true);
-    this.playerLastXv = player.xv;
-    this.playerLastYv = player.yv;
+    this.playerLastXd = player.ctrlVector.x;
+    this.playerLastYd = player.ctrlVector.y;
     this.blockable = true;
   }
   doEffect(target){
     if (target.fullEffectImmunity){
       return;
     }
-    if (sqrt(sq(this.playerLastXv) + sq(this.playerLastYv)) < 0.4){
+    if (sqrt(sq(this.playerLastXd) + sq(this.playerLastYd)) < 0.4){
       return;
     }
     if (target.restrictedLastFrame){
-      let newCtrlVector = {x: this.playerLastXv, y: this.playerLastYv};
+      let newCtrlVector = {x: this.playerLastXd, y: this.playerLastYd};
       let mag = sqrt(sq(newCtrlVector.x) + sq(newCtrlVector.y));
       newCtrlVector.x /= mag;
       newCtrlVector.y /= mag;
       target.ctrlVector.x += newCtrlVector.x;
       target.ctrlVector.y += newCtrlVector.y;
-
+      target.speedMultiplier *= 2;
       return;
     }
-    target.ctrlVector = {x: this.playerLastXv, y: this.playerLastYv};
+    target.ctrlVector = {x: this.playerLastXd, y: this.playerLastYd};
     let mag = sqrt(sq(target.ctrlVector.x) + sq(target.ctrlVector.y));
     target.ctrlVector.x /= mag;
     target.ctrlVector.y /= mag;

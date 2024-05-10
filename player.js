@@ -64,6 +64,8 @@ class Player extends Entity{
     this.auras = [];
     this.prevMovementX = 0;
     this.prevMovementY = 0;
+    this.sx = 0;
+    this.sy = 0;
   }
   resetAllModifiers(){
     this.detectable = true;
@@ -131,6 +133,8 @@ class Player extends Entity{
     }
     let sx = this.prevMovementX;
     let sy = this.prevMovementY;
+    this.sx = sx;
+    this.sy = sy;
 
     sx *= 1-((1-dim)*tFix);
     sy *= 1-((1-dim)*tFix);
