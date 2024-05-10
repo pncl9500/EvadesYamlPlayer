@@ -3,7 +3,7 @@ effectPriorities = {
   DeadEffect: 2000,
   SafeZoneEffect: -200,
   HardenEffect: 1000,
-  FlowEffect: 0,
+  FlowEffect: 10,
   MinimumSpeedZoneEffect: -2000,
 
   PoisonSniperEffect: 1700,

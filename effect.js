@@ -16,7 +16,7 @@ class Effect{
   }
   apply(target){
     if (this.toRemove){
-      return;
+      //return;
     }
     this.doEffect(target);
     if (!this.noDuration){
