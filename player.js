@@ -216,6 +216,9 @@ class Player extends Entity{
   }
   toggleOffOtherAbility(exemptAbility){
     if (this.ability2 !== exemptAbility){
+      if (this.ability2.toggled === false){
+        return;
+      }
       let prms = this.ability2.getActivationParams(this);
       this.ability2.toggled = false;
       this.ability2.startCooldown(this);
@@ -223,6 +226,9 @@ class Player extends Entity{
       return;
     }
     if (this.ability1 !== exemptAbility){
+      if (this.ability1.toggled === false){
+        return;
+      }
       let prms = this.ability1.getActivationParams(this);
       this.ability1.toggled = false;
       this.ability1.startCooldown(this);
