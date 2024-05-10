@@ -1233,8 +1233,6 @@ class BlockingEnemyEffect extends Effect{
     }
     for (let i in target.effects){
       if (target.effects[i].blockable){
-        console.log(target.effects[i]);
-        console.log(target.blockedEffects);
         let noPush = false;
         for (let j in target.blockedEffects){
           if (target.blockedEffects[j].constructor.name === target.effects[i].constructor.name){
@@ -1706,8 +1704,8 @@ class QuicksandEnemyEffect extends Effect{
     this.blockable = true;
   }
   doEffect(target){
-    target.x += cos(this.direction) * this.strength;
-    target.y += sin(this.direction) * this.strength;
+    target.x += cos(this.direction) * this.strength * tFix * target.effectVulnerability;
+    target.y += sin(this.direction) * this.strength * tFix * target.effectVulnerability;
   }
 }
 
@@ -1717,7 +1715,7 @@ class Sand extends Enemy{
     this.friction = 1;
   }
   behavior(area, players){
-    this.friction -= dTime / 1000;
+    this.friction += dTime / 1000;
     if(this.friction>3){
       this.friction = 3;
     }
@@ -1753,5 +1751,59 @@ class SandRock extends Enemy{
     this.y - this.radius < this.parentZone.y && (this.y = this.parentZone.y + this.radius, this.angleToVel(), this.yv *= -1, this.friction = 1, this.velToAngle());
     this.y + this.radius > this.parentZone.y + this.parentZone.height && (this.y = this.parentZone.y + this.parentZone.height - this.radius, this.angleToVel(), this.yv *= -1, this.friction = 1, this.velToAngle());
     this.wallBounceEvent();
+  }
+}
+
+class Crumbling extends Enemy{
+  constructor(x, y, angle, speed, radius){
+    super(x, y, angle, speed, radius, pal.nm.crumbling);
+    this.area = null;
+    this.staticSpeed = speed;
+    this.staticRadius = radius;
+    this.clock = 3001;
+  }
+  behavior(area, players){
+    this.clock += dTime;
+    this.area = area;
+    if (this.clock > 3000 && this.baseRadius !== this.staticRadius){
+      this.baseRadius += tFix * this.staticRadius / 2 / 2000 * 30;
+      if (this.baseRadius > this.staticRadius){
+        this.baseRadius = this.staticRadius;
+      }
+      this.speed = this.staticSpeed;
+      this.speedToVel();
+    }
+  }
+  tryCollision(){
+    if (this.clock > 3000){
+      let r = new Residue(this.x, this.y, random() * 2 * PI, this.staticSpeed / 3, this.staticRadius / 3);
+      r.parentZone = this.parentZone;
+      this.area.addEnt(r);
+      this.clock = 0;
+      this.baseRadius = this.staticRadius / 2;
+      this.velToAngle();
+      this.speed = this.staticSpeed / 2;
+      this.speedToVel();
+    }
+  }
+  wallBounce(){
+    this.x - this.radius < this.parentZone.x && (this.x = this.parentZone.x + this.radius, this.angleToVel(), this.xv *= -1, this.tryCollision(), this.velToAngle());
+    this.x + this.radius > this.parentZone.x + this.parentZone.width && (this.x = this.parentZone.x + this.parentZone.width - this.radius, this.angleToVel(), this.xv *= -1, this.tryCollision(), this.velToAngle());
+    this.y - this.radius < this.parentZone.y && (this.y = this.parentZone.y + this.radius, this.angleToVel(), this.yv *= -1, this.tryCollision(), this.velToAngle());
+    this.y + this.radius > this.parentZone.y + this.parentZone.height && (this.y = this.parentZone.y + this.parentZone.height - this.radius, this.angleToVel(), this.yv *= -1, this.tryCollision(), this.velToAngle());
+    this.wallBounceEvent();
+  }
+}
+
+class Residue extends Enemy{
+  constructor(x, y, angle, speed, radius){
+    super(x, y, angle, speed, radius, pal.nm.residue);
+    this.clock = 0;
+  }
+  behavior(area, players){
+    this.clock += dTime;
+    if (this.clock > 3000){
+      this.toRemove = true;
+    }
   }
 }

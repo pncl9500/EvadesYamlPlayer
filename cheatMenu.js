@@ -486,7 +486,7 @@ function clearDummyPlayers(exception = game.mainPlayer){
 }
 
 function getRegionSelectorMenu(){
-  let totalMissingEnemies = ["ring_sniper", "residue"];
+  let totalMissingEnemies = ["ring_sniper"];
   let totalEnemyTypes = 98;
   list = [
     btn("Go back", 38, 12, () => {queueCheatMenuChange(baseCheatMenuItems)}, "Return to the previous menu."),

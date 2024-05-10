@@ -83,7 +83,6 @@ class Zone{
       let enemy = getEnemyFromSpawner(x, y, d * (Math.PI/180), enemyType, spawner, spawnIndex, this);
       enemy.parentZone = this;
       area.entities.push(enemy);
-      console.log(enemy);
     }
   }
 }
