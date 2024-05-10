@@ -1640,3 +1640,49 @@ class WindSniperBullet extends Bullet{
     }
   }
 }
+
+class Radar extends AuraEnemy{
+  constructor(x, y, angle, speed, radius, auraSize){
+    super(x, y, angle, speed, radius, pal.nm.radar, pal.nmaur.radar, auraSize)
+    this.releaseTime = 250;
+    this.clock = Math.random() * this.releaseTime;
+  }
+  behavior(area, players){
+    this.clock += dTime;
+    if (this.clock > this.releaseTime) {
+      let min = this.auraSize;
+      let index;
+      for (var i in players) {
+        const player = players[i]
+        if (abs(player.xv) < 0.1 && abs(player.yv) < 0.1){
+          continue;
+        }
+        if (dst(this, player) < min) {
+          min = dst(this, player);
+          index = i;
+        }
+      }
+      if (index != undefined && players[index].detectable) {
+        let p = players[index];
+        var dX = p.x - this.x;
+        var dY = p.y - this.y;
+        let r = new RadarBullet(this.x, this.y, atan2(dY, dX), this.speed + 5, this.radius / 3, pal.nm.radar, this);
+        r.parentZone = this.parentZone;
+        area.addEnt(r);
+        this.clock = 0;
+      }
+    }
+  }
+}
+
+class RadarBullet extends Bullet{
+  constructor(x, y, angle, speed, radius, color, parent){
+    super(x, y, angle, speed, radius, color);
+    this.parent = parent;
+  }
+  behavior(area, players){
+    if (dst(this, this.parent) > this.parent.auraSize){
+      this.toRemove = true;
+    }
+  }
+}
