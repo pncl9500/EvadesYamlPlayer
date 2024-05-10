@@ -132,9 +132,6 @@ class Area{
         }
       }
     }
-    for (var i in this.parent.unknownEnemyTypes){
-      console.warn(`Unknown enemy in ${this.parent.name}: ${this.parent.unknownEnemyTypes[i]}`);
-    }
     return this.parent.unknownEnemyTypes;
   }
   addPellets(){

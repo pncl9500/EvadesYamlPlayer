@@ -125,7 +125,7 @@ class Player extends Entity{
     if (!(this.ctrlVector.x === 0 && this.ctrlVector.y === 0)){
       this.lastDir = Math.atan2(this.ctrlVector.y, this.ctrlVector.x);
     }
-    let dim = (1 - this.region.properties.friction ?? defaults.regionProps.friction);
+    let dim = (1 - (this.region.properties.friction ?? defaults.regionProps.friction));
     if (this.speedMultiplier === 0){
       dim = 0;
     }
