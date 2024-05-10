@@ -546,7 +546,7 @@ function getRegionSelectorMenu(){
     list.push(row(items));
   }
   list.push(txt("", 8));
-  list.push(txt(`Total missing enemies (${totalMissingEnemies.length}/${totalEnemyTypes}, ${round((totalMissingEnemies.length/totalEnemyTypes) * 1000) / 10}% missing):`, 12));
+  list.push(txt(`Total missing enemies (${totalMissingEnemies.length}/${totalEnemyTypes}, ${round((totalMissingEnemies.length/totalEnemyTypes) * 1000) / 10}% missing, ${totalEnemyTypes- totalMissingEnemies.length}/${totalEnemyTypes} complete, ${round(((totalEnemyTypes - totalMissingEnemies.length)/totalEnemyTypes) * 1000) / 10}% complete):`, 12));
   for (let i in totalMissingEnemies){
     list.push(txt(totalMissingEnemies[i], 8));
   }

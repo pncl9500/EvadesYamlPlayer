@@ -1352,3 +1352,58 @@ class ExperienceDrainEffect extends Effect{
     }
   }
 }
+
+class Grass extends Enemy{
+  constructor(x, y, angle, speed, radius){
+    super(x, y, angle, speed, radius, pal.nm.grass);
+    this.effect = new IsGrassEffect();
+    this.gainEffect(this.effect);
+    this.clock = 0;
+    this.clockStarted = false;
+  }
+  playerCollisionEvent(player){
+    if (player.dead){
+      return;
+    }
+    if (this.effect.harmlessState === false){
+      let hardBehavior = player.region.name.substring(player.region.name.length - 4) == "Hard";
+      if (hardBehavior){
+        this.reset();
+        return; 
+      }
+      for (let i in player.area.entities){
+        if (player.area.entities[i].constructor.name === "Grass"){
+          player.area.entities[i].reset();
+        }
+      }
+    } else {
+      this.clockStarted = true;
+    }
+  }
+  reset(){
+    this.clockStarted = false;
+    this.clock = 0;
+    this.effect.harmlessState = true;
+    this.effect.alphaState = 0.5;
+  }
+  behavior(area, players){
+    if (!this.clockStarted){return;}
+    this.clock += dTime;
+    this.effect.alphaState = 0.5 + this.clock / 20 / 100;
+    if (this.clock > 1000){
+      this.effect.harmlessState = false;
+    }
+  }
+}
+
+class IsGrassEffect extends Effect{
+  constructor(){
+    super(-1, getEffectPriority("IsGrassEffect"), false, true);
+    this.harmlessState = true;
+    this.alphaState = 0.5;
+  }
+  doEffect(target){
+    target.harmless = this.harmlessState;
+    target.alphaMultiplier = this.alphaState;
+  }
+}

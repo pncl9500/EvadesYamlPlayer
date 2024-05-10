@@ -1,4 +1,4 @@
-debugValue = 0;
+debugValue = "";
 game = null;
 ui = null;
 cheatMenuOpen = false;
@@ -54,7 +54,7 @@ function draw() {
   if (cheatMenuOpen){
     drawCheatMenu();
   }
-  //drawDebugValueText();
+  drawDebugValueText();
 }
 function drawDebugValueText(){
   fill(255);
