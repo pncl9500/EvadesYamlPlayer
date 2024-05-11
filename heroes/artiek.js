@@ -35,14 +35,12 @@ class FadingAura extends Entity{
 
 class Fizzle extends Ability{
   constructor(){
-    super(5, 0, 20, im.ab.fizzle);
+    super(5, 250, 20, im.ab.fizzle);
     this.passive = true;
     this.onDeathPassive = true;
     this.reviveRadii = [100, 125, 150, 175, 200];
   }
   activate(player, players, pellets, enemies, miscEnts, region, area){
-    //prevent deaths from resses on enemies from activating ability
-    if (player.hasEffect("RecentReviveEffect")) return;
     let aura = new FadingAura(player.x, player.y, this.reviveRadii[this.tier - 1], pal.hero.artiek, 0.5, 0.25, 0.008);
     area.addEnt(aura)
     let furthestPlayer;
