@@ -39,9 +39,12 @@ function draw() {
     deltaTime = 0;
   }
   dTime = deltaTime;
+  if (settings.tasMode){
+    dTime = 1000 / settings.fps;
+  }
   dTime *= timeScale;
   tFix = dTime / (1000 / 60) / 2;
-  
+
   updateAll();
   background(51);
   push();

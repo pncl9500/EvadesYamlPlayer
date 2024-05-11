@@ -38,4 +38,5 @@ settings = {
   changeCtrlsOnCycle: true,
   removeDeadPlayers: false,
   infiniteDeathTimer: false,
+  tasMode: false,
 }
