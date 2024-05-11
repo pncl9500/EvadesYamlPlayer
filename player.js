@@ -232,8 +232,8 @@ class Player extends Entity{
     let myv = 1 * this.tempSpeed * tFix * this.speedMultiplier * this.xSpeedMultiplier;
     this.xv += sx;
     this.yv += sy;
-    this.xv = max(-mxv, min(mxv, this.xv));
-    this.yv = max(-myv, min(myv, this.yv));
+    this.xv = mxv < 0 ? max(mxv, min(-mxv, this.xv)) :  max(-mxv, min(mxv, this.xv));
+    this.yv = myv < 0 ? max(myv, min(-myv, this.yv)) :  max(-myv, min(myv, this.yv));
     this.x += this.xv;
     this.y += this.yv;
     this.prevMovementX = this.xv;
