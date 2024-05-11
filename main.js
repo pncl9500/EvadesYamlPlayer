@@ -41,6 +41,7 @@ function draw() {
   dTime = deltaTime;
   dTime *= timeScale;
   tFix = dTime / (1000 / 60) / 2;
+  
   updateAll();
   background(51);
   push();

@@ -114,13 +114,13 @@ class Entity{
   preDraw(){
     
   }
-  draw(){
+  draw(noDraw = false){
     // noStroke();
     // fill(0);
     // textSize(12);
     // text(this.z, this.x, this.y - this.radius);
     noStroke();
-    this.drawBackExtra();
+    !noDraw && this.drawBackExtra();
     fill(this.tempColor.r, this.tempColor.g, this.tempColor.b, (this.tempColor.a ?? 255) * this.alphaMultiplier);
     noStroke();
     switch (this.renderType) {
@@ -146,9 +146,9 @@ class Entity{
         break;
     }
     if (!(this.renderType === "image")){
-      ellipse(this.x, this.y, this.radius - (this.renderType === "ring" ? ringEnemyStrokeWidth / 2 : 0));
+      !noDraw && ellipse(this.x, this.y, this.radius - (this.renderType === "ring" ? ringEnemyStrokeWidth / 2 : 0));
     }
-    this.drawFrontExtra();
+    !noDraw && this.drawFrontExtra();
     this.tempColor.r = this.color.r;
     this.tempColor.g = this.color.g;
     this.tempColor.b = this.color.b;

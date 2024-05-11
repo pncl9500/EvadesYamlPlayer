@@ -26,6 +26,7 @@ class Pellet extends Entity{
       pelletMultiplier = pelletMultiplier;
     }
     this.xpValue = floor(2+(zone.parentAreaNum + 1))/3*pelletMultiplier;
+    this.draw(true);
   }
   update(){
 

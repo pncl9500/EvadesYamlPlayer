@@ -4,16 +4,11 @@ class Game{
     this.players = [];
     this.mainPlayer = null;
   }
+  draw(){
+    this.mainPlayer.area.draw(this.mainPlayer.region);
+  }
   update(){
-    if (settings.invincibilityCheat){
-      this.mainPlayer.gainEffect(new CheatInvincibilityEffect());
-    }
-    if (settings.infiniteAbilityUseCheat){
-      this.mainPlayer.gainEffect(new CheatInfiniteAbilityEffect());
-      this.mainPlayer.ability1.recharge(100000);
-      this.mainPlayer.ability2.recharge(100000);
-      this.mainPlayer.ability3.recharge(100000);
-    }
+    this.doSettingEffects();
     //loop through every player and update their areas
     var areasToUpdate = [];
     for (var i in this.players){
@@ -46,9 +41,6 @@ class Game{
   addRegion(region){
     this.regions.push(region);
   }
-  draw(){
-    this.mainPlayer.area.draw(this.mainPlayer.region);
-  }
   cycleMainPlayer(){
     if (this.players.length === 0){
       return;
@@ -67,6 +59,17 @@ class Game{
     this.mainPlayer.z = z.mainPlayer;
     if (settings.changeCtrlsOnCycle){
       this.mainPlayer.ctrlSets = mainPlayerControls;
+    }
+  }
+  doSettingEffects(){
+    if (settings.invincibilityCheat){
+      this.mainPlayer.gainEffect(new CheatInvincibilityEffect());
+    }
+    if (settings.infiniteAbilityUseCheat){
+      this.mainPlayer.gainEffect(new CheatInfiniteAbilityEffect());
+      this.mainPlayer.ability1.recharge(100000);
+      this.mainPlayer.ability2.recharge(100000);
+      this.mainPlayer.ability3.recharge(100000);
     }
   }
 }
