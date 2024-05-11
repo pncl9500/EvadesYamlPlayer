@@ -8,6 +8,10 @@ class Pellet extends Entity{
     this.colors = ["#b84dd4", "#a32dd8", "#3b96fd", "#43c59b", "#f98f6b", "#61c736", "#d192bd"];
     const selectedColor = this.colors[floor(random(0, this.colors.length))];
     this.color = hexToRgb(selectedColor);
+    this.tempColor.r = this.color.r;
+    this.tempColor.g = this.color.g;
+    this.tempColor.b = this.color.b;
+    this.tempColor.a = this.color.a;
     let area = zone.parentRegion.areas[zone.parentAreaNum];
     this.area = area;
     this.spawnedInVictory = spawnedInVictory;
@@ -26,7 +30,6 @@ class Pellet extends Entity{
       pelletMultiplier = pelletMultiplier;
     }
     this.xpValue = floor(2+(zone.parentAreaNum + 1))/3*pelletMultiplier;
-    this.draw(true);
   }
   update(){
 
