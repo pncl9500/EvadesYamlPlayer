@@ -111,6 +111,9 @@ class Entity{
   getAura(){
 
   }
+  preDraw(){
+    
+  }
   draw(){
     // noStroke();
     // fill(0);

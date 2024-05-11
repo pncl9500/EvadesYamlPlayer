@@ -22,6 +22,9 @@ function loadImageAssets(){
 
       barrier: loadImage("imageAssets/ab/barrier.png"),
       stream: loadImage("imageAssets/ab/stream.png"),
+
+      sear: loadImage("imageAssets/ab/sear.png"),
+      fizzle: loadImage("imageAssets/ab/fizzle.png"),
     }
   }
 }

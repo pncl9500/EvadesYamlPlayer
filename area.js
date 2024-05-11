@@ -43,6 +43,7 @@ class Area{
     }
     toDraw.sort((a, b) => (a.z > b.z) ? 1 : -1);
     for (var i in toDraw){
+      toDraw[i].preDraw();
       toDraw[i].draw();
     }
   }

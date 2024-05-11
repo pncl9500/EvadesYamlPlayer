@@ -48,7 +48,10 @@ class Ability{
            (player.dead || this.usableWhileAlive) &&
            this.tier != 0;
   }
-  attemptUse(player){
+  attemptUse(player, override){
+    if (this.passive && !override){
+      return;
+    }
     if (this.canUseAbility(player)){
       if (this.useConditionSatisfied()){
         this.use(player);
@@ -99,7 +102,10 @@ class Ability{
   drainEnergy(player){
     player.energy -= this.cost;
   }
-  tryToggleOffThroughDeath(){
+  tryToggleOffThroughDeath(player){
+    if (this.onDeathPassive){
+      this.attemptUse(player, true);
+    }
     return;
   }
   toggleOn(player, players, pellets, enemies, miscEnts, region, area){
@@ -129,7 +135,10 @@ class ToggleAbility extends Ability{
   toggleOff(player, players, pellets, enemies, miscEnts, region, area){
     
   }
-  attemptUse(player){
+  attemptUse(player, override){
+    if (this.passive && !override){
+      return;
+    }
     if (this.canUseAbility(player)){
       if (this.useConditionSatisfied()){
         if (this.toggled === false){
@@ -189,7 +198,10 @@ class ContinuousToggleAbility extends ToggleAbility{
       this.toggleOff(player, prms.players, prms.pellets, prms.enemies, prms.miscEnts, prms.region, prms.area);
     }
   }
-  attemptUse(player){
+  attemptUse(player, override){
+    if (this.passive && !override){
+      return;
+    }
     if (!this.useConditionSatisfied()){
       return;
     }

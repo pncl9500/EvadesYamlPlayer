@@ -37,4 +37,5 @@ settings = {
   randomDummySpawn: true,
   changeCtrlsOnCycle: true,
   removeDeadPlayers: false,
+  infiniteDeathTimer: false,
 }

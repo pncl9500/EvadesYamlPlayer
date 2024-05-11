@@ -177,7 +177,6 @@ class Player extends Entity{
     }
     this.moveDist = (this.speed) * this.speedMultiplier + (this.tempSpeed - this.speed);
     this.stepMaxDistance = this.moveDist * 2;
-    debugValue = this.stepAccelerating;
     //get acceleraty stuff
     if (this.stepAccelerating){
       if (this.stepDistance < this.stepMaxDistance){

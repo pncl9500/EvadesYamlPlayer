@@ -279,6 +279,8 @@ function setCheatMenuItems(){
             tog(11, 11, true, () => {settings.rechargeCooldownOnDeath = true}, () => {settings.rechargeCooldownOnDeath = false}, () => {return settings.rechargeCooldownOnDeath;}, "Recharge all cooldowns upon respawning."),]),
         row([txt("Background tint:", 12), 
             tog(11, 11, true, () => {settings.regionBackground = true}, () => {settings.regionBackground = false}, () => {return settings.regionBackground;}, "Add a tint to the background based on the area's color."),]),
+        row([txt("Infinite death timers:", 12), 
+            tog(11, 11, false, () => {settings.infiniteDeathTimer = true}, () => {settings.infiniteDeathTimer = false}, () => {return settings.infiniteDeathTimer;}, "Prevent death timers from ticking down."),]),
     txt("Quick Cheats", 20), bigLine,
         row([txt("Change area:", 12), 
             btn("-40", 18, 12, () => {game.mainPlayer.changeAreaCheat(-40); game.mainPlayer.moveToAreaStart()}, "Move back 40 areas."),

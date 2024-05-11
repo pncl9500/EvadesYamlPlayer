@@ -6,6 +6,7 @@ heroList = {
   "necro": Necro,
   "brute": Brute,
   "nexus": Nexus,
+  "artiek": Artiek,
 }
 
 heroDict = new Map();

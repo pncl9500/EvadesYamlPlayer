@@ -92,8 +92,12 @@ class DeadEffect extends Effect{
     target.tempColor.a = 80;
     target.canRevivePlayers = false;
     target.detectable = false;
+    if (settings.infiniteDeathTimer){
+      this.life += dTime;
+    }
   }
   removeEffect(target){
+    target.gainEffect(new RecentReviveEffect());
     if (settings.removeDeadPlayers && !target.isMain){
       target.removeSelf();
       return;
@@ -103,5 +107,15 @@ class DeadEffect extends Effect{
       target.x = target.mostRecentSafeZone.x + target.mostRecentSafeZone.width / 2;
       target.y = target.mostRecentSafeZone.y + target.mostRecentSafeZone.height / 2;
     }
+  }
+}
+
+//terrible kludge. this should not exist. do not use this under any circumstances.
+class RecentReviveEffect extends Effect{
+  constructor(duration = 60){
+    super(duration, getEffectPriority("RecentReviveEffect"), false, true)
+  }
+  doEffect(target){
+
   }
 }
