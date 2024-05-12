@@ -23,6 +23,11 @@ class Game{
     //all players after updating the areas because idk
     //better to keep things separate
     for (var i in this.players){
+      this.players[i].tempColor.r = this.players[i].color.r;
+      this.players[i].tempColor.g = this.players[i].color.g;
+      this.players[i].tempColor.b = this.players[i].color.b;
+      this.players[i].tempColor.a = this.players[i].color.a;
+      this.players[i].tempRadius = this.players[i].radius;
       this.players[i].update();
     }
     this.mainPlayer.updateAsMain();

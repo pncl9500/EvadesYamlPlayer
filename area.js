@@ -67,6 +67,11 @@ class Area{
   update(){
     //basically everything loop
     for (var i = 0; i < this.entities.length; i++){
+      this.entities[i].tempColor.r = this.entities[i].color.r;
+      this.entities[i].tempColor.g = this.entities[i].color.g;
+      this.entities[i].tempColor.b = this.entities[i].color.b;
+      this.entities[i].tempColor.a = this.entities[i].color.a;
+      this.entities[i].tempRadius = this.entities[i].radius;
       this.entities[i].update(this, this.players);
       if (this.entities[i].toRemove){
         this.entities[i].toRemove = false;

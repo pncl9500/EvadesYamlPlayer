@@ -39,4 +39,5 @@ settings = {
   removeDeadPlayers: false,
   infiniteDeathTimer: false,
   tasMode: false,
+  gamePaused: false,
 }

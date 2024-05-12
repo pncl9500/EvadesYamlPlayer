@@ -45,7 +45,9 @@ function draw() {
   dTime *= timeScale;
   tFix = dTime / (1000 / 60) / 2;
 
-  updateAll();
+  if (!settings.gamePaused){
+    updateAll();
+  }
   background(51);
   push();
   doCamTransform(cameraFocusX, cameraFocusY, 1);
@@ -60,6 +62,22 @@ function draw() {
   }
   drawDebugValueText();
 }
+
+function skipFrame(){
+  if (deltaTime > timeCap){
+    tFix = 0;
+    deltaTime = 0;
+  }
+  dTime = deltaTime;
+  if (settings.tasMode){
+    dTime = 1000 / settings.fps;
+  }
+  console.log(dTime);
+  dTime *= timeScale;
+  tFix = dTime / (1000 / 60) / 2;
+  updateAll();
+}
+
 function drawDebugValueText(){
   fill(255);
   noStroke();

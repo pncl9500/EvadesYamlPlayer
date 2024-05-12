@@ -149,11 +149,6 @@ class Entity{
       ellipse(this.x, this.y, this.radius - (this.renderType === "ring" ? ringEnemyStrokeWidth / 2 : 0));
     }
     this.drawFrontExtra();
-    this.tempColor.r = this.color.r;
-    this.tempColor.g = this.color.g;
-    this.tempColor.b = this.color.b;
-    this.tempColor.a = this.color.a;
-    this.tempRadius = this.radius;
   }
   update(){
     
