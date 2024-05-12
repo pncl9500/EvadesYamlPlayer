@@ -133,7 +133,7 @@ class AuraEnemy extends Enemy{
       if (players[i].dead && !this.affectsDeadPlayers){
         continue;
       }
-      if (circleCircle(this.aura, players[i]) && !this.disabled){
+      if (circleCircle({x: this.x, y: this.y, r: this.auraSize * this.radiusMultiplier}, players[i]) && !this.disabled){
         this.applyAuraEffectToPlayer(area, players, players[i]);
       }
     }
