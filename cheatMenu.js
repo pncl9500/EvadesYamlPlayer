@@ -517,7 +517,12 @@ function setCheatMenuItems(){
         }
       }}}, "Make all enemies a random color and randomizes their properties."),
     ]),
-    
+    row([txt("Wobbly mode:", 12), 
+      tog(11, 11, false, () => {settings.wobblyMode = true}, () => {settings.wobblyMode = false}, undefined, "Make the game wobbly."),]),
+    row([txt("Wobble speed:", 12), 
+      sld(0.5, 3, 120, (to) => {settings.wobbleFrequency = to}, () => {return settings.wobbleFrequency}, 0),
+      pdd(3, 0),
+      btn("Default", null, 12, () => {settings.wobbleFrequency = 1}, "Reset wobble speed to its default value (1)."),]),
   ]
   baseCheatMenuItems = list;
   return list;

@@ -76,8 +76,13 @@ class Game{
       this.mainPlayer.ability2.recharge(100000);
       this.mainPlayer.ability3.recharge(100000);
     }
+    if (settings.wobblyMode){
+      wobbleClock = frameCount / settings.fps;
+      timeScale = 1 + sin(wobbleClock * settings.wobbleFrequency * 8) / 1.5;
+    }
   }
 }
+wobbleClock = 0;
 
 startingRegionName = "Central Core";
 startingAreaNum = 0;

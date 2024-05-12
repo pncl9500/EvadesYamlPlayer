@@ -40,4 +40,7 @@ settings = {
   infiniteDeathTimer: false,
   tasMode: false,
   gamePaused: false,
+
+  wobblyMode: false,
+  wobbleFrequency: 1,
 }
