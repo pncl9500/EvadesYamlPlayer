@@ -43,4 +43,6 @@ settings = {
 
   wobblyMode: false,
   wobbleFrequency: 1,
+
+  squareMode: false,
 }

@@ -146,7 +146,11 @@ class Entity{
         break;
     }
     if (!(this.renderType === "image")){
-      ellipse(this.x, this.y, this.radius - (this.renderType === "ring" ? ringEnemyStrokeWidth / 2 : 0));
+      if (settings.squareMode){
+        rect(this.x - this.radius, this.y - this.radius, this.radius * 2, this.radius * 2)
+      } else {
+        ellipse(this.x, this.y, this.radius - (this.renderType === "ring" ? ringEnemyStrokeWidth / 2 : 0));
+      }
     }
     this.drawFrontExtra();
   }

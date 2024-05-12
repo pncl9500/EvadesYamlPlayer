@@ -523,6 +523,8 @@ function setCheatMenuItems(){
       sld(0.5, 3, 120, (to) => {settings.wobbleFrequency = to}, () => {return settings.wobbleFrequency}, 0),
       pdd(3, 0),
       btn("Default", null, 12, () => {settings.wobbleFrequency = 1}, "Reset wobble speed to its default value (1)."),]),
+    row([txt("Square mode:", 12), 
+      tog(11, 11, false, () => {settings.squareMode = true}, () => {settings.squareMode = false}, undefined, "Make everything look like a square. HITBOXES ARE NOT AFFECTED!"),]),
   ]
   baseCheatMenuItems = list;
   return list;
