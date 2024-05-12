@@ -241,6 +241,64 @@ class CheatMenuToggle extends CheatMenuItem{
   }
 }
 
+class CheatMenuSlider extends CheatMenuItem{
+  constructor(min, max, width, setFunc, getFunc, step, downOffset = 6){
+    super(2, width);
+    this.min = min;
+    this.max = max;
+    this.setFunc = setFunc;
+    this.getFunc = getFunc;
+    this.step = step;
+    this.circleRadius = 4;
+    let val = this.getFunc();
+    let t = (val - this.min) / (this.max - this.min);
+    this.circleX = map(t, 0, 1, 0, this.width);
+    this.downOffset = downOffset;
+    this.lockedToMouse = false;
+  }
+  hoveredByMouse(relMouseX, relMouseY, offset){
+    return circleCircle({x: relMouseX, y: relMouseY, r: 1}, {x: this.circleRadius + this.circleX, y: offset + this.downOffset, r: this.circleRadius});
+  }
+  draw(offset){
+    stroke(255);
+    strokeWeight(1);
+    line(this.circleRadius, offset + this.downOffset, this.width, offset + this.downOffset);
+    fill(0);
+    if (this.hoveredByMouse(relMouseX, relMouseY, offset)){
+      fill(100);
+    }
+    ellipse(this.circleRadius + this.circleX, offset + this.downOffset, this.circleRadius);
+
+    if (this.hoveredByMouse(relMouseX, relMouseY, offset) && mouseIsPressed){
+      this.lockedToMouse = true;
+    }
+    if (!mouseIsPressed){
+      this.lockedToMouse = false;
+    }
+    
+    let currentVal = this.getFunc();
+    this.circleX = map(currentVal, this.min, this.max, 0, this.width);
+
+
+    if (this.lockedToMouse){
+      this.circleX = relMouseX - this.circleRadius;
+      this.circleX = min(max(this.circleX, 0), this.width)
+    }
+    let xtoVal = map(this.circleX, 0, this.width, this.min, this.max);
+    if (this.step !== 0){
+      xtoVal = (round(xtoVal / this.step)) * this.step;
+    }
+    this.circleX = map(xtoVal, this.min, this.max, 0, this.width);
+    this.setFunc(xtoVal);
+  }
+}
+
+class CheatMenuPadding extends CheatMenuItem{
+  constructor(width, height){
+    super(height, width);
+  }
+}
+
 
 bigLine = new CheatMenuLine();
 function txt(text, height){
@@ -257,6 +315,12 @@ function row(items){
 
 function tog(width, height, toggled, onFunc, offFunc, getStateFunc, tooltip){
   return new CheatMenuToggle(width, height, toggled, onFunc, offFunc, getStateFunc, tooltip);
+}
+function sld(min, max, width, setFunc, getFunc, step, downOffset = 6){
+  return new CheatMenuSlider(min, max, width, setFunc, getFunc, step, downOffset);
+}
+function pdd(width, height){
+  return new CheatMenuPadding(width, height);
 }
 
 let cheatMenuItems = [];
@@ -311,6 +375,10 @@ function setCheatMenuItems(){
             tog(11, 11, false, () => {settings.invincibilityCheat = true}, () => {settings.invincibilityCheat = false}, () => {return settings.invincibilityCheat;}, "Become truly invincible, bypassing corrosion. Hotkey: [V]"),]),
             row([txt("Infinite ability use:", 12), 
             tog(11, 11, false, () => {settings.infiniteAbilityUseCheat = true}, () => {settings.infiniteAbilityUseCheat = false}, () => {return settings.infiniteAbilityUseCheat;}, "Remove all cooldowns and gain infinite energy. Hotkey: [B]"),]),
+            row([txt("Time scale:", 12), 
+              sld(0, 3, 120, (to) => {timeScale = to}, () => {return timeScale}, 0),
+              pdd(3, 0),
+              btn("Default", null, 12, () => {timeScale = 1}, "Reset time scale to its default value (1)."),]),
     txt("Players", 20), bigLine,
         row([txt("Player management:", 12), 
             btn("Create new", null, 12, () => {queueCheatMenuChange(getPlayerCreationMenu())}, "Create a new player."),
