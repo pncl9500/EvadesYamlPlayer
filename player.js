@@ -400,6 +400,7 @@ class Player extends Entity{
     this.deathEffect = new DeadEffect(this.deathTimer);
     this.gainEffect(this.deathEffect);
     if (settings.instantRespawn && this.instantRespawnAppropriate() && this.isMain){
+      //THIS IS NOT IT
       this.x = this.mostRecentSafeZone.x + this.mostRecentSafeZone.width / 2;
       this.y = this.mostRecentSafeZone.y + this.mostRecentSafeZone.height / 2;
       this.revive();

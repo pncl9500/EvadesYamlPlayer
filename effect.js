@@ -102,9 +102,10 @@ class DeadEffect extends Effect{
       return;
     }
     target.revive();
-    if (settings.instantRespawn && target.isMain){
-      target.x = target.mostRecentSafeZone.x + target.mostRecentSafeZone.width / 2;
-      target.y = target.mostRecentSafeZone.y + target.mostRecentSafeZone.height / 2;
-    }
+    //idk why this was even here in the first place but it's causing problems now.
+    // if (settings.instantRespawn && target.isMain){
+    //   target.x = target.mostRecentSafeZone.x + target.mostRecentSafeZone.width / 2;
+    //   target.y = target.mostRecentSafeZone.y + target.mostRecentSafeZone.height / 2;
+    // }
   }
 }
