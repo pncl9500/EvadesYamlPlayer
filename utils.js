@@ -48,6 +48,9 @@ function circleCircle(c1, c2){
   } catch (error) {
     r2 = c2.r;
   }
+  if (settings.squareMode){
+    return rectRect({x: c1.x - r1, y: c1.y - r1, width: r1 * 2, height: r1 * 2}, {x: c2.x - r2, y: c2.y - r2, width: r2 * 2, height: r2 * 2})
+  }
   return dist < r1 + r2;
 }
 

@@ -524,7 +524,7 @@ function setCheatMenuItems(){
       pdd(3, 0),
       btn("Default", null, 12, () => {settings.wobbleFrequency = 1}, "Reset wobble speed to its default value (1)."),]),
     row([txt("Square mode:", 12), 
-      tog(11, 11, false, () => {settings.squareMode = true}, () => {settings.squareMode = false}, undefined, "Make everything look like a square. HITBOXES ARE NOT AFFECTED!"),]),
+      tog(11, 11, false, () => {settings.squareMode = true}, () => {settings.squareMode = false}, undefined, "Make everything into a square. Some hitboxes may stay circular."),]),
     row([txt("Freaky mode:", 12), 
       tog(11, 11, false, () => {}, () => {}, undefined, "Make the game freaky."),]),
   ]
