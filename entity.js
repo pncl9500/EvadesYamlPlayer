@@ -118,8 +118,7 @@ class Entity{
   drawOnMap(){
     noStroke();
     fill(this.tempColor.r, this.tempColor.g, this.tempColor.b, (this.tempColor.a ?? 255) * this.alphaMultiplier);
-    let minMinimapRadius = 28
-    ellipse(this.x, this.y, max(this.radius, minMinimapRadius));
+    ellipse(this.x, this.y, max(this.radius, minEntityMinimapRadius));
   }
   draw(){
     // noStroke();

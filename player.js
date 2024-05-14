@@ -1,3 +1,5 @@
+minPlayerMinimapRadius = 32;
+
 deathTimerDurations = [
   10000,
   15000,
@@ -67,6 +69,11 @@ class Player extends Entity{
     this.sx = 0;
     this.sy = 0;
     this.defStepParams();
+  }
+  drawOnMap(){
+    noStroke();
+    fill(this.tempColor.r, this.tempColor.g, this.tempColor.b, (this.tempColor.a ?? 255) * this.alphaMultiplier);
+    ellipse(this.x, this.y, max(this.radius, minPlayerMinimapRadius));
   }
   resetAllModifiers(){
     this.detectable = true;

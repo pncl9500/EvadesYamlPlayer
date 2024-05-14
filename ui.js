@@ -1,3 +1,5 @@
+let minEntityMinimapRadius = 26;
+
 function initUI(){
   return new UI;
 }
