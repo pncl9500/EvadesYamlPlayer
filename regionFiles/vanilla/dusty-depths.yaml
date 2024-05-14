@@ -231,7 +231,6 @@ areas:
         - 0
         - 160
       lighting: 0.75
-      pellet_count: 0
     x: last_right
     y: last_y-192
     zones:
@@ -1397,7 +1396,6 @@ areas:
         - 0
         - 160
       lighting: 0.75
-      pellet_count: 0
     x: last_right
     y: last_y
     zones:
@@ -2758,7 +2756,6 @@ areas:
         - 0
         - 160
       lighting: 0.75
-      pellet_count: 0
     x: last_right
     y: last_y
     zones:
@@ -4189,7 +4186,6 @@ areas:
         - 0
         - 160
       lighting: 0.75
-      pellet_count: 0
     x: last_right
     y: last_y
     zones:
@@ -5750,7 +5746,6 @@ areas:
         - 0
         - 160
       lighting: 0.75
-      pellet_count: 0
     x: last_right
     y: last_y
     zones:
@@ -7340,7 +7335,6 @@ areas:
         - 40
         - 160
       lighting: 0.65
-      pellet_count: 0
     x: last_right
     y: last_y-160
     zones:
@@ -9940,7 +9934,6 @@ areas:
         - 40
         - 160
       lighting: 0.6
-      pellet_count: 0
     x: last_right
     y: last_y
     zones:
@@ -12816,7 +12809,6 @@ areas:
         - 40
         - 160
       lighting: 0.55
-      pellet_count: 0
     x: last_right
     y: last_y
     zones:
@@ -14910,7 +14902,6 @@ areas:
         - 40
         - 160
       lighting: 0.5
-      pellet_count: 0
     x: last_right
     y: last_y
     zones:

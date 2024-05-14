@@ -644,6 +644,12 @@ function getRegionSelectorMenu(){
       but.hoveredColor = {r: 90, g: 90, b: 40};
       items.push(but);
     }
+    if (extrapolatedMapNames.includes(game.regions[i].name)){
+      let but = btn(" ! ", null, 12, () => {}, `${game.regions[i].name}'s map file is an estimated version of the vanilla region and has not been obtained from a developer. May not be fully accurate.`);
+      but.color = {r: 255, g: 255, b: 220};
+      but.hoveredColor = {r: 90, g: 90, b: 40};
+      items.push(but);
+    }
     list.push(row(items));
   }
   list.push(txt("", 8));
@@ -862,8 +868,13 @@ function ptRect(ptx, pty, rectx, recty, rectw, recth){
 }
 
 outdatedMapNames = [
-  "Shifting Sands",
-  "Dusty Depths"
+  "Shifting Sands"
+]
+
+extrapolatedMapNames = [
+  "Dusty Depths",
+  "Research Lab",
+  "Withering Wasteland",
 ]
 
 unimplementedGimmickMapNames = [
