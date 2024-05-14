@@ -52,13 +52,15 @@ class Area{
     for (var i in this.zones){
       this.zones[i].draw(this, parentRegion);
     }
+    fill(0, 80);
+    rect(0, 0, this.bounds.right, this.bounds.bottom);
     for (var i in this.entities){
       if (this.entities[i].renderOnMinimap === false || this.entities[i].mainType === "enemy" || this.entities[i].mainType === "pellet"){
         continue;
       }
       this.entities[i].drawOnMap();
     }
-    fill(0, 103);
+    fill(0, 30);
     rect(0, 0, this.bounds.right, this.bounds.bottom);
     for (var i in this.players){
       this.players[i].drawOnMap();
