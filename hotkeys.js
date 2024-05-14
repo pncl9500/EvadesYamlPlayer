@@ -24,5 +24,6 @@ function keyPressed() {
   if (keyCode === 86) { settings.invincibilityCheat = !settings.invincibilityCheat; }
   if (keyCode === 66) { settings.infiniteAbilityUseCheat = !settings.infiniteAbilityUseCheat; }
   if (keyCode === 72) { ui.heroCard.hidden = !ui.heroCard.hidden; }
+  if (keyCode === 77) { ui.miniMap.hidden = !ui.miniMap.hidden; }
   if (keyCode === 80) { skipFrame(); }
 }

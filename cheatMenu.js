@@ -334,6 +334,8 @@ function setCheatMenuItems(){
             tog(11, 11, true, () => {settings.drawOutlines = true}, () => {settings.drawOutlines = false}, undefined, "Enable enemy outlines."),]),
         row([txt("Show hero card:", 12), 
             tog(11, 11, true, () => {ui.heroCard.hidden = false}, () => {ui.heroCard.hidden = true}, () => {return !ui.heroCard.hidden}, "Enable the hero card. Hotkey: [H]"),]),
+        row([txt("Show minimap:", 12), 
+            tog(11, 11, true, () => {ui.miniMap.hidden = false}, () => {ui.miniMap.hidden = true}, () => {return !ui.miniMap.hidden}, "Enable the minimap. Hotkey: [M]"),]),
     txt("Sandbox settings", 20), bigLine,
         row([txt("Change hero: ", 12), 
             btn("Open list", 37, 12, () => {queueCheatMenuChange(getHeroSelectorMenu())}, "Select a hero."),]),
