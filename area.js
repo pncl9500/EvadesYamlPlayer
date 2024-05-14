@@ -52,7 +52,7 @@ class Area{
     for (var i in this.zones){
       this.zones[i].draw(this, parentRegion);
     }
-    fill(0, 90);
+    fill(0, 103);
     rect(0, 0, this.bounds.right, this.bounds.bottom);
     for (var i in this.players){
       this.players[i].drawOnMap();
