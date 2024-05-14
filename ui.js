@@ -4,8 +4,10 @@ function initUI(){
 class UI{
   constructor(){
     this.heroCard = new HeroCard();
+    this.miniMap = new MiniMap();
     this.uiPanels = [];
     this.uiPanels.push(this.heroCard);
+    this.uiPanels.push(this.miniMap);
   }
   draw(){
     for (var i in this.uiPanels){
@@ -205,5 +207,32 @@ class HeroCard extends UIpanel{
     let fvpy = cy + length * sqsin(angle);
     vertex(fvpx, fvpy);
     endShape(CLOSE);
+  }
+}
+
+class MiniMap extends UIpanel{
+  constructor(){
+    super(-1, 1);
+    this.maxWidth = 370;
+    this.maxHeight = 100;
+    this.padding = 0;
+  }
+  draw(){
+    noStroke();
+    const areaWidth = game.mainPlayer.area.bounds.right;
+    const areaHeight = game.mainPlayer.area.bounds.bottom;
+    let longestSide = areaWidth >= areaHeight ? "horiz" : "vert";
+    let scaledWidth;
+    let scaledHeight;
+    (longestSide === "horiz") && (scaledWidth = this.maxWidth) && (scaledHeight = this.maxWidth / areaWidth * areaHeight);
+    (longestSide === "vert") && (scaledHeight = this.maxHeight) && (scaledWidth = this.maxHeight / areaHeight * areaWidth);
+    (scaledHeight > this.maxHeight) && (longestSide = "vert") && (scaledHeight = this.maxHeight) && (scaledWidth *= (this.maxHeight / scaledHeight));
+    let ratio = longestSide === "horiz" ? this.maxWidth / areaWidth : this.maxHeight / areaHeight;
+
+    push();
+    translate(0, -scaledHeight);
+    scale(ratio);
+    settings.mirrorMap ? game.mainPlayer.area.draw(game.mainPlayer.region) : game.mainPlayer.area.drawOnMap(game.mainPlayer.region);
+    pop();
   }
 }

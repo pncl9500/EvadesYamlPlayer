@@ -114,6 +114,12 @@ class Entity{
   preDraw(){
     
   }
+  drawOnMap(){
+    noStroke();
+    fill(this.tempColor.r, this.tempColor.g, this.tempColor.b, (this.tempColor.a ?? 255) * this.alphaMultiplier);
+    let minMinimapRadius = 28
+    ellipse(this.x, this.y, max(this.radius, minMinimapRadius));
+  }
   draw(){
     // noStroke();
     // fill(0);
@@ -122,7 +128,6 @@ class Entity{
     noStroke();
     this.drawBackExtra();
     fill(this.tempColor.r, this.tempColor.g, this.tempColor.b, (this.tempColor.a ?? 255) * this.alphaMultiplier);
-    noStroke();
     switch (this.renderType) {
       case "noOutline":
         break;

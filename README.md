@@ -1,0 +1,2 @@
+If you are going to take code from this, do not assume that any part of it is accurate to the vanilla game.
+Most things (especially projectile lifetimes/speeds/angles/sizes/ranges) are estimated, and will not be fully accurate.

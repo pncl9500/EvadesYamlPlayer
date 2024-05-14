@@ -47,6 +47,23 @@ class Area{
       toDraw[i].draw();
     }
   }
+  drawOnMap(parentRegion){
+    //finish later
+    for (var i in this.zones){
+      this.zones[i].draw(this, parentRegion);
+    }
+    fill(0, 90);
+    rect(0, 0, this.bounds.right, this.bounds.bottom);
+    for (var i in this.players){
+      this.players[i].drawOnMap();
+    }
+    for (var i in this.entities){
+      if (this.entities[i].mainType === "enemy" || this.entities[i].mainType === "pellet"){
+        continue;
+      }
+      this.entities[i].drawOnMap();
+    }
+  }
   addEnt(ent){
     this.entities.push(ent);
   }
