@@ -864,7 +864,7 @@ function ptRect(ptx, pty, rectx, recty, rectw, recth){
 outdatedMapNames = [
   "Shifting Sands",
   "Withering Wasteland",
-  "Research Lab"
+  "Dusty Depths"
 ]
 
 unimplementedGimmickMapNames = [

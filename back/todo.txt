@@ -112,3 +112,10 @@ cybot
 alk
 aranes
 custom
+
+-----------------------------------------------------------
+other:
+mouse movement?
+fix zone coloring bug
+add asset loading screen
+give cheat menu a slide in/out animation
