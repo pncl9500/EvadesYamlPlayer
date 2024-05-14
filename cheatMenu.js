@@ -863,7 +863,6 @@ function ptRect(ptx, pty, rectx, recty, rectw, recth){
 
 outdatedMapNames = [
   "Shifting Sands",
-  "Withering Wasteland",
   "Dusty Depths"
 ]
 
