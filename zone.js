@@ -39,11 +39,11 @@ class Zone{
   draw(parentArea, parentRegion){
     this.getZoneBaseColor();
     rect(this.x, this.y, this.width, this.height);
-    if (parentRegion.properties !== undefined && parentRegion.properties.hasOwnProperty("background_color")){
+    if (parentRegion.properties !== undefined && parentRegion.properties.hasOwnProperty("background_color") && !this.properties.hasOwnProperty("background_color")){
       fill(parentRegion.properties.background_color[0], parentRegion.properties.background_color[1], parentRegion.properties.background_color[2], parentRegion.properties.background_color[3]);
       rect(this.x, this.y, this.width, this.height);
     }
-    if (parentArea.properties !== undefined && parentArea.properties.hasOwnProperty("background_color")){
+    if (parentArea.properties !== undefined && parentArea.properties.hasOwnProperty("background_color") && !this.properties.hasOwnProperty("background_color")){
       fill(parentArea.properties.background_color[0], parentArea.properties.background_color[1], parentArea.properties.background_color[2], parentArea.properties.background_color[3]);
       rect(this.x, this.y, this.width, this.height);
     }
