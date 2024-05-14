@@ -39,6 +39,7 @@ class BarrierProjectile extends Projectile{
     this.ignorePreviousTargets = false;
     this.clock = 0;
     this.maxLifetime = lifetime;
+    this.renderOnMinimap = false;
   }
   detectContact(){
     this.detectPlayerContact();
@@ -101,6 +102,7 @@ class StreamProjectile extends Projectile{
         this.y -= this.height;
       }
     }
+    this.renderOnMinimap = false;
   }
   detectContact(){
     this.detectPlayerContact();

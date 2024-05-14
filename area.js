@@ -58,7 +58,7 @@ class Area{
       this.players[i].drawOnMap();
     }
     for (var i in this.entities){
-      if (this.entities[i].mainType === "enemy" || this.entities[i].mainType === "pellet"){
+      if (this.entities[i].renderOnMinimap === false || this.entities[i].mainType === "enemy" || this.entities[i].mainType === "pellet"){
         continue;
       }
       this.entities[i].drawOnMap();

@@ -30,6 +30,7 @@ class Entity{
     this.effects = [];
     this.restrictedLastFrame = false;
     this.effectRemovalQueue = [];
+    this.renderOnMinimap = true;
   }
   checkPlayerCollision(area, players){
     for(let i in players){
