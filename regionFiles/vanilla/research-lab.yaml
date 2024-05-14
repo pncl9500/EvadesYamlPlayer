@@ -32,7 +32,7 @@ areas:
           minimum_speed: 10
         x: 320
         y: 0
-        width: 3008
+        width: 3200
         height: 32
       - type: safe
         properties:
@@ -181,99 +181,115 @@ areas:
             angle: 90
             speed: 3
             types:
-              - sniper
+              - experience_drain
+            experience_drain_radius: 45
           - x: 2016
             y: 240
             radius: 12
             angle: 90
             speed: 3
             types:
-              - ice_sniper
+              - blocking
+            blocking_radius: 45
           - x: 2112
             y: 240
             radius: 12
             angle: 90
             speed: 3
             types:
-              - speed_sniper
+              - sniper
           - x: 2208
             y: 240
             radius: 12
             angle: 90
             speed: 3
             types:
-              - regen_sniper
+              - ice_sniper
           - x: 2304
             y: 240
             radius: 12
             angle: 90
             speed: 3
             types:
-              - radiating_bullets
+              - speed_sniper
           - x: 2400
             y: 240
             radius: 12
             angle: 90
-            speed: 10.5
+            speed: 3
             types:
-              - tree
+              - regen_sniper
           - x: 2496
             y: 240
             radius: 12
             angle: 90
             speed: 3
             types:
-              - corrosive_sniper
+              - radiating_bullets
           - x: 2592
             y: 240
             radius: 12
             angle: 90
-            speed: 3
+            speed: 10.5
             types:
-              - poison_sniper
+              - tree
           - x: 2688
             y: 240
             radius: 12
             angle: 90
             speed: 3
             types:
-              - positive_magnetic_sniper
+              - corrosive_sniper
           - x: 2784
             y: 240
             radius: 12
             angle: 90
             speed: 3
             types:
-              - negative_magnetic_sniper
+              - poison_sniper
           - x: 2880
             y: 240
             radius: 12
             angle: 90
             speed: 3
             types:
-              - wind_sniper
+              - positive_magnetic_sniper
           - x: 2976
             y: 240
             radius: 12
             angle: 90
             speed: 3
             types:
-              - prediction_sniper
+              - negative_magnetic_sniper
           - x: 3072
             y: 240
             radius: 12
             angle: 90
             speed: 3
             types:
-              - lead_sniper
+              - wind_sniper
           - x: 3168
             y: 240
             radius: 12
             angle: 90
             speed: 3
             types:
-              - force_sniper_a
+              - prediction_sniper
           - x: 3264
+            y: 240
+            radius: 12
+            angle: 90
+            speed: 3
+            types:
+              - lead_sniper
+          - x: 3360
+            y: 240
+            radius: 12
+            angle: 90
+            speed: 3
+            types:
+              - force_sniper_a
+          - x: 3456
             y: 240
             radius: 12
             angle: 90
