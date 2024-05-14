@@ -136,7 +136,7 @@ class HeroCard extends UIpanel{
         fill(208, 208, 68);
         stroke(208, 208, 68);
       }
-      ellipse(-this.width / 2 + this.lineDistance + 40 + 240 - 5 * (game.mainPlayer.ability1.maxTier - 1) + i * 10, -this.height + 37 - 28, 3.5, 3.5);
+      ellipse(-this.width / 2 + this.lineDistance + 40 + 240 - 5 * (game.mainPlayer.ability1.maxTier - 1) + i * 10, -this.height + 37 - 28, 3);
     }
     for (var i = 0; i < game.mainPlayer.ability2.maxTier; i++){
       noFill();
@@ -145,7 +145,7 @@ class HeroCard extends UIpanel{
         fill(208, 208, 68);
         stroke(208, 208, 68);
       }
-      ellipse(-this.width / 2 + this.lineDistance + 40 + 320 - 5 * (game.mainPlayer.ability2.maxTier - 1) + i * 10, -this.height + 37 - 28, 3.5, 3.5);
+      ellipse(-this.width / 2 + this.lineDistance + 40 + 320 - 5 * (game.mainPlayer.ability2.maxTier - 1) + i * 10, -this.height + 37 - 28, 3);
     }
     rectMode(CORNER);
   }
