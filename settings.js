@@ -10,7 +10,7 @@ settings = {
   gridColor: [
     0,
     0,
-    60,
+    20,
     40,
   ],
   //the width of each grid line.
