@@ -48,7 +48,6 @@ class Area{
     }
   }
   drawOnMap(parentRegion){
-    //finish later
     for (var i in this.zones){
       this.zones[i].draw(this, parentRegion);
     }
