@@ -655,10 +655,13 @@ class Player extends Entity{
           this.y = y;
           this.y += (this.y < 0) ? this.area.bounds.bottom : this.area.bounds.top;
         }
+        if (this.areaNum !== 0 || this.x >= 48){
+          return;
+        }
         let zt = this.getZonesTouched();
         for (let i in zt){
           if (zt[i].type === "teleport"){
-            this.x += 48;
+            this.x = 64;
           }
         }
         return;
