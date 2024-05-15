@@ -8,7 +8,6 @@ heroList = {
   "nexus": Nexus,
   "shade": Shade,
   //"euclid": Euclid,
-  //"artiek": Artiek,
 }
 
 heroDict = new Map();
