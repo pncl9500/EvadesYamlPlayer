@@ -116,7 +116,6 @@ custom
 -----------------------------------------------------------
 other:
 mouse movement? why haven't you done this yet?
-region:area banner
 fix zone coloring bug (ii is still wrong)
 add asset loading screen
 add pretentious logo
