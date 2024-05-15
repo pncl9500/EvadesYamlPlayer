@@ -147,7 +147,7 @@ class Entity{
         //dont render
         break;
       case "image":
-        //do this later (this is for sweet tooth and experiorb)
+        image(this.image, this.x - this.radius, this.y - this.radius, this.radius * 2, this.radius * 2);
       default:
         break;
     }

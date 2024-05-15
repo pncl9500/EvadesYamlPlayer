@@ -103,6 +103,7 @@ class Player extends Entity{
     }
 
     this.canRevivePlayers = true;
+    this.cancelContactDeath = false;
   }
   applyEffectsBeforeAbilities(){
     for (var i = 0; i < this.effects.length; i++){
@@ -464,6 +465,13 @@ class Player extends Entity{
     }
   }
   enemyCollision(enemy){
+    if (this.cancelContactDeath){
+      for (let i in this.effects){
+        this.effects[i].playerEnemyContact(this, enemy);
+      }
+      return;
+    }
+    if (enemy.harmless){return;};
     if (this.invincible && (!enemy.corrosive || this.corrosiveBypass)) {return;};
     this.die();
   }

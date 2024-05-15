@@ -38,6 +38,8 @@ effectPriorities = {
   MinimizeEffect: 1000,
   RevivingEnemyEffect: 1000,
   DistortEffect: 1000,
+  VengeanceSlowEffect: 1000,
+  VengeanceFreezeEffect: 1001,
 
   IsGhostEffect: 2000,
 

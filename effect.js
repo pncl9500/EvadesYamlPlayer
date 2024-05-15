@@ -27,6 +27,9 @@ class Effect{
       }
     }
   }
+  playerEnemyContact(target, contactedEnemy){
+    
+  }
   applyBeforeAbilities(target){
     this.doEffectBeforeAbilities(target);
   }

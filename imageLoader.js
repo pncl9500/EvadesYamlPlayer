@@ -23,6 +23,10 @@ function loadImageAssets(){
       barrier: loadImage("imageAssets/ab/barrier.png"),
       stream: loadImage("imageAssets/ab/stream.png"),
 
+      night: loadImage("imageAssets/ab/night.png"),
+      vengeance: loadImage("imageAssets/ab/vengeance.png"),
+        vengeance_projectile: loadImage("imageAssets/ent/vengeance_projectile.png"),
+
       sear: loadImage("imageAssets/ab/sear.png"),
       fizzle: loadImage("imageAssets/ab/fizzle.png"),
     }
