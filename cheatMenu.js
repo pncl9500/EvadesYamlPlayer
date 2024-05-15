@@ -649,7 +649,7 @@ function getRegionSelectorMenu(){
       items.push(but);
     }
     if (extrapolatedMapNames.includes(game.regions[i].name)){
-      let but = btn(" ! ", null, 12, () => {}, `${game.regions[i].name}'s map file is an estimated version of the vanilla region and has not been obtained from a developer. May not be fully accurate.`);
+      let but = btn(" ! ", null, 12, () => {}, `${game.regions[i].name}'s map file is a modified version of an outdated file and has not been obtained from a developer. May not be fully accurate.`);
       but.color = {r: 255, g: 255, b: 220};
       but.hoveredColor = {r: 90, g: 90, b: 40};
       items.push(but);
