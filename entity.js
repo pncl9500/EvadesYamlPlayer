@@ -116,9 +116,10 @@ class Entity{
     
   }
   drawOnMap(){
+    let map = ui.miniMap;
     noStroke();
     fill(this.tempColor.r, this.tempColor.g, this.tempColor.b, (this.tempColor.a ?? 255) * this.alphaMultiplier);
-    ellipse(this.x, this.y, max(this.radius, minEntityMinimapRadius));
+    ellipse(this.x, this.y, max(this.radius, minEntityMinimapRadius) / map.storedRatio * map.markerScale);
   }
   draw(){
     // noStroke();

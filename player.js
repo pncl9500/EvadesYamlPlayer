@@ -70,11 +70,6 @@ class Player extends Entity{
     this.sy = 0;
     this.defStepParams();
   }
-  drawOnMap(){
-    noStroke();
-    fill(this.tempColor.r, this.tempColor.g, this.tempColor.b, (this.tempColor.a ?? 255) * this.alphaMultiplier);
-    ellipse(this.x, this.y, max(this.radius, minPlayerMinimapRadius));
-  }
   resetAllModifiers(){
     this.detectable = true;
     this.radiusMultiplier = 1;
@@ -744,6 +739,28 @@ class Player extends Entity{
     this.area.players.splice(this.area.players.indexOf(this), 1);
     this.area.attemptUnload();
     this.game.players.splice(this.game.players.indexOf(this), 1);
+  }
+  drawOnMap(){
+    noStroke();
+    let redness = 200 + 55 * sin(frameCount / (settings.fps / 30) * 0.2);
+    let map = ui.miniMap;
+    if (this.dead){
+      strokeWeight(12);
+      stroke(redness, 0, 0)
+    }
+    fill(this.tempColor.r, this.tempColor.g, this.tempColor.b, this.dead ? 255 : (this.tempColor.a ?? 255) * this.alphaMultiplier);
+    ellipse(this.x, this.y, (max(this.radius, minPlayerMinimapRadius) / map.storedRatio) * map.markerScale);
+    if (this.dead){
+      fill(redness, 0, 0);
+      noStroke();
+      textSize(64 / map.storedRatio * map.markerScale);
+      textAlign(CENTER, CENTER);
+      let off = 80 / map.storedRatio * map.markerScale;
+      if (this.y - off < 40 / map.storedRatio * map.markerScale){
+        off *= -1;
+      }
+      text(round(this.deathEffect.life / 1000), this.x - 2, this.y - off);
+    }
   }
 }
 //this is actually helpful somehow

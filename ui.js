@@ -218,6 +218,10 @@ class MiniMap extends UIpanel{
     this.maxWidth = 370;
     this.maxHeight = 100;
     this.padding = 0;
+
+    //dont change these
+    this.storedRatio = 1;
+    this.markerScale = 0.12;
   }
   draw(){
     noStroke();
@@ -230,7 +234,7 @@ class MiniMap extends UIpanel{
     (longestSide === "vert") && (scaledHeight = this.maxHeight) && (scaledWidth = this.maxHeight / areaHeight * areaWidth);
     (scaledHeight > this.maxHeight) && (longestSide = "vert") && (scaledHeight = this.maxHeight) && (scaledWidth *= (this.maxHeight / scaledHeight));
     let ratio = longestSide === "horiz" ? this.maxWidth / areaWidth : this.maxHeight / areaHeight;
-
+    this.storedRatio = ratio;
     push();
     translate(0, -scaledHeight);
     scale(ratio);
