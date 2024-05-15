@@ -594,6 +594,8 @@ function getCreditsMenu(){
     txt("Countless lines of code were taken or referenced from the ravel sandbox, originally", 12),
     txt("created by Ravelfett and currently maintained by DD1, Tronicality, and Sonic.exe.", 12),
     pdd(0, 6),
+    txt("Countless lines of code were taken or referenced from Sonic.exe's region editor. ", 12),
+    pdd(0, 6),
     txt("Map files taken from Sonic.exe's evades.io region editor, originally obtained from", 12),
     txt("Evades.io developers, and originally built by their respective authors.", 12),
     pdd(0, 6),
