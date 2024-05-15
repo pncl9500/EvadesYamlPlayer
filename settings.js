@@ -45,4 +45,23 @@ settings = {
   wobbleFrequency: 1,
 
   squareMode: false,
+
+  darkMode: false,
+  zoneBaseColors: {
+    active: {r: 255, g: 255, b: 255},
+    safe: {r: 195, g: 195, b: 195},
+    exit: {r: 253, g: 244, b: 129},
+    removal: {r: 254, g: 250, b: 193},
+    teleport: {r: 132, g: 206, b: 220},
+    dummy: {r: 213, g: 213, b: 213},
+  },
+  zoneBaseColorsDark: {
+    active: {r: 17, g: 17, b: 17},
+    safe: {r: 60, g: 60, b: 60},
+    exit: {r: 146, g: 136, b: 42},
+    removal: {r: 194, g: 186, b: 120}, //estimated
+    teleport: {r: 63, g: 133, b: 147},
+    dummy: {r: 17, g: 17, b: 17}, //estimated
+  },
+  backgroundBrightness: 51,
 }

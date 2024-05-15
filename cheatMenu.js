@@ -338,6 +338,24 @@ function setCheatMenuItems(){
             tog(11, 11, true, () => {ui.miniMap.hidden = false}, () => {ui.miniMap.hidden = true}, () => {return !ui.miniMap.hidden}, "Enable the minimap. Hotkey: [M]"),]),
         row([txt("Show timer:", 12), 
             tog(11, 11, false, () => {ui.timer.hidden = false}, () => {ui.timer.hidden = true}, () => {return !ui.timer.hidden}, "Enable the timer."),]),
+        row([txt("Dark mode:", 12), 
+            tog(11, 11, false, () => {
+              settings.darkMode = true;
+              let tempZoneColors = settings.zoneBaseColors;
+              settings.zoneBaseColors = settings.zoneBaseColorsDark;
+              settings.zoneBaseColorsDark = tempZoneColors;
+              settings.gridColor = [255,255,250,40];
+              settings.backgroundBrightness = 5;
+            }, () => {
+              settings.darkMode = false;
+              let tempZoneColors = settings.zoneBaseColors;
+              settings.zoneBaseColors = settings.zoneBaseColorsDark;
+              settings.zoneBaseColorsDark = tempZoneColors;
+              settings.gridColor = [0,0,20,40];
+              settings.backgroundBrightness = 51;
+            }, () => {
+              return settings.darkMode;
+            }, "Enable dark mode."),]),
     txt("Sandbox settings", 20), bigLine,
         row([txt("Change hero: ", 12), 
             btn("Open list", 37, 12, () => {queueCheatMenuChange(getHeroSelectorMenu())}, "Select a hero."),]),

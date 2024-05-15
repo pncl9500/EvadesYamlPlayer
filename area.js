@@ -81,6 +81,9 @@ class Area{
     let g = settings.gridColor[1];
     let b = settings.gridColor[2];
     let a = settings.gridColor[3];
+    if (settings.darkMode){
+      blendMode(ADD);
+    }
     stroke(r, g, b, a);
     strokeWeight(settings.gridLineWidth);
     for (var x = 1; x < (this.bounds.right - this.bounds.left) / settings.gridSize; x++){
@@ -89,6 +92,7 @@ class Area{
     for (var y = 1; y < (this.bounds.bottom - this.bounds.top) / settings.gridSize; y++){
       line(this.bounds.left, y * settings.gridSize, this.bounds.right, y * settings.gridSize);
     }
+    blendMode(BLEND);
   }
   update(){
     //basically everything loop

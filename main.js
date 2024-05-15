@@ -52,7 +52,7 @@ function draw() {
     updateAll();
     gameClock += dTime;
   }
-  background(51);
+  background(settings.backgroundBrightness);
   push();
   doCamTransform(cameraFocusX, cameraFocusY, 1);
   game.draw();

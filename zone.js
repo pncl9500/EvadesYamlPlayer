@@ -14,23 +14,23 @@ class Zone{
   getZoneBaseColor(){
     switch (this.type) {
       case "active":
-        fill(255);
+        fill(settings.zoneBaseColors.active.r, settings.zoneBaseColors.active.g, settings.zoneBaseColors.active.b);
         break;
       case "safe":
-        fill(195);
+        fill(settings.zoneBaseColors.safe.r, settings.zoneBaseColors.safe.g, settings.zoneBaseColors.safe.b);
         break;
       case "exit":
       case "victory":
-        fill(253, 244, 129);
+        fill(settings.zoneBaseColors.exit.r, settings.zoneBaseColors.exit.g, settings.zoneBaseColors.exit.b);
         break;
       case "removal":
-        fill(254, 250, 193);
+        fill(settings.zoneBaseColors.removal.r, settings.zoneBaseColors.removal.g, settings.zoneBaseColors.removal.b);
         break;
       case "teleport":
-        fill(132, 206, 220);
+        fill(settings.zoneBaseColors.teleport.r, settings.zoneBaseColors.teleport.g, settings.zoneBaseColors.teleport.b);
         break;
       case "dummy":
-        fill(213);
+        fill(settings.zoneBaseColors.dummy.r, settings.zoneBaseColors.dummy.g, settings.zoneBaseColors.dummy.b);
         break;
       default:
         break;
