@@ -12,7 +12,7 @@ areas:
     x: 5632
     y: 147952
     zones:
-      - type: exit
+      - type: teleport
         x: 0
         y: 0
         translate:
@@ -303,7 +303,7 @@ areas:
         y: 0
         width: 256
         height: 480
-      - type: exit
+      - type: teleport
         x: last_right
         y: 0
         translate:
