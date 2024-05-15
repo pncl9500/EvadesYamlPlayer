@@ -585,7 +585,7 @@ function clearDummyPlayers(exception = game.mainPlayer){
 function getCreditsMenu(){
   list = [
     txt("Credits", 20), bigLine,
-    txt("Sandbox by PNCL (me)", 12),
+    txt("EvadesYamlPlayer by PNCL (me)", 12),
     pdd(0, 6),
     txt("Original Evades.io game created by Micelee and developed by Stovoy, TheArctosJackal,", 12),
     txt("TTTruck, Meldiron, Kaluub, and PotatoNuke. Evades.io source code was used. Hero and", 12),
