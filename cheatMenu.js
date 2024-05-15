@@ -522,19 +522,21 @@ function setCheatMenuItems(){
           game.mainPlayer.area.entities[i].baseRadius *= random(0.2,2.5);
         }
       }}}, "Make all enemies a random color and randomizes their properties."),
-    ]),
-    row([txt("Wobbly mode:", 12), 
-      tog(11, 11, false, () => {settings.wobblyMode = true}, () => {settings.wobblyMode = false; timeScale = 1}, undefined, "Make the game wobbly. Overrides time scale setting."),]),
-    row([txt("Wobble speed:", 12), 
-      sld(0.5, 3, 120, (to) => {settings.wobbleFrequency = to}, () => {return settings.wobbleFrequency}, 0),
-      pdd(3, 0),
-      btn("Default", null, 12, () => {settings.wobbleFrequency = 1}, "Reset wobble speed to its default value (1)."),]),
-    row([txt("Square mode:", 12), 
-      tog(11, 11, false, () => {settings.squareMode = true}, () => {settings.squareMode = false}, undefined, "Make everything into a square. Some hitboxes may stay circular."),]),
-    row([txt("Mirror map:", 12), 
-      tog(11, 11, false, () => {settings.mirrorMap = true}, () => {settings.mirrorMap = false}, undefined, "Make the minimap accurately render the entire area."),]),
-    row([txt("Freaky mode:", 12), 
-      tog(11, 11, false, () => {}, () => {}, undefined, "Make the game freaky."),]),
+      ]),
+      row([txt("Wobbly mode:", 12), 
+        tog(11, 11, false, () => {settings.wobblyMode = true}, () => {settings.wobblyMode = false; timeScale = 1}, undefined, "Make the game wobbly. Overrides time scale setting."),]),
+      row([txt("Wobble speed:", 12), 
+        sld(0.5, 3, 120, (to) => {settings.wobbleFrequency = to}, () => {return settings.wobbleFrequency}, 0),
+        pdd(3, 0),
+        btn("Default", null, 12, () => {settings.wobbleFrequency = 1}, "Reset wobble speed to its default value (1)."),]),
+      row([txt("Square mode:", 12), 
+        tog(11, 11, false, () => {settings.squareMode = true}, () => {settings.squareMode = false}, undefined, "Make everything into a square. Some hitboxes may stay circular."),]),
+      row([txt("Mirror map:", 12), 
+        tog(11, 11, false, () => {settings.mirrorMap = true}, () => {settings.mirrorMap = false}, undefined, "Make the minimap accurately render the entire area."),]),
+      row([txt("Freaky mode:", 12), 
+        tog(11, 11, false, () => {}, () => {}, undefined, "Make the game freaky."),]),
+    txt("Credits", 20), bigLine,
+        btn("Show credits", null, 12, () => {queueCheatMenuChange(getCreditsMenu())}, "View the credits."),
   ]
   baseCheatMenuItems = list;
   return list;
@@ -566,6 +568,7 @@ function massChangeEnemySize(size){
 
 let newCheatMenu = undefined;
 function queueCheatMenuChange(list){
+  mouseScroll = 0;
   newCheatMenu = list;
 }
 
@@ -577,6 +580,41 @@ function clearDummyPlayers(exception = game.mainPlayer){
     }
   }
   game.cycleMainPlayer();
+}
+
+function getCreditsMenu(){
+  list = [
+    txt("Credits", 20), bigLine,
+    txt("Sandbox by PNCL (me)", 12),
+    pdd(0, 6),
+    txt("Original Evades.io game created by Micelee and developed by Stovoy, TheArctosJackal,", 12),
+    txt("TTTruck, Meldiron, Kaluub, and PotatoNuke. Some Evades.io source code was used.", 12),
+    txt("Hero and enemy designs are from Evades.io and its developers.", 12),
+    pdd(0, 6),
+    txt("Countless lines of code were taken or referenced from the ravel sandbox, originally", 12),
+    txt("created by Ravelfett and currently maintained by DD1, Tronicality, and Sonic.exe.", 12),
+    pdd(0, 6),
+    txt("Map files taken from Sonic.exe's evades.io region editor, originally obtained from", 12),
+    txt("Evades.io developers, and originally built by their respective authors.", 12),
+    pdd(0, 4),
+    txt("Bugfinders:", 12),
+    txt("Sonic.exe", 8),
+    txt("Pack", 8),
+    txt("Bunny", 8),
+    pdd(0, 4),
+    txt("Accuracy maintainers:", 12),
+    txt("Sonic.exe", 8),
+    pdd(0, 4),
+    row([txt("Region credits:", 12), btn(" ! ", null, 12, () => {}, "Unfortunately, I do not know the author of every map used in-game. I do intend to credit them. If a region is not listed here, it is not an indication that I created it.")]),
+    txt("Dusty Depths by Piger and MeguclOwUn", 8),
+    txt("Shifting Sands by Piger and DD1", 8),
+    txt("Mysterious Mansion by Potatonuke", 8),
+    txt("Quiet Quarry Hard by Potatonuke", 8),
+    txt("Frozen Fjord Hard by Potatonuke", 8),
+    txt("Restless Ridge Hard by Amasterclasher, TheTroll, and DD1", 8),
+    txt("Other maps created by Evades.io developers or dedicated Evades.io community members", 8),
+  ]
+  return list;
 }
 
 function getRegionSelectorMenu(){
