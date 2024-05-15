@@ -569,7 +569,7 @@ class IsGhostEffect extends Effect{
 class SpeedGhost extends Enemy{
   constructor(x, y, angle, speed, radius){
     super(x, y, angle, speed, radius, pal.nm.speed_ghost)
-    this.gainEffect(new IsGhostEffect());
+    this.setAsGhost();
   }
   behavior(area, players){
     for (var i in players){
@@ -587,7 +587,7 @@ class SpeedGhost extends Enemy{
 class RegenGhost extends Enemy{
   constructor(x, y, angle, speed, radius){
     super(x, y, angle, speed, radius, pal.nm.regen_ghost)
-    this.gainEffect(new IsGhostEffect());
+    this.setAsGhost();
   }
   behavior(area, players){
     for (var i in players){
@@ -605,7 +605,7 @@ class RegenGhost extends Enemy{
 class DisablingGhost extends Enemy{
   constructor(x, y, angle, speed, radius){
     super(x, y, angle, speed, radius, pal.nm.disabling_ghost)
-    this.gainEffect(new IsGhostEffect());
+    this.setAsGhost();
   }
   behavior(area, players){
     for (var i in players){
@@ -702,7 +702,7 @@ class PoisonSniperEffect extends Effect{
 class PoisonGhost extends Enemy{
   constructor(x, y, angle, speed, radius){
     super(x, y, angle, speed, radius, pal.nm.poison_ghost)
-    this.gainEffect(new IsGhostEffect());
+    this.setAsGhost();
   }
   behavior(area, players){
     for (var i in players){
@@ -757,7 +757,7 @@ class IceSniperEffect extends Effect{
 class IceGhost extends Enemy{
   constructor(x, y, angle, speed, radius){
     super(x, y, angle, speed, radius, pal.nm.ice_ghost)
-    this.gainEffect(new IsGhostEffect());
+    this.setAsGhost();
   }
   behavior(area, players){
     for (var i in players){
@@ -920,7 +920,7 @@ class Gravity extends AuraEnemy{
 class GravityGhost extends Enemy{
   constructor(x, y, angle, speed, radius){
     super(x, y, angle, speed, radius, pal.nm.gravity_ghost)
-    this.gainEffect(new IsGhostEffect());
+    this.setAsGhost();
     this.gravity = 12;
   }
   behavior(area, players){
@@ -963,7 +963,7 @@ class Repelling extends AuraEnemy{
 class RepellingGhost extends Enemy{
   constructor(x, y, angle, speed, radius){
     super(x, y, angle, speed, radius, pal.nm.repelling_ghost)
-    this.gainEffect(new IsGhostEffect());
+    this.setAsGhost();
     this.repulsion = 12;
   }
   behavior(area, players){
@@ -1584,7 +1584,7 @@ class FireTrailProjectile extends Enemy{
 class WindGhost extends Enemy{
   constructor(x, y, angle, speed, radius){
     super(x, y, angle, speed, radius, pal.nm.wind_ghost)
-    this.gainEffect(new IsGhostEffect());
+    this.setAsGhost();
     this.gravity = 16;
   }
   behavior(area, players){

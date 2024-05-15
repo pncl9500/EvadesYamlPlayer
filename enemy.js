@@ -20,6 +20,10 @@ class Enemy extends Entity{
 
     this.playerContactFunctions = [];
   }
+  setAsGhost(){
+    this.gainEffect(new IsGhostEffect());
+    this.alphaMultiplier = 0.4;
+  }
   canGainEffect(effect){
     if (this.immune && !effect.overrideEnemyImmunity){
       return false;
