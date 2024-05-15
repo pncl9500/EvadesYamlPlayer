@@ -7,6 +7,7 @@ heroList = {
   "brute": Brute,
   "nexus": Nexus,
   "shade": Shade,
+  //"euclid": Euclid,
   //"artiek": Artiek,
 }
 
