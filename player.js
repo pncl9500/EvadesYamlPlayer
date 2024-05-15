@@ -197,7 +197,7 @@ class Player extends Entity{
         this.stepDistance -= this.stepDeceleration * this.moveDist * tFix;
       } else {
         this.stepDistance = 0;
-        //this.stepAccelerating = true; //???
+        //this.stepAccelerating = true;
         this.stepMoving = false
         this.canStepMove = true;
       }
@@ -216,8 +216,8 @@ class Player extends Entity{
     let myv = 1 * tFix * this.ySpeedMultiplier * this.stepDistance;
     this.xv += sx;
     this.yv += sy;
-    this.xv = max(-mxv, min(mxv, this.xv));
-    this.yv = max(-myv, min(myv, this.yv));
+    abs(this.xv) > 0.5 && (this.xv = max(-mxv, min(mxv, this.xv)));
+    abs(this.yv) > 0.5 && (this.yv = max(-myv, min(myv, this.yv)));
     this.x += this.xv;
     this.y += this.yv;
     this.prevMovementX = this.xv;
