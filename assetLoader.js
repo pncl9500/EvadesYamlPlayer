@@ -1,4 +1,4 @@
-function loadImageAssets(){
+function loadAssets(){
   im = {
     missingImage: loadImage("imageAssets/missingImage.png"),
     ab: {
@@ -30,5 +30,8 @@ function loadImageAssets(){
       sear: loadImage("imageAssets/ab/sear.png"),
       fizzle: loadImage("imageAssets/ab/fizzle.png"),
     }
+  }
+  fnt = {
+    tahomaBold: loadFont("fontAssets/tahomabd.ttf")
   }
 }

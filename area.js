@@ -1,8 +1,9 @@
 class Area{
-  constructor(x, y, zones, properties, parent){
+  constructor(x, y, zones, properties, parent, name = undefined){
     this.loaded = false;
     this.x = x;
     this.y = y;
+    this.name = name;
     this.zones = zones;
     this.properties = properties;
     this.parent = parent;
@@ -10,6 +11,13 @@ class Area{
     this.players = [];
     //players do not go in the entities array... for some reason
     this.entities = [];
+    this.isVictory = false;
+    for (let i in this.zones){
+      if (this.zones[i].type === "victory"){
+        this.isVictory = true;
+        break;
+      }
+    }
   }
   draw(parentRegion){
     if (settings.regionBackground){

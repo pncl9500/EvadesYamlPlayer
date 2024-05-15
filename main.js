@@ -7,7 +7,7 @@ cheatMenuOpen = false;
  * Loaded before the game is opened
  */
 function preload(){
-  loadImageAssets();
+  loadAssets();
   loadAllYAML();
 }
 /**

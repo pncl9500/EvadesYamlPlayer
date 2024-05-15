@@ -148,7 +148,7 @@ class Region{
           y = lastArea.bounds.bottom + lastArea.y + add;
         }
       }
-      var area = new Area(x, y, zones, ar.properties, this);
+      var area = new Area(x, y, zones, ar.properties, this, ar.name);
       this.areas.push(area);
       lastArea = area;
     }
