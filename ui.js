@@ -234,7 +234,12 @@ class MiniMap extends UIpanel{
     push();
     translate(0, -scaledHeight);
     scale(ratio);
+    //if region background was on and mirror map was also on, drawing the map would make a new ambient background layer, which we don't want
+    //so temporarily turn regionBackground off and then turn it back on after drawing
+    let regionBgOn = settings.regionBackground;
+    settings.regionBackground = false;
     settings.mirrorMap ? game.mainPlayer.area.draw(game.mainPlayer.region) : game.mainPlayer.area.drawOnMap(game.mainPlayer.region);
+    settings.regionBackground = regionBgOn;
     pop();
   }
 }
