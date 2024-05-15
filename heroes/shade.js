@@ -46,6 +46,13 @@ class NightEffect extends Effect{
     }
     this.toRemove = true;
     contactedEnemy.gainEffect(new NightEnemyEffect(this.effectDurationOnEnemy));
+    if (contactedEnemy.harmless){return;};
+    if (target.invincible && (!contactedEnemy.corrosive || target.corrosiveBypass)) {
+      return;
+    }
+    if (contactedEnemy.immune){
+      target.die();
+    }
   }
 }
 
