@@ -7,8 +7,20 @@ heroList = {
   "brute": Brute,
   "nexus": Nexus,
   "shade": Shade,
+  "oldmorfe": OldMorfe,
   //"euclid": Euclid,
 }
+
+vanillaHeroes = [
+  "magmax",
+  "rime",
+  "morfe",
+  "aurora",
+  "necro",
+  "brute",
+  "nexus",
+  "shade"
+]
 
 heroDict = new Map();
 

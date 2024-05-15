@@ -126,6 +126,28 @@ function processUrlParams(){
         game.mainPlayer.area.attemptLoad(true); 
         game.mainPlayer.moveToAreaStart();
         break;
+      case "hero":
+        game.mainPlayer.swapHero(val);
+        break;
+      case "points":
+        game.mainPlayer.upgradePoints = 150;
+        break;
+      case "stats":
+        game.mainPlayer.upgradePoints = 150;
+        game.mainPlayer.speed = gameConsts.maxSpeed;
+        game.mainPlayer.maxEnergy = gameConsts.maxEnergy;
+        game.mainPlayer.regen = gameConsts.maxRegen;
+        break;
+      case "fullstats":
+        game.mainPlayer.upgradePoints = 160;
+        game.mainPlayer.speed = gameConsts.maxSpeed;
+        game.mainPlayer.maxEnergy = gameConsts.maxEnergy;
+        game.mainPlayer.regen = gameConsts.maxRegen;
+        for (let i = 0; i < 5; i++){
+          game.mainPlayer.ability1.upgrade(game.mainPlayer);
+          game.mainPlayer.ability2.upgrade(game.mainPlayer);
+        }
+        break;
       default:
         break;
     }

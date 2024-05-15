@@ -743,7 +743,8 @@ function getHeroSelectorMenu(playerToChange = game.mainPlayer, backMenuDestinati
     btn("Go back", 38, 12, () => {if (typeof bmd === "function"){bmd = bmd()}queueCheatMenuChange(bmd)}, "Return to the previous menu."),
     txt("Hero List", 20), bigLine,
   ];
-  for (const [key, value] of Object.entries(heroList)){
+  for (var i in vanillaHeroes){
+    let key = vanillaHeroes[i];
     let n = new(heroDict.get(key))(-99999, -99999, 0, "", false, game, 0, 0, []);
     n.toRemove = true;
     let nb = btn(n.heroName, 180, 12, () => {
@@ -774,7 +775,8 @@ function getPlayerCreationMenu(){
       tog(11, 11, true, () => {settings.randomDummySpawn = true}, () => {settings.randomDummySpawn = false}, () => {return settings.randomDummySpawn;}, "If enabled, dummy players will be spawned with a random positional variation."),]),
     txt("Hero List", 20), bigLine,
   ];
-  for (const [key, value] of Object.entries(heroList)){
+  for (let i in vanillaHeroes){
+    let key = vanillaHeroes[i];
     let n = new(heroDict.get(key))(-99999, -99999, 0, "", false, game, 0, 0, []);
     n.toRemove = true;
     let nb = btn(n.heroName, 180, 12, () => {

@@ -157,5 +157,7 @@ pal = {
     alk: "8b0146",
     aranes: "212121",
     cybot: "926be3",
+
+    oldmorfe: "00dd00",
   },
 }
