@@ -617,7 +617,7 @@ function getCreditsMenu(){
     txt("Quiet Quarry Hard by PotatoNuke", 8),
     txt("Frozen Fjord Hard by PotatoNuke", 8),
     txt("Restless Ridge Hard by Amasterclasher, TheTroll, and DD1", 8),
-    txt("Other maps created by Evades.io developers or dedicated Evades.io community members", 8),
+    txt("Other maps created by Evades.io developers or dedicated Evades.io community members.", 8)
   ]
   return list;
 }
