@@ -8,10 +8,12 @@ class UI{
     this.heroCard = new HeroCard();
     this.miniMap = new MiniMap();
     this.areaHeader = new AreaHeader();
+    this.timer = new Timer();
     this.uiPanels = [];
     this.uiPanels.push(this.heroCard);
     this.uiPanels.push(this.miniMap);
     this.uiPanels.push(this.areaHeader);
+    this.uiPanels.push(this.timer);
   }
   draw(){
     for (var i in this.uiPanels){
@@ -276,7 +278,7 @@ class AreaHeader extends UIpanel{
     }
     stroke(c.r, c.g, c.b);
     strokeWeight(5);
-    textSize(36);
+    textSize(35);
     let regionName = game.mainPlayer.region.name;
     let areaName = "Area " + (game.mainPlayer.areaNum + 1);
     if (game.mainPlayer.area.isVictory){
@@ -296,3 +298,38 @@ let bosslessRegions = [
   "Grand Garden Hard",
   "Restless Ridge Hard"
 ]
+
+class Timer extends UIpanel{
+  constructor(){
+    super(0 , -1);
+    this.hidden = true;
+  }
+  draw(){
+    noStroke();
+    textFont(fnt.tahomaBold);
+    textAlign(CENTER, TOP);
+    fill(244, 250, 255);
+    let c = {r: 66, g: 90, b: 109};
+    if (game.mainPlayer.region.properties !== undefined && game.mainPlayer.region.properties.hasOwnProperty("background_color")){
+      var colset = game.mainPlayer.region.properties.background_color;
+      c = {r: colset[0], g: colset[1], b: colset[2]};
+      c.r /= 1.5;
+      c.g /= 1.5;
+      c.b /= 1.5;
+    }
+    if (game.mainPlayer.area.properties !== undefined && game.mainPlayer.area.properties.hasOwnProperty("background_color")){
+      var colset = game.mainPlayer.area.properties.background_color;
+      c = {r: colset[0], g: colset[1], b: colset[2]};
+      c.r /= 1.5;
+      c.g /= 1.5;
+      c.b /= 1.5;
+    }
+    stroke(c.r, c.g, c.b);
+    strokeWeight(5);
+    textSize(35);
+
+    let minutes = floor((gameClock / 1000) / 60);
+    let seconds = floor((gameClock / 1000) % 60);
+    text(minutes + "m " + seconds + "s", 0, -8 + 42);
+  }
+}

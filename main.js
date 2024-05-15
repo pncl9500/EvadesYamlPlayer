@@ -32,6 +32,7 @@ function setup() {
 var tFix = 0.5;
 var timeCap = 250;
 var timeScale = 1;
+var gameClock = 0;
 /**
  * Called every frame
  */
@@ -46,9 +47,10 @@ function draw() {
   }
   dTime *= timeScale;
   tFix = dTime / (1000 / 60) / 2;
-
+  
   if (!settings.gamePaused){
     updateAll();
+    gameClock += dTime;
   }
   background(51);
   push();
@@ -78,6 +80,7 @@ function skipFrame(){
   dTime *= timeScale;
   tFix = dTime / (1000 / 60) / 2;
   updateAll();
+  gameClock += dTime;
 }
 
 function drawDebugValueText(){
