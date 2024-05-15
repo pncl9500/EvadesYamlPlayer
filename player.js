@@ -745,7 +745,7 @@ class Player extends Entity{
     let redness = 200 + 55 * sin(frameCount / (settings.fps / 30) * 0.2);
     let map = ui.miniMap;
     if (this.dead){
-      strokeWeight(12);
+      strokeWeight(12 / map.storedRatio * map.markerScale);
       stroke(redness, 0, 0)
     }
     fill(this.tempColor.r, this.tempColor.g, this.tempColor.b, this.dead ? 255 : (this.tempColor.a ?? 255) * this.alphaMultiplier);
