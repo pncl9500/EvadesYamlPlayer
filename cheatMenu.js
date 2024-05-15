@@ -613,9 +613,9 @@ function getCreditsMenu(){
     row([txt("Region credits:", 12), btn(" ! ", null, 12, () => {}, "Unfortunately, I do not know the author of every map used in-game. I do intend to credit them. If a region is not listed here, it is not an indication that I created it.")]),
     txt("Dusty Depths by Piger and MeguclOwUn", 8),
     txt("Shifting Sands by Piger and DD1", 8),
-    txt("Mysterious Mansion by Potatonuke", 8),
-    txt("Quiet Quarry Hard by Potatonuke", 8),
-    txt("Frozen Fjord Hard by Potatonuke", 8),
+    txt("Mysterious Mansion by PotatoNuke", 8),
+    txt("Quiet Quarry Hard by PotatoNuke", 8),
+    txt("Frozen Fjord Hard by PotatoNuke", 8),
     txt("Restless Ridge Hard by Amasterclasher, TheTroll, and DD1", 8),
     txt("Other maps created by Evades.io developers or dedicated Evades.io community members", 8),
   ]
