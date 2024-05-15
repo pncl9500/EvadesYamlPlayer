@@ -296,7 +296,9 @@ class AreaHeader extends UIpanel{
 let bosslessRegions = [
   "Grand Garden",
   "Grand Garden Hard",
-  "Restless Ridge Hard"
+  "Restless Ridge Hard",
+  "Magnetic Monopole",
+  "Magnetic Monopole Hard",
 ]
 
 class Timer extends UIpanel{
