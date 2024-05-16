@@ -102,8 +102,8 @@ function processUrlParams(){
   for (var i = 0; i < urlParams.length; i++){
     //split each parameter into its key and value
     var pair = urlParams[i].split("=");
-    var param = pair[0];
-    var val = pair[1];
+    var param = pair[0].toLowerCase();
+    var val = pair[1] ? pair[1].toLowerCase() : pair[1];
     //do stuff with each parameter
     switch (param) {
       case "region":
