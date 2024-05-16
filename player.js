@@ -15,7 +15,7 @@ deathTimerDurations = [
 ]
 
 class Player extends Entity{
-  constructor(x, y, radius, color, name, isMain, game, regionNum = 0, areaNum = 0, ctrlSets = []){
+  constructor(x, y, radius, color, name, isMain, game, regionNum = 0, areaNum = 0, ctrlSets = [], putInArea = true){
     super(x, y, radius, color, isMain ? z.mainPlayer : z.player, "noOutline")
     this.heroName = "Basic";
 
@@ -30,8 +30,10 @@ class Player extends Entity{
     this.areaNum = areaNum;
     this.area = this.region.areas[areaNum];
     this.visitedAreas = [];
-    this.area.enter(this);
-    this.area.attemptLoad(true);
+    if (putInArea){
+      this.area.enter(this);
+      this.area.attemptLoad(true);
+    }
     this.name = name;
     this.speed = gameConsts.startingSpeed;
     this.tempSpeed = this.speed;
@@ -699,7 +701,7 @@ class Player extends Entity{
     }
   }
   swapHero(newHeroName){
-    let newPlayer = new(heroDict.get(newHeroName))(this.x, this.y, this.baseRadius, this.name, this.isMain, game, this.regionNum, this.areaNum, this.ctrlSets);
+    let newPlayer = new(heroDict.get(newHeroName))(this.x, this.y, this.baseRadius, this.name, this.isMain, game, this.regionNum, this.areaNum, this.ctrlSets, false);
 
     for (var i = 0; i < min(this.ability1.tier, newPlayer.ability1.maxTier); i++){
       newPlayer.ability1.upgrade(newPlayer, true);
@@ -733,15 +735,14 @@ class Player extends Entity{
     newPlayer.mostRecentSafeY = this.mostRecentSafeY;
     newPlayer.lastDir = this.lastDir;
 
+    let ind = this.area.players.indexOf(this);
     this.area.players.splice(this.area.players.indexOf(this), 1);
-    let ind = this.game.players.indexOf(this);
     this.game.players.splice(this.game.players.indexOf(this), 1);
-    
-    //this.area.players.push(newPlayer);
-    this.game.addPlayer(newPlayer, ind);
-    if (this.isMain){
-      this.game.setMainPlayer(newPlayer);
-    }
+
+    this.area.players.push(newPlayer);
+    this.game.players.push(newPlayer);
+
+    this.game.setMainPlayer(newPlayer);
   }
   removeSelf(){
     this.area.players.splice(this.area.players.indexOf(this), 1);

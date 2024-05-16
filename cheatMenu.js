@@ -756,7 +756,7 @@ function getHeroSelectorMenu(playerToChange = game.mainPlayer, backMenuDestinati
   ];
   for (var i in vanillaHeroes){
     let key = vanillaHeroes[i];
-    let n = new(heroDict.get(key))(-99999, -99999, 0, "", false, game, 0, 0, []);
+    let n = new(heroDict.get(key))(-99999, -99999, 0, "", false, game, 0, 0, [], false);
     n.toRemove = true;
     let nb = btn(n.heroName, 180, 12, () => {
       playerToChange.swapHero(key);
@@ -788,7 +788,7 @@ function getPlayerCreationMenu(){
   ];
   for (let i in vanillaHeroes){
     let key = vanillaHeroes[i];
-    let n = new(heroDict.get(key))(-99999, -99999, 0, "", false, game, 0, 0, []);
+    let n = new(heroDict.get(key))(-99999, -99999, 0, "", false, game, 0, 0, [], false);
     n.toRemove = true;
     let nb = btn(n.heroName, 180, 12, () => {
       let dummyNum = max(1, game.players.length);

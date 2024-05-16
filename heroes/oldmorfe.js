@@ -1,6 +1,6 @@
 class OldMorfe extends Player{
-  constructor(x, y, radius, name, isMain, game, regionNum = 0, areaNum = 0, ctrlSets = []){
-    super(x, y, radius, pal.hero.morfe, name, isMain, game, regionNum, areaNum, ctrlSets);
+  constructor(x, y, radius, name, isMain, game, regionNum = 0, areaNum = 0, ctrlSets = [], putInArea){
+    super(x, y, radius, pal.hero.morfe, name, isMain, game, regionNum, areaNum, ctrlSets, putInArea);
     this.heroName = "OG Morfe";
     this.ability1 = new OldReverse();
     this.ability2 = new OldMinimize();

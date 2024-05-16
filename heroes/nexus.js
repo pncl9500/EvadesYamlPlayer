@@ -1,6 +1,6 @@
 class Nexus extends Player{
-  constructor(x, y, radius, name, isMain, game, regionNum = 0, areaNum = 0, ctrlSets = []){
-    super(x, y, radius, pal.hero.nexus, name, isMain, game, regionNum, areaNum, ctrlSets);
+  constructor(x, y, radius, name, isMain, game, regionNum = 0, areaNum = 0, ctrlSets = [], putInArea){
+    super(x, y, radius, pal.hero.nexus, name, isMain, game, regionNum, areaNum, ctrlSets, putInArea);
     this.heroName = "Nexus";
     this.ability1 = new Barrier();
     this.ability2 = new Stream();
