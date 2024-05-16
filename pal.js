@@ -101,7 +101,11 @@ pal = {
     force_sniper_b: "#914d83",
   },
   nmp:{
-    ice_sniper:"be89ff",
+    ice_sniper: "be89ff",
+    poison_sniper: {r: 80, g: 11, b: 112},
+    wind_sniper: {r: 144, g: 191, b: 166},
+    positive_magnetic_sniper: {r: 207, g: 44, b: 42},
+    negative_magnetic_sniper: {r: 107, g: 89, b: 245},
   },
   nmaur:{
     "slowing":"#ff000026",

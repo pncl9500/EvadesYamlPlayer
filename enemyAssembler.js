@@ -69,6 +69,8 @@ function getEnemyFromSpawner(x, y, d, enemyType, spawner, spawnIndex, zone){
     case "force_sniper_a": return new ForceSniperA(x, y, d, s, r);
     case "force_sniper_b": return new ForceSniperB(x, y, d, s, r);
     case "wind_sniper": return new WindSniper(x, y, d, s, r);
+    case "positive_magnetic_sniper": return new PositiveMagneticSniper(x, y, d, s, r);
+    case "negative_magnetic_sniper": return new NegativeMagneticSniper(x, y, d, s, r);
 
     //pseudo sniper
     case "radiating_bullets": return new RadiatingBullets(x, y, d, s, r, property("release_time"), property("release_interval"));
@@ -82,6 +84,8 @@ function getEnemyFromSpawner(x, y, d, enemyType, spawner, spawnIndex, zone){
     case "gravity_ghost": return new GravityGhost(x, y, d, s, r);
     case "repelling_ghost": return new RepellingGhost(x, y, d, s, r);
     case "wind_ghost": return new WindGhost(x, y, d, s, r);
+    case "positive_magnetic_ghost": return new PositiveMagneticGhost(x, y, d, s, r);
+    case "negative_magnetic_ghost": return new NegativeMagneticGhost(x, y, d, s, r);
 
     //wall
     case "wall": return new Wall(s, r, spawnIndex, spawner.count, spawner.move_clockwise ?? defaults.spawnerProps.move_clockwise, zone);

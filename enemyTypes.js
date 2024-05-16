@@ -674,7 +674,7 @@ class PoisonSniper extends GenericSniper{
     super(x, y, angle, speed, radius, pal.nm.poison_sniper, 3000, 600);
   } 
   createBullet(angle, target, area){
-    let bullet = new PoisonSniperBullet(this.x, this.y, angle, 16, 10, pal.nm.poison_sniper);
+    let bullet = new PoisonSniperBullet(this.x, this.y, angle, 16, 10, pal.nmp.poison_sniper);
     bullet.parentZone = this.parentZone;
     area.addEnt(bullet);
   }
@@ -1619,7 +1619,7 @@ class WindSniper extends GenericSniper{
     super(x, y, angle, speed, radius, pal.nm.wind_sniper, 3000, 600);
   } 
   createBullet(angle, target, area){
-    let bullet = new WindSniperBullet(this.x, this.y, angle, 16, this.radius / 2, pal.nm.wind_sniper);
+    let bullet = new WindSniperBullet(this.x, this.y, angle, 16, this.radius / 2, pal.nmp.wind_sniper);
     bullet.parentZone = this.parentZone;
     area.addEnt(bullet);
   }
@@ -1855,6 +1855,96 @@ class MagneticNullificationEnemyEffect extends Effect{
   doEffect(target){
     if (!(target.magnetism || target.partialMagnetism)) return;
     target.magneticSpeedMultiplier *= 0;
+  }
+}
+
+class PositiveMagneticSniper extends GenericSniper{
+  constructor(x, y, angle, speed, radius){
+    super(x, y, angle, speed, radius, pal.nm.positive_magnetic_sniper, 3000, 600);
+  } 
+  createBullet(angle, target, area){
+    let bullet = new PositiveMagneticSniperBullet(this.x, this.y, angle, 16, 10, pal.nmp.positive_magnetic_sniper);
+    bullet.parentZone = this.parentZone;
+    area.addEnt(bullet);
+  }
+}
+
+class PositiveMagneticSniperBullet extends Bullet{
+  constructor(x, y, angle, speed, radius, color){
+    super(x, y, angle, speed, radius, color);
+    this.inherentlyHarmless = true;
+  }
+  playerCollisionEvent(player){
+    if (player.ignoreBullets){
+      return;
+    }
+    if (!(player.magnetism || player.partialMagnetism)){
+      return;
+    }
+    player.ability3 = new MagnetismUp();
+    player.magnetismDirection = -1;
+    this.toRemove = true;
+  }
+}
+
+class NegativeMagneticSniper extends GenericSniper{
+  constructor(x, y, angle, speed, radius){
+    super(x, y, angle, speed, radius, pal.nm.negative_magnetic_sniper, 3000, 600);
+  } 
+  createBullet(angle, target, area){
+    let bullet = new NegativeMagneticSniperBullet(this.x, this.y, angle, 16, 10, pal.nmp.negative_magnetic_sniper);
+    bullet.parentZone = this.parentZone;
+    area.addEnt(bullet);
+  }
+}
+
+class NegativeMagneticSniperBullet extends Bullet{
+  constructor(x, y, angle, speed, radius, color){
+    super(x, y, angle, speed, radius, color);
+    this.inherentlyHarmless = true;
+  }
+  playerCollisionEvent(player){
+    if (player.ignoreBullets){
+      return;
+    }
+    if (!(player.magnetism || player.partialMagnetism)){
+      return;
+    }
+    player.ability3 = new MagnetismDown()
+    player.magnetismDirection = 1;
+    this.toRemove = true;
+  }
+}
+
+class PositiveMagneticGhost extends Enemy{
+  constructor(x, y, angle, speed, radius){
+    super(x, y, angle, speed, radius, pal.nm.positive_magnetic_ghost)
+    this.setAsGhost();
+  }
+  behavior(area, players){
+    for (var i in players){
+      if (circleCircle(this, players[i]) && !this.disabled){
+        let player = players[i];
+        player.ability3 = new MagnetismUp();
+        player.magnetismDirection = -1;
+      }
+    }
+  }
+}
+
+class NegativeMagneticGhost extends Enemy{
+  constructor(x, y, angle, speed, radius){
+    super(x, y, angle, speed, radius, pal.nm.negative_magnetic_ghost)
+    this.setAsGhost();
+  }
+  behavior(area, players){
+    for (var i in players){
+      if (circleCircle(this, players[i]) && !this.disabled){
+        let player = players[i];
+        player.ability3 = new MagnetismDown();
+        player.magnetismDirection = 1;
+      }
+    }
   }
 }
 
