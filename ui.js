@@ -287,7 +287,13 @@ class AreaHeader extends UIpanel{
     if (game.mainPlayer.areaNum % 10 === 9 && !bosslessRegions.includes(game.mainPlayer.region.name)){
       areaName = "BOSS AREA " + (game.mainPlayer.areaNum + 1);
     }
-    let finalAreaName = game.mainPlayer.area.name ?? areaName;
+    let overridingName = game.mainPlayer.area.name;
+    if (game.mainPlayer.area.name !== undefined){
+      if (parseInt(overridingName.substring(0, 1)) == overridingName.substring(0, 1)){
+        overridingName = "Area " + overridingName;
+      }
+    }
+    let finalAreaName = overridingName ?? areaName;
     text(regionName + ": " + finalAreaName, 0, -8);
   }
 }
