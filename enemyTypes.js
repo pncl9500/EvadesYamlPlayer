@@ -1695,7 +1695,10 @@ class RadarBullet extends Bullet{
 class Quicksand extends AuraEnemy{
   constructor(x, y, angle, speed, radius, auraSize, dir, strength){
     super(x, y, angle, speed, radius, pal.nm.quicksand, pal.nmaur.quicksand, auraSize)
-    this.dir = dir * (PI/180) ?? floor(random(0, 2*PI) / (PI/2)) * PI/2;
+    this.dir = dir * (PI/180);
+    if (isNaN(this.dir)){
+      this.dir = floor(random(0, 2*PI) / (PI/2)) * PI/2;
+    }
     this.strength = strength;
   }
   applyAuraEffectToPlayer(area, players, player){
