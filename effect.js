@@ -112,3 +112,14 @@ class DeadEffect extends Effect{
     // }
   }
 }
+
+
+class CancelMagnetismEffect extends Effect{
+  constructor(duration = 0){
+    super(duration, getEffectPriority("SafeZoneEffect"), false)
+  }
+  doEffectBeforeAbilities(target){
+    target.magnetism = false;
+    target.partialMagnetism = false;
+  }
+}

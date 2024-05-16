@@ -971,9 +971,6 @@ extrapolatedMapNames = [
 unimplementedGimmickMapNames = [
   "Cyber Castle",
   "Cyber Castle Hard",
-  "Magnetic Monopole",
-  "Magnetic Monopole Hard",
-  "Infinite Inferno",
   "Stellar Square",
   "Endless Echo",
   "Endless Echo Hard",

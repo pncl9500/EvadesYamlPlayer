@@ -65,17 +65,19 @@ class HeroCard extends UIpanel{
     this.lineDistance = 104;
   }
   draw(){
+    let hasThird = !(game.mainPlayer.ability3.constructor.name === "Ability");
+    let extraWidth = hasThird ? 74: 0;
     //this sucks and has a lot of magic numbers. fun
     //background
     noStroke();
     fill(0, 200);
-    rect(-this.width / 2, -this.height, this.width, this.height);
+    rect(-this.width / 2, -this.height, this.width + extraWidth, this.height);
     //bar
     fill(game.mainPlayer.color.r, game.mainPlayer.color.g, game.mainPlayer.color.b, 110);
-    rect(-this.width / 2, -this.height - this.xpBarHeight, this.width, this.xpBarHeight);
+    rect(-this.width / 2, -this.height - this.xpBarHeight, this.width + extraWidth, this.xpBarHeight);
     //filled bar 
     fill(game.mainPlayer.color.r, game.mainPlayer.color.g, game.mainPlayer.color.b, 255);
-    rect(-this.width / 2, -this.height - this.xpBarHeight, this.width * (game.mainPlayer.levelProgress / game.mainPlayer.levelProgressNeeded), this.xpBarHeight);
+    rect(-this.width / 2, -this.height - this.xpBarHeight, (this.width + extraWidth) * (game.mainPlayer.levelProgress / game.mainPlayer.levelProgressNeeded), this.xpBarHeight);
     //line
     fill(125);
     rect(-this.width / 2 + this.lineDistance - 1, -this.height, 2, this.height);
@@ -111,18 +113,23 @@ class HeroCard extends UIpanel{
     this.drawStatUpgraderText(-this.width / 2 + this.lineDistance + 40 + 160, -this.height + 37, round(game.mainPlayer.regen * 10) / 10, "Regen", "3", true, game.mainPlayer.regen < gameConsts.maxRegen)
     this.drawStatUpgraderButton(-this.width / 2 + this.lineDistance + 40 + 240, -this.height + 37, "4", game.mainPlayer.ability1.tier < game.mainPlayer.ability1.maxTier);
     this.drawStatUpgraderButton(-this.width / 2 + this.lineDistance + 40 + 320, -this.height + 37, "5", game.mainPlayer.ability2.tier < game.mainPlayer.ability2.maxTier);
+    hasThird && this.drawStatUpgraderButton(-this.width / 2 + this.lineDistance + 40 + 400, -this.height + 37, "6", game.mainPlayer.ability3.tier < game.mainPlayer.ability3.maxTier);
     if (game.mainPlayer.upgradePoints < 1){
       this.drawAbilityUpgradeText(-this.width / 2 + this.lineDistance + 40 + 240, -this.height + 37, "Locked", "[Z] or [J]", game.mainPlayer.ability1.tier === 0);
       this.drawAbilityUpgradeText(-this.width / 2 + this.lineDistance + 40 + 320, -this.height + 37, "Locked", "[X] or [K]", game.mainPlayer.ability2.tier === 0);
+      hasThird && this.drawAbilityUpgradeText(-this.width / 2 + this.lineDistance + 40 + 400, -this.height + 37, "Locked", "[C] or [L]", game.mainPlayer.ability3.tier === 0);
     }
     image(game.mainPlayer.ability1.image, -this.width / 2 + this.lineDistance + 40 + 240 - 21, -this.height + 37 - 21 + 1, 42, 42);
     image(game.mainPlayer.ability2.image, -this.width / 2 + this.lineDistance + 40 + 320 - 21, -this.height + 37 - 21 + 1, 42, 42);
+    hasThird && image(game.mainPlayer.ability3.image, -this.width / 2 + this.lineDistance + 40 + 400 - 21, -this.height + 37 - 21 + 1, 42, 42);
     //how do we draw the spinny cd mask
     (game.mainPlayer.ability1.currentCooldown > 0 && !game.mainPlayer.abilitiesDisabled && this.drawCooldownMask(game.mainPlayer.ability1.currentCooldown, game.mainPlayer.ability1.cooldownOfPreviousUse, -this.width / 2 + this.lineDistance + 40 + 240 - 21, -this.height + 37 - 21 + 1, 42, 42));
     (game.mainPlayer.ability2.currentCooldown > 0 && !game.mainPlayer.abilitiesDisabled && this.drawCooldownMask(game.mainPlayer.ability2.currentCooldown, game.mainPlayer.ability2.cooldownOfPreviousUse, -this.width / 2 + this.lineDistance + 40 + 320 - 21, -this.height + 37 - 21 + 1, 42, 42));
+    hasThird && ((game.mainPlayer.ability3.currentCooldown > 0 && !game.mainPlayer.abilitiesDisabled && this.drawCooldownMask(game.mainPlayer.ability3.currentCooldown, game.mainPlayer.ability3.cooldownOfPreviousUse, -this.width / 2 + this.lineDistance + 40 + 400 - 21, -this.height + 37 - 21 + 1, 42, 42)));
     if (game.mainPlayer.abilitiesDisabled){
       this.drawCooldownMask(1, 1, -this.width / 2 + this.lineDistance + 40 + 240 - 21, -this.height + 37 - 21 + 1, 42, 42);
       this.drawCooldownMask(1, 1, -this.width / 2 + this.lineDistance + 40 + 320 - 21, -this.height + 37 - 21 + 1, 42, 42);
+      hasThird && this.drawCooldownMask(1, 1, -this.width / 2 + this.lineDistance + 40 + 400 - 21, -this.height + 37 - 21 + 1, 42, 42);
     }
     if (game.mainPlayer.ability1.tier === 0){
       fill(0, 110);
@@ -131,6 +138,10 @@ class HeroCard extends UIpanel{
     if (game.mainPlayer.ability2.tier === 0){
       fill(0, 110);
       rect(-this.width / 2 + this.lineDistance + 40 + 320, -this.height + 37 + 1, 42, 42);
+    }
+    if (hasThird && game.mainPlayer.ability3.tier === 0){
+      fill(0, 110);
+      rect(-this.width / 2 + this.lineDistance + 40 + 400, -this.height + 37 + 1, 42, 42);
     }
     strokeWeight(1);
     for (var i = 0; i < game.mainPlayer.ability1.maxTier; i++){
@@ -150,6 +161,17 @@ class HeroCard extends UIpanel{
         stroke(208, 208, 68);
       }
       ellipse(-this.width / 2 + this.lineDistance + 40 + 320 - 5 * (game.mainPlayer.ability2.maxTier - 1) + i * 10, -this.height + 37 - 28, 3);
+    }
+    if (hasThird){
+      for (var i = 0; i < game.mainPlayer.ability3.maxTier; i++){
+        noFill();
+        stroke(125);
+        if (game.mainPlayer.ability3.tier > i){
+          fill(208, 208, 68);
+          stroke(208, 208, 68);
+        }
+        ellipse(-this.width / 2 + this.lineDistance + 40 + 400 - 5 * (game.mainPlayer.ability3.maxTier - 1) + i * 10, -this.height + 37 - 28, 3);
+      }
     }
     rectMode(CORNER);
   }

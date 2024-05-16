@@ -27,8 +27,8 @@ function loadAssets(){
       vengeance: loadImage("imageAssets/ab/vengeance.png"),
         vengeance_projectile: loadImage("imageAssets/ent/vengeance_projectile.png"),
 
-      sear: loadImage("imageAssets/ab/sear.png"),
-      fizzle: loadImage("imageAssets/ab/fizzle.png"),
+      magnetism_down: loadImage("imageAssets/ab/magnetism_down.png"),
+      magnetism_up: loadImage("imageAssets/ab/magnetism_up.png"),
     }
   }
   fnt = {

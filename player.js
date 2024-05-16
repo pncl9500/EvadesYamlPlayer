@@ -71,6 +71,8 @@ class Player extends Entity{
     this.sx = 0;
     this.sy = 0;
     this.defStepParams();
+
+    this.magnetismDirection = 1;
   }
   resetAllModifiers(){
     this.detectable = true;
@@ -106,6 +108,25 @@ class Player extends Entity{
 
     this.canRevivePlayers = true;
     this.cancelContactDeath = false;
+
+    this.magnetism = false;
+    if (this.region.properties !== undefined && this.region.properties.hasOwnProperty("magnetism")){
+      this.magnetism = this.region.properties.magnetism;
+      this.magnetism && this.getMagnet();
+    }
+    if (this.area.properties !== undefined && this.area.properties.hasOwnProperty("magnetism")){
+      this.magnetism = this.area.properties.magnetism;
+      this.magnetism && this.getMagnet();
+    }
+    this.partialMagnetism = false;
+    if (this.region.properties !== undefined && this.region.properties.hasOwnProperty("partial_magnetism")){
+      this.partialMagnetism = this.region.properties.partial_magnetism;
+      this.partialMagnetism && this.getMagnet();
+    }
+    if (this.area.properties !== undefined && this.area.properties.hasOwnProperty("partial_magnetism")){
+      this.partialMagnetism = this.area.properties.partial_magnetism;
+      this.partialMagnetism && this.getMagnet();
+    }
   }
   applyEffectsBeforeAbilities(){
     for (var i = 0; i < this.effects.length; i++){
@@ -138,11 +159,13 @@ class Player extends Entity{
     if (this.speedMultiplier === 0){
       dim = 0;
     }
+
+    let magneticSpeed = this.getMagneticSpeed();
     //final pass
     if (this.stepMovement){
-      this.moveWithSteps(dim);
+      this.moveWithSteps(dim, magneticSpeed);
     } else {
-      this.move(dim);
+      this.move(dim, magneticSpeed);
     }
     this.restrictedLastFrame = false;
     this.area.restrict(this);
@@ -168,7 +191,7 @@ class Player extends Entity{
   //issues with cent movement:
   //harden + cent movement sucks
   //you move 1px in the perpendicular direction after each step
-  moveWithSteps(dim){
+  moveWithSteps(dim, magneticSpeed = 0){
     //cent movement. we can't just override the standard move function for the Cent class because of lead sniper, which
     //requires all players to be capable of cent movement.
     if (this.canStepMove && !(this.ctrlVector.x === 0 && this.ctrlVector.y === 0)){
@@ -208,6 +231,7 @@ class Player extends Entity{
     sx *= 1-((1-dim)*tFix);
     sy *= 1-((1-dim)*tFix);
 
+    this.speedMultiplier *= this.shifting ? 0.5 : 1;
     this.xv = this.stepCtrlVector.x * tFix * this.xSpeedMultiplier * this.moveDist;
     this.yv = this.stepCtrlVector.y * tFix * this.ySpeedMultiplier * this.moveDist;
     let mxv = 1 * tFix * this.xSpeedMultiplier * this.stepDistance;
@@ -221,7 +245,7 @@ class Player extends Entity{
     this.prevMovementX = this.xv;
     this.prevMovementY = this.yv;
   }
-  move(dim){
+  move(dim, magneticSpeed = 0){
     let sx = this.prevMovementX;
     let sy = this.prevMovementY;
     this.sx = sx;
@@ -237,8 +261,12 @@ class Player extends Entity{
     let myv = 1 * this.tempSpeed * tFix * this.speedMultiplier * this.xSpeedMultiplier;
     this.xv += sx;
     this.yv += sy;
-    this.xv = mxv < 0 ? max(mxv, min(-mxv, this.xv)) :  max(-mxv, min(mxv, this.xv));
-    this.yv = myv < 0 ? max(myv, min(-myv, this.yv)) :  max(-myv, min(myv, this.yv));
+    this.xv = (mxv < 0) ? max(mxv, min(-mxv, this.xv)) :  max(-mxv, min(mxv, this.xv));
+    if (!(this.magnetism || this.partialMagnetism)){
+      this.yv = (myv < 0) ? max(myv, min(-myv, this.yv)) :  max(-myv, min(myv, this.yv));
+    }
+    if (this.magnetism) {this.yv -= sy; this.yv = magneticSpeed * tFix * ((this.dead && !(this.area.cancelMagnetismOnDownedPlayers)) ? 1 : this.speedMultiplier) * this.ySpeedMultiplier * (this.shifting ? 2 : 1)};
+    if (this.partialMagnetism) {this.yv -= sy; this.yv += magneticSpeed * tFix * ((this.dead && !(this.area.cancelMagnetismOnDownedPlayers)) ? 1 : this.speedMultiplier) * this.ySpeedMultiplier * (this.shifting ? 2 : 1)};
     this.x += this.xv;
     this.y += this.yv;
     this.prevMovementX = this.xv;
@@ -519,6 +547,9 @@ class Player extends Entity{
           this.resetToSpawn();
         case "exit":
         case "teleport":
+          //another kludge, player would move slightly when teleporting in magnetic levels if
+          //the game didn't temporarily give them this effect
+          this.gainEffect(new CancelMagnetismEffect(60));
           if (!this.onTpZoneLastFrame){
             if (zone.type === "exit"){
               this.doExitTranslate(zone); 
@@ -534,6 +565,10 @@ class Player extends Entity{
           //check again if the player is completely 100% inside the safe zone, and then apply safe zone effect
           if (circleRect({x: this.x, y: this.y, radius: this.getRadius() + 1}, {x: zone.x + this.getRadius() * 2, y: zone.y + this.getRadius() * 2, width: zone.width - this.getRadius() * 4, height: zone.height - this.getRadius() * 4})){
             this.gainEffect(new SafeZoneEffect(), false);
+          }
+          //check AGAIN if the player's center point is in the safe zone, and then cancel magnetism effects
+          if (ptRect(this.x, this.y, zone.x, zone.y, zone.width, zone.height)){
+            this.gainEffect(new CancelMagnetismEffect(), false);
           }
           //prevent the player from respawning in safe zones if they are very thin (annoying in research lab)
           if (zone.width === 32 || zone.height === 32){
@@ -774,6 +809,50 @@ class Player extends Entity{
       text(round(this.deathEffect.life / 1000), this.x - 2, this.y - off);
     }
   }
+  getMagneticSpeed(){
+    let state = this.partialMagnetism ? "partial" : (this.magnetism ? "magnetism" : "none");
+    switch (state) {
+      case "none":
+        return 0;
+      case "partial":
+        return this.tempSpeed/2 * this.magnetismDirection;
+      case "magnetism":
+        return 10 * this.magnetismDirection;
+      default:
+        break;
+    }
+  }
+  getMagnet(){
+    if (this.areaNum === 0){
+      //remove magnet if player has magnet and is on area 1
+      if (this.ability3.constructor.name.startsWith("Magnetism")){
+        this.ability3 = new Ability();
+      }
+      //dont give magnet on area 1
+      return;
+    }
+    this.ability3 = this.magnetismDirection === 1 ? new MagnetismDown() : new MagnetismUp();
+  }
 }
 //this is actually helpful somehow
 tpZoneEpsilon = 8;
+
+class MagnetismDown extends Ability{
+  constructor(){
+    super(1, 0, 1, im.ab.magnetism_down);
+    this.tier = 1;
+  }
+  activate(player, players, pellets, enemies, miscEnts, region, area){
+    player.magnetismDirection = -1;
+  }
+}
+
+class MagnetismUp extends Ability{
+  constructor(){
+    super(1, 0, 1, im.ab.magnetism_up);
+    this.tier = 1;
+  }
+  activate(player, players, pellets, enemies, miscEnts, region, area){
+    player.magnetismDirection = 1;
+  }
+}

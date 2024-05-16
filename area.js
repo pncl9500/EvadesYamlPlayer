@@ -12,9 +12,14 @@ class Area{
     //players do not go in the entities array... for some reason
     this.entities = [];
     this.isVictory = false;
+    this.cancelMagnetismOnDownedPlayers = false;
     for (let i in this.zones){
       if (this.zones[i].type === "victory"){
         this.isVictory = true;
+        break;
+      }
+      if (this.zones[i].type === "active" && this.zones[i].height > this.zones[i].width){
+        this.cancelMagnetismOnDownedPlayers = true;
         break;
       }
     }
