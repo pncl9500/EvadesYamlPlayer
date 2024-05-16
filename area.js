@@ -21,7 +21,7 @@ class Area{
   }
   draw(parentRegion){
     if (settings.regionBackground){
-      if (this.parent.hasOwnProperty("properties") && this.parent.properties.hasOwnProperty("background_color")){
+      if (this.parent.hasOwnProperty("properties") && this.parent.properties.hasOwnProperty("background_color") && !(this.hasOwnProperty("properties") && this.properties !== undefined && this.properties.hasOwnProperty("background_color"))){
         background(this.parent.properties.background_color[0], this.parent.properties.background_color[1], this.parent.properties.background_color[2], floor(this.parent.properties.background_color[3] * 0.3));
       }
       if (this.hasOwnProperty("properties") && this.properties !== undefined && this.properties.hasOwnProperty("background_color")){
