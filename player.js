@@ -405,7 +405,6 @@ class Player extends Entity{
     this.deathEffect = new DeadEffect(this.deathTimer);
     this.gainEffect(this.deathEffect);
     if (settings.instantRespawn && this.instantRespawnAppropriate() && this.isMain){
-      //THIS IS NOT IT
       this.x = this.mostRecentSafeZone.x + this.mostRecentSafeZone.width / 2;
       this.y = this.mostRecentSafeZone.y + this.mostRecentSafeZone.height / 2;
       this.revive();
@@ -535,6 +534,10 @@ class Player extends Entity{
           //check again if the player is completely 100% inside the safe zone, and then apply safe zone effect
           if (circleRect({x: this.x, y: this.y, radius: this.getRadius() + 1}, {x: zone.x + this.getRadius() * 2, y: zone.y + this.getRadius() * 2, width: zone.width - this.getRadius() * 4, height: zone.height - this.getRadius() * 4})){
             this.gainEffect(new SafeZoneEffect(), false);
+          }
+          //prevent the player from respawning in safe zones if they are very thin (annoying in research lab)
+          if (zone.width === 32 || zone.height === 32){
+            break;
           }
           this.mostRecentSafeX = this.x;
           this.mostRecentSafeY = this.x;
