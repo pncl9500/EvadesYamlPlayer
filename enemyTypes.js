@@ -683,18 +683,19 @@ class PoisonSniperBullet extends Bullet{
     if (player.ignoreBullets){
       return;
     }
-    player.gainEffect(new PoisonSniperEffect(1000));
+    player.gainEffect(new PoisonSniperEffect(1000, player.effectVulnerability));
     this.toRemove = true;
   }
 }
 
 class PoisonSniperEffect extends Effect{
-  constructor(duration){
+  constructor(duration, vulnAtContactPoint = 1){
     super(duration, getEffectPriority("PoisonSniperEffect"), false, true);
+    this.vulnAtContactPoint = vulnAtContactPoint;
   }
   doEffect(target){
     let t = this.life / this.duration;
-    target.speedMultiplier *= 3 * target.effectVulnerability;
+    target.speedMultiplier *= 1 + (2 * this.vulnAtContactPoint);
     target.tempColor = {r: floor(map(t, 0, 1, target.tempColor.r, 140)), g: floor(map(t, 0, 1, target.tempColor.g, 1)), b:  floor(map(t, 0, 1, target.tempColor.b, 183))};
   }
 }
