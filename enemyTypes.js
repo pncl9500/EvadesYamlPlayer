@@ -261,6 +261,12 @@ class Dasher extends Enemy{
     this.oldAngle = this.angle;
     this.dasher = true;
   }
+  setAngle(ang){
+    this.velToAngle();
+    this.angle = ang;
+    this.oldAngle = ang;
+    this.angleToVel();
+  }
   compute_speed(){
     this.speed = (this.time_since_last_dash < this.time_between_dashes && this.time_dashing == 0 && this.time_preparing == 0) ? 0 : (this.time_dashing == 0) ? this.prepare_speed : this.base_speed//(this.time_preparing>0) ? this.prepare_speed : this.base_speed
     this.speedToVel();

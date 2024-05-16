@@ -56,6 +56,11 @@ class Enemy extends Entity{
     this.yv = 0;
     this.angleToVel();
   }
+  setAngle(ang){
+    this.velToAngle();
+    this.angle = ang;
+    this.angleToVel();
+  }
   update(area, players){
     this.resetState();
     this.applyEffects();

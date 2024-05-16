@@ -71,9 +71,6 @@ class OldReverseProjectile extends Projectile{
     this.detectEnemyContact();
   }
   contactEffect(enemy){
-    enemy.velToAngle();
-    enemy.angle = this.angle;
-    enemy.oldAngle = this.angle;
-    enemy.speedToVel();
+    enemy.setAngle(this.angle)
   }
 }
