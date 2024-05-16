@@ -8,9 +8,7 @@ leaderboard
 
 -----------------------------------------------------------
 feature complete regions:
-cc, cch, cc3, pp, pph, ww, gg, ggh, vv, vvh, hh, hhh, ee, eeh, dd, ddh, mm, mmh, oo, ooh, tt, tth, aah, gg2, gg2h, ww2
-regions with outdated map file:
-ss, ww2, rl
+cc, cch, cc3, pp, pph, ww, gg, ggh, vv, vvh, hh, hhh, ee, eeh, dd, ddh, mm, mmh, oo, ooh, tt, tth, aah, gg2, gg2h, ww2, mm2, mm2h
 
 regions/enemies:
 
@@ -18,15 +16,6 @@ ff:
 walls
 frost giant
 snowman
-
-mm2:
-magnetism and partial magnetism
-magnetic nullification
-magnetic reduction
-negative magnetic ghost
-negative magnetic sniper
-positive magnetic ghost
-positive magnetic sniper
 
 bb:
 lunging

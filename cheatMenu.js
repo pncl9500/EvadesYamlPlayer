@@ -957,7 +957,6 @@ function ptRect(ptx, pty, rectx, recty, rectw, recth){
 }
 
 outdatedMapNames = [
-  "Shifting Sands",
   "Burning Bunker Hard",
 ]
 
@@ -966,6 +965,7 @@ extrapolatedMapNames = [
   "Research Lab",
   "Withering Wasteland",
   "Burning Bunker",
+  "Shifting Sands",
 ]
 
 unimplementedGimmickMapNames = [

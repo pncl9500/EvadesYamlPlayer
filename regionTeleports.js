@@ -333,6 +333,9 @@ regionTeleports = {
   "Shifting Sands":{
     "area_0": {
       "zone_0": {dest: "Peculiar Pyramid", x: -80},
+    },
+    "area_21": {
+      "zone_8": {dest: "Dusty Depths", x: 64, y: 80},
     }
   },
   //RL has been modified so the exit zones are teleports.
@@ -353,6 +356,7 @@ regionTeleports = {
   },
   "Dusty Depths":{
     "area_0": {
+      "zone_0": {dest: "Shifting Sands", x: -160, y: -80, area: 21},
       "zone_2": {dest: "Dusty Depths", x: 60, y: 120, area: 1},
     }
   },
