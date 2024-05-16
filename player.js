@@ -80,8 +80,7 @@ class Player extends Entity{
     this.tempSpeed = this.speed;
     this.tempRadius = this.baseRadius;
     this.speedMultiplier = 1;
-    this.xSpeedMultiplier = 1;
-    this.ySpeedMultiplier = 1;
+    this.magneticSpeedMultiplier = 1;
     this.alphaMultiplier = 1;
     this.energyBarColor = {r: settings.energyBarColor[0], g: settings.energyBarColor[1], b: settings.energyBarColor[2], a: settings.energyBarColor[3]};
 
@@ -232,10 +231,10 @@ class Player extends Entity{
     sy *= 1-((1-dim)*tFix);
 
     this.speedMultiplier *= this.shifting ? 0.5 : 1;
-    this.xv = this.stepCtrlVector.x * tFix * this.xSpeedMultiplier * this.moveDist;
-    this.yv = this.stepCtrlVector.y * tFix * this.ySpeedMultiplier * this.moveDist;
-    let mxv = 1 * tFix * this.xSpeedMultiplier * this.stepDistance;
-    let myv = 1 * tFix * this.ySpeedMultiplier * this.stepDistance;
+    this.xv = this.stepCtrlVector.x * tFix * this.moveDist;
+    this.yv = this.stepCtrlVector.y * tFix * this.moveDist;
+    let mxv = 1 * tFix * this.stepDistance;
+    let myv = 1 * tFix * this.stepDistance;
     this.xv += sx;
     this.yv += sy;
     abs(this.xv) > 0.5 && (this.xv = max(-mxv, min(mxv, this.xv)));
@@ -255,18 +254,18 @@ class Player extends Entity{
     sy *= 1-((1-dim)*tFix);
 
     this.speedMultiplier *= this.shifting ? 0.5 : 1;
-    this.xv = this.ctrlVector.x * this.tempSpeed * tFix * this.speedMultiplier * this.xSpeedMultiplier;
-    this.yv = this.ctrlVector.y * this.tempSpeed * tFix * this.speedMultiplier * this.ySpeedMultiplier;
-    let mxv = 1 * this.tempSpeed * tFix * this.speedMultiplier * this.xSpeedMultiplier;
-    let myv = 1 * this.tempSpeed * tFix * this.speedMultiplier * this.xSpeedMultiplier;
+    this.xv = this.ctrlVector.x * this.tempSpeed * tFix * this.speedMultiplier;
+    this.yv = this.ctrlVector.y * this.tempSpeed * tFix * this.speedMultiplier;
+    let mxv = 1 * this.tempSpeed * tFix * this.speedMultiplier;
+    let myv = 1 * this.tempSpeed * tFix * this.speedMultiplier;
     this.xv += sx;
     this.yv += sy;
     this.xv = (mxv < 0) ? max(mxv, min(-mxv, this.xv)) :  max(-mxv, min(mxv, this.xv));
     if (!(this.magnetism || this.partialMagnetism)){
       this.yv = (myv < 0) ? max(myv, min(-myv, this.yv)) :  max(-myv, min(myv, this.yv));
     }
-    if (this.magnetism) {this.yv -= sy; this.yv = magneticSpeed * tFix * ((this.dead && !(this.area.cancelMagnetismOnDownedPlayers)) ? 1 : this.speedMultiplier) * this.ySpeedMultiplier * (this.shifting ? 2 : 1)};
-    if (this.partialMagnetism) {this.yv -= sy; this.yv += magneticSpeed * tFix * ((this.dead && !(this.area.cancelMagnetismOnDownedPlayers)) ? 1 : this.speedMultiplier) * this.ySpeedMultiplier * (this.shifting ? 2 : 1)};
+    if (this.magnetism) {this.yv -= sy; this.yv = magneticSpeed * tFix * ((this.dead && !(this.area.cancelMagnetismOnDownedPlayers)) ? 1 : this.speedMultiplier) * this.magneticSpeedMultiplier * (this.shifting ? 2 : 1)};
+    if (this.partialMagnetism) {this.yv -= sy; this.yv += magneticSpeed * tFix * ((this.dead && !(this.area.cancelMagnetismOnDownedPlayers)) ? 1 : this.speedMultiplier) * this.magneticSpeedMultiplier * (this.shifting ? 2 : 1)};
     this.x += this.xv;
     this.y += this.yv;
     this.prevMovementX = this.xv;

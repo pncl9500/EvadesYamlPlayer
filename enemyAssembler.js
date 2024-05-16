@@ -56,6 +56,8 @@ function getEnemyFromSpawner(x, y, d, enemyType, spawner, spawnIndex, zone){
     case "experience_drain": return new ExperienceDrain(x, y, d, s, r, auraSize);
     case "radar": return new Radar(x, y, d, s, r, auraSize);
     case "quicksand": return new Quicksand(x, y, d, s, r, auraSize, property("push_direction"), property("quicksand_strength"));
+    case "magnetic_reduction": return new MagneticReduction(x, y, d, s, r, auraSize);
+    case "magnetic_nullification": return new MagneticNullification(x, y, d, s, r, auraSize);
 
     //sniper
     case "sniper": return new Sniper(x, y, d, s, r);

@@ -1818,6 +1818,47 @@ class Residue extends Enemy{
   }
 }
 
+class MagneticReduction extends AuraEnemy{
+  constructor(x, y, angle, speed, radius, auraSize){
+    super(x, y, angle, speed, radius, pal.nm.magnetic_reduction, pal.nmaur.magnetic_reduction, auraSize)
+  }
+  applyAuraEffectToPlayer(area, players, player){
+    player.gainEffect(new MagneticReductionEnemyEffect());
+  }
+}
+
+class MagneticReductionEnemyEffect extends Effect{
+  constructor(){
+    super(0, getEffectPriority("MagneticReductionEnemyEffect"), false, true);
+    this.blockable = true;
+  }
+  doEffect(target){
+    if (!(target.magnetism || target.partialMagnetism)) return;
+    target.magneticSpeedMultiplier *= 0.5;
+  }
+}
+
+class MagneticNullification extends AuraEnemy{
+  constructor(x, y, angle, speed, radius, auraSize){
+    super(x, y, angle, speed, radius, pal.nm.magnetic_nullification, pal.nmaur.magnetic_nullification, auraSize)
+  }
+  applyAuraEffectToPlayer(area, players, player){
+    player.gainEffect(new MagneticNullificationEnemyEffect());
+  }
+}
+
+class MagneticNullificationEnemyEffect extends Effect{
+  constructor(){
+    super(0, getEffectPriority("MagneticNullificationEnemyEffect"), false, true);
+    this.blockable = true;
+  }
+  doEffect(target){
+    if (!(target.magnetism || target.partialMagnetism)) return;
+    target.magneticSpeedMultiplier *= 0;
+  }
+}
+
+
 // class Cactus extends Enemy{
 //   constructor(x, y, angle, speed, radius){
 //     super(x, y, angle, speed, radius, pal.nm.cactus);
