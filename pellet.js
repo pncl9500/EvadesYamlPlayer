@@ -32,7 +32,7 @@ class Pellet extends Entity{
     this.xpValue = floor(2+(zone.parentAreaNum + 1))/3*pelletMultiplier;
   }
   update(){
-
+    this.alphaMultiplier = settings.pelletOpacity;
   }
   playerCollision(player){
     this.collect(player);

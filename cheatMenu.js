@@ -373,6 +373,8 @@ function setCheatMenuItems(){
             btn("High", null, 12, () => {pixelDensity(basePixelDensity)}, "Make the game have more pixels. This is the default setting."),]),
         row([txt("Show area header:", 12), 
             tog(11, 11, true, () => {ui.areaHeader.hidden = false}, () => {ui.areaHeader.hidden = true}, () => {return !ui.areaHeader.hidden}, "Enable the area header."),]),
+        row([txt("Transparent pellets:", 12), 
+            tog(11, 11, false, () => {settings.pelletOpacity = 0.15}, () => {settings.pelletOpacity = 1}, undefined, "Make pellets render as transparent."),]),
     txt("Quick Cheats", 20), bigLine,
         row([txt("Change area:", 12), 
             btn("-40", 18, 12, () => {game.mainPlayer.changeAreaCheat(-40); game.mainPlayer.moveToAreaStart()}, "Move back 40 areas."),

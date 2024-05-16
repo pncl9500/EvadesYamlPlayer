@@ -64,4 +64,5 @@ settings = {
     dummy: {r: 17, g: 17, b: 17}, //estimated
   },
   backgroundBrightness: 51,
+  pelletOpacity: 1,
 }
