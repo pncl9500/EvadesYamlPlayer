@@ -289,12 +289,16 @@ class AreaHeader extends UIpanel{
     }
     let overridingName = game.mainPlayer.area.name;
     if (game.mainPlayer.area.name !== undefined){
-      if (parseInt(overridingName.substring(0, 1)) == overridingName.substring(0, 1)){
+      if (!isNaN(parseInt(overridingName))){
         overridingName = "Area " + overridingName;
       }
     }
     let finalAreaName = overridingName ?? areaName;
-    text(regionName + ": " + finalAreaName, 0, -8);
+    if (arealessRegions.includes(game.mainPlayer.region.name)){
+      text(regionName, 0, -8);
+    } else {
+      text(regionName + ": " + finalAreaName, 0, -8);
+    }
   }
 }
 
@@ -323,6 +327,11 @@ let bosslessRegions = [
   "Shifting Sands",
   "Infinite Inferno",
   "Dusty Depths",
+]
+
+let arealessRegions = [
+  "Research Lab",
+  "Stellar Square"
 ]
 
 class Timer extends UIpanel{
