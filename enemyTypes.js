@@ -1370,7 +1370,7 @@ class Grass extends Enemy{
     if (player.dead){
       return;
     }
-    if (this.effect.harmlessState === false){
+    if (!this.harmless){
       let hardBehavior = player.region.name.substring(player.region.name.length - 4) == "Hard";
       if (hardBehavior){
         this.reset();
