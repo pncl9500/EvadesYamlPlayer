@@ -294,11 +294,29 @@ class AreaHeader extends UIpanel{
 
 //regions for which areas are not marked as boss areas.
 let bosslessRegions = [
-  "Grand Garden",
-  "Grand Garden Hard",
-  "Restless Ridge Hard",
+  "Peculiar Pyramid",
+  "Peculiar Pyramid Hard",
+  "Haunted Halls",
+  "Ominous Occult",
+  "Ominous Occult Hard",
+  "Toxic Territory",
+  "Toxic Territory Hard",
   "Magnetic Monopole",
   "Magnetic Monopole Hard",
+  "Burning Bunker",
+  "Burning Bunker Hard",
+  "Assorted Alcove",
+  "Assorted Alcove Hard",
+  "Restless Ridge Hard",
+  "Grand Garden",
+  "Grand Garden Hard",
+  "Mysterious Mansion",
+  "Coupled Corridors",
+  "Cyber Castle",
+  "Cyber Castle Hard",
+  "Shifting Sands",
+  "Infinite Inferno",
+  "Dusty Depths",
 ]
 
 class Timer extends UIpanel{
