@@ -1834,7 +1834,7 @@ class MagneticReductionEnemyEffect extends Effect{
   }
   doEffect(target){
     if (!(target.magnetism || target.partialMagnetism)) return;
-    target.magneticSpeedMultiplier *= 0.5;
+    target.magneticSpeedMultiplier *= (1 - target.effectVulnerability * 0.5);
   }
 }
 
@@ -1854,7 +1854,7 @@ class MagneticNullificationEnemyEffect extends Effect{
   }
   doEffect(target){
     if (!(target.magnetism || target.partialMagnetism)) return;
-    target.magneticSpeedMultiplier *= 0;
+    target.magneticSpeedMultiplier *= (1 - target.effectVulnerability);
   }
 }
 
@@ -1879,6 +1879,11 @@ class PositiveMagneticSniperBullet extends Bullet{
       return;
     }
     if (!(player.magnetism || player.partialMagnetism)){
+      this.toRemove = true;
+      return;
+    }
+    if (player.fullEffectImmunity){
+      this.toRemove = true;
       return;
     }
     player.ability3 = new MagnetismUp();
@@ -1908,6 +1913,11 @@ class NegativeMagneticSniperBullet extends Bullet{
       return;
     }
     if (!(player.magnetism || player.partialMagnetism)){
+      this.toRemove = true;
+      return;
+    }
+    if (player.fullEffectImmunity){
+      this.toRemove = true;
       return;
     }
     player.ability3 = new MagnetismDown()
@@ -1925,6 +1935,9 @@ class PositiveMagneticGhost extends Enemy{
     for (var i in players){
       if (circleCircle(this, players[i]) && !this.disabled){
         let player = players[i];
+        if (player.fullEffectImmunity){
+          continue;
+        }
         player.ability3 = new MagnetismUp();
         player.magnetismDirection = -1;
       }
@@ -1941,6 +1954,9 @@ class NegativeMagneticGhost extends Enemy{
     for (var i in players){
       if (circleCircle(this, players[i]) && !this.disabled){
         let player = players[i];
+        if (player.fullEffectImmunity){
+          continue;
+        }
         player.ability3 = new MagnetismDown();
         player.magnetismDirection = 1;
       }
