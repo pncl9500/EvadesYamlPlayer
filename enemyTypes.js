@@ -274,11 +274,7 @@ class Dasher extends Enemy{
   }
   wallBounce(){
     this.angle = this.oldAngle;
-    this.x - this.radius < this.parentZone.x && (this.x = this.parentZone.x + this.radius, this.angleToVel(), this.xv *= -1, this.velToAngle());
-    this.x + this.radius > this.parentZone.x + this.parentZone.width && (this.x = this.parentZone.x + this.parentZone.width - this.radius, this.angleToVel(), this.xv *= -1, this.velToAngle());
-    this.y - this.radius < this.parentZone.y && (this.y = this.parentZone.y + this.radius, this.angleToVel(), this.yv *= -1, this.velToAngle());
-    this.y + this.radius > this.parentZone.y + this.parentZone.height && (this.y = this.parentZone.y + this.parentZone.height - this.radius, this.angleToVel(), this.yv *= -1, this.velToAngle());
-    this.wallBounceEvent();
+    super.wallBounce();
     this.oldAngle = this.angle;
   }
   behavior(area, players) {
@@ -363,12 +359,8 @@ class Turning extends Enemy{
     this.angle += this.turningSpeed * tFix;
     this.angleToVel();
   }
-  wallBounce(){
-    this.x - this.radius < this.parentZone.x && (this.x = this.parentZone.x + this.radius, this.angleToVel(), this.xv *= -1, this.turningSpeed *= -1, this.velToAngle());
-    this.x + this.radius > this.parentZone.x + this.parentZone.width && (this.x = this.parentZone.x + this.parentZone.width - this.radius, this.angleToVel(), this.xv *= -1, this.turningSpeed *= -1, this.velToAngle());
-    this.y - this.radius < this.parentZone.y && (this.y = this.parentZone.y + this.radius, this.angleToVel(), this.yv *= -1, this.turningSpeed *= -1, this.velToAngle());
-    this.y + this.radius > this.parentZone.y + this.parentZone.height && (this.y = this.parentZone.y + this.parentZone.height - this.radius, this.angleToVel(), this.yv *= -1, this.turningSpeed *= -1, this.velToAngle());
-    this.wallBounceEvent();
+  wallBounceEvent(wallX, wallY){
+    this.turningSpeed *= -1;
   }
 }
 
@@ -493,12 +485,8 @@ class Bullet extends Enemy{
       this.wallBounce();
     }
   }
-  wallBounce(){
-    this.x - this.radius < this.parentZone.x && (this.x = this.parentZone.x + this.radius, this.toRemove = true);
-    this.x + this.radius > this.parentZone.x + this.parentZone.width && (this.x = this.parentZone.x + this.parentZone.width - this.radius, this.toRemove = true);
-    this.y - this.radius < this.parentZone.y && (this.y = this.parentZone.y + this.radius, this.toRemove = true);
-    this.y + this.radius > this.parentZone.y + this.parentZone.height && (this.y = this.parentZone.y + this.parentZone.height - this.radius, this.toRemove = true);
-    this.wallBounceEvent();
+  wallBounceEvent(wallX, wallY){
+    this.toRemove = true;
   }
 }
 
@@ -819,12 +807,14 @@ class Icicle extends Enemy{
       this.speedMultiplier = 0;
     }
   }
-  wallBounce(){
-    this.x - this.radius < this.parentZone.x && (this.x = this.parentZone.x + this.radius, this.angleToVel(), this.xv *= -1, this.pauseTimer = this.pauseLength, this.velToAngle());
-    this.x + this.radius > this.parentZone.x + this.parentZone.width && (this.x = this.parentZone.x + this.parentZone.width - this.radius, this.angleToVel(), this.xv *= -1, this.pauseTimer = this.pauseLength, this.velToAngle());
-    this.y - this.radius < this.parentZone.y && (this.y = this.parentZone.y + this.radius, this.angleToVel(), this.yv *= -1, this.pauseTimer = this.pauseLength, this.velToAngle());
-    this.y + this.radius > this.parentZone.y + this.parentZone.height && (this.y = this.parentZone.y + this.parentZone.height - this.radius, this.angleToVel(), this.yv *= -1, this.pauseTimer = this.pauseLength, this.velToAngle());
-    this.wallBounceEvent();
+  wallBounceEvent(wallX, wallY, tangentPosX, tangentPosY){
+    this.pauseTimer = this.pauseLength;
+    if (tangentPosX != null){
+      this.x = tangentPosX;
+    }
+    if (tangentPosY != null){
+      this.y = tangentPosY;
+    }
   }
 }
 
@@ -1009,12 +999,8 @@ class Wavy extends Enemy{
     this.angle += this.angleIncrement * this.dir * tFix;
     this.angleToVel();
   }
-  wallBounce(){
-    this.x - this.radius < this.parentZone.x && (this.x = this.parentZone.x + this.radius, this.angleToVel(), this.xv *= -1, this.dir *= -1, this.velToAngle());
-    this.x + this.radius > this.parentZone.x + this.parentZone.width && (this.x = this.parentZone.x + this.parentZone.width - this.radius, this.angleToVel(), this.xv *= -1, this.dir *= -1, this.velToAngle());
-    this.y - this.radius < this.parentZone.y && (this.y = this.parentZone.y + this.radius, this.angleToVel(), this.yv *= -1, this.dir *= -1, this.velToAngle());
-    this.y + this.radius > this.parentZone.y + this.parentZone.height && (this.y = this.parentZone.y + this.parentZone.height - this.radius, this.angleToVel(), this.yv *= -1, this.dir *= -1, this.velToAngle());
-    this.wallBounceEvent();
+  wallBounceEvent(wallX, wallY){
+    this.dir *= -1;
   }
 }
 
@@ -1110,12 +1096,8 @@ class Spiral extends Enemy{
     this.angle += this.angleIncrement * this.dir * tFix;
     this.angleToVel();
   }
-  wallBounce(){
-    this.x - this.radius < this.parentZone.x && (this.x = this.parentZone.x + this.radius, this.angleToVel(), this.xv *= -1, this.turningSpeed *= -1, this.velToAngle());
-    this.x + this.radius > this.parentZone.x + this.parentZone.width && (this.x = this.parentZone.x + this.parentZone.width - this.radius, this.angleToVel(), this.xv *= -1, this.turningSpeed *= -1, this.velToAngle());
-    this.y - this.radius < this.parentZone.y && (this.y = this.parentZone.y + this.radius, this.angleToVel(), this.yv *= -1, this.turningSpeed *= -1, this.velToAngle());
-    this.y + this.radius > this.parentZone.y + this.parentZone.height && (this.y = this.parentZone.y + this.parentZone.height - this.radius, this.angleToVel(), this.yv *= -1, this.turningSpeed *= -1, this.velToAngle());
-    this.wallBounceEvent();
+  wallBounceEvent(wallX, wallY){
+    this.dir *= -1;
   }
 }
 
@@ -1732,12 +1714,8 @@ class Sand extends Enemy{
     this.xv = this.speedMultiplier * this.speed * cos(this.angle) * this.friction;
     this.yv = this.speedMultiplier * this.speed * sin(this.angle) * this.friction;
   }
-  wallBounce(){
-    this.x - this.radius < this.parentZone.x && (this.x = this.parentZone.x + this.radius, this.angleToVel(), this.xv *= -1, this.friction = 0, this.velToAngle());
-    this.x + this.radius > this.parentZone.x + this.parentZone.width && (this.x = this.parentZone.x + this.parentZone.width - this.radius, this.angleToVel(), this.xv *= -1, this.friction = 0, this.velToAngle());
-    this.y - this.radius < this.parentZone.y && (this.y = this.parentZone.y + this.radius, this.angleToVel(), this.yv *= -1, this.friction = 0, this.velToAngle());
-    this.y + this.radius > this.parentZone.y + this.parentZone.height && (this.y = this.parentZone.y + this.parentZone.height - this.radius, this.angleToVel(), this.yv *= -1, this.friction = 0, this.velToAngle());
-    this.wallBounceEvent();
+  wallBounceEvent(wallX, wallY){
+    this.friction = 0;
   }
 }
 
@@ -1755,12 +1733,8 @@ class SandRock extends Enemy{
     this.xv = this.speedMultiplier * this.speed * cos(this.angle) * this.friction;
     this.yv = this.speedMultiplier * this.speed * sin(this.angle) * this.friction;
   }
-  wallBounce(){
-    this.x - this.radius < this.parentZone.x && (this.x = this.parentZone.x + this.radius, this.angleToVel(), this.xv *= -1, this.friction = 1, this.velToAngle());
-    this.x + this.radius > this.parentZone.x + this.parentZone.width && (this.x = this.parentZone.x + this.parentZone.width - this.radius, this.angleToVel(), this.xv *= -1, this.friction = 1, this.velToAngle());
-    this.y - this.radius < this.parentZone.y && (this.y = this.parentZone.y + this.radius, this.angleToVel(), this.yv *= -1, this.friction = 1, this.velToAngle());
-    this.y + this.radius > this.parentZone.y + this.parentZone.height && (this.y = this.parentZone.y + this.parentZone.height - this.radius, this.angleToVel(), this.yv *= -1, this.friction = 1, this.velToAngle());
-    this.wallBounceEvent();
+  wallBounceEvent(wallX, wallY){
+    this.friction = 1;
   }
 }
 
@@ -1796,12 +1770,8 @@ class Crumbling extends Enemy{
       this.speedToVel();
     }
   }
-  wallBounce(){
-    this.x - this.radius < this.parentZone.x && (this.x = this.parentZone.x + this.radius, this.angleToVel(), this.xv *= -1, this.tryCollision(), this.velToAngle());
-    this.x + this.radius > this.parentZone.x + this.parentZone.width && (this.x = this.parentZone.x + this.parentZone.width - this.radius, this.angleToVel(), this.xv *= -1, this.tryCollision(), this.velToAngle());
-    this.y - this.radius < this.parentZone.y && (this.y = this.parentZone.y + this.radius, this.angleToVel(), this.yv *= -1, this.tryCollision(), this.velToAngle());
-    this.y + this.radius > this.parentZone.y + this.parentZone.height && (this.y = this.parentZone.y + this.parentZone.height - this.radius, this.angleToVel(), this.yv *= -1, this.tryCollision(), this.velToAngle());
-    this.wallBounceEvent();
+  wallBounceEvent(wallX, wallY){
+    this.tryCollision();
   }
 }
 

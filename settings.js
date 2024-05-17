@@ -1,5 +1,3 @@
-//WALLBOUNCES ARE NOT FRAERATE INDEPENDENT
-//FIX IT
 settings = {
   fps: 60,
   //whether or not to draw the grid.
@@ -71,4 +69,5 @@ settings = {
   mouseToggled: false,
   mouseAngleFix: false,
   mainRelativeMouseControl: false,
+  fixedWallbounces: true,
 }

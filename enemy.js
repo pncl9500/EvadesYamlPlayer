@@ -91,12 +91,44 @@ class Enemy extends Entity{
 
   }
   wallBounce(){
-    this.x - this.radius < this.parentZone.x && (this.x = this.parentZone.x + this.radius, this.angleToVel(), this.xv *= -1, this.velToAngle());
-    this.x + this.radius > this.parentZone.x + this.parentZone.width && (this.x = this.parentZone.x + this.parentZone.width - this.radius, this.angleToVel(), this.xv *= -1, this.velToAngle());
-    this.y - this.radius < this.parentZone.y && (this.y = this.parentZone.y + this.radius, this.angleToVel(), this.yv *= -1, this.velToAngle());
-    this.y + this.radius > this.parentZone.y + this.parentZone.height && (this.y = this.parentZone.y + this.parentZone.height - this.radius, this.angleToVel(), this.yv *= -1, this.velToAngle());
+    if (this.x - this.radius < this.parentZone.x){
+      let jut = (this.parentZone.x - (this.x - this.radius));
+      this.x = this.parentZone.x + this.radius + (settings.fixedWallbounces ? jut : 0);
+      let wallX = this.parentZone.x;
+      this.wallBounceEvent(wallX, null, wallX + this.radius, null); 
+      this.angleToVel();
+      this.xv *= -1; 
+      this.velToAngle();
+    }
+    if (this.x + this.radius > this.parentZone.x + this.parentZone.width){
+      let jut = ((this.parentZone.x + this.parentZone.width) - (this.x + this.radius));
+      this.x = this.parentZone.x + this.parentZone.width - this.radius + (settings.fixedWallbounces ? jut : 0);
+      let wallX = this.parentZone.x + this.parentZone.width;
+      this.wallBounceEvent(wallX, null, wallX - this.radius, null); 
+      this.angleToVel();
+      this.xv *= -1;
+      this.velToAngle();
+    }
+    if (this.y - this.radius < this.parentZone.y){
+      let jut = (this.parentZone.y - (this.y - this.radius));
+      this.y = this.parentZone.y + this.radius + (settings.fixedWallbounces ? jut : 0);
+      let wallY = this.parentZone.y;
+      this.wallBounceEvent(null, wallY, null, wallY + this.radius); 
+      this.angleToVel();
+      this.yv *= -1; 
+      this.velToAngle();
+    }
+    if (this.y + this.radius > this.parentZone.y + this.parentZone.height){
+      let jut = ((this.parentZone.y + this.parentZone.height) - (this.y + this.radius));
+      this.y = this.parentZone.y + this.parentZone.height - this.radius + (settings.fixedWallbounces ? jut : 0);
+      let wallY = this.parentZone.y + this.parentZone.height;
+      this.wallBounceEvent(null, wallY, null, wallY - this.radius); 
+      this.angleToVel();
+      this.yv *= -1;
+      this.velToAngle();
+    }
   }
-  wallBounceEvent(){
+  wallBounceEvent(wallX, wallY, tangentPosX, tangentPosY){
 
   }
 }

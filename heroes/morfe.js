@@ -105,12 +105,65 @@ class Projectile extends Entity{
     }
     this.detectContact();
   }
+  // wallBounce(){
+  //   let pb = this.bounces;
+  //   this.x - this.radius < this.area.bounds.left && (this.x = this.area.bounds.left + this.radius, this.angleToVel(), this.xv *= -1, this.velToAngle(), this.bounces--, this.wallBounceEvent());
+  //   this.x + this.radius > this.area.bounds.right && (this.x = this.area.bounds.right - this.radius, this.angleToVel(), this.xv *= -1, this.velToAngle(), this.bounces--, this.wallBounceEvent());
+  //   this.y - this.radius < this.area.bounds.top && (this.y = this.area.bounds.top + this.radius, this.angleToVel(), this.yv *= -1, this.velToAngle(), this.bounces--, this.wallBounceEvent());
+  //   this.y + this.radius > this.area.bounds.bottom && (this.y = this.area.bounds.bottom - this.radius, this.angleToVel(), this.yv *= -1, this.velToAngle(), this.bounces--, this.wallBounceEvent());
+  //   if (pb === this.bounces){
+  //     return;
+  //   }
+  //   if (this.bounces === -1){
+  //     this.toRemove = true;
+  //     return;
+  //   }
+  // }
+  // wallBounceEvent(){
+    
+  // }
   wallBounce(){
     let pb = this.bounces;
-    this.x - this.radius < this.area.bounds.left && (this.x = this.area.bounds.left + this.radius, this.angleToVel(), this.xv *= -1, this.velToAngle(), this.bounces--, this.wallBounceEvent());
-    this.x + this.radius > this.area.bounds.right && (this.x = this.area.bounds.right - this.radius, this.angleToVel(), this.xv *= -1, this.velToAngle(), this.bounces--, this.wallBounceEvent());
-    this.y - this.radius < this.area.bounds.top && (this.y = this.area.bounds.top + this.radius, this.angleToVel(), this.yv *= -1, this.velToAngle(), this.bounces--, this.wallBounceEvent());
-    this.y + this.radius > this.area.bounds.bottom && (this.y = this.area.bounds.bottom - this.radius, this.angleToVel(), this.yv *= -1, this.velToAngle(), this.bounces--, this.wallBounceEvent());
+    if (this.x - this.radius < this.area.bounds.left){
+      let jut = (this.area.bounds.left - (this.x - this.radius));
+      this.x = this.area.bounds.left + this.radius + (settings.fixedWallbounces ? jut : 0);
+      this.bounces--;
+      let wallX = this.area.bounds.left;
+      this.wallBounceEvent(wallX, null, wallX + this.radius, null); 
+      this.angleToVel();
+      this.xv *= -1; 
+      this.velToAngle();
+    }
+    if (this.x + this.radius > this.area.bounds.right){
+      let jut = ((this.area.bounds.right) - (this.x + this.radius));
+      this.x = this.area.bounds.right - this.radius + (settings.fixedWallbounces ? jut : 0);
+      this.bounces--;
+      let wallX = this.area.bounds.right;
+      this.wallBounceEvent(wallX, null, wallX - this.radius, null); 
+      this.angleToVel();
+      this.xv *= -1;
+      this.velToAngle();
+    }
+    if (this.y - this.radius < this.area.bounds.top){
+      let jut = (this.area.bounds.top - (this.y - this.radius));
+      this.y = this.area.bounds.top + this.radius + (settings.fixedWallbounces ? jut : 0);
+      this.bounces--;
+      let wallY = this.area.bounds.top;
+      this.wallBounceEvent(null, wallY, null, wallY + this.radius); 
+      this.angleToVel();
+      this.yv *= -1; 
+      this.velToAngle();
+    }
+    if (this.y + this.radius > this.area.bounds.bottom){
+      let jut = ((this.area.bounds.bottom) - (this.y + this.radius));
+      this.y = this.area.bounds.bottom - this.radius + (settings.fixedWallbounces ? jut : 0);
+      this.bounces--;
+      let wallY = this.area.bounds.bottom;
+      this.wallBounceEvent(null, wallY, null, wallY - this.radius); 
+      this.angleToVel();
+      this.yv *= -1;
+      this.velToAngle();
+    }
     if (pb === this.bounces){
       return;
     }
@@ -119,8 +172,8 @@ class Projectile extends Entity{
       return;
     }
   }
-  wallBounceEvent(){
-    
+  wallBounceEvent(wallX, wallY, tangentPosX, tangentPosY){
+
   }
   velToAngle(){
     this.angle = atan2(this.yv, this.xv);

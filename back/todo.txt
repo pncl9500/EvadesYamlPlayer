@@ -1,10 +1,10 @@
 todo (in no particular order):
 
+32 enemies
+missing map properties
 Loading custom map files obviously
 Fix mouse controls nullifying low friction
 mouse/low friction compatible cent movement
-32 enemies
-MAKE WALLBOUNCES FRAMERATE INDEPENDENT
 walls
 lighting
 endless regions
@@ -20,10 +20,9 @@ local storage stuff so if you were rameses or something you will respawn as rame
 TASing
 artificial delay simulation
 artificial random spikes and slides simulation???
-missing map properties
 make enemy radius decreases ONLY decrease aura while it isnt recovering radius (vanilla behavior)
 pellet size change
-fix bugs relating to making a new player and stuff
+fix bugs relating to changing hero type and stuff
 
 euclid
 chrono
@@ -50,3 +49,5 @@ cybot
 alk
 aranes
 custom
+
+
