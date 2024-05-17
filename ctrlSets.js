@@ -76,10 +76,10 @@ class MouseSet extends ControlSet{
     var gameMouseY = 0 + game.mainPlayer.y + ((mouseY - windowHeight / 2)) / (pixelToUnitRatio);
     let dx = gameMouseX - (settings.mainRelativeMouseControl ? (game.mainPlayer.x) : (player.x + (player.area.x - game.mainPlayer.area.x)));
     let dy = gameMouseY - (settings.mainRelativeMouseControl ? (game.mainPlayer.y) : (player.y + (player.area.y - game.mainPlayer.area.y)));
-    if (!settings.mainRelativeMouseControl && mainPlayer.region !== player.region){
-      dx = 0;
-      dy = 0;
-    }
+    // if (!settings.mainRelativeMouseControl && mainPlayer.region !== player.region){
+    //   dx = 0;
+    //   dy = 0;
+    // }
     let maxOrthogDist = 150;
     let maxDiagonalDist = 200;
     let dist = sqrt((dx)*(dx) + (dy)*(dy));

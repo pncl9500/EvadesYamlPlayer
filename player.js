@@ -881,8 +881,8 @@ class MagnetismUp extends Ability{
 }
 
 class TestEnt extends Entity{
-  constructor(x, y){
-    super(x, y, 8, "#cc0000", 0.5, "noOutline");
+  constructor(x, y, color = 0){
+    super(x, y, 8, color === 1 ? "#cc0000" : "#0000cc", 0.5, "noOutline");
     this.clock = 0;
   }
   update(){
