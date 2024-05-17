@@ -265,14 +265,8 @@ class Player extends Entity{
     this.speedMultiplier *= this.shifting ? 0.5 : 1;
     this.xv = this.ctrlVector.x * this.tempSpeed * tFix * this.speedMultiplier;
     this.yv = this.ctrlVector.y * this.tempSpeed * tFix * this.speedMultiplier;
-    //let mxv = 1 * this.tempSpeed * tFix * this.speedMultiplier;
-    //let myv = 1 * this.tempSpeed * tFix * this.speedMultiplier;
     this.xv += sx;
     this.yv += sy;
-    // this.xv = (mxv < 0) ? max(mxv, min(-mxv, this.xv)) :  max(-mxv, min(mxv, this.xv));
-    // if (!(this.magnetism || this.partialMagnetism)){
-    //   this.yv = (myv < 0) ? max(myv, min(-myv, this.yv)) :  max(-myv, min(myv, this.yv));
-    // }
     if (this.magnetism) {this.yv -= sy; this.yv = magneticSpeed * tFix * ((this.dead && !(this.area.cancelMagnetismOnDownedPlayers)) ? 1 : this.speedMultiplier) * this.magneticSpeedMultiplier * (this.shifting ? 2 : 1)};
     if (this.partialMagnetism) {this.yv -= sy; this.yv += magneticSpeed * tFix * ((this.dead && !(this.area.cancelMagnetismOnDownedPlayers)) ? 1 : this.speedMultiplier) * this.magneticSpeedMultiplier * (this.shifting ? 2 : 1)};
     this.x += this.xv;
