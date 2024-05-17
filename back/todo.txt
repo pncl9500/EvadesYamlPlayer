@@ -17,6 +17,7 @@ local storage stuff so if you were rameses or something you will respawn as rame
 TASing
 artificial delay simulation
 artificial random spikes and slides simulation???
+missing map properties
 
 euclid
 chrono
