@@ -1,5 +1,7 @@
 todo (in no particular order):
+Loading custom map files obviously
 Fix mouse controls nullifying low friction
+mouse/low friction compatible cent movement
 32 enemies
 MAKE WALLBOUNCES FRAMERATE INDEPENDENT
 walls
