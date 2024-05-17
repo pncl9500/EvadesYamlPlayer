@@ -99,7 +99,7 @@ function initGame(){
       break;
     }
   }
-  mainPlayer = new Magmax(176 + random(-64,64), 240 + random(-96,96), 16, "Player 1", true, game, startingRegionId, startingAreaNum, [new WASDset(), new ArrowSet(), new MouseSet()]);
+  mainPlayer = new Magmax(176 + random(-64,64), 240 + random(-96,96), gameConsts.defaultPlayerSize, "Player 1", true, game, startingRegionId, startingAreaNum, [new WASDset(), new ArrowSet(), new MouseSet()]);
   game.setMainPlayer(mainPlayer);
   game.addPlayer(mainPlayer);
   return game;

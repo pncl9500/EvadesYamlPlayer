@@ -9,4 +9,5 @@ gameConsts = {
   speedIncrement: 0.5,
   energyIncrement: 5,
   regenIncrement: 0.2,
+  defaultPlayerSize: 15,
 }
