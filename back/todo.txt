@@ -18,6 +18,8 @@ TASing
 artificial delay simulation
 artificial random spikes and slides simulation???
 missing map properties
+make enemy radius decreases ONLY decrease aura while it isnt recovering radius (vanilla behavior)
+pellet size change
 
 euclid
 chrono
