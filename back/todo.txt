@@ -23,6 +23,7 @@ artificial random spikes and slides simulation???
 missing map properties
 make enemy radius decreases ONLY decrease aura while it isnt recovering radius (vanilla behavior)
 pellet size change
+fix bugs relating to making a new player and stuff
 
 euclid
 chrono
