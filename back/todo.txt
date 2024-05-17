@@ -1,81 +1,20 @@
------------------------------------------------------------
-features:
-mouse control
-area banner
-minimap
-chat box
-leaderboard
-
------------------------------------------------------------
-feature complete regions:
-cc, cch, cc3, pp, pph, ww, gg, ggh, vv, vvh, hh, hhh, ee, eeh, dd, ddh, mm, mmh, oo, ooh, tt, tth, aah, gg2, gg2h, ww2, mm2, mm2h
-
-regions/enemies:
-
-ff:
+todo (in no particular order):
+32 enemies
+MAKE WALLBOUNCES FRAMERATE INDEPENDENT
 walls
-frost giant
-snowman
+lighting
+endless regions
+teleport requirements
+chat box (console) and running console commands through URL
+leaderboard
+controller control? who even uses this
+mouse deadzone
+add asset loading screen
+add pretentious logo
+arrows pointing to nearby dead players
+local storage stuff so if you were rameses or something you will respawn as rameses
+TASing
 
-bb:
-lunging
-
-ss2:
-cactus
-
-dd2:
-stalactite
-
-hh2:
-implement lighting
-fake pumpkin
-pumpkin
-tree
-
-mm3:
-firefly
-glowy
-phantom
-mist
-
-cc4:
-charging
-lead sniper
-
-ii:
-cycling
-
-ee2:
-infinite map behavior
-
-cc2:
-aibot
-eabot
-fibot
-wabot
-cybot
-
-cc2h:
-electrical
-sparking
-thunderbolt
-static
-prediction sniper
-ring sniper
-icbot
-elbot
-libot
-mebot
-plbot
-dabot
-cybot (hard mode)
-
-
-
------------------------------------------------------------
-heroes:
-figure out which effects nexus shield is supposed to block and make the shield effect remove them (maybe sonic.exe knows?)
-shade
 euclid
 chrono
 reaper
@@ -101,13 +40,3 @@ cybot
 alk
 aranes
 custom
-
------------------------------------------------------------
-other:
-mouse movement? why haven't you done this yet?
-fix zone coloring bug (ii is still wrong)
-add asset loading screen
-add pretentious logo
-arrows pointing to nearby dead players
-chat (console)
-local storage stuff so if you were rameses or something you will respawn as rameses
