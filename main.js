@@ -51,7 +51,6 @@ function draw() {
   
   if (!settings.gamePaused){
     updateAll();
-    gameClock += dTime;
   }
   background(settings.backgroundBrightness);
   push();
@@ -81,7 +80,6 @@ function skipFrame(){
   dTime *= timeScale;
   tFix = dTime / (1000 / 60) / 2;
   updateAll();
-  gameClock += dTime;
 }
 
 function drawDebugValueText(){
@@ -92,6 +90,7 @@ function drawDebugValueText(){
 }
 
 function updateAll(){
+  gameClock += dTime;
   game.update();
 }
 

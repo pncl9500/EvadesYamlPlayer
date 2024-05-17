@@ -436,7 +436,7 @@ function setCheatMenuItems(){
             tog(11, 11, false, () => {settings.tasMode = true}, () => {settings.tasMode = false}, () => {return settings.tasMode;}, "Equally space every frame in time, making the game deterministic."),]),
         row([txt("Pause game:", 12), 
             tog(11, 11, false, () => {settings.gamePaused = true}, () => {settings.gamePaused = false}, () => {return settings.gamePaused;}, "Pause the game and prevent entities from updating. Pressing [P] or clicking the button below will cause a frame to occur."),]),
-        btn("Skip frame", null, 12, () => {skipFrame()}, "Cause a frame to happen."),
+        btn("Skip frame", null, 12, () => {skipFrame()}, "Cause a frame to happen. Hotkey: [P] (only when paused)"),
     txt("Fun", 20), bigLine,
       txt("Certain settings (particularly rainbow mode when used multiple times) may cause flashing light effects.", 8), 
         row([txt("Enemy speed:", 12), 
