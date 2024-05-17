@@ -1,4 +1,5 @@
 todo (in no particular order):
+Fix mouse controls nullifying low friction
 32 enemies
 MAKE WALLBOUNCES FRAMERATE INDEPENDENT
 walls
