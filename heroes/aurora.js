@@ -22,11 +22,6 @@ class Distort extends ContinuousToggleAbility{
       return;
     }
     for (var i in enemies){
-      // area.addEnt(new TestEnt(this.aura.x, this.aura.y, 0));
-      // area.addEnt(new TestEnt(enemies[i].x, enemies[i].y, 1));
-      // console.log(this.aura);
-      // console.log(enemies[i])
-      // debugValue = this.aura.getRadius();
       if (circleCircle(this.aura, enemies[i])){
         enemies[i].gainEffect(new DistortEffect(this.slowEffect[this.tier - 1]));
       }

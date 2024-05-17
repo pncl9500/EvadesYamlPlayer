@@ -46,7 +46,7 @@ class Entity{
     
   }
   getRadius(){
-    return this.tempRadius;
+    return this.tempRadius ?? this.radius;
   }
   hasEffect(effectConstructorName){
     for (var i in this.effects){
