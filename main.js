@@ -14,6 +14,7 @@ function preload(){
  * Called once when the page is opened
  */
 function setup() {
+  document.title = "YAML Player"
   basePixelDensity = pixelDensity();
 
   frameRate(settings.fps);
