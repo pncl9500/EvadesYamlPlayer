@@ -379,7 +379,7 @@ function setCheatMenuItems(){
             tog(11, 11, true, () => {ui.areaHeader.hidden = false}, () => {ui.areaHeader.hidden = true}, () => {return !ui.areaHeader.hidden}, "Enable the area header."),]),
         row([txt("Transparent pellets:", 12), 
             tog(11, 11, false, () => {settings.pelletOpacity = 0.15}, () => {settings.pelletOpacity = 1}, undefined, "Make pellets render as transparent."),]),
-        row([txt("Fixed mouse:", 12), 
+        row([txt("Fixed mouse angle:", 12), 
             tog(11, 11, true, () => {settings.mouseAngleFix = true}, () => {settings.mouseAngleFix = false}, undefined, "Fix mouse movement so the player's angle points directly towards the mouse at all times. NOT accurate to vanilla evades."),]),
     txt("Quick Cheats", 20), bigLine,
         row([txt("Change area:", 12), 
