@@ -229,16 +229,19 @@ class Player extends Entity{
     this.sy = sy;
     sx *= 1-((1-dim)*tFix);
     sy *= 1-((1-dim)*tFix);
+    //dubious?
+    if (this.ctrlVector.x !== 0){
+      sx = 0;
+    }
+    if (this.ctrlVector.y !== 0){
+      sy = 0;
+    }
 
     this.speedMultiplier *= this.shifting ? 0.5 : 1;
     this.xv = this.stepCtrlVector.x * tFix * this.moveDist;
     this.yv = this.stepCtrlVector.y * tFix * this.moveDist;
-    let mxv = 1 * tFix * this.stepDistance;
-    let myv = 1 * tFix * this.stepDistance;
     this.xv += sx;
     this.yv += sy;
-    abs(this.xv) > 0.5 && (this.xv = max(-mxv, min(mxv, this.xv)));
-    abs(this.yv) > 0.5 && (this.yv = max(-myv, min(myv, this.yv)));
     this.x += this.xv;
     this.y += this.yv;
     this.prevMovementX = this.xv;
@@ -249,6 +252,12 @@ class Player extends Entity{
     let sy = this.prevMovementY;
     this.sx = sx;
     this.sy = sy;
+    if (this.ctrlVector.x !== 0){
+      sx = 0;
+    }
+    if (this.ctrlVector.y !== 0){
+      sy = 0;
+    }
 
     sx *= 1-((1-dim)*tFix);
     sy *= 1-((1-dim)*tFix);
@@ -256,14 +265,14 @@ class Player extends Entity{
     this.speedMultiplier *= this.shifting ? 0.5 : 1;
     this.xv = this.ctrlVector.x * this.tempSpeed * tFix * this.speedMultiplier;
     this.yv = this.ctrlVector.y * this.tempSpeed * tFix * this.speedMultiplier;
-    let mxv = 1 * this.tempSpeed * tFix * this.speedMultiplier;
-    let myv = 1 * this.tempSpeed * tFix * this.speedMultiplier;
+    //let mxv = 1 * this.tempSpeed * tFix * this.speedMultiplier;
+    //let myv = 1 * this.tempSpeed * tFix * this.speedMultiplier;
     this.xv += sx;
     this.yv += sy;
-    this.xv = (mxv < 0) ? max(mxv, min(-mxv, this.xv)) :  max(-mxv, min(mxv, this.xv));
-    if (!(this.magnetism || this.partialMagnetism)){
-      this.yv = (myv < 0) ? max(myv, min(-myv, this.yv)) :  max(-myv, min(myv, this.yv));
-    }
+    // this.xv = (mxv < 0) ? max(mxv, min(-mxv, this.xv)) :  max(-mxv, min(mxv, this.xv));
+    // if (!(this.magnetism || this.partialMagnetism)){
+    //   this.yv = (myv < 0) ? max(myv, min(-myv, this.yv)) :  max(-myv, min(myv, this.yv));
+    // }
     if (this.magnetism) {this.yv -= sy; this.yv = magneticSpeed * tFix * ((this.dead && !(this.area.cancelMagnetismOnDownedPlayers)) ? 1 : this.speedMultiplier) * this.magneticSpeedMultiplier * (this.shifting ? 2 : 1)};
     if (this.partialMagnetism) {this.yv -= sy; this.yv += magneticSpeed * tFix * ((this.dead && !(this.area.cancelMagnetismOnDownedPlayers)) ? 1 : this.speedMultiplier) * this.magneticSpeedMultiplier * (this.shifting ? 2 : 1)};
     this.x += this.xv;
@@ -352,16 +361,25 @@ class Player extends Entity{
     }
   }
   setAbilityUsages(){
+    //we need to prevent abilities from being used multiple times per frame
+    //this will happen if a player is controlled with both arrows and mouse at the same time,
+    //as both of those sets use Z/X/C, so it will try to tap Z/X/C twice in one frame.
+    let ab1usedThisFrame = false;
+    let ab2usedThisFrame = false;
+    let ab3usedThisFrame = false;
     for (var i in this.ctrlSets){
       this.ctrlSets[i].getAbKeyStates();
-      if (this.ctrlSets[i].ab1KeyTapped){
+      if (this.ctrlSets[i].ab1KeyTapped && !ab1usedThisFrame){
         this.ability1.attemptUse(this);
+        ab1usedThisFrame = true;
       }
-      if (this.ctrlSets[i].ab2KeyTapped){
+      if (this.ctrlSets[i].ab2KeyTapped && !ab2usedThisFrame){
         this.ability2.attemptUse(this);
+        ab2usedThisFrame = true;
       }
-      if (this.ctrlSets[i].ab3KeyTapped){
+      if (this.ctrlSets[i].ab3KeyTapped && !ab3usedThisFrame){
         this.ability3.attemptUse(this);
+        ab3usedThisFrame = true;
       }
     }
   }
@@ -371,16 +389,28 @@ class Player extends Entity{
       this.shifting = true;
     }
     var ctrlVector = {x: 0, y: 0};
+    let vecSources = {x: null, y: null};
+    this.ctrlSets.sort((a, b) => a.setPriority - b.setPriority);
     for (var i in this.ctrlSets){
       if (!this.ctrlSets[i].active){
         continue;
       }
-      var testCv = this.ctrlSets[i].getCtrlVector();
+      var testCv = this.ctrlSets[i].getCtrlVector(this);
       if (testCv.x !== null){
         ctrlVector.x = testCv.x;
+        vecSources.x = this.ctrlSets[i].ctrlType;
+        if (vecSources.y === "mouse" && this.ctrlSets[i].ctrlType !== "mouse"){
+          ctrlVector.y = 0 
+          vecSources.y = this.ctrlSets[i].ctrlType;
+        }
       }
       if (testCv.y !== null){
         ctrlVector.y = testCv.y;
+        vecSources.y = this.ctrlSets[i].ctrlType;
+        if (vecSources.x === "mouse" && this.ctrlSets[i].ctrlType !== "mouse"){
+          ctrlVector.x = 0 
+          vecSources.x = this.ctrlSets[i].ctrlType;
+        }
       }
     }
     return ctrlVector;
@@ -853,5 +883,18 @@ class MagnetismUp extends Ability{
   }
   activate(player, players, pellets, enemies, miscEnts, region, area){
     player.magnetismDirection = 1;
+  }
+}
+
+class TestEnt extends Entity{
+  constructor(x, y){
+    super(x, y, 8, "#cc0000", 0.5, "noOutline");
+    this.clock = 0;
+  }
+  update(){
+    this.clock += dTime;
+    if (this.clock > 4000){
+      this.toRemove = true;
+    }
   }
 }

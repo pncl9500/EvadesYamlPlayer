@@ -65,4 +65,10 @@ settings = {
   },
   backgroundBrightness: 51,
   pelletOpacity: 1,
+
+  mouseEnabled: true,
+  toggleMouse: true,
+  mouseToggled: false,
+  mouseAngleFix: false,
+  mainRelativeMouseControl: false,
 }

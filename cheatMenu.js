@@ -328,6 +328,10 @@ let baseCheatMenuItems = [];
 function setCheatMenuItems(){
   let list = [
     txt("Vanilla settings", 20), bigLine,
+        row([txt("Enable mouse:", 12), 
+            tog(11, 11, true, () => {settings.mouseEnabled = true; settings.mouseToggled = false}, () => {settings.mouseEnabled = false}, undefined, "Enable mouse movement."),]),
+        row([txt("Toggle mouse:", 12), 
+            tog(11, 11, true, () => {settings.toggleMouse = true; settings.mouseToggled = false}, () => {settings.toggleMouse = false}, undefined, "Activate mouse movement only when the mouse is held down. No effect if mouse movement is disabled."),]),
         row([txt("Show tiles:", 12), 
             tog(11, 11, true, () => {settings.drawTiles = true}, () => {settings.drawTiles = false}, undefined, "Enable grid lines."),]),
         row([txt("Show outlines:", 12), 
@@ -375,6 +379,8 @@ function setCheatMenuItems(){
             tog(11, 11, true, () => {ui.areaHeader.hidden = false}, () => {ui.areaHeader.hidden = true}, () => {return !ui.areaHeader.hidden}, "Enable the area header."),]),
         row([txt("Transparent pellets:", 12), 
             tog(11, 11, false, () => {settings.pelletOpacity = 0.15}, () => {settings.pelletOpacity = 1}, undefined, "Make pellets render as transparent."),]),
+        row([txt("Fixed mouse:", 12), 
+            tog(11, 11, true, () => {settings.mouseAngleFix = true}, () => {settings.mouseAngleFix = false}, undefined, "Fix mouse movement so the player's angle points directly towards the mouse at all times. NOT accurate to vanilla evades."),]),
     txt("Quick Cheats", 20), bigLine,
         row([txt("Change area:", 12), 
             btn("-40", 18, 12, () => {game.mainPlayer.changeAreaCheat(-40); game.mainPlayer.moveToAreaStart()}, "Move back 40 areas."),
@@ -421,6 +427,8 @@ function setCheatMenuItems(){
             tog(11, 11, true, () => {settings.changeCtrlsOnCycle = true}, () => {settings.changeCtrlsOnCycle = false}, () => {return settings.changeCtrlsOnCycle;}, "Automatically transfer the controls of the current main player to the new main player when cycling main players. Disable if you're editing controls and want to keep your changes consistent."),]),
         row([txt("Remove dead players:", 12), 
             tog(11, 11, false, () => {settings.removeDeadPlayers = true}, () => {settings.removeDeadPlayers = false}, () => {return settings.removeDeadPlayers;}, "Remove players if their death timer reaches zero (does not affect the main player)."),]),
+        row([txt("Main player relative mouse movement:", 12), 
+            tog(11, 11, false, () => {settings.mainRelativeMouseControl = true}, () => {settings.mainRelativeMouseControl = false}, () => {return settings.mainRelativeMouseControl;}, "Move mouse-controlled dummy players relative to the main player instead of the dummy player."),]),
         btn("Restore controls", null, 12, () => {for (let i in defaultControls){game.mainPlayer.ctrlSets.push(defaultControls[i])}}, "Give default controls to the main player. If you can't control anything, press this button."),
     txt("TASing", 20), bigLine,
       txt("TASing tools are not in a functional state yet. You are not currently be able to make a TAS.", 8), 
@@ -901,6 +909,29 @@ function getPlayerEditMenu(player){
           }
           return false;
         }, "Control " + pname + " with the arrow keys for movement and ZXC for abilities."),]),
+      row([txt("Controlled by mouse:", 12), 
+        tog(11, 11, false, () => {
+          for (let i in editedPlayer.ctrlSets){
+            if (editedPlayer.ctrlSets[i].constructor.name === "MouseSet"){
+              return;
+            }
+          }
+          editedPlayer.ctrlSets.push(new MouseSet());
+        }, () => {
+          for (let i = 0; i < editedPlayer.ctrlSets.length; i++){
+            if (editedPlayer.ctrlSets[i].constructor.name === "MouseSet"){
+              editedPlayer.ctrlSets.splice(i, 1);
+              i--;
+            }
+          }
+        }, () => {
+          for (let i in editedPlayer.ctrlSets){
+            if (editedPlayer.ctrlSets[i].constructor.name === "MouseSet"){
+              return true;
+            }
+          }
+          return false;
+        }, "Control " + pname + " with the mouse for movement and ZXC for abilities."),]),
   ];
   return list;
 }
@@ -910,7 +941,7 @@ function getPlayerlessCheatMenuItems(){
     txt("Oh no!", 20),
     txt("It appears that you have no body. Wanna fix that?", 12),
     btn("Click here to fix that.", 78, 12, () => {
-      game.addPlayer(new Magmax(176 + random(-64,64), 240 + random(-96,96), 16, "Player 1", true, game, startingRegionId, startingAreaNum, [new WASDset, new ArrowSet]));
+      game.addPlayer(new Magmax(176 + random(-64,64), 240 + random(-96,96), 16, "Player 1", true, game, startingRegionId, startingAreaNum, [new WASDset(), new ArrowSet(), new MouseSet()]));
       game.cycleMainPlayer();
       queueCheatMenuChange(baseCheatMenuItems);
     }, "Fix that."),

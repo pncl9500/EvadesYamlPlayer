@@ -27,3 +27,10 @@ function keyPressed() {
   if (keyCode === 77) { ui.miniMap.hidden = !ui.miniMap.hidden; }
   if (keyCode === 80) { skipFrame(); }
 }
+
+function mouseClicked(){
+  if (cheatMenuOpen){
+    return;
+  }
+  settings.mouseToggled = !settings.mouseToggled;
+}
