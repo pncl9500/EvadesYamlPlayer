@@ -15,6 +15,8 @@ add pretentious logo
 arrows pointing to nearby dead players
 local storage stuff so if you were rameses or something you will respawn as rameses
 TASing
+artificial delay simulation
+artificial random spikes and slides simulation???
 
 euclid
 chrono
