@@ -812,15 +812,38 @@ function getHeroSelectorSectionFromArray(playerToChange, set){
   return list;
 }
 
-function getPlayerCreationMenu(){
+
+function getPlayerCreationMenu(backMenuDestination = baseCheatMenuItems){
+  let bmd = backMenuDestination;
+  var nonVanillaShown = false;
   list = [
-    btn("Go back", 38, 12, () => {queueCheatMenuChange(baseCheatMenuItems)}, "Return to the previous menu."),
+    row([
+      btn("Go back", 38, 12, () => {if (typeof bmd === "function"){bmd = bmd()}queueCheatMenuChange(bmd)}, "Return to the previous menu."),
+      btn("Show extra heroes", null, 12, () => {
+        if (nonVanillaShown){
+          return;
+        }
+        nonVanillaShown = true;
+        cheatMenuItems = cheatMenuItems.concat(pdd(0, 10), txt("Bonus heroes", 20), bigLine)
+        cheatMenuItems = cheatMenuItems.concat(getPlayerCreationSectionFromArray(modHeroes));
+        cheatMenuItems = cheatMenuItems.concat(pdd(0, 10), txt("Variant heroes", 20), bigLine)
+        cheatMenuItems = cheatMenuItems.concat(getPlayerCreationSectionFromArray(variantHeroes));
+      }, "Show non-vanilla heroes."),
+    ]),
     row([txt("Random Variation:", 12), 
-      tog(11, 11, true, () => {settings.randomDummySpawn = true}, () => {settings.randomDummySpawn = false}, () => {return settings.randomDummySpawn;}, "If enabled, dummy players will be spawned with a random positional variation."),]),
-    txt("Hero List", 20), bigLine,
+    tog(11, 11, true, () => {settings.randomDummySpawn = true}, () => {settings.randomDummySpawn = false}, () => {return settings.randomDummySpawn;}, "If enabled, dummy players will be spawned with a random positional variation."),]),
+    txt("Vanilla heroes", 20), bigLine,
   ];
-  for (let i in vanillaHeroes){
-    let key = vanillaHeroes[i];
+
+  list = list.concat(getPlayerCreationSectionFromArray(vanillaHeroes));
+  list = list.concat()
+  return list;
+}
+
+function getPlayerCreationSectionFromArray(set){
+  let list = [];
+  for (var i in set){
+    let key = set[i];
     let n = new(heroDict.get(key))(-99999, -99999, 0, "", false, game, 0, 0, [], false);
     n.toRemove = true;
     let nb = btn(n.heroName, 180, 12, () => {
