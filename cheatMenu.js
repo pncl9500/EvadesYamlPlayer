@@ -1034,5 +1034,6 @@ unimplementedGimmickMapNames = [
   "Haunted Halls",
   "Frozen Fjord",
   "Frozen Fjord Hard",
+  "Dusty Depths",
   "Research Lab",
 ]
