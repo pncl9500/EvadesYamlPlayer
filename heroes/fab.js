@@ -12,7 +12,7 @@ class Fab extends Player{
 
 class Masonry extends Ability{
   constructor(){
-    super(5, [6500, 6000, 5500, 5000, 4500], 15, im.ab.masonry);
+    super(5, [6500, 6000, 5500, 5000, 4500], 15, "ab.masonry");
   }
   activate(player, players, pellets, enemies, miscEnts, region, area){
     for (var i = 0; i < 7; i++){
@@ -109,7 +109,7 @@ class MasonryEffect extends Effect{
 
 class Tether extends Ability{
   constructor(){
-    super(5, [16000, 14000, 12000, 10000, 8000], 20, im.ab.tether);
+    super(5, [16000, 14000, 12000, 10000, 8000], 20, "ab.tether");
     this.rechargingActive = false;
     this.tetherSelf = null;
     this.tetherOther = null;

@@ -29,7 +29,7 @@ class Morfe extends Player{
 
 class Reverse extends Ability{
   constructor(){
-    super(5, 3000, 10, im.ab.reverse);
+    super(5, 3000, 10, "ab.reverse");
     this.projectileCounts = [1,2,3,4,5];
     this.fanAngles = [0, PI/180 * 10, PI/180 * 20, PI/180 * 30, PI/180 * 40];
   }
@@ -47,7 +47,7 @@ class Reverse extends Ability{
 
 class Minimize extends Ability{
   constructor(){
-    super(5, 1500, 10, im.ab.minimize);
+    super(5, 1500, 10, "ab.minimize");
     this.projectileCounts = [2,3,4,5,6];
     this.fanAngles = [PI/180 * 10, PI/180 * 20, PI/180 * 30, PI/180 * 40, PI/180 * 50];
   }

@@ -862,7 +862,7 @@ tpZoneEpsilon = 8;
 
 class MagnetismDown extends Ability{
   constructor(){
-    super(1, 0, 1, im.ab.magnetism_down);
+    super(1, 0, 1, "ab.magnetism_down");
     this.tier = 1;
   }
   activate(player, players, pellets, enemies, miscEnts, region, area){
@@ -872,7 +872,7 @@ class MagnetismDown extends Ability{
 
 class MagnetismUp extends Ability{
   constructor(){
-    super(1, 0, 1, im.ab.magnetism_up);
+    super(1, 0, 1, "ab.magnetism_up");
     this.tier = 1;
   }
   activate(player, players, pellets, enemies, miscEnts, region, area){

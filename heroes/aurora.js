@@ -9,7 +9,7 @@ class Aurora extends Player{
 
 class Distort extends ContinuousToggleAbility{
   constructor(){
-    super(5, 0, 7, im.ab.distort);
+    super(5, 0, 7, "ab.distort");
     this.ranges = [180, 210, 240, 270, 300];
     this.slowEffect = [0.7, 0.65, 0.6, 0.55, 0.5];
     this.aura = new LockedAura({x: 0, y: 0}, this.ranges[this.tier - 1], "#ff000030", z.genericAura + random() * z.randEpsilon);
@@ -48,7 +48,7 @@ class DistortEffect extends Effect{
 
 class Energize extends Ability{
   constructor(){
-    super(5, 0, 0, im.ab.energize);
+    super(5, 0, 0, "ab.energize");
     this.regenBoosts = [2, 2.25, 2.5, 2.75, 3];
     this.cooldownReduction = 0.9;
   }

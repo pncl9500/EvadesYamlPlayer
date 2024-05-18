@@ -10,7 +10,7 @@ class Brute extends Player{
 
 class Vigor extends Ability{
   constructor(){
-    super(5, 0, 0, im.ab.vigor);
+    super(5, 0, 0, "ab.vigor");
     this.reductions = [0.15, 0.30, 0.45, 0.60, 0.75];
     this.maxEnergyReduction = 0.25;
     this.sizeIncreases = [1.03, 1.03, 1.06, 1.06, 1.09];
@@ -42,7 +42,7 @@ class VigorEffect extends Effect{
 
 class Stomp extends ToggleAbility{
   constructor(){
-    super(5, 1000, 10, im.ab.stomp);
+    super(5, 1000, 10, "ab.stomp");
     this.ranges = [130, 145, 160, 175, 190];
     this.stompTravelTime = 200;
     this.freezeTime = 4000;

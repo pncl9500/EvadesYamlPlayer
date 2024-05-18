@@ -9,7 +9,7 @@ class Magmax extends Player{
 
 class Flow extends ContinuousToggleAbility{
   constructor(){
-    super(5, 0, 2, im.ab.flow);
+    super(5, 0, 2, "ab.flow");
     this.speeds = [2, 3, 4, 5, 6];
     this.effect = new FlowEffect(0, this.speeds[this.tier - 1]);
   }
@@ -28,7 +28,7 @@ class Flow extends ContinuousToggleAbility{
 
 class Harden extends ContinuousToggleAbility{
   constructor(){
-    super(5, [1250, 1000, 750, 500, 250], 12, im.ab.harden);
+    super(5, [1250, 1000, 750, 500, 250], 12, "ab.harden");
   }
   behavior(player){
     if (this.toggled){

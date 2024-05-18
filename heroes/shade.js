@@ -9,7 +9,7 @@ class Shade extends Player{
 
 class Night extends Ability{
   constructor(){
-    super(5, 7000, 30, im.ab.night);
+    super(5, 7000, 30, "ab.night");
     this.speedBoosts = [0, 1.25, 2.5, 3.75, 5];
     this.effectLength = 7000;
   }
@@ -68,7 +68,7 @@ class NightEnemyEffect extends Effect{
 
 class Vengeance extends Ability{
   constructor(){
-    super(5, [3000, 2500, 2000, 1500, 1000], 5, im.ab.vengeance);
+    super(5, [3000, 2500, 2000, 1500, 1000], 5, "ab.vengeance");
     this.projectileRadii = [20, 25, 30, 35, 40];
   }
   activate(player, players, pellets, enemies, miscEnts, region, area){
@@ -82,7 +82,7 @@ class Vengeance extends Ability{
 class VengeanceProjectile extends Projectile{
   constructor(x, y, angle, area, player, radius){
     super(x, y, angle, 58, -1, -1, radius, "880022", area, player, z.genericProjectile, [], "image");
-    this.image = im.ab.vengeance_projectile
+    this.image = "pr.vengeance_projectile"
     this.returning = false;
     this.clock = 0;
     this.acceleration = 4;

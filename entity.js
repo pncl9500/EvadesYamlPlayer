@@ -148,7 +148,7 @@ class Entity{
         stroke(this.tempColor.r, this.tempColor.g, this.tempColor.b, this.tempColor.a ?? 255);
         break;
       case "image":
-        image(this.image, this.x - this.radius, this.y - this.radius, this.radius * 2, this.radius * 2);
+        image(im[this.image], this.x - this.radius, this.y - this.radius, this.radius * 2, this.radius * 2);
       default:
         break;
     }

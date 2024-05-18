@@ -9,7 +9,7 @@ class OldMorfe extends Player{
 
 class OldMinimize extends Ability{
   constructor(){
-    super(5, 2000, 15, im.ab.minimize);
+    super(5, 2000, 15, "ab.minimize");
     this.projectileCounts = [2,3,4,5,6];
     this.fanAngles = [PI/180 * 10, PI/180 * 20, PI/180 * 30, PI/180 * 40, PI/180 * 50];
   }
@@ -48,7 +48,7 @@ class OldMinimizeEffect extends Effect{
 
 class OldReverse extends Ability{
   constructor(){
-    super(5, 2000, 15, im.ab.reverse);
+    super(5, 2000, 15, "ab.reverse");
     this.projectileCounts = [2,3,4,5,6];
     this.fanAngles = [PI/180 * 10, PI/180 * 20, PI/180 * 30, PI/180 * 40, PI/180 * 50];
   }

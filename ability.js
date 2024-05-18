@@ -1,5 +1,5 @@
 class Ability{
-  constructor(maxTier = 5, cooldowns = 0, cost = 0, image = im.missingImage){
+  constructor(maxTier = 5, cooldowns = 0, cost = 0, image = "missingImage"){
     this.image = image;
     this.tier = 0;
     this.maxTier = maxTier;
@@ -124,7 +124,7 @@ class Ability{
 }
 
 class ToggleAbility extends Ability{
-  constructor(maxTier = 5, cooldowns = 0, cost = 0, image = im.missingImage){
+  constructor(maxTier = 5, cooldowns = 0, cost = 0, image = "missingImage"){
     super(maxTier, cooldowns, cost, image);
     this.toggled = false;
     this.toggleOffOnDeath = true;
@@ -169,7 +169,7 @@ class ToggleAbility extends Ability{
 }
 
 class ContinuousToggleAbility extends ToggleAbility{
-  constructor(maxTier = 5, cooldowns = 0, cost = 0, image = im.missingImage){
+  constructor(maxTier = 5, cooldowns = 0, cost = 0, image = "missingImage"){
     super(maxTier, cooldowns, cost, image);
     this.energyUseEpsilon = 0.05;
   }

@@ -9,7 +9,7 @@ class Nexus extends Player{
 
 class Barrier extends Ability{
   constructor(){
-    super(5, 10000, 30, im.ab.barrier);
+    super(5, 10000, 30, "ab.barrier");
     this.durations = [2500, 2700, 2900, 3100, 3300];
     this.usableWhileDead = true;
   }
@@ -65,7 +65,7 @@ class BarrierEffect extends Effect{
 
 class Stream extends Ability{
   constructor(){
-    super(5, 2000, 5, im.ab.stream);
+    super(5, 2000, 5, "ab.stream");
     this.duration = 8000;
     this.speedBoosts = [0, 1.25, 2.5, 3.75, 5];
   }

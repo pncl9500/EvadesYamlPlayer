@@ -12,7 +12,7 @@ class Necro extends Player{
 
 class Resurrection extends Ability{
   constructor(){
-    super(1, 75, 0, im.ab.resurrection);
+    super(1, 75, 0, "ab.resurrection");
     this.pelletBased = true;
     this.usableWhileDead = true;
     this.usableWhileAlive = false;
@@ -24,7 +24,7 @@ class Resurrection extends Ability{
 
 class Reanimate extends Ability{
   constructor(){
-    super(5, [14000,12000,10000,8000,6000], 30, im.ab.reanimate);
+    super(5, [14000,12000,10000,8000,6000], 30, "ab.reanimate");
     this.projectileCounts = [1,2,3,4,5];
     this.fanAngles = [PI/180 * 0, PI/180 * 20, PI/180 * 20, PI/180 * 20, PI/180 * 20];
   }
