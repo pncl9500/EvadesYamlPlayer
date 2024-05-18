@@ -762,12 +762,33 @@ function getRegionSelectorMenu(){
 
 function getHeroSelectorMenu(playerToChange = game.mainPlayer, backMenuDestination = baseCheatMenuItems){
   let bmd = backMenuDestination;
+  var nonVanillaShown = false;
   list = [
-    btn("Go back", 38, 12, () => {if (typeof bmd === "function"){bmd = bmd()}queueCheatMenuChange(bmd)}, "Return to the previous menu."),
-    txt("Hero List", 20), bigLine,
+    row([
+      btn("Go back", 38, 12, () => {if (typeof bmd === "function"){bmd = bmd()}queueCheatMenuChange(bmd)}, "Return to the previous menu."),
+      btn("Show extra heroes", null, 12, () => {
+        if (nonVanillaShown){
+          return;
+        }
+        nonVanillaShown = true;
+        cheatMenuItems = cheatMenuItems.concat(pdd(0, 10), txt("Bonus heroes", 20), bigLine)
+        cheatMenuItems = cheatMenuItems.concat(getHeroSelectorSectionFromArray(playerToChange, modHeroes));
+        cheatMenuItems = cheatMenuItems.concat(pdd(0, 10), txt("Variant heroes", 20), bigLine)
+        cheatMenuItems = cheatMenuItems.concat(getHeroSelectorSectionFromArray(playerToChange, variantHeroes));
+      }, "Show non-vanilla heroes."),
+    ]),
+    txt("Vanilla heroes", 20), bigLine,
   ];
-  for (var i in vanillaHeroes){
-    let key = vanillaHeroes[i];
+
+  list = list.concat(getHeroSelectorSectionFromArray(playerToChange, vanillaHeroes));
+  list = list.concat()
+  return list;
+}
+
+function getHeroSelectorSectionFromArray(playerToChange, set){
+  let list = [];
+  for (var i in set){
+    let key = set[i];
     let n = new(heroDict.get(key))(-99999, -99999, 0, "", false, game, 0, 0, [], false);
     n.toRemove = true;
     let nb = btn(n.heroName, 180, 12, () => {
