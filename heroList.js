@@ -7,8 +7,9 @@ heroList = {
   "brute": Brute,
   "nexus": Nexus,
   "shade": Shade,
-  "oldmorfe": OldMorfe,
   //"euclid": Euclid,
+  
+  "oldmorfe": OldMorfe,
 }
 
 vanillaHeroes = [
