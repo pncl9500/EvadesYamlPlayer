@@ -116,6 +116,7 @@ class Entity{
     
   }
   drawOnMap(){
+    if (this.renderType === "none") return;
     let map = ui.miniMap;
     noStroke();
     fill(this.tempColor.r, this.tempColor.g, this.tempColor.b, (this.tempColor.a ?? 255) * this.alphaMultiplier);
@@ -130,6 +131,9 @@ class Entity{
     this.drawBackExtra();
     fill(this.tempColor.r, this.tempColor.g, this.tempColor.b, (this.tempColor.a ?? 255) * this.alphaMultiplier);
     switch (this.renderType) {
+      case "none":
+        //dont render
+        return;
       case "noOutline":
         break;
       case "outline":
@@ -142,9 +146,6 @@ class Entity{
         noFill();
         strokeWeight(ringEnemyStrokeWidth);
         stroke(this.tempColor.r, this.tempColor.g, this.tempColor.b, this.tempColor.a ?? 255);
-        break;
-      case "none":
-        //dont render
         break;
       case "image":
         image(this.image, this.x - this.radius, this.y - this.radius, this.radius * 2, this.radius * 2);

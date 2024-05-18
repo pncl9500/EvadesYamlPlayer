@@ -163,5 +163,6 @@ pal = {
     cybot: "926be3",
 
     oldmorfe: "00dd00",
+    fab: "bdab73",
   },
 }

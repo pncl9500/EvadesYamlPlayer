@@ -148,10 +148,39 @@ function processUrlParams(){
           game.mainPlayer.ability2.upgrade(game.mainPlayer);
         }
         break;
+      case "test":
+        testParamFunc(game.mainPlayer);
+        break;
       default:
         break;
     }
   }
+}
+
+function testParamFunc(mp){
+  settings.changeCtrlsOnCycle = false;
+  mp.upgradePoints = 160;
+  mp.speed = gameConsts.maxSpeed;
+  mp.maxEnergy = gameConsts.maxEnergy;
+  mp.regen = gameConsts.maxRegen;
+  for (let i = 0; i < 5; i++){
+    mp.ability1.upgrade(mp);
+    mp.ability2.upgrade(mp);
+  }
+  let newPlayer = new Magmax(mp.x + random(-32,32) * settings.randomDummySpawn, mp.y + random(-32, 32) * settings.randomDummySpawn, gameConsts.defaultPlayerSize, `Player 2`, false, game, mp.regionNum, mp.areaNum, []);
+  game.addPlayer(newPlayer);
+  game.cycleMainPlayer();
+  game.mainPlayer.upgradePoints = 160;
+  game.mainPlayer.speed = gameConsts.maxSpeed;
+  game.mainPlayer.maxEnergy = gameConsts.maxEnergy;
+  game.mainPlayer.regen = gameConsts.maxRegen;
+  for (let i = 0; i < 5; i++){
+    game.mainPlayer.ability1.upgrade(game.mainPlayer);
+    game.mainPlayer.ability2.upgrade(game.mainPlayer);
+  }
+  game.mainPlayer.ctrlSets = [new ArrowSet()];
+  game.cycleMainPlayer();
+  mp.ctrlSets = [new WASDset()];
 }
 
 regionCodes = {

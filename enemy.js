@@ -57,6 +57,9 @@ class Enemy extends Entity{
     this.angleToVel();
   }
   setAngle(ang){
+    if (this.immune){
+      return;
+    }
     this.velToAngle();
     this.angle = ang;
     this.angleToVel();

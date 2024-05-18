@@ -12,6 +12,7 @@ class Ability{
       this.cooldowns = [this.cooldowns,this.cooldowns,this.cooldowns,this.cooldowns,this.cooldowns];
     }
     this.cost = cost;
+    this.rechargingActive = true;
   }
   upgrade(player, forceUpgrade = false){
     if ((player.upgradePoints > 0 || forceUpgrade) && this.tier < this.maxTier){
@@ -26,7 +27,7 @@ class Ability{
 
   }
   update(player){
-    if (!this.pelletBased){
+    if (!this.pelletBased && this.rechargingActive){
       this.currentCooldown -= dTime;
     }
   }
@@ -54,15 +55,21 @@ class Ability{
     }
     if (this.canUseAbility(player)){
       if (this.useConditionSatisfied()){
+        this.startCooldown(player);
         this.use(player);
         this.drainEnergy(player);
-        this.startCooldown(player);
       }
     }
   }
   startCooldown(player){
     this.currentCooldown = this.cooldowns[this.tier - 1] * (this.pelletBased ? 1 : player.cooldownMultiplier);
     this.cooldownOfPreviousUse = this.currentCooldown;
+  }
+  cancelUse(player, giveEnergy = true){
+    this.currentCooldown = 0;
+    //i don't want to bloat this out even more with a new cooldown of previous use variable god help me
+    if (!giveEnergy) return;
+    player.energy += this.cost;
   }
   use(player){
     let prms = this.getActivationParams(player);
@@ -150,10 +157,10 @@ class ToggleAbility extends Ability{
         if (this.toggled === true){
           this.toggled = false;
           let prms = this.getActivationParams(player);
+          this.startCooldown(player);
           this.activate(player, prms.players, prms.pellets, prms.enemies, prms.miscEnts, prms.region, prms.area);
           this.toggleOff(player, prms.players, prms.pellets, prms.enemies, prms.miscEnts, prms.region, prms.area);
           this.drainEnergy(player);
-          this.startCooldown(player);
           return;
         }
       }

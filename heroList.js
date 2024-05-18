@@ -8,8 +8,9 @@ heroList = {
   "nexus": Nexus,
   "shade": Shade,
   //"euclid": Euclid,
-  
+
   "oldmorfe": OldMorfe,
+  "fab": Fab,
 }
 
 vanillaHeroes = [

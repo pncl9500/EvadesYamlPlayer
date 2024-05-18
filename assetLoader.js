@@ -29,6 +29,9 @@ function loadAssets(){
 
       magnetism_down: loadImage("imageAssets/ab/magnetism_down.png"),
       magnetism_up: loadImage("imageAssets/ab/magnetism_up.png"),
+
+      masonry: loadImage("imageAssets/ab/masonry.png"),
+      tether: loadImage("imageAssets/ab/tether.png"),
     }
   }
   fnt = {
