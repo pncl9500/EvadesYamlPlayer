@@ -38,6 +38,7 @@ function getPlayerEditMenu(player){
         btn("Clear other players", null, 12, () => {clearDummyPlayers(editedPlayer)}, "Delete all players except for " + pname + "."),]),
     row([txt("Change hero: ", 12), 
         btn("Open list", 37, 12, () => {queueCheatMenuChange(getHeroSelectorMenu(editedPlayer, getPlayerSelectorMenu))}, "Select a hero for " + pname + " to be."),]), 
+    txt("Control sets", 16), bigLine(),
     row([txt("Controlled by WASD:", 12), 
         tog(11, 11, false, () => {
           for (let i in editedPlayer.ctrlSets){
@@ -107,6 +108,14 @@ function getPlayerEditMenu(player){
           }
           return false;
         }, "Control " + pname + " with the mouse for movement and ZXC for abilities."),]),
+      txt("Macros", 16), bigLine(),
+      txt("Using macros to activate abilities with no cooldown may result in flashing light effects.", 8),
+      row([txt("Ability 1 macro:", 12), 
+        tog(11, 11, false, () => {editedPlayer.ab1macro = true}, () => {editedPlayer.ab1macro = false}, () => {return editedPlayer.ab1macro}, "Make " + pname + " use ability 1 when possible."),]),
+      row([txt("Ability 2 macro:", 12), 
+        tog(11, 11, false, () => {editedPlayer.ab2macro = true}, () => {editedPlayer.ab2macro = false}, () => {return editedPlayer.ab2macro}, "Make " + pname + " use ability 2 when possible."),]),
+      row([txt("Ability 3 macro:", 12), 
+        tog(11, 11, false, () => {editedPlayer.ab3macro = true}, () => {editedPlayer.ab3macro = false}, () => {return editedPlayer.ab3macro}, "Make " + pname + " use ability 3 when possible."),]),
   ];
   return list;
 }

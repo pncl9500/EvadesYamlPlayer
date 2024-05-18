@@ -73,6 +73,10 @@ class Player extends Entity{
     this.defStepParams();
 
     this.magnetismDirection = 1;
+
+    this.ab1macro = false;
+    this.ab2macro = false;
+    this.ab3macro = false;
   }
   resetAllModifiers(){
     this.detectable = true;
@@ -363,15 +367,15 @@ class Player extends Entity{
     let ab3usedThisFrame = false;
     for (var i in this.ctrlSets){
       this.ctrlSets[i].getAbKeyStates();
-      if (this.ctrlSets[i].ab1KeyTapped && !ab1usedThisFrame){
+      if ((this.ab1macro || this.ctrlSets[i].ab1KeyTapped) && !ab1usedThisFrame){
         this.ability1.attemptUse(this);
         ab1usedThisFrame = true;
       }
-      if (this.ctrlSets[i].ab2KeyTapped && !ab2usedThisFrame){
+      if ((this.ab2macro || this.ctrlSets[i].ab2KeyTapped) && !ab2usedThisFrame){
         this.ability2.attemptUse(this);
         ab2usedThisFrame = true;
       }
-      if (this.ctrlSets[i].ab3KeyTapped && !ab3usedThisFrame){
+      if ((this.ab3macro || this.ctrlSets[i].ab3KeyTapped) && !ab3usedThisFrame){
         this.ability3.attemptUse(this);
         ab3usedThisFrame = true;
       }
@@ -795,6 +799,14 @@ class Player extends Entity{
     newPlayer.mostRecentSafeX = this.mostRecentSafeX;
     newPlayer.mostRecentSafeY = this.mostRecentSafeY;
     newPlayer.lastDir = this.lastDir;
+    newPlayer.magnetismDirection = this.magnetismDirection;
+    newPlayer.prevMovementX = this.prevMovementX;
+    newPlayer.prevMovementY = this.prevMovementY;
+    newPlayer.sx = this.sx;
+    newPlayer.sy = this.sy;
+    newPlayer.ab1macro = this.ab1macro;
+    newPlayer.ab2macro = this.ab2macro;
+    newPlayer.ab3macro = this.ab3macro;
 
     let ind = this.area.players.indexOf(this);
     this.area.players.splice(this.area.players.indexOf(this), 1);
