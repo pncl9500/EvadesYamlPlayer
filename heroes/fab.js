@@ -238,8 +238,8 @@ class TetherIndicatorEnt extends Entity{
   snap(){
     let dist = dst(this.self, this.other);
     if (dist < this.reach * 2){
-      this.x = (this.self.x + this.other.x)/2;
-      this.y = (this.self.y + this.other.y)/2;
+      this.x = (this.self.x + this.other.x)/2 + random(-this.shake, this.shake);
+      this.y = (this.self.y + this.other.y)/2 + random(-this.shake, this.shake);
       return;
     }
     this.x = this.self.x + this.reach * cos(atan2(this.other.y - this.self.y, this.other.x - this.self.x)) + random(-this.shake, this.shake);
