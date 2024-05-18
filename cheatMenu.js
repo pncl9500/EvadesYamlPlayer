@@ -464,7 +464,7 @@ function setCheatMenuItems(){
         row([txt("Player size:", 12), 
             btn("Tiny", null, 12, () => {game.mainPlayer.baseRadius = 3;}, "Become a very small size."),
             btn("Small", null, 12, () => {game.mainPlayer.baseRadius = 8;}, "Become a small size."),
-            btn("Normal", null, 12, () => {game.mainPlayer.baseRadius = 16;}, "Become a normal size."),
+            btn("Normal", null, 12, () => {game.mainPlayer.baseRadius = 15;}, "Become a normal size."),
             btn("Big", null, 12, () => {game.mainPlayer.baseRadius = 32;}, "Become a large size."),
             btn("Huge", null, 12, () => {game.mainPlayer.baseRadius = 64;}, "Become a very large size."),]),
         row([txt("Player speed:", 12), 
