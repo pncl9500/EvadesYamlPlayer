@@ -90,244 +90,12 @@ function drawCheatMenu(){
   }
 }
 
-class CheatMenuItem{
-  constructor(height, width){
-    this.height = height;
-    this.width = width;
-  }
-  draw(offset){
-
-  }
-  behavior(offset){
-
-  }
-}
-
-class CheatMenuText extends CheatMenuItem{
-  constructor(text, height){
-    super(height, 0);
-    textSize(height);
-    this.width = textWidth(text);
-    this.text = text;
-  }
-  draw(offset){
-    noStroke();
-    textSize(this.height);
-    fill(255);
-    text(this.text, 0, offset);
-  }
-}
-
-class CheatMenuLine extends CheatMenuItem{
-  constructor(){
-    super(2, cheatMenuWidth - cheatMenuLeftPadding * 2);
-  }
-  draw(offset){
-    stroke(255);
-    strokeWeight(2);
-    line(0, offset, cheatMenuWidth - cheatMenuLeftPadding * 2, offset);
-  }
-}
-
-class CheatMenuButton extends CheatMenuItem{
-  constructor(text, width, height, func, tooltip){
-    super(height, width);
-    this.text = text;
-    this.width = width;
-    if (width === null){
-      textSize(this.height - cheatMenuButtonPadding * 2);
-      this.width = textWidth(this.text) + cheatMenuButtonPadding * 2 + 1;
-    }
-    this.func = func;
-    this.tooltip = tooltip;
-    this.color = {r: 255, g: 255, b: 255};
-    this.hoverColor = {r: 125, g: 125, b: 125};
-    this.textColor = {r: 0, g: 0, b: 0};
-  }
-  hoveredByMouse(relMouseX, relMouseY, offset){
-    return ptRect(relMouseX, relMouseY, 0, offset, this.width, this.height);
-  }
-  draw(offset){
-    noStroke();
-    fill(this.color.r, this.color.g, this.color.b);
-    if (this.hoveredByMouse(relMouseX, relMouseY, offset)){
-      fill(this.hoverColor.r, this.hoverColor.g, this.hoverColor.b);
-      if (mouseReleasedLastFrame){
-        this.func();
-      }
-    }
-    rect(0, offset, this.width, this.height);
-    textSize(this.height - cheatMenuButtonPadding * 2);
-    fill(this.textColor.r, this.textColor.g, this.textColor.b);
-    textAlign(LEFT, CENTER);
-    text(this.text, cheatMenuButtonPadding, offset + this.height / 2 + 0.5);
-    textAlign(LEFT, TOP);
-    if (this.tooltip !== undefined && this.hoveredByMouse(relMouseX, relMouseY, offset)){
-      tooltipToRender = this.tooltip;
-    }
-  }
-}
-
-class CheatMenuRow extends CheatMenuItem{
-  constructor(items){
-    super(0);
-    this.items = items;
-    let greatestHeight = 0;
-    let width = 0;
-    for (var i in items){
-      if (items[i].height > greatestHeight){
-        greatestHeight = items[i].height;
-        width += items[i].width;
-        width += cheatMenuRowItemPadding;
-      }
-    }
-    this.height = greatestHeight;
-  }
-  draw(offset){
-    push();
-    let initialRelMouseX = relMouseX;
-    for (var i in this.items){
-      this.items[i].draw(offset);
-      this.items[i].behavior();
-      translate(this.items[i].width + cheatMenuRowItemPadding, 0)
-      relMouseX -= this.items[i].width + cheatMenuRowItemPadding;
-    }
-    relMouseX = initialRelMouseX;
-    pop();
-  }
-}
-
-class CheatMenuToggle extends CheatMenuItem{
-  constructor(width, height, toggled, onFunc, offFunc, getStateFunc, tooltip){
-    super(height, width);
-    this.toggled = toggled;
-    this.onFunc = onFunc;
-    this.offFunc = offFunc;
-    this.toggleBoxPadding = 2;
-    this.getStateFunc = getStateFunc;
-    this.tooltip = tooltip;
-  }
-  hoveredByMouse(relMouseX, relMouseY, offset){
-    return ptRect(relMouseX, relMouseY, 0, offset, this.width, this.height);
-  }
-  draw(offset){
-    if (this.getStateFunc !== undefined){
-      this.toggled = this.getStateFunc();
-    }
-    stroke(255);
-    strokeWeight(1);
-    noFill();
-    if (this.hoveredByMouse(relMouseX, relMouseY, offset)){
-      fill(255, 100);
-      if (mouseReleasedLastFrame){
-        if (this.toggled){
-          this.toggled = false;
-          this.offFunc();
-        } else {
-          this.toggled = true;
-          this.onFunc();
-        }
-      }
-    }
-    rect(0, offset, this.width, this.height);
-    if (this.toggled){
-      fill(255);
-      noStroke();
-      rect(0 + this.toggleBoxPadding, offset + this.toggleBoxPadding, this.width - this.toggleBoxPadding * 2 - 0.40, this.height - this.toggleBoxPadding * 2 - 0.40);
-    }
-    if (this.tooltip !== undefined && this.hoveredByMouse(relMouseX, relMouseY, offset)){
-      tooltipToRender = this.tooltip;
-    }
-  }
-}
-
-class CheatMenuSlider extends CheatMenuItem{
-  constructor(min, max, width, setFunc, getFunc, step, downOffset = 6){
-    super(2, width);
-    this.min = min;
-    this.max = max;
-    this.setFunc = setFunc;
-    this.getFunc = getFunc;
-    this.step = step;
-    this.circleRadius = 4;
-    let val = this.getFunc();
-    let t = (val - this.min) / (this.max - this.min);
-    this.circleX = map(t, 0, 1, 0, this.width);
-    this.downOffset = downOffset;
-    this.lockedToMouse = false;
-  }
-  hoveredByMouse(relMouseX, relMouseY, offset){
-    return circleCircle({x: relMouseX, y: relMouseY, r: 1}, {x: this.circleRadius + this.circleX, y: offset + this.downOffset, r: this.circleRadius});
-  }
-  draw(offset){
-    stroke(255);
-    strokeWeight(1);
-    line(this.circleRadius, offset + this.downOffset, this.width, offset + this.downOffset);
-    fill(0);
-    if (this.hoveredByMouse(relMouseX, relMouseY, offset)){
-      fill(100);
-    }
-    ellipse(this.circleRadius + this.circleX, offset + this.downOffset, this.circleRadius);
-
-    if (this.hoveredByMouse(relMouseX, relMouseY, offset) && mouseIsPressed){
-      this.lockedToMouse = true;
-    }
-    if (!mouseIsPressed){
-      this.lockedToMouse = false;
-    }
-    
-    let currentVal = this.getFunc();
-    this.circleX = map(currentVal, this.min, this.max, 0, this.width);
-
-
-    if (this.lockedToMouse){
-      this.circleX = relMouseX - this.circleRadius;
-      this.circleX = min(max(this.circleX, 0), this.width)
-    }
-    let xtoVal = map(this.circleX, 0, this.width, this.min, this.max);
-    if (this.step !== 0){
-      xtoVal = (round(xtoVal / this.step)) * this.step;
-    }
-    this.circleX = map(xtoVal, this.min, this.max, 0, this.width);
-    this.setFunc(xtoVal);
-  }
-}
-
-class CheatMenuPadding extends CheatMenuItem{
-  constructor(width, height){
-    super(height, width);
-  }
-}
-
-
-bigLine = new CheatMenuLine();
-function txt(text, height){
-  return new CheatMenuText(text, height);
-}
-
-function btn(text, width, height, func, tooltip){
-  return new CheatMenuButton(text, width, height, func, tooltip);
-}
-
-function row(items){
-  return new CheatMenuRow(items);
-}
-
-function tog(width, height, toggled, onFunc, offFunc, getStateFunc, tooltip){
-  return new CheatMenuToggle(width, height, toggled, onFunc, offFunc, getStateFunc, tooltip);
-}
-function sld(min, max, width, setFunc, getFunc, step, downOffset = 6){
-  return new CheatMenuSlider(min, max, width, setFunc, getFunc, step, downOffset);
-}
-function pdd(width, height){
-  return new CheatMenuPadding(width, height);
-}
 
 let cheatMenuItems = [];
 let baseCheatMenuItems = [];
 function setCheatMenuItems(){
   let list = [
-    txt("Vanilla settings", 20), bigLine,
+    txt("Vanilla settings", 20), bigLine(),
         row([txt("Enable mouse:", 12), 
             tog(11, 11, true, () => {settings.mouseEnabled = true; settings.mouseToggled = false}, () => {settings.mouseEnabled = false}, undefined, "Enable mouse movement."),]),
         row([txt("Toggle mouse:", 12), 
@@ -360,7 +128,7 @@ function setCheatMenuItems(){
             }, () => {
               return settings.darkMode;
             }, "Enable dark mode."),]),
-    txt("Sandbox settings", 20), bigLine,
+    txt("Sandbox settings", 20), bigLine(),
         row([txt("Change hero: ", 12), 
             btn("Open list", 37, 12, () => {queueCheatMenuChange(getHeroSelectorMenu())}, "Select a hero."),]),
         row([txt("Instant respawn:", 12), 
@@ -386,7 +154,7 @@ function setCheatMenuItems(){
             tog(11, 11, true, () => {settings.mouseAngleFix = true}, () => {settings.mouseAngleFix = false}, undefined, "Fix mouse movement so the player's angle points directly towards the mouse at all times. NOT accurate to vanilla evades."),]),
         row([txt("Fixed wallbounces:", 12), 
             tog(11, 11, true, () => {settings.fixedWallbounces = true}, () => {settings.fixedWallbounces = false}, undefined, "Make enemy wallbounces behave independently from the framerate. Unknown if it is accurate to vanilla evades, and it may look weird with high enemy speeds."),]),
-    txt("Quick Cheats", 20), bigLine,
+    txt("Quick Cheats", 20), bigLine(),
         row([txt("Change area:", 12), 
             btn("-40", 18, 12, () => {game.mainPlayer.changeAreaCheat(-40); game.mainPlayer.moveToAreaStart()}, "Move back 40 areas."),
             btn("-10", 18, 12, () => {game.mainPlayer.changeAreaCheat(-10); game.mainPlayer.moveToAreaStart()}, "Move back 10 areas."),
@@ -417,7 +185,7 @@ function setCheatMenuItems(){
               sld(0, 3, 120, (to) => {timeScale = to}, () => {return timeScale}, 0),
               pdd(3, 0),
               btn("Default", null, 12, () => {timeScale = 1}, "Reset time scale to its default value (1)."),]),
-    txt("Players", 20), bigLine,
+    txt("Players", 20), bigLine(),
         row([txt("Player management:", 12), 
             btn("Create new", null, 12, () => {queueCheatMenuChange(getPlayerCreationMenu())}, "Create a new player."),
             btn("Delete current", null, 12, () => {let m = game.mainPlayer; game.cycleMainPlayer(), m.removeSelf();if (game.players.length === 0){queueCheatMenuChange(getPlayerlessCheatMenuItems());}}, "Delete the main player."),
@@ -432,14 +200,14 @@ function setCheatMenuItems(){
         row([txt("Main player relative mouse movement:", 12), 
             tog(11, 11, false, () => {settings.mainRelativeMouseControl = true}, () => {settings.mainRelativeMouseControl = false}, () => {return settings.mainRelativeMouseControl;}, "Move mouse-controlled dummy players relative to the main player instead of the dummy player."),]),
         btn("Restore controls", null, 12, () => {for (let i in defaultControls){game.mainPlayer.ctrlSets.push(defaultControls[i])}}, "Give default controls to the main player. If you can't control anything, press this button."),
-    txt("TASing", 20), bigLine,
+    txt("TASing", 20), bigLine(),
       txt("TASing tools are not in a functional state yet. You are not currently be able to make a TAS.", 8), 
         row([txt("TAS mode:", 12), 
             tog(11, 11, false, () => {settings.tasMode = true}, () => {settings.tasMode = false}, () => {return settings.tasMode;}, "Equally space every frame in time, making the game deterministic."),]),
         row([txt("Pause game:", 12), 
             tog(11, 11, false, () => {settings.gamePaused = true}, () => {settings.gamePaused = false}, () => {return settings.gamePaused;}, "Pause the game and prevent entities from updating. Pressing [P] or clicking the button below will cause a frame to occur."),]),
         btn("Skip frame", null, 12, () => {skipFrame()}, "Cause a frame to happen. Hotkey: [P] (only when paused)"),
-    txt("Fun", 20), bigLine,
+    txt("Fun", 20), bigLine(),
       txt("Certain settings (particularly rainbow mode when used multiple times) may cause flashing light effects.", 8), 
         row([txt("Enemy speed:", 12), 
             btn("Frozen", null, 12, () => {massChangeEnemySpeed(0)}, "Change the speed of all enemies to 0."),
@@ -569,7 +337,7 @@ function setCheatMenuItems(){
         tog(11, 11, false, () => {settings.mirrorMap = true}, () => {settings.mirrorMap = false}, undefined, "Make the minimap accurately render the entire area."),]),
       row([txt("Freaky mode:", 12), 
         tog(11, 11, false, () => {}, () => {}, undefined, "Make the game freaky."),]),
-    txt("Credits", 20), bigLine,
+    txt("Credits", 20), bigLine(),
         btn("Show credits", null, 12, () => {queueCheatMenuChange(getCreditsMenu())}, "View the credits."),
   ]
   baseCheatMenuItems = list;
@@ -616,371 +384,7 @@ function clearDummyPlayers(exception = game.mainPlayer){
   game.cycleMainPlayer();
 }
 
-function getCreditsMenu(){
-  list = [
-    txt("Credits", 20), bigLine,
-    txt("EvadesYamlPlayer by PNCL (me)", 12),
-    pdd(0, 6),
-    txt("Original Evades.io game created by Micelee and developed by Stovoy, TheArctosJackal,", 12),
-    txt("TTTruck, Meldiron, Kaluub, and PotatoNuke. Evades.io source code was used. Hero and", 12),
-    txt("enemy designs are from Evades.io and its developers, as well as ability icon and", 12),
-    txt("projectile art.", 12),
-    pdd(0, 6),
-    txt("Countless lines of code were taken or referenced from the Ravel Sandbox, originally", 12),
-    txt("created by Ravelfett and currently maintained by DD1, Tronicality, and Sonic.exe.", 12),
-    btn("Link to the Ravel Sandbox", null, 12, () => {window.open("https://pifary-dev.github.io/ravel/")}, "The aforementioned Ravel Sandbox."),
-    pdd(0, 6),
-    txt("Countless lines of code were taken or referenced from Sonic.exe's Region Editor. ", 12),
-    btn("Link to the Region Editor", null, 12, () => {window.open("https://sonic3xe.github.io/evades-region-editor/")}, "The aforementioned Region Editor."),
-    pdd(0, 6),
-    txt("Map files taken from Sonic.exe's evades.io region editor, originally obtained from", 12),
-    txt("Evades.io developers, and originally created by their respective authors.", 12),
-    pdd(0, 6),
-    txt("Special thanks to Sonic.exe for their vast knowledge of the inner workings of Evades.io", 12),
-    txt("(and also creating the region editor).", 12),
-    pdd(0, 4),
-    txt("Bugfinders:", 12),
-    txt("Sonic.exe", 8),
-    txt("Pack", 8),
-    txt("Bunny", 8),
-    pdd(0, 4),
-    txt("Accuracy maintainers:", 12),
-    txt("Sonic.exe", 8),
-    pdd(0, 4),
-    row([txt("Vanilla region credits:", 12), btn(" ! ", null, 12, () => {}, "Unfortunately, I do not know the author of every region used in-game. I do intend to credit them. If a region is not listed here, it is not an indication that I created it.")]),
-    txt("Dusty Depths by Piger and MeguclOwUn", 8),
-    txt("Shifting Sands by Piger and DD1", 8),
-    txt("Mysterious Mansion by PotatoNuke", 8),
-    txt("Quiet Quarry by Extirpater and TTTruck", 8),
-    txt("Quiet Quarry Hard by PotatoNuke", 8),
-    txt("Frozen Fjord Hard by PotatoNuke", 8),
-    txt("Endless Echo by PotatoNuke", 8),
-    txt("Peculiar Pyramid Hard by PotatoNuke", 8),
-    txt("Restless Ridge by Extirpater", 8),
-    txt("Restless Ridge Hard by Amasterclasher, TheTroll, and DD1", 8),
-    txt("Assorted Alcove by TTTruck", 8),
-    txt("Glacial Gorge Hard originally by TTTruck", 8),
-    txt("Catastrophic Core balanced by Raqzv", 8),
-    txt("Infinite Inferno balanced by Piger", 8),
-    txt("Magnetic Monopole Dipole balanced by Piger", 8),
-    txt("Magnetic Monopole Dipole Hard balanced by Piger", 8),
-    txt("Burning Bunker Hard balanced by Piger", 8),
-    txt("Other maps created by Evades.io developers or dedicated Evades.io community members.", 8),
-    pdd(0, 3000),
-    txt("Shoutout to gloglonzo", 8),
-  ]
-  return list;
-}
 
-function getRegionSelectorMenu(){
-  let totalMissingEnemies = ["ring_sniper"];
-  let totalEnemyTypes = 98;
-  list = [
-    btn("Go back", 38, 12, () => {queueCheatMenuChange(baseCheatMenuItems)}, "Return to the previous menu."),
-    txt("Region List", 20), bigLine,
-  ];
-  for (let i in game.regions){
-    let nb = btn(game.regions[i].name, 180, 12, () => {
-      game.mainPlayer.area.exit(game.mainPlayer);
-      game.mainPlayer.area.attemptUnload(game.mainPlayer);
-      game.mainPlayer.goToRegionFromId(i);
-      game.mainPlayer.goToAreaFromId(0);
-      game.mainPlayer.area.enter(game.mainPlayer);
-      game.mainPlayer.area.attemptLoad(true);
-      game.mainPlayer.moveToAreaStart();
-    })
-    try {
-      nb.color.r = game.regions[i].properties.background_color[0];
-      nb.color.g = game.regions[i].properties.background_color[1];
-      nb.color.b = game.regions[i].properties.background_color[2];
-      nb.hoverColor.r = game.regions[i].properties.background_color[0] + 40;
-      nb.hoverColor.g = game.regions[i].properties.background_color[1] + 40;
-      nb.hoverColor.b = game.regions[i].properties.background_color[2] + 40;
-      if (game.regions[i].properties.background_color[0] + game.regions[i].properties.background_color[1] + game.regions[i].properties.background_color[2] < 216){
-        nb.textColor.r = 255;
-        nb.textColor.g = 255;
-        nb.textColor.b = 255;
-      }
-    } catch (error) {
-      //do nothing
-    }
-    let unknownEnemyTypes = game.regions[i].areas[0].scanForUnknownEnemyTypes();
-    let items = [nb];
-    if (unknownEnemyTypes.length > 0){
-      let str;
-      if (unknownEnemyTypes.length === 1){
-        str = game.regions[i].name + ` has ${unknownEnemyTypes.length} missing enemy type (`;
-      } else {
-        str = game.regions[i].name + ` has ${unknownEnemyTypes.length} missing enemy types (`;
-      }
-      for (let i = 0; i < unknownEnemyTypes.length; i++){
-        if (!totalMissingEnemies.includes(unknownEnemyTypes[i])){
-          totalMissingEnemies.push(unknownEnemyTypes[i]);
-        }
-        str += unknownEnemyTypes[i];
-        if (i === unknownEnemyTypes.length - 1){
-          str += ")"
-          continue;
-        }
-        str += ", "
-      }
-      let but = btn(" ! ", null, 12, () => {}, str);
-      but.color = {r: 255, g: 220, b: 255};
-      but.hoveredColor = {r: 90, g: 40, b: 90};
-      items.push(but)
-    }
-    if (unimplementedGimmickMapNames.includes(game.regions[i].name)){
-      let but = btn(" ! ", null, 12, () => {}, `${game.regions[i].name}'s mechanics have not been fully implemented.`);
-      but.color = {r: 220, g: 255, b: 255};
-      but.hoveredColor = {r: 40, g: 90, b: 90};
-      items.push(but);
-    }
-    if (outdatedMapNames.includes(game.regions[i].name)){
-      let but = btn(" ! ", null, 12, () => {}, `${game.regions[i].name}'s map file is outdated.`);
-      but.color = {r: 255, g: 255, b: 220};
-      but.hoveredColor = {r: 90, g: 90, b: 40};
-      items.push(but);
-    }
-    if (extrapolatedMapNames.includes(game.regions[i].name)){
-      let but = btn(" ! ", null, 12, () => {}, `${game.regions[i].name}'s map file is a modified version of an outdated file and has not been obtained from a developer. May not be fully accurate.`);
-      but.color = {r: 255, g: 255, b: 220};
-      but.hoveredColor = {r: 90, g: 90, b: 40};
-      items.push(but);
-    }
-    list.push(row(items));
-  }
-  list.push(txt("", 8));
-  list.push(txt(`Total missing enemies (${totalMissingEnemies.length}/${totalEnemyTypes}, ${round((totalMissingEnemies.length/totalEnemyTypes) * 1000) / 10}% missing, ${totalEnemyTypes- totalMissingEnemies.length}/${totalEnemyTypes} complete, ${round(((totalEnemyTypes - totalMissingEnemies.length)/totalEnemyTypes) * 1000) / 10}% complete):`, 12));
-  for (let i in totalMissingEnemies){
-    list.push(txt(totalMissingEnemies[i], 8));
-  }
-  if (totalMissingEnemies.length === 0){
-    list.push(txt("All enemies have been implemented, and I can finally rest.", 8));
-  }
-  return list;
-}
-
-function getHeroSelectorMenu(playerToChange = game.mainPlayer, backMenuDestination = baseCheatMenuItems){
-  let bmd = backMenuDestination;
-  var nonVanillaShown = false;
-  list = [
-    row([
-      btn("Go back", 38, 12, () => {if (typeof bmd === "function"){bmd = bmd()}queueCheatMenuChange(bmd)}, "Return to the previous menu."),
-      btn("Show extra heroes", null, 12, () => {
-        if (nonVanillaShown){
-          return;
-        }
-        nonVanillaShown = true;
-        cheatMenuItems = cheatMenuItems.concat(pdd(0, 10), txt("Bonus heroes", 20), bigLine)
-        cheatMenuItems = cheatMenuItems.concat(getHeroSelectorSectionFromArray(playerToChange, modHeroes));
-        cheatMenuItems = cheatMenuItems.concat(pdd(0, 10), txt("Variant heroes", 20), bigLine)
-        cheatMenuItems = cheatMenuItems.concat(getHeroSelectorSectionFromArray(playerToChange, variantHeroes));
-      }, "Show non-vanilla heroes."),
-    ]),
-    txt("Vanilla heroes", 20), bigLine,
-  ];
-
-  list = list.concat(getHeroSelectorSectionFromArray(playerToChange, vanillaHeroes));
-  list = list.concat()
-  return list;
-}
-
-function getHeroSelectorSectionFromArray(playerToChange, set){
-  let list = [];
-  for (var i in set){
-    let key = set[i];
-    let n = new(heroDict.get(key))(-99999, -99999, 0, "", false, game, 0, 0, [], false);
-    n.toRemove = true;
-    let nb = btn(n.heroName, 180, 12, () => {
-      playerToChange.swapHero(key);
-    })
-    try {
-      nb.color = hexToRgb(pal.hero[key]);
-      nb.hoverColor.r = nb.color.r + 40;
-      nb.hoverColor.g = nb.color.g + 40;
-      nb.hoverColor.b = nb.color.b + 40;
-      if (nb.color.r + nb.color.g + nb.color.b < 216){
-        nb.textColor.r = 255;
-        nb.textColor.g = 255;
-        nb.textColor.b = 255;
-      }
-    } catch (error) {
-      //do nothing
-    }
-    list.push(nb);
-  }
-  return list;
-}
-
-
-function getPlayerCreationMenu(backMenuDestination = baseCheatMenuItems){
-  let bmd = backMenuDestination;
-  var nonVanillaShown = false;
-  list = [
-    row([
-      btn("Go back", 38, 12, () => {if (typeof bmd === "function"){bmd = bmd()}queueCheatMenuChange(bmd)}, "Return to the previous menu."),
-      btn("Show extra heroes", null, 12, () => {
-        if (nonVanillaShown){
-          return;
-        }
-        nonVanillaShown = true;
-        cheatMenuItems = cheatMenuItems.concat(pdd(0, 10), txt("Bonus heroes", 20), bigLine)
-        cheatMenuItems = cheatMenuItems.concat(getPlayerCreationSectionFromArray(modHeroes));
-        cheatMenuItems = cheatMenuItems.concat(pdd(0, 10), txt("Variant heroes", 20), bigLine)
-        cheatMenuItems = cheatMenuItems.concat(getPlayerCreationSectionFromArray(variantHeroes));
-      }, "Show non-vanilla heroes."),
-    ]),
-    row([txt("Random Variation:", 12), 
-    tog(11, 11, true, () => {settings.randomDummySpawn = true}, () => {settings.randomDummySpawn = false}, () => {return settings.randomDummySpawn;}, "If enabled, dummy players will be spawned with a random positional variation."),]),
-    txt("Vanilla heroes", 20), bigLine,
-  ];
-
-  list = list.concat(getPlayerCreationSectionFromArray(vanillaHeroes));
-  list = list.concat()
-  return list;
-}
-
-function getPlayerCreationSectionFromArray(set){
-  let list = [];
-  for (var i in set){
-    let key = set[i];
-    let n = new(heroDict.get(key))(-99999, -99999, 0, "", false, game, 0, 0, [], false);
-    n.toRemove = true;
-    let nb = btn(n.heroName, 180, 12, () => {
-      let dummyNum = max(1, game.players.length);
-      let newPlayer = new(heroDict.get(key))(game.mainPlayer.x + random(-32,32) * settings.randomDummySpawn, game.mainPlayer.y + random(-32, 32) * settings.randomDummySpawn, gameConsts.defaultPlayerSize, `Dummy player ${dummyNum}`, false, game, game.mainPlayer.regionNum, game.mainPlayer.areaNum, []);
-      game.addPlayer(newPlayer);
-    })
-    try {
-      nb.color = hexToRgb(pal.hero[key]);
-      nb.hoverColor.r = nb.color.r + 40;
-      nb.hoverColor.g = nb.color.g + 40;
-      nb.hoverColor.b = nb.color.b + 40;
-      if (nb.color.r + nb.color.g + nb.color.b < 216){
-        nb.textColor.r = 255;
-        nb.textColor.g = 255;
-        nb.textColor.b = 255;
-      }
-    } catch (error) {
-      //do nothing
-    }
-    list.push(nb);
-  }
-  return list;
-}
-
-function getPlayerSelectorMenu(){
-  list = [
-    btn("Go back", 38, 12, () => {queueCheatMenuChange(baseCheatMenuItems)}, "Return to the previous menu."),
-    txt("Player List", 20), bigLine,
-  ];
-  for (let i in game.players){
-    let nb = btn(game.players[i].name, 180, 12, () => {
-      queueCheatMenuChange(getPlayerEditMenu(game.players[i]));
-    })
-    try {
-      nb.color = game.players[i].color;
-      nb.hoverColor.r = nb.color.r + 40;
-      nb.hoverColor.g = nb.color.g + 40;
-      nb.hoverColor.b = nb.color.b + 40;
-      if (nb.color.r + nb.color.g + nb.color.b < 216){
-        nb.textColor.r = 255;
-        nb.textColor.g = 255;
-        nb.textColor.b = 255;
-      }
-    } catch (error) {
-      //do nothing
-    }
-    list.push(nb);
-  }
-  return list;
-}
-
-function getPlayerEditMenu(player){
-  var editedPlayer = player;
-  let pname = editedPlayer.name;
-  list = [
-    btn("Go back", 38, 12, () => {queueCheatMenuChange(getPlayerSelectorMenu())}, "Return to the previous menu."),
-    txt("Editing " + pname, 20), bigLine,
-    row([txt("Player management:", 12), 
-        btn("Set as main", null, 12, () => {let oldSets = game.mainPlayer.ctrlSets; game.mainPlayer.ctrlSets = [], game.setMainPlayer(editedPlayer), editedPlayer.ctrlSets = oldSets}, "Make " + pname + " the main player, letting you control it."),
-        btn("Set as main (ignore controls)", null, 12, () => {game.setMainPlayer(editedPlayer);}, "Make " + pname + " the main player without changing any controls."),
-        btn("Delete player", null, 12, () => {game.cycleMainPlayer(), editedPlayer.removeSelf();if (game.players.length === 0){queueCheatMenuChange(getPlayerlessCheatMenuItems())} else {queueCheatMenuChange(getPlayerSelectorMenu())}}, "Delete " + pname + "."),
-        btn("Clear other players", null, 12, () => {clearDummyPlayers(editedPlayer)}, "Delete all players except for " + pname + "."),]),
-    row([txt("Change hero: ", 12), 
-        btn("Open list", 37, 12, () => {queueCheatMenuChange(getHeroSelectorMenu(editedPlayer, getPlayerSelectorMenu))}, "Select a hero for " + pname + " to be."),]), 
-    row([txt("Controlled by WASD:", 12), 
-        tog(11, 11, false, () => {
-          for (let i in editedPlayer.ctrlSets){
-            if (editedPlayer.ctrlSets[i].constructor.name === "WASDset"){
-              return;
-            }
-          }
-          editedPlayer.ctrlSets.push(new WASDset());
-        }, () => {
-          for (let i = 0; i < editedPlayer.ctrlSets.length; i++){
-            if (editedPlayer.ctrlSets[i].constructor.name === "WASDset"){
-              editedPlayer.ctrlSets.splice(i, 1);
-              i--;
-            }
-          }
-        }, () => {
-          for (let i in editedPlayer.ctrlSets){
-            if (editedPlayer.ctrlSets[i].constructor.name === "WASDset"){
-              return true;
-            }
-          }
-          return false;
-        }, "Control " + pname + " with WASD for movement and JKL for abilities."),]),
-    row([txt("Controlled by arrows:", 12), 
-        tog(11, 11, false, () => {
-          for (let i in editedPlayer.ctrlSets){
-            if (editedPlayer.ctrlSets[i].constructor.name === "ArrowSet"){
-              return;
-            }
-          }
-          editedPlayer.ctrlSets.push(new ArrowSet());
-        }, () => {
-          for (let i = 0; i < editedPlayer.ctrlSets.length; i++){
-            if (editedPlayer.ctrlSets[i].constructor.name === "ArrowSet"){
-              editedPlayer.ctrlSets.splice(i, 1);
-              i--;
-            }
-          }
-        }, () => {
-          for (let i in editedPlayer.ctrlSets){
-            if (editedPlayer.ctrlSets[i].constructor.name === "ArrowSet"){
-              return true;
-            }
-          }
-          return false;
-        }, "Control " + pname + " with the arrow keys for movement and ZXC for abilities."),]),
-      row([txt("Controlled by mouse:", 12), 
-        tog(11, 11, false, () => {
-          for (let i in editedPlayer.ctrlSets){
-            if (editedPlayer.ctrlSets[i].constructor.name === "MouseSet"){
-              return;
-            }
-          }
-          editedPlayer.ctrlSets.push(new MouseSet());
-        }, () => {
-          for (let i = 0; i < editedPlayer.ctrlSets.length; i++){
-            if (editedPlayer.ctrlSets[i].constructor.name === "MouseSet"){
-              editedPlayer.ctrlSets.splice(i, 1);
-              i--;
-            }
-          }
-        }, () => {
-          for (let i in editedPlayer.ctrlSets){
-            if (editedPlayer.ctrlSets[i].constructor.name === "MouseSet"){
-              return true;
-            }
-          }
-          return false;
-        }, "Control " + pname + " with the mouse for movement and ZXC for abilities."),]),
-  ];
-  return list;
-}
 
 function getPlayerlessCheatMenuItems(){
   list = [
@@ -1032,31 +436,3 @@ function ptRect(ptx, pty, rectx, recty, rectw, recth){
          pty >= recty &&
          pty <= recty + recth;
 }
-
-outdatedMapNames = [
-  "Burning Bunker Hard",
-]
-
-extrapolatedMapNames = [
-  "Dusty Depths",
-  "Research Lab",
-  "Withering Wasteland",
-  "Burning Bunker",
-  "Shifting Sands",
-]
-
-unimplementedGimmickMapNames = [
-  "Cyber Castle",
-  "Cyber Castle Hard",
-  "Stellar Square",
-  "Endless Echo",
-  "Endless Echo Hard",
-  "Burning Bunker",
-  "Burning Bunker Hard",
-  "Mysterious Mansion",
-  "Haunted Halls",
-  "Frozen Fjord",
-  "Frozen Fjord Hard",
-  "Dusty Depths",
-  "Research Lab",
-]
