@@ -336,7 +336,15 @@ function setCheatMenuItems(){
             }, "Respawn all pellets in the area without removing the first spawn."),
             btn("Remove all", null, 12, () => {
               game.mainPlayer.area.entities = [];
-            }, "Remove everything from the area."),]),
+            }, "Remove everything from the area."),
+            btn("Remove wall", null, 12, () => {
+              for (let i = 0; i < game.mainPlayer.area.entities.length; i++){
+                if (game.mainPlayer.area.entities[i].constructor.name === "Wall"){
+                  game.mainPlayer.area.entities.splice(i, 1);
+                  i--;
+                }
+              };
+            }, "Remove every wall enemy from the area."),]),
       row([txt("Wobbly mode:", 12), 
         tog(11, 11, false, () => {settings.wobblyMode = true}, () => {settings.wobblyMode = false; timeScale = 1}, undefined, "Make the game wobbly. Overrides time scale setting."),]),
       row([txt("Wobble speed:", 12), 
