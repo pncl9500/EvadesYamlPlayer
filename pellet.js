@@ -41,6 +41,9 @@ class Pellet extends Entity{
   collect(player){
     player.addXp(this.xpValue);
     player.rechargePelletBasedAbilities(this.multiplier);
+    if (settings.agarMode){
+      player.baseRadius += 0.2 * this.multiplier;
+    }
   }
   relocate(){
     let viableZoneFound = false

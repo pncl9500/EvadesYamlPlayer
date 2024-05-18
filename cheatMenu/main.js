@@ -325,6 +325,18 @@ function setCheatMenuItems(){
         }
       }}}, "Make all enemies a random color and randomizes their properties."),
       ]),
+      row([txt("Area settings:", 12), 
+            btn("Spawn enemies again", null, 12, () => {
+              for (let i in game.mainPlayer.area.zones){
+                game.mainPlayer.area.zones[i].initSpawners();
+              }
+            }, "Respawn all enemies in the area without removing the first spawn."),
+            btn("Spawn pellets again", null, 12, () => {
+              game.mainPlayer.area.spawnBaseEnts(true);
+            }, "Respawn all pellets in the area without removing the first spawn."),
+            btn("Remove all", null, 12, () => {
+              game.mainPlayer.area.entities = [];
+            }, "Remove everything from the area."),]),
       row([txt("Wobbly mode:", 12), 
         tog(11, 11, false, () => {settings.wobblyMode = true}, () => {settings.wobblyMode = false; timeScale = 1}, undefined, "Make the game wobbly. Overrides time scale setting."),]),
       row([txt("Wobble speed:", 12), 
@@ -335,6 +347,8 @@ function setCheatMenuItems(){
         tog(11, 11, false, () => {settings.squareMode = true}, () => {settings.squareMode = false}, undefined, "Make everything into a square. Some hitboxes may stay circular."),]),
       row([txt("Mirror map:", 12), 
         tog(11, 11, false, () => {settings.mirrorMap = true}, () => {settings.mirrorMap = false}, undefined, "Make the minimap accurately render the entire area."),]),
+      row([txt("Agar mode:", 12), 
+        tog(11, 11, false, () => {settings.agarMode = true}, () => {settings.agarMode = false}, undefined, "Become larger whenever you collect a pellet."),]),
       row([txt("Freaky mode:", 12), 
         tog(11, 11, false, () => {}, () => {}, undefined, "Make the game freaky."),]),
     txt("Credits", 20), bigLine(),

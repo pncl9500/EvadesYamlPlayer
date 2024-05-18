@@ -69,5 +69,8 @@ settings = {
   mouseToggled: false,
   mouseAngleFix: false,
   mainRelativeMouseControl: false,
+  
   fixedWallbounces: true,
+
+  agarMode: false,
 }

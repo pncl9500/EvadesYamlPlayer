@@ -152,7 +152,7 @@ class Area{
   }
   load(throughTp){
     this.loaded = true;
-    this.addPellets();
+    this.spawnBaseEnts();
     if (this.parent.areas.indexOf(this) === 0 && throughTp){
       this.scanForUnknownEnemyTypes();
     }
@@ -175,7 +175,7 @@ class Area{
     }
     return this.parent.unknownEnemyTypes;
   }
-  addPellets(){
+  spawnBaseEnts(noSpawn){
     let vzPelletsSpawned = false;
     for (var i in this.zones){
       if (this.zones[i].type === "active"){
@@ -187,7 +187,7 @@ class Area{
         for (var p = 0; p < pelletCount; p++){
           this.entities.push(new Pellet(0, 0, this.zones[i], pelletMultiplier));
         }
-        this.zones[i].initSpawners();
+        !noSpawn && this.zones[i].initSpawners();
       }
       if (this.zones[i].type === "victory" && !vzPelletsSpawned){
         vzPelletsSpawned = true;
@@ -204,7 +204,7 @@ class Area{
           let fakeZone = new Zone("dummy", 0, 0, this.bounds.right, this.bounds.bottom, {}, [], {x: 0, y: 0}, this.parent, this.parent.areas.indexOf(this));
           this.entities.push(new Pellet(0, 0, fakeZone, pelletMultiplier, true));
         }
-        this.zones[i].initSpawners();
+        !noSpawn && this.zones[i].initSpawners();
       }
     }
   }
