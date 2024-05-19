@@ -465,6 +465,7 @@ class Bullet extends Enemy{
     this.immune = true;
     this.clock = 0;
     this.maxLife = maxLife;
+    this.interactAsBullet = true;
   }
   playerCollisionEvent(player){
 
@@ -652,6 +653,7 @@ class CorrosiveSniper extends GenericSniper{
   } 
   createBullet(angle, target, area){
     let bullet = new Bullet(this.x, this.y, angle, 10, this.radius / 2, pal.nm.corrosive_sniper, 7000);
+    bullet.interactAsBullet = false;
     bullet.renderType = "outline";
     bullet.corrosive = true;
     bullet.immune = false;

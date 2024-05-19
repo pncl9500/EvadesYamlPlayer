@@ -16,6 +16,7 @@ class Enemy extends Entity{
     this.restricted = true;
     this.resetState();
     this.angleToVel();
+    this.interactAsBullet = false;
     //all enemies have parentZone property
 
     this.playerContactFunctions = [];

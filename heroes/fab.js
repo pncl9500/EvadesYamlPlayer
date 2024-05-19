@@ -71,6 +71,7 @@ class MasonryBlob extends Projectile{
     this.detectEnemyContact();
   }
   contactEffect(enemy){
+    if (enemy.interactAsBullet) return;
     this.growing = false;
     enemy.setAngle(atan2(enemy.y - this.y, enemy.x - this.x));
     this.radius -= 18;
