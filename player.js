@@ -766,7 +766,7 @@ class Player extends Entity{
     }
   }
   swapHero(newHeroName){
-    if (!Object.keys(heroDict).includes(newHeroName)) return;
+    if (!Object.keys(heroList).includes(newHeroName)) return;
     let newPlayer = new(heroDict.get(newHeroName))(this.x, this.y, this.baseRadius, this.name, this.isMain, game, this.regionNum, this.areaNum, this.ctrlSets, false);
 
     for (var i = 0; i < min(this.ability1.tier, newPlayer.ability1.maxTier); i++){
