@@ -10,6 +10,7 @@ heroList = {
   //"euclid": Euclid,
 
   "oldmorfe": OldMorfe,
+  "ogmorfe": OldMorfe,
   "fab": Fab,
 }
 

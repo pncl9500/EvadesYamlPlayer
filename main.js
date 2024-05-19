@@ -76,7 +76,6 @@ function skipFrame(){
   if (settings.tasMode){
     dTime = 1000 / settings.fps;
   }
-  console.log(dTime);
   dTime *= timeScale;
   tFix = dTime / (1000 / 60) / 2;
   updateAll();
@@ -101,7 +100,6 @@ function processUrlParams(){
   urlParams.shift();
   //move area parameter after region parameter so teleports work right
   urlParams.sort((a, b) => {return a.startsWith("area=")});
-  console.log(urlParams);
   for (var i = 0; i < urlParams.length; i++){
     //split each parameter into its key and value
     var pair = urlParams[i].split("=");
