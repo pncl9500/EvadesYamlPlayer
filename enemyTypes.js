@@ -1441,6 +1441,7 @@ class FlowerPetal extends Enemy{
     //literally what could possibly be the correct value for this?
     //ravel's... definitely isn't right. this is close enough i guess
     const growth = (1 / 20) * this.growthMultiplier * 0.6;
+    this.radiusMultiplier *= this.parent.radiusMultiplier;
     switch (this.id) {
       case 0: this.setPosition(1, -0.25); break;
       case 1: this.setPosition(-1, -0.25); break;
@@ -1472,8 +1473,8 @@ class FlowerPetal extends Enemy{
     this.radiusMultiplier *= max(this.radiusRatio, 0);
   }
   setPosition(x, y){
-    this.x = this.parent.x + x * this.radius;
-    this.y = this.parent.y + y * this.radius;
+    this.x = this.parent.x + x * this.radius * this.radiusMultiplier;
+    this.y = this.parent.y + y * this.radius * this.radiusMultiplier;
   }
 }
 
