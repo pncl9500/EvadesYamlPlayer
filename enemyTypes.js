@@ -1173,6 +1173,7 @@ class ReducingEnemyPostEffect extends Effect{
         this.toRemove = true;
       }
     }
+    if (!target.hasOwnProperty("reduction")) return;
     target.reduction -= 1 * (8/30) * tFix;
     target.tempRadius -= target.reduction;
     if (target.reduction <= 0){
