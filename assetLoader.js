@@ -29,6 +29,9 @@ function loadAssets(){
     "ab.black_hole": loadImage("imageAssets/ab/black_hole.png"),
     "ab.orbit": loadImage("imageAssets/ab/orbit.png"),
 
+    "ab.rewind": loadImage("imageAssets/ab/rewind.png"),
+    "ab.backtrack": loadImage("imageAssets/ab/backtrack.png"),
+
     "ab.magnetism_down": loadImage("imageAssets/ab/magnetism_down.png"),
     "ab.magnetism_up": loadImage("imageAssets/ab/magnetism_up.png"),
 

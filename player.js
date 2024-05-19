@@ -136,6 +136,9 @@ class Player extends Entity{
       this.effects[i].applyBeforeAbilities(this);
     }
   }
+  behavior(){
+
+  }
   //design this with the idea that it will be completely overriden in cent's code (if i do a single className === "Cent" i will never forgive myself)
   update(){
     this.resetAllModifiers();
@@ -144,6 +147,7 @@ class Player extends Entity{
     this.setAbilityUsages();
     this.cooldownMultiplier = 1;
 
+    this.behavior();
     if (this.doRevive){
       this.revive();
       this.doRevive = false;
