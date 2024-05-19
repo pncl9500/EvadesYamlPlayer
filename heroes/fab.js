@@ -103,7 +103,7 @@ class MasonryEffect extends Effect{
   doEffect(target){
     target.harmless = true;
     target.alphaMultiplier = 0.4;
-    target.speedMultiplier *= 0.85;
+    target.speedMultiplier *= 0.5;
   }
 }
 
