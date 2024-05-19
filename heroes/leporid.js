@@ -220,6 +220,7 @@ class PitEffect extends Effect{
     if (target.radiusMultiplier <= 0){
       target.radiusMultiplier = 0;
       target.speedMultiplier = 0;
+      target.alphaMultiplier = 0;
     }
     for (var i = 0; i < target.effects.length; i++){
       if (target.effects[i].constructor.name === "PitPostEffect"){
