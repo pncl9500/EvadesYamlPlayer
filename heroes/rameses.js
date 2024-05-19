@@ -36,6 +36,13 @@ class Bandages extends Ability{
     }
     this.applyingBandages = false;
   }
+  startCooldown(player){
+    this.currentCooldown = (this.cooldowns[this.tier - 1] * (this.pelletBased ? 1 : player.cooldownMultiplier));
+    if (player.hasEffect("SafeZoneEffect")){
+      this.currentCooldown /= 2;
+    }
+    this.cooldownOfPreviousUse = this.currentCooldown;
+  }
 }
 
 class BandagingEffect extends Effect{
