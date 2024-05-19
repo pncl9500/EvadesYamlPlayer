@@ -35,6 +35,9 @@ function loadAssets(){
     "ab.atonement": loadImage("imageAssets/ab/atonement.png"),
     "ab.depart": loadImage("imageAssets/ab/depart.png"),
 
+    "ab.bandages": loadImage("imageAssets/ab/bandages.png"),
+    "ab.latch": loadImage("imageAssets/ab/latch.png"),
+
     "ab.magnetism_down": loadImage("imageAssets/ab/magnetism_down.png"),
     "ab.magnetism_up": loadImage("imageAssets/ab/magnetism_up.png"),
 
