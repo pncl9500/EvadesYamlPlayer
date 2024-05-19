@@ -194,20 +194,26 @@ class PitProjectile extends Projectile{
     this.detectEnemyContact();
   }
   contactEffect(enemy){
-    enemy.gainEffect(new PitEffect());
+    enemy.gainEffect(new PitEffect(this));
   }
 }
 
 class PitEffect extends Effect{
-  constructor(){
+  constructor(pit){
     super(0, getEffectPriority("PitEffect"), false, true);
     this.blockable = true;
+    this.pit = pit;
+    this.pitDrawStrength = 1.5;
   }
   doEffect(target){
     if (!target.hasOwnProperty("pitFactor")){
       target.pitFactor = 0;
     }
-    target.speedMultiplier *= 0.5 * map(target.pitFactor, 0, 50, 1, 0.3, true);
+    target.speedMultiplier *= 0;
+    let angle = atan2(this.pit.y - target.y, this.pit.x - target.x);
+    let dist = dst(this.pit, this);
+    target.x += cos(angle) * this.pitDrawStrength;
+    target.y += sin(angle) * this.pitDrawStrength;
     target.pitFactor += 1.5 * tFix;
     if (target.pitFactor > 50) target.pitFactor = 50;
     target.radiusMultiplier *= (map(target.pitFactor, 0, 50, 1, 0, true));
