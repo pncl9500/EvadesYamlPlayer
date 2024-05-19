@@ -110,9 +110,9 @@ function processUrlParams(){
         let region = 0;
         try {
           let nameToSearch = regionCodes[val];
-          for (var i in game.regions){
-            if (game.regions[i].name.toLowerCase() == nameToSearch){
-              region = i;
+          for (var r in game.regions){
+            if (game.regions[r].name.toLowerCase() == nameToSearch){
+              region = r;
             }
           }
         } catch (error) {
