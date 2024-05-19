@@ -135,7 +135,7 @@ class BurrowingEffect extends Effect{
   }
   removeEffect(target){
     if (target.dead) return;
-    target.gainEffect(new OrbitInvincibilityEffect(1000));
+    //target.gainEffect(new OrbitInvincibilityEffect(1000));
   }
 }
 
