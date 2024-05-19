@@ -116,13 +116,15 @@ class Rewind extends ToggleAbility{
       affectedEnts[i].gainEffect(new RewindEffect(this.effectLength, this.slowEffects[this.tier - 1]));
       //MOOOOOOOOOOVE!
       if (affectedEnts[i].immune) continue;
-      affectedEnts[i].speedMultiplier *= -1;
+      //affectedEnts[i].speedMultiplier *= -1;
       let tempDtime = dTime;
       let tempTfix = tFix;
       let dt = this.rewindLength / this.backwardsSimulationSteps;
       let tf = dt / (1000 / 60) / 2;
       dTime = dt;
       tFix = tf;
+      dTime *= -1;
+      tFix *= -1;
       affectedEnts[i].harmless = true;
       affectedEnts[i].alphaMultiplier = 0.4;
       for (let s = 0; s < this.backwardsSimulationSteps; s++){
@@ -130,7 +132,7 @@ class Rewind extends ToggleAbility{
       }
       dTime = tempDtime;
       tFix = tempTfix;
-      affectedEnts[i].speedMultiplier *= -1;
+      //affectedEnts[i].speedMultiplier *= -1;
     }
   }
 }

@@ -261,6 +261,9 @@ class Dasher extends Enemy{
     this.oldAngle = this.angle;
     this.dasher = true;
   }
+  simBehavior(area, players){
+    
+  }
   setAngle(ang){
     this.velToAngle();
     this.angle = ang;
