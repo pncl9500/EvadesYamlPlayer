@@ -194,6 +194,7 @@ class PitProjectile extends Projectile{
     this.detectEnemyContact();
   }
   contactEffect(enemy){
+    if (this.state === "shrinking") return;
     enemy.gainEffect(new PitEffect(this));
   }
 }
@@ -203,17 +204,13 @@ class PitEffect extends Effect{
     super(0, getEffectPriority("PitEffect"), false, true);
     this.blockable = true;
     this.pit = pit;
-    this.pitDrawStrength = 1.5;
+    this.pitDrawStrength = 4;
   }
   doEffect(target){
     if (!target.hasOwnProperty("pitFactor")){
       target.pitFactor = 0;
     }
     target.speedMultiplier *= 0;
-    let angle = atan2(this.pit.y - target.y, this.pit.x - target.x);
-    let dist = dst(this.pit, this);
-    target.x += cos(angle) * this.pitDrawStrength;
-    target.y += sin(angle) * this.pitDrawStrength;
     target.pitFactor += 1.5 * tFix;
     if (target.pitFactor > 50) target.pitFactor = 50;
     target.radiusMultiplier *= (map(target.pitFactor, 0, 50, 1, 0, true));
@@ -222,6 +219,14 @@ class PitEffect extends Effect{
       target.speedMultiplier = 0;
       target.alphaMultiplier = 0;
     }
+    let angle = atan2(this.pit.y - target.y, this.pit.x - target.x);
+    let dist = dst(this.pit, target);
+    let minDrawStrength = this.pitDrawStrength;
+    if (dist > target.radius * target.radiusMultiplier + this.pit.radius){
+      minDrawStrength = dist - target.radius * target.radiusMultiplier - this.pit.radius;
+    }
+    target.x += cos(angle) * max(this.pitDrawStrength, minDrawStrength) * tFix;
+    target.y += sin(angle) * max(this.pitDrawStrength, minDrawStrength) * tFix;
     for (var i = 0; i < target.effects.length; i++){
       if (target.effects[i].constructor.name === "PitPostEffect"){
         target.effects.splice(i, 1);
