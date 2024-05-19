@@ -359,8 +359,11 @@ function setCheatMenuItems(){
         tog(11, 11, false, () => {settings.agarMode = true}, () => {settings.agarMode = false}, undefined, "Become larger whenever you collect a pellet."),]),
       row([txt("Freaky mode:", 12), 
         tog(11, 11, false, () => {}, () => {}, undefined, "Make the game freaky."),]),
-    txt("Credits", 20), bigLine(),
-        btn("Show credits", null, 12, () => {queueCheatMenuChange(getCreditsMenu())}, "View the credits."),
+    txt("Info", 20), bigLine(),
+        row([
+            btn("Show about", null, 12, () => {queueCheatMenuChange(getAboutMenu())}, "View the about section."),
+            btn("Show credits", null, 12, () => {queueCheatMenuChange(getCreditsMenu())}, "View the credits."),
+        ]),
   ]
   baseCheatMenuItems = list;
   return list;
