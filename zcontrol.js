@@ -10,8 +10,9 @@ z = {
   genericAura: 200,
   //auraRadiusZfactor: -0.3,
   auraOffsetFromParent: -0.01,
-
+  
   orbitCore: 2.5,
   orbitAura: 0.4,
   blackHole: 0.3,
+  vengeanceProjectile: 2500,
 }

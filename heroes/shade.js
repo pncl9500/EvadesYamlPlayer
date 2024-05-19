@@ -81,7 +81,7 @@ class Vengeance extends Ability{
 
 class VengeanceProjectile extends Projectile{
   constructor(x, y, angle, area, player, radius){
-    super(x, y, angle, 58, -1, -1, radius, "880022", area, player, z.genericProjectile, [], "image");
+    super(x, y, angle, 58, -1, -1, radius, "880022", area, player, z.vengeanceProjectile, [], "image");
     this.image = "pr.vengeance_projectile"
     this.returning = false;
     this.clock = 0;
