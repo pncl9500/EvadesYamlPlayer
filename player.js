@@ -176,13 +176,13 @@ class Player extends Entity{
     }
     this.restrictedLastFrame = false;
     this.area.restrict(this);
-    this.updateAuras();
-
+    
     this.updateAbilities();
-
+    
     this.zonesTouched = this.getZonesTouched();
-
+    
     this.handleZonesTouched();
+    this.updateAuras();
   }
   defStepParams(){
     this.canStepMove = true;
