@@ -32,6 +32,9 @@ function loadAssets(){
     "ab.rewind": loadImage("imageAssets/ab/rewind.png"),
     "ab.backtrack": loadImage("imageAssets/ab/backtrack.png"),
 
+    "ab.atonement": loadImage("imageAssets/ab/atonement.png"),
+    "ab.depart": loadImage("imageAssets/ab/depart.png"),
+
     "ab.magnetism_down": loadImage("imageAssets/ab/magnetism_down.png"),
     "ab.magnetism_up": loadImage("imageAssets/ab/magnetism_up.png"),
 

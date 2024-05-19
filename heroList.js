@@ -9,6 +9,7 @@ heroList = {
   "shade": Shade,
   "euclid": Euclid,
   "chrono": Chrono,
+  "reaper": Reaper,
 
   "fab": Fab,
   "leporid": Leporid,
@@ -28,6 +29,7 @@ vanillaHeroes = [
   "shade",
   "euclid",
   "chrono",
+  "reaper",
 ]
 
 modHeroes = [

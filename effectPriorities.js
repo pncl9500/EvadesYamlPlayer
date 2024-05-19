@@ -5,6 +5,8 @@ effectPriorities = {
   HardenEffect: 1000,
   FlowEffect: 10,
 
+  DepartEffect: 1950,
+
   GenericInvincibilityEffect: 1100, //after other color changes
 
   MinimumSpeedZoneEffect: -2000,
