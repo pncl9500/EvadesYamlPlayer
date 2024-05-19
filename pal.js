@@ -162,7 +162,10 @@ pal = {
     aranes: "212121",
     cybot: "926be3",
 
-    oldmorfe: "00dd00",
     fab: "bdab73",
+    leporid: "aab5af",
+    
+    
+    oldmorfe: "00dd00",
   },
 }

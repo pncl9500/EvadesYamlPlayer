@@ -10,7 +10,7 @@ class Euclid extends Player{
 
 class OrbitInvincibilityEffect extends Effect{
   constructor(duration){
-    super(duration, getEffectPriority("OrbitInvincibilityEffect"), false, true);
+    super(duration, getEffectPriority("GenericInvincibilityEffect"), false, true);
   }
   doEffect(target){
     target.invincible = true;

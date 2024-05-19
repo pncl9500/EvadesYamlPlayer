@@ -4,6 +4,9 @@ effectPriorities = {
   SafeZoneEffect: -200,
   HardenEffect: 1000,
   FlowEffect: 10,
+
+  GenericInvincibilityEffect: 1100, //after other color changes
+
   MinimumSpeedZoneEffect: -2000,
 
   PoisonSniperEffect: 1700,

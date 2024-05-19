@@ -34,6 +34,9 @@ function loadAssets(){
 
     "ab.masonry": loadImage("imageAssets/ab/masonry.png"),
     "ab.tether": loadImage("imageAssets/ab/tether.png"),
+
+    "ab.burrow": loadImage("imageAssets/ab/burrow.png"),
+    "ab.pit": loadImage("imageAssets/ab/pit.png"),
   }
   fnt = {
     tahomaBold: loadFont("fontAssets/tahomabd.ttf")

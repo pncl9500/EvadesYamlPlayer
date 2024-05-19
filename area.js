@@ -109,6 +109,7 @@ class Area{
       this.entities[i].tempRadius = this.entities[i].radius;
       this.entities[i].update(this, this.players);
       if (this.entities[i].toRemove){
+        //dubious line of code... i don't remember why i put this here.
         this.entities[i].toRemove = false;
         this.entities.splice(i, 1);
         i--;

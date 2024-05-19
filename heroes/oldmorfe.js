@@ -27,6 +27,7 @@ class OldMinimize extends Ability{
 class OldMinimizeProjectile extends Projectile{
   constructor(x, y, angle, area, player, entitiesAffectedByAbility, lifetime = 700){
     super(x, y, angle, 22, lifetime, 0, 10, "ff0000", area, player, z.genericProjectile, entitiesAffectedByAbility, "noOutline");
+    this.ignorePreviousTargets = true
   }
   detectContact(){
     this.detectEnemyContact();
@@ -66,6 +67,7 @@ class OldReverse extends Ability{
 class OldReverseProjectile extends Projectile{
   constructor(x, y, angle, area, player, entitiesAffectedByAbility, lifetime = 1500){
     super(x, y, angle, 22, lifetime, 0, 10, "00dd00", area, player, z.genericProjectile, entitiesAffectedByAbility, "noOutline");
+    this.ignorePreviousTargets = true;
   }
   detectContact(){
     this.detectEnemyContact();

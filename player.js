@@ -451,6 +451,12 @@ class Player extends Entity{
     if (this.dead){
       return;
     }
+    for (var i = 0; i < this.effects.length; i++){
+      if (this.effects[i].removedOnDeath){
+        this.effects.splice(i, 1);
+        i--;
+      }
+    }
     this.ability1.tryToggleOffThroughDeath(this);
     this.ability2.tryToggleOffThroughDeath(this);
     this.ability3.tryToggleOffThroughDeath(this);
@@ -498,8 +504,10 @@ class Player extends Entity{
   }
   drawBackExtra(){
     this.drawAuras();
-    this.drawName();
-    this.drawBar();
+    if (this.alphaMultiplier !== 0){
+      this.drawName();
+      this.drawBar();
+    }
     if (this.deathEffect !== null){
       this.drawDeathTimer(this.deathEffect.life);
     }

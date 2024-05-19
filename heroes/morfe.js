@@ -77,7 +77,7 @@ class Projectile extends Entity{
     this.y += fireOffset * sin(this.angle);
     this.entitiesAffectedByAbility = entitiesAffectedByAbility;
     this.restricted = restricted;
-    this.ignorePreviousTargets = true;
+    this.ignorePreviousTargets = false;
     this.player = player;
     if (this.restricted){
       this.wallBounce();
@@ -259,6 +259,7 @@ class ReverseProjectile extends Projectile{
   constructor(x, y, angle, area, player, entitiesAffectedByAbility, sourceAbility, lifetime = 300){
     super(x, y, angle, 42, lifetime, -1, 22, "00dd00", area, player, z.genericProjectile, entitiesAffectedByAbility, "noOutline");
     this.sourceAbility = sourceAbility;
+    this.ignorePreviousTargets = true;
   }
   detectContact(){
     this.detectEnemyContact();
@@ -286,6 +287,7 @@ class ReverseProjectile extends Projectile{
 class MinimizeProjectile extends Projectile{
   constructor(x, y, angle, area, player, entitiesAffectedByAbility, lifetime = 700){
     super(x, y, angle, 22, lifetime, -1, 10, "ff0000", area, player, z.genericProjectile, entitiesAffectedByAbility, "noOutline");
+    this.ignorePreviousTargets = true
   }
   detectContact(){
     this.detectEnemyContact();

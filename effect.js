@@ -13,6 +13,7 @@ class Effect{
     this.overrideEnemyImmunity = false;
     this.toRemove = false;
     this.blockable = false;
+    this.removedOnDeath = false;
   }
   apply(target){
     if (this.toRemove){

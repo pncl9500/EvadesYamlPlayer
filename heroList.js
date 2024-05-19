@@ -9,9 +9,11 @@ heroList = {
   "shade": Shade,
   "euclid": Euclid,
 
+  "fab": Fab,
+  "leporid": Leporid,
+  
   "oldmorfe": OldMorfe,
   "ogmorfe": OldMorfe,
-  "fab": Fab,
 }
 
 vanillaHeroes = [
@@ -28,6 +30,7 @@ vanillaHeroes = [
 
 modHeroes = [
   "fab",
+  "leporid",
 ]
 
 variantHeroes = [
