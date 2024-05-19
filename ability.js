@@ -59,7 +59,13 @@ class Ability{
         this.use(player);
         this.drainEnergy(player);
       }
+    } else {
+      let prms = this.getActivationParams(player);
+      this.useDuringCooldown(player, prms.players, prms.pellets, prms.enemies, prms.miscEnts, prms.region, prms.area);
     }
+  }
+  useDuringCooldown(player, players, pellets, enemies, miscEnts, region, area){
+
   }
   startCooldown(player){
     this.currentCooldown = this.cooldowns[this.tier - 1] * (this.pelletBased ? 1 : player.cooldownMultiplier);

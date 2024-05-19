@@ -7,7 +7,7 @@ heroList = {
   "brute": Brute,
   "nexus": Nexus,
   "shade": Shade,
-  //"euclid": Euclid,
+  "euclid": Euclid,
 
   "oldmorfe": OldMorfe,
   "ogmorfe": OldMorfe,
@@ -22,7 +22,8 @@ vanillaHeroes = [
   "necro",
   "brute",
   "nexus",
-  "shade"
+  "shade",
+  "euclid",
 ]
 
 modHeroes = [

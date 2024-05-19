@@ -78,6 +78,7 @@ class Projectile extends Entity{
     this.entitiesAffectedByAbility = entitiesAffectedByAbility;
     this.restricted = restricted;
     this.ignorePreviousTargets = true;
+    this.player = player;
     if (this.restricted){
       this.wallBounce();
     }
@@ -173,6 +174,31 @@ class Projectile extends Entity{
     }
   }
   wallBounceEvent(wallX, wallY, tangentPosX, tangentPosY){
+
+  }
+  wallSnap(){
+    if (this.x - this.radius < this.area.bounds.left){
+      this.x = this.area.bounds.left + this.radius;
+      let wallX = this.area.bounds.left;
+      this.wallSnapEvent(wallX, null, wallX + this.radius, null);
+    }
+    if (this.x + this.radius > this.area.bounds.right){
+      this.x = this.area.bounds.right - this.radius;
+      let wallX = this.area.bounds.right;
+      this.wallSnapEvent(wallX, null, wallX - this.radius, null)
+    }
+    if (this.y - this.radius < this.area.bounds.top){
+      this.y = this.area.bounds.top + this.radius;
+      let wallY = this.area.bounds.top;
+      this.wallSnapEvent(null, wallY, null, wallY + this.radius);
+    }
+    if (this.y + this.radius > this.area.bounds.bottom){
+      this.y = this.area.bounds.bottom - this.radius;
+      let wallY = this.area.bounds.bottom;
+      this.wallSnapEvent(null, wallY, null, wallY - this.radius);
+    }
+  }
+  wallSnapEvent(wallX, wallY, tangentPosX, tangentPosY){
 
   }
   velToAngle(){

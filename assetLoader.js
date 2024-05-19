@@ -26,6 +26,9 @@ function loadAssets(){
     "ab.vengeance": loadImage("imageAssets/ab/vengeance.png"),
     "pr.vengeance_projectile": loadImage("imageAssets/ent/vengeance_projectile.png"),
 
+    "ab.black_hole": loadImage("imageAssets/ab/black_hole.png"),
+    "ab.orbit": loadImage("imageAssets/ab/orbit.png"),
+
     "ab.magnetism_down": loadImage("imageAssets/ab/magnetism_down.png"),
     "ab.magnetism_up": loadImage("imageAssets/ab/magnetism_up.png"),
 

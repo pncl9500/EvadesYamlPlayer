@@ -40,6 +40,8 @@ class Enemy extends Entity{
     if (this.inherentlyHarmless){
       this.harmless = true;
     }
+    this.conditionallyHarmless = false;
+    this.conditionalHarmlessnessHeroTypes = [];
     this.disabled = false;
     this.alphaMultiplier = 1;
   }
@@ -91,6 +93,31 @@ class Enemy extends Entity{
 
   }
   behavior(area, players){
+
+  }
+  wallSnap(){
+    if (this.x - this.radius < this.parentZone.x){
+      this.x = this.parentZone.x + this.radius;
+      let wallX = this.parentZone.x;
+      this.wallSnapEvent(wallX, null, wallX + this.radius, null);
+    }
+    if (this.x + this.radius > this.parentZone.x + this.parentZone.width){
+      this.x = this.parentZone.x + this.parentZone.width - this.radius;
+      let wallX = this.parentZone.x + this.parentZone.width;
+      this.wallSnapEvent(wallX, null, wallX - this.radius, null)
+    }
+    if (this.y - this.radius < this.parentZone.y){
+      this.y = this.parentZone.y + this.radius;
+      let wallY = this.parentZone.y;
+      this.wallSnapEvent(null, wallY, null, wallY + this.radius);
+    }
+    if (this.y + this.radius > this.parentZone.y + this.parentZone.height){
+      this.y = this.parentZone.y + this.parentZone.height - this.radius;
+      let wallY = this.parentZone.y + this.parentZone.height;
+      this.wallSnapEvent(null, wallY, null, wallY - this.radius);
+    }
+  }
+  wallSnapEvent(wallX, wallY, tangentPosX, tangentPosY){
 
   }
   wallBounce(){

@@ -1185,6 +1185,7 @@ class ReducingEnemyPostEffect extends Effect{
 class Invin extends AuraEnemy{
   constructor(x, y, angle, speed, radius, auraSize){
     super(x, y, angle, speed, radius, pal.nm.barrier, pal.nmaur.barrier, auraSize)
+    this.immune = true;
   }
   applyAuraEffectToPlayer(area, players, player){
     player.gainEffect(new InvinEnemyEffect());
