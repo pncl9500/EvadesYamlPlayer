@@ -12,7 +12,7 @@ class Fab extends Player{
 
 class Masonry extends Ability{
   constructor(){
-    super(5, [6500, 6000, 5500, 5000, 4500], 15, "ab.masonry");
+    super(5, [8000, 7500, 7000, 6500, 6000], 15, "ab.masonry");
   }
   activate(player, players, pellets, enemies, miscEnts, region, area){
     for (var i = 0; i < 7; i++){
