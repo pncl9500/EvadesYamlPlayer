@@ -99,6 +99,8 @@ function processUrlParams(){
   var urlParams = window.location.search.split("?");
   //remove empty first parameter
   urlParams.shift();
+  //move area parameter after region parameter so teleports work right
+  urlParams.sort((a, b) => {a === "area" ? 1 : 0});
   for (var i = 0; i < urlParams.length; i++){
     //split each parameter into its key and value
     var pair = urlParams[i].split("=");
@@ -122,6 +124,15 @@ function processUrlParams(){
         game.mainPlayer.area.attemptUnload(game.mainPlayer);
         game.mainPlayer.goToRegionFromId(region);
         game.mainPlayer.goToAreaFromId(0);
+        game.mainPlayer.area.enter(game.mainPlayer);
+        game.mainPlayer.area.attemptLoad(true); 
+        game.mainPlayer.moveToAreaStart();
+        break;
+      case "area":
+        let area = val - 1;
+        game.mainPlayer.area.exit(game.mainPlayer);
+        game.mainPlayer.area.attemptUnload(game.mainPlayer);
+        game.mainPlayer.goToAreaFromId(area);
         game.mainPlayer.area.enter(game.mainPlayer);
         game.mainPlayer.area.attemptLoad(true); 
         game.mainPlayer.moveToAreaStart();

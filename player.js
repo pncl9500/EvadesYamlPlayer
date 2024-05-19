@@ -679,8 +679,8 @@ class Player extends Entity{
     this.region = this.game.regions[id];
   }
   goToAreaFromId(id){
-    this.areaNum = id;
-    this.area = this.region.areas[id];
+    this.areaNum = constrain(id, 0, this.region.areas.length - 1);
+    this.area = this.region.areas[this.areaNum];
   }
   doTeleportTranslate(zoneId){
     //we are actually going to override evades convention here because it is very bad!
