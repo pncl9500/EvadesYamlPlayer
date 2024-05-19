@@ -204,7 +204,7 @@ class PitEffect extends Effect{
     super(0, getEffectPriority("PitEffect"), false, true);
     this.blockable = true;
     this.pit = pit;
-    this.pitDrawStrength = 4;
+    this.pitDrawStrength = 3.5;
   }
   doEffect(target){
     if (!target.hasOwnProperty("pitFactor")){
