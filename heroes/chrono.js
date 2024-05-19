@@ -10,6 +10,16 @@ class Chrono extends Player{
     this.backtrackLength = 2000;
     this.firstStateArea = this.area;
   }
+  instantRespawnAppropriate(){
+    //when is instant respawn appropriate?
+    //if backtrack cooldown > 2000
+    //if you are going to backtrack onto an enemy
+    if (this.ability1.currentCooldown > this.backtrackLength){
+      return true;
+    }
+    //other cases, return false
+    return false;
+  }
   behavior(){
     let timer;
     this.deathEffect && (timer = this.deathEffect.life);
