@@ -117,6 +117,9 @@ class BurrowingEffect extends Effect{
     this.removedOnDeath = true;
   }
   doEffect(target){
+    if (target.area !== this.otherBurrow.area){
+      this.toRemove = true;
+    }
     target.invincible = true;
     target.alphaMultiplier = 0.2;
     target.burrowProgress = 0;
