@@ -100,7 +100,8 @@ function processUrlParams(){
   //remove empty first parameter
   urlParams.shift();
   //move area parameter after region parameter so teleports work right
-  urlParams.sort((a, b) => {a === "area" ? 1 : 0});
+  urlParams.sort((a, b) => {return a.startsWith("area=")});
+  console.log(urlParams);
   for (var i = 0; i < urlParams.length; i++){
     //split each parameter into its key and value
     var pair = urlParams[i].split("=");
