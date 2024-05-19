@@ -24,7 +24,6 @@ make enemy radius decreases ONLY decrease aura while it isnt recovering radius (
 pellet size change
 fix bugs relating to changing hero type and stuff
 
-euclid
 chrono
 reaper
 rameses
