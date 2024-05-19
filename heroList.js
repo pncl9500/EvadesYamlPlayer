@@ -31,7 +31,7 @@ vanillaHeroes = [
   "euclid",
   "chrono",
   "reaper",
-  "rameses"
+  //"rameses"
 ]
 
 modHeroes = [
