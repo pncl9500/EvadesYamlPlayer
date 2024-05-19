@@ -66,9 +66,9 @@ class Enemy extends Entity{
     this.angle = ang;
     this.angleToVel();
   }
-  update(area, players){
-    this.resetState();
-    this.applyEffects();
+  update(area, players, sim = false){
+    !sim && this.resetState();
+    !sim && this.applyEffects();
     this.radius = this.baseRadius * this.radiusMultiplier;
     this.behavior(area, players);
     this.radius = this.baseRadius * this.radiusMultiplier;
