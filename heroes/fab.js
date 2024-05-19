@@ -105,6 +105,7 @@ class MasonryEffect extends Effect{
     target.harmless = true;
     target.alphaMultiplier = 0.4;
     target.speedMultiplier *= 0.5;
+    target.disabled = true;
   }
 }
 
