@@ -262,7 +262,7 @@ class Dasher extends Enemy{
     this.dasher = true;
   }
   simBehavior(area, players){
-    
+
   }
   setAngle(ang){
     this.velToAngle();
@@ -903,7 +903,7 @@ class Gravity extends AuraEnemy{
     this.gravity = gravity;
   }
   applyAuraEffectToPlayer(area, players, player){
-    if (player.fullEffectImmunity){
+    if (player.fullEffectImmunity || player.dead){
       return;
     }
     var dx = player.x - this.x;
@@ -946,7 +946,7 @@ class Repelling extends AuraEnemy{
     this.repulsion = repulsion;
   }
   applyAuraEffectToPlayer(area, players, player){
-    if (player.fullEffectImmunity){
+    if (player.fullEffectImmunity || player.dead){
       return;
     }
     var dx = player.x - this.x;

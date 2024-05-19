@@ -8,6 +8,7 @@ effectPriorities = {
   DepartEffect: 1950,
 
   GenericInvincibilityEffect: 1100, //after other color changes
+  AtonementEffect: 1100, //after other color changes
 
   MinimumSpeedZoneEffect: -2000,
 
