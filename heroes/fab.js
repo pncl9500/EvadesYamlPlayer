@@ -12,10 +12,11 @@ class Fab extends Player{
 
 class Masonry extends Ability{
   constructor(){
-    super(5, [8000, 7500, 7000, 6500, 6000], 15, "ab.masonry");
+    super(5, 5500, 15, "ab.masonry");
+    this.blobCounts = [3, 4, 5, 6, 7]
   }
   activate(player, players, pellets, enemies, miscEnts, region, area){
-    for (var i = 0; i < 7; i++){
+    for (var i = 0; i < this.blobCounts[this.tier - 1]; i++){
       let pDir = player.lastDir;
       let maxDev = i === 0 ? 32 : 56;
       let initialDistance = 64;
