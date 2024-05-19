@@ -157,7 +157,7 @@ class PostBurrowInvincibilityEffect extends Effect{
 
 class Pit extends Ability{
   constructor(){
-    super(5, [24000, 22000, 20000, 18000, 16000], 40, "ab.pit");
+    super(5, [21000, 19000, 17000, 15000, 13000], 40, "ab.pit");
   }
   activate(player, players, pellets, enemies, miscEnts, region, area){
     area.addEnt(new PitProjectile(player.x, player.y, area, player))
