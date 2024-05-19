@@ -16,7 +16,7 @@ class Bandages extends Ability{
     this.applyingBandages = false;
   }
   activate(player, players, pellets, enemies, miscEnts, region, area){
-    if (player.hasEffect("BandageEffect")) this.cancelUse(player);
+    if (player.hasEffect("BandageEffect") || player.hasEffect("UnbandagingEffect")) this.cancelUse(player);
     this.applyingBandages = true;
     player.gainEffect(new BandagingEffect(this.currentCooldown, this.slowdown));
   }
