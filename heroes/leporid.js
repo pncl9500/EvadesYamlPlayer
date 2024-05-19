@@ -129,18 +129,19 @@ class BurrowingEffect extends Effect{
     if (dst(target, this.otherBurrow) < this.burrowSpeed){
       target.x = this.otherBurrow.x;
       target.y = this.otherBurrow.y;
+      //come on man
       this.toRemove = true;
     }
   }
   removeEffect(target){
     if (target.dead) return;
-    target.gainEffect(new PostBurrowInvincibilityEffect());
+    target.gainEffect(new OrbitInvincibilityEffect(1000));
   }
 }
 
 class PostBurrowInvincibilityEffect extends Effect{
   constructor(){
-    super(1000, getEffectPriority["GenericInvincibilityEffect"], false, true);
+    super(1000, getEffectPriority["GenericInvincibilityEffect"], false, false);
   }
   doEffect(target){
     target.invincible = true;

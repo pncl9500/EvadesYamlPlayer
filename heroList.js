@@ -27,7 +27,6 @@ vanillaHeroes = [
   "nexus",
   "shade",
   "euclid",
-  "chrono",
 ]
 
 modHeroes = [
