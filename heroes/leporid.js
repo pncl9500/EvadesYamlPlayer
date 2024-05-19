@@ -218,6 +218,7 @@ class PitEffect extends Effect{
       target.radiusMultiplier = 0;
       target.speedMultiplier = 0;
       target.alphaMultiplier = 0;
+      target.disabled = true;
     }
     let angle = atan2(this.pit.y - target.y, this.pit.x - target.x);
     let dist = dst(this.pit, target);

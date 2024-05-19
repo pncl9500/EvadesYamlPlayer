@@ -417,7 +417,7 @@ class GenericSniper extends Enemy{
       this.tempColor.g *= (1 - mul * 0.3); this.tempColor.g = floor(this.tempColor.g);
       this.tempColor.b *= (1 - mul * 0.3); this.tempColor.b = floor(this.tempColor.b);
     }
-    if (this.clock > this.fireInterval) {
+    if (this.clock > this.fireInterval && !this.disabled) {
       var min = this.range;
       var index;
       for (var i in players) {
