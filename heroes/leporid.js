@@ -149,8 +149,7 @@ class PostBurrowInvincibilityEffect extends Effect{
     target.tempColor = lerpCol(target.tempColor, t, 0, 0, 0);
     for (var i = 0; i < target.effects.length; i++){
       if (target.effects[i].constructor.name === "PreBurrowPostEffect" || target.effects[i].constructor.name === "PreBurrowEffect"){
-        target.effects.splice(i, 1);
-        i--;
+        target.effects[i].toRemove = true;
       }
     }
   }

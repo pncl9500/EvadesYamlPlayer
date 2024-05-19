@@ -533,7 +533,7 @@ class Player extends Entity{
     }
   }
   enemyCollision(enemy){
-    for (let i in this.effects){
+    for (let i in this.effects){      
       this.effects[i].playerEnemyContact(this, enemy);
     }
     if (this.cancelContactDeath){
