@@ -4,7 +4,7 @@ class Jolt extends Player{
     this.heroName = "Jolt";
     this.ability1 = new Spark();
     this.ability2 = new Charge();
-    this.storedAbility = new Stomp();
+    this.storedAbility = new Lightning();
 
     this.ability1.upgradeWith = this.storedAbility;
     this.storedAbility.upgradeWith = this.ability1;
@@ -206,5 +206,11 @@ class SparkEffect extends Effect{
   doEffect(target){
     target.disabled = true;
     target.speedMultiplier *= this.slow;
+  }
+}
+
+class Lightning extends Ability{
+  constructor(){
+    super(5, 6, 0, "ab.lightning");
   }
 }
