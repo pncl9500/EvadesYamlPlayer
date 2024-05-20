@@ -33,8 +33,8 @@ function setup() {
   ui.alertBox.alerts.push("Press escape to open the options menu.")
   ui.alertBox.alerts.push(" ")
   ui.alertBox.alerts.push("Note that EvadesYamlPlayer is currently in open beta.")
-  ui.alertBox.alerts.push("The game may be unstable and does not currently have")
-  ui.alertBox.alerts.push("every Evades.io feature.")
+  ui.alertBox.alerts.push("The game does not currently have every Evades.io feature")
+  ui.alertBox.alerts.push("and may crash without warning.")
 
   cheatMenuItems = setCheatMenuItems();
   
