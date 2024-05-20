@@ -38,6 +38,10 @@ function loadAssets(){
     "ab.bandages": loadImage("imageAssets/ab/bandages.png"),
     "ab.latch": loadImage("imageAssets/ab/latch.png"),
 
+    "ab.spark": loadImage("imageAssets/ab/spark.png"),
+    "ab.lightning": loadImage("imageAssets/ab/lightning.png"),
+    "ab.charge": loadImage("imageAssets/ab/charge.png"),
+
     "ab.magnetism_down": loadImage("imageAssets/ab/magnetism_down.png"),
     "ab.magnetism_up": loadImage("imageAssets/ab/magnetism_up.png"),
 

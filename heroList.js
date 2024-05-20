@@ -12,6 +12,7 @@ heroList = {
   "reaper": Reaper,
   "rameses": Rameses,
   "ram": Rameses,
+  "jolt": Jolt,
 
   "fab": Fab,
   "leporid": Leporid,
