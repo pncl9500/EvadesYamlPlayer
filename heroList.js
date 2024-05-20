@@ -33,7 +33,8 @@ vanillaHeroes = [
   "euclid",
   "chrono",
   "reaper",
-  "rameses"
+  "rameses",
+  "jolt",
 ]
 
 modHeroes = [

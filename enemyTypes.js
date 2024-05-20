@@ -1649,6 +1649,7 @@ class Radar extends AuraEnemy{
   }
   behavior(area, players){
     this.clock += dTime;
+    if (this.disabled) return;
     if (this.clock > this.releaseTime) {
       let min = this.auraSize;
       let index;
