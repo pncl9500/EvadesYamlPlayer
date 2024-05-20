@@ -92,6 +92,7 @@ class StompingEffect extends Effect{
     let moveDist = ((this.targetDist - this.initialDist) / this.travelTime) * dTime;
     target.x += cos(this.stompAngle) * moveDist;
     target.y += sin(this.stompAngle) * moveDist;
+    target.wallSnap();
     target.harmless = true;
     target.disabled = true;
     target.alphaMultiplier = 0.4;
