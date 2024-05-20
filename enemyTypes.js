@@ -624,6 +624,7 @@ class RadiatingBullets extends GenericSniper{
   }
   sniperBehavior(area, players){
     this.clock += dTime;
+    if (this.disabled) return;
     if (this.clock >= this.fireInterval * (2/3)){
       let min = this.fireInterval * (2/3);
       let max = this.fireInterval;
