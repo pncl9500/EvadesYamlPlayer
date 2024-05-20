@@ -14,6 +14,9 @@ function getAboutMenu(){
     txt("If you are taking code from EvadesYamlPlayer for your own projects (which you are freely allowed to do), please keep in mind that", 8),
     txt("it is very likely for the code to not be accurate to vanilla Evades.io. Most behavior was either taken directly from other Evades.io", 8),
     txt("sandboxes or determined through potentially faulty empirical in-game observations, and is most likely not entirely game-accurate.", 8),
+    pdd(10, 5),
+    txt("Another note: the region files for Cyber Castle, Cyber Castle Hard, and Research Lab have been slightly altered to be compatible", 8),
+    txt("with EvadesYamlPlayer, so please try to acquire these map files from other sources if possible.", 8),
 
 
     
