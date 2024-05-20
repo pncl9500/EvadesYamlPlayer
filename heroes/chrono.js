@@ -7,7 +7,7 @@ class Chrono extends Player{
     this.previousStates = [];
     this.clock = 0;
     
-    this.backtrackLength = 2000;
+    this.backtrackLength = 2500;
     this.firstStateArea = this.area;
   }
   instantRespawnAppropriate(){
@@ -71,7 +71,7 @@ class Chrono extends Player{
 class Backtrack extends Ability{
   constructor(){
     super(5, [7500, 7000, 6500, 5000, 5500], 30, "ab.backtrack");
-    this.backtrackLength = 2000;
+    this.backtrackLength = 2500;
     this.usableWhileDead = true;
   }
   activate(player, players, pellets, enemies, miscEnts, region, area){
