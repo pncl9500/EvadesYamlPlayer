@@ -1,56 +1,75 @@
+loadedAssets = [];
+
+function loadImg(img){
+  return loadImage(img, loadedAssets.push(img));
+}
+
+function drawImage(imgCode, x, y, radius){
+  if (loadedAssets.includes(imgCode)){
+    image(im[imgCode], x - radius, y - radius, radius * 2, radius * 2);
+  } else {
+    noStroke();
+    fill(255);
+    rect(x - radius, y - radius, radius * 2, radius * 2);
+  }
+}
+
 function loadAssets(){
   im = {
-    "missingImage": loadImage("imageAssets/missingImage.png"),
-    "ab.flow": loadImage("imageAssets/ab/flow.png"),
-    "ab.harden": loadImage("imageAssets/ab/harden.png"),
+    "missingImage": loadImg("imageAssets/missingImage.png"),
+    "ab.flow": loadImg("imageAssets/ab/flow.png"),
+    "ab.harden": loadImg("imageAssets/ab/harden.png"),
 
-    "ab.warp": loadImage("imageAssets/ab/warp.png"),
-    "ab.paralysis": loadImage("imageAssets/ab/paralysis.png"),
+    "ab.warp": loadImg("imageAssets/ab/warp.png"),
+    "ab.paralysis": loadImg("imageAssets/ab/paralysis.png"),
 
-    "ab.reverse": loadImage("imageAssets/ab/reverse.png"),
-    "ab.minimize": loadImage("imageAssets/ab/minimize.png"),
+    "ab.reverse": loadImg("imageAssets/ab/reverse.png"),
+    "ab.minimize": loadImg("imageAssets/ab/minimize.png"),
 
-    "ab.distort": loadImage("imageAssets/ab/distort.png"),
-    "ab.energize": loadImage("imageAssets/ab/energize.png"),
+    "ab.distort": loadImg("imageAssets/ab/distort.png"),
+    "ab.energize": loadImg("imageAssets/ab/energize.png"),
 
-    "ab.resurrection": loadImage("imageAssets/ab/resurrection.png"),
-    "ab.reanimate": loadImage("imageAssets/ab/reanimate.png"),
+    "ab.resurrection": loadImg("imageAssets/ab/resurrection.png"),
+    "ab.reanimate": loadImg("imageAssets/ab/reanimate.png"),
 
-    "ab.stomp": loadImage("imageAssets/ab/stomp.png"),
-    "ab.vigor": loadImage("imageAssets/ab/vigor.png"),
+    "ab.stomp": loadImg("imageAssets/ab/stomp.png"),
+    "ab.vigor": loadImg("imageAssets/ab/vigor.png"),
 
-    "ab.barrier": loadImage("imageAssets/ab/barrier.png"),
-    "ab.stream": loadImage("imageAssets/ab/stream.png"),
+    "ab.barrier": loadImg("imageAssets/ab/barrier.png"),
+    "ab.stream": loadImg("imageAssets/ab/stream.png"),
 
-    "ab.night": loadImage("imageAssets/ab/night.png"),
-    "ab.vengeance": loadImage("imageAssets/ab/vengeance.png"),
-    "pr.vengeance_projectile": loadImage("imageAssets/ent/vengeance_projectile.png"),
+    "ab.night": loadImg("imageAssets/ab/night.png"),
+    "ab.vengeance": loadImg("imageAssets/ab/vengeance.png"),
+    "pr.vengeance_projectile": loadImg("imageAssets/ent/vengeance_projectile.png"),
 
-    "ab.black_hole": loadImage("imageAssets/ab/black_hole.png"),
-    "ab.orbit": loadImage("imageAssets/ab/orbit.png"),
+    "ab.black_hole": loadImg("imageAssets/ab/black_hole.png"),
+    "ab.orbit": loadImg("imageAssets/ab/orbit.png"),
 
-    "ab.rewind": loadImage("imageAssets/ab/rewind.png"),
-    "ab.backtrack": loadImage("imageAssets/ab/backtrack.png"),
+    "ab.rewind": loadImg("imageAssets/ab/rewind.png"),
+    "ab.backtrack": loadImg("imageAssets/ab/backtrack.png"),
 
-    "ab.atonement": loadImage("imageAssets/ab/atonement.png"),
-    "ab.depart": loadImage("imageAssets/ab/depart.png"),
+    "ab.atonement": loadImg("imageAssets/ab/atonement.png"),
+    "ab.depart": loadImg("imageAssets/ab/depart.png"),
 
-    "ab.bandages": loadImage("imageAssets/ab/bandages.png"),
-    "ab.latch": loadImage("imageAssets/ab/latch.png"),
+    "ab.bandages": loadImg("imageAssets/ab/bandages.png"),
+    "ab.latch": loadImg("imageAssets/ab/latch.png"),
 
-    "ab.spark": loadImage("imageAssets/ab/spark.png"),
-    "ab.lightning": loadImage("imageAssets/ab/lightning.png"),
-    "ab.charge": loadImage("imageAssets/ab/charge.png"),
+    "ab.spark": loadImg("imageAssets/ab/spark.png"),
+    "ab.lightning": loadImg("imageAssets/ab/lightning.png"),
+    "ab.charge": loadImg("imageAssets/ab/charge.png"),
 
-    "ab.magnetism_down": loadImage("imageAssets/ab/magnetism_down.png"),
-    "ab.magnetism_up": loadImage("imageAssets/ab/magnetism_up.png"),
+    "ab.magnetism_down": loadImg("imageAssets/ab/magnetism_down.png"),
+    "ab.magnetism_up": loadImg("imageAssets/ab/magnetism_up.png"),
 
-    "ab.masonry": loadImage("imageAssets/ab/masonry.png"),
-    "ab.tether": loadImage("imageAssets/ab/tether.png"),
+    "ab.masonry": loadImg("imageAssets/ab/masonry.png"),
+    "ab.tether": loadImg("imageAssets/ab/tether.png"),
 
-    "ab.burrow": loadImage("imageAssets/ab/burrow.png"),
-    "ab.pit": loadImage("imageAssets/ab/pit.png"),
+    "ab.burrow": loadImg("imageAssets/ab/burrow.png"),
+    "ab.pit": loadImg("imageAssets/ab/pit.png"),
   }
+}
+
+function loadFonts(){
   fnt = {
     tahomaBold: loadFont("fontAssets/tahomabd.ttf")
   }

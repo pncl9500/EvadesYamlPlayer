@@ -7,13 +7,14 @@ cheatMenuOpen = false;
  * Loaded before the game is opened
  */
 function preload(){
-  loadAssets();
+  loadFonts();
   loadAllYAML();
 }
 /**
  * Called once when the page is opened
- */
+*/
 function setup() {
+  loadAssets();
   document.title = "YAML Player"
   basePixelDensity = pixelDensity();
 
