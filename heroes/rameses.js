@@ -118,7 +118,7 @@ class Latch extends Ability{
 
 class LatchProjectile extends Projectile{
   constructor(x, y, angle, area, player){
-    super(x, y, angle, 21, 1800, -1, 24, "#ddddaa", area, player, z.genericProjectile, [], "noOutline", 32, true);
+    super(x, y, angle, 21, 1800, -1, 18, "#F7F89F", area, player, z.genericProjectile, [], "noOutline", 32, true);
     this.targetAngle = angle;
     //what are the numbers supposed to be here? speed and lifetime are unclear too.
     this.homingRange = 280;
@@ -127,7 +127,7 @@ class LatchProjectile extends Projectile{
   drawFrontExtra(){
     noFill();
     strokeWeight(4);
-    stroke(40, 100, 50);
+    stroke(80, 145, 91);
     ellipse(this.x, this.y, this.radius - 4 / 2);
   }
   behavior(area, players) {
