@@ -172,16 +172,18 @@ class Pit extends Ability{
 
 class PitProjectile extends Projectile{
   constructor(x, y, area, player){
-    super(x, y, 0, 0, -1, -1, 0, "#22110066", area, player, z.blackHole, [], "noOutline", 0, false)
+    super(x, y, 0, 0, -1, -1, 0, "#11090066", area, player, z.blackHole, [], "noOutline", 0, false)
     this.state = "growing";
     this.clock = 0;
-    this.maxRadius = 180;
+    this.targetRadius = 60;
+    this.maxRadius = 250;
+    this.digSpeed = 0.8;
   }
   behavior(area, players){
     this.clock += dTime;
     if (this.state === "growing"){
-      this.radius += (this.maxRadius - this.radius) * 0.1;
-      if (this.clock > 5000){
+      this.radius += (this.targetRadius - this.radius) * 0.1;
+      if (this.clock > 6500){
         this.state = "shrinking";
       }
     }
@@ -189,6 +191,12 @@ class PitProjectile extends Projectile{
       this.radius /= pow(1.2, tFix);
       if (this.radius < 0.5){
         this.toRemove = true;
+      }
+    }
+    for (let i in players){
+      if (players[i].heroName === "Leporid" && circleCircle(players[i], this)){
+        this.targetRadius += this.digSpeed * tFix;
+        this.targetRadius = min(this.targetRadius, this.maxRadius);
       }
     }
   }
