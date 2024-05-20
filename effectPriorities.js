@@ -23,6 +23,7 @@ effectPriorities = {
   EnergizeEffect: 1000,
   VigorEffect: 200,
   FullVigorEffect: 200,
+  DepartEffect: 200,
 
   SlowingEnemyEffect: 500,
   DrainingEnemyEffect: 500,
