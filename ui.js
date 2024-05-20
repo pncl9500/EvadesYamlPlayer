@@ -9,11 +9,13 @@ class UI{
     this.miniMap = new MiniMap();
     this.areaHeader = new AreaHeader();
     this.timer = new Timer();
+    this.alertBox = new AlertBox();
     this.uiPanels = [];
     this.uiPanels.push(this.heroCard);
     this.uiPanels.push(this.miniMap);
     this.uiPanels.push(this.areaHeader);
     this.uiPanels.push(this.timer);
+    this.uiPanels.push(this.alertBox);
   }
   draw(){
     for (var i in this.uiPanels){
@@ -390,3 +392,70 @@ class Timer extends UIpanel{
     text(minutes + "m " + seconds + "s", 0, -8 + 42);
   }
 }
+
+class AlertBox extends UIpanel{
+  constructor(){
+    super(1, 1);
+    this.hidden = true;
+    this.padding = 0;
+    this.width = 310;
+    this.height = 157;
+    this.alerts = [
+
+    ];
+    this.maxAlerts = 13;
+    this.textSize = 11.8;
+    this.stayingDuration = 4000;
+    this.timeUntilVanish = this.stayingDuration;
+    this.alpha = 255;
+    this.fadeSpeed = 1.5;
+  }
+  draw(){
+    noStroke();
+    fill(0, this.alpha * 0.5);
+    rect(-this.width, -this.height, this.width, this.height)
+    this.drawAlerts();
+    this.timeUntilVanish -= deltaTime; //deltaTime instead of dTime is intentional here
+    if (this.timeUntilVanish < 0){
+      this.alpha -= this.fadeSpeed * deltaTime * (1/16);
+      if (this.alpha < 0){
+        this.hidden = true;
+      }
+    }
+  }
+  drawAlerts(){
+    textSize(this.textSize);
+    fill(255, this.alpha);
+    textAlign(LEFT, TOP);
+    for (let i = 0; i < min(this.alerts.length, this.maxAlerts); i++){
+      text(this.alerts[i + (max(this.alerts.length - this.maxAlerts, 0))], -this.width + 2, -this.height + i * 12 + 2);
+    }
+  }
+  setAlertsForRegion(region){
+    //if region is clean, stop here
+    this.alerts = [];
+    region.areas[0].scanForUnknownEnemyTypes();
+    if (region.unknownEnemyTypes.length === 0 && !outdatedMapNames.includes(region.name) && !unimplementedGimmickMapNames.includes(region.name)) {this.hidden = true; return;}
+    this.alpha = 255;
+    this.hidden = false;
+    if (region.unknownEnemyTypes.length > 10){
+      this.alerts.push(region.unknownEnemyTypes.length + " missing enemies in " + region.name);
+      this.alerts.push("(too many to list)");
+    } else {
+      for (let i = 0; i < region.unknownEnemyTypes.length; i++){
+        this.alerts.push("Missing enemy in " + region.name + ": " + region.unknownEnemyTypes[i]);
+      }
+    }
+    if (outdatedMapNames.includes(region.name)){ this.alerts.push("Outdated map file: " + region.name); }
+    if (infiniteMaps.includes(region.name)){ this.alerts.push("Missing mechanic in " + region.name + ": infinite map"); }
+    if (wallMaps.includes(region.name)){ this.alerts.push("Missing mechanic in " + region.name + ": walls"); }
+    if (lightingMaps.includes(region.name)){ this.alerts.push("Missing mechanic in " + region.name + ": lighting"); }
+    if (requirementMaps.includes(region.name)){ this.alerts.push("Missing mechanic in " + region.name + ": blocked teleports"); }
+    if (allImmuneMaps.includes(region.name)){ this.alerts.push("Missing mechanic in " + region.name + ": all enemies immune"); }
+    if (stellarSquareMaps.includes(region.name)){ this.alerts.push("Missing mechanic in " + region.name + ": is stellar square"); }
+    if (levelRemovalMaps.includes(region.name)){ this.alerts.push("Missing mechanic in " + region.name + ": level removal"); }
+
+    this.timeUntilVanish = this.stayingDuration;
+  }
+}
+

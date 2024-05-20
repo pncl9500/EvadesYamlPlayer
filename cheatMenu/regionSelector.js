@@ -24,6 +24,51 @@ unimplementedGimmickMapNames = [
   "Frozen Fjord Hard",
   "Dusty Depths",
   "Research Lab",
+  "Restless Ridge Hard",
+]
+
+infiniteMaps = [
+  "Endless Echo",
+  "Endless Echo Hard",
+]
+
+wallMaps = [
+  "Burning Bunker",
+  "Burning Bunker Hard",
+  "Frozen Fjord",
+  "Frozen Fjord Hard",
+  "Dusty Depths",
+]
+
+requirementMaps = [
+  "Cyber Castle",
+  "Cyber Castle Hard",
+  //technically pyramid and halls too, but the requirements don't affect the gameplay of the map, so we might as well
+  //exclude them. also, it would be annoying for players if we *did* give these teleports functioning requirements, whereas
+  //in cyber castle maps it is somewhat expected.
+]
+
+lightingMaps = [
+  "Burning Bunker",
+  "Burning Bunker Hard",
+  "Frozen Fjord",
+  "Frozen Fjord Hard",
+  "Dusty Depths",
+  "Haunted Halls",
+  "Mysterious Mansion",
+  "Restless Ridge Hard",
+]
+
+allImmuneMaps = [
+  "Research Lab",
+]
+
+levelRemovalMaps = [
+  "Dusty Depths",
+]
+
+stellarSquareMaps = [
+  "Stellar Square",
 ]
 
 

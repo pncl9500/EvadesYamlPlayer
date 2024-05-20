@@ -26,6 +26,16 @@ function setup() {
   initCanvas();
   game = initGame();
   ui = initUI();
+
+  ui.alertBox.hidden = false;
+  ui.alertBox.timeUntilVanish = 12000;
+  ui.alertBox.alerts.push("Welcome to EvadesYamlPlayer!")
+  ui.alertBox.alerts.push("Press escape to open the options menu.")
+  ui.alertBox.alerts.push(" ")
+  ui.alertBox.alerts.push("Note that EvadesYamlPlayer is currently in open beta.")
+  ui.alertBox.alerts.push("The game may be unstable and does not currently have")
+  ui.alertBox.alerts.push("every Evades.io feature.")
+
   cheatMenuItems = setCheatMenuItems();
   
   processUrlParams();
