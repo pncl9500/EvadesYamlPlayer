@@ -15,4 +15,5 @@ z = {
   orbitAura: 0.4,
   blackHole: 0.3,
   vengeanceProjectile: 2500,
+  sparkProjectile: 2510,
 }
