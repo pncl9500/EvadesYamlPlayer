@@ -5,7 +5,6 @@ function loadImg(img, imgcode){
 }
 
 function drawImage(imgCode, x, y, radius){
-  console.log(loadedAssets);
   if (loadedAssets.includes(imgCode)){
     image(im[imgCode], x - radius, y - radius, radius * 2, radius * 2);
   } else {
