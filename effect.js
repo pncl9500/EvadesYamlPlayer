@@ -93,7 +93,7 @@ class DeadEffect extends Effect{
   }
   doEffect(target){
     target.speedMultiplier = 0;
-    target.tempColor.a = 80;
+    target.alphaMultiplier = 0.3;
     target.canRevivePlayers = false;
     target.detectable = false;
     if (settings.infiniteDeathTimer){
