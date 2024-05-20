@@ -164,4 +164,7 @@ class Entity{
   update(){
     
   }
+  doRemove(area, players){
+    
+  }
 }

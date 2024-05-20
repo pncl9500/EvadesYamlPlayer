@@ -16,4 +16,5 @@ z = {
   blackHole: 0.3,
   vengeanceProjectile: 2500,
   sparkProjectile: 2510,
+  lightningProjectile: 2511,
 }

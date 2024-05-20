@@ -23,6 +23,8 @@ class Area{
         break;
       }
     }
+
+    this.entQueue = [];
   }
   draw(parentRegion){
     if (settings.regionBackground){
@@ -81,6 +83,9 @@ class Area{
   addEnt(ent){
     this.entities.push(ent);
   }
+  queueEntSpawn(ent){
+    this.entQueue.push(ent);
+  }
   drawTiles(){
     let r = settings.gridColor[0];
     let g = settings.gridColor[1];
@@ -111,6 +116,7 @@ class Area{
       if (this.entities[i].toRemove){
         //dubious line of code... i don't remember why i put this here.
         this.entities[i].toRemove = false;
+        this.entities[i].doRemove(this, this.players);
         this.entities.splice(i, 1);
         i--;
         continue;
@@ -126,6 +132,11 @@ class Area{
       if (this.players[i].checkForPlayerCollision){
         this.players[i].checkPlayerCollision(this, this.players);
       }
+    }
+    for (var i = 0; i < this.entQueue.length; i++){
+      this.addEnt(this.entQueue[i]);
+      this.entQueue.splice(i, 1);
+      i--
     }
   }
   enter(player){

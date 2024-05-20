@@ -127,7 +127,7 @@ class Spark extends Ability{
 class SparkProjectile extends Projectile{
   constructor(x, y, target, area, player, duration, slow){
     let projSpeed = 29;
-    super(x, y, target ? atan2(target.y - y, target.x - x) : random(0, 360), projSpeed, 2000, -1, 7, "#eeee00", area, player, z.sparkProjectile, [], "noOutline", 32, true);
+    super(x, y, target ? atan2(target.y - y, target.x - x) : random(0, 360), projSpeed, 2000, -1, 8, "#eeee00", area, player, z.sparkProjectile, [], "noOutline", 32, true);
     this.target = target;
     this.targetHistory = [this.target];
     //if there is no target, remove behavior
@@ -209,8 +209,188 @@ class SparkEffect extends Effect{
   }
 }
 
+//lightning notes
+//lightning projectiles spawned at frame 23
+//last lightning projectile movement at 1.06
+//lightning projectiles last... 13 frames.
+//or 433 ms.... i'll assume that it's meant to be 400, or 12 frames.
+//nearly vertical lightning projectile went 320px in this time 320px / 12f = 26.667 pixels / second
+//the trail SLOWS ENEMIES
+//other than that, lightning projectiles seem to work exactly the same as spark projectiles, with the minor difference
+//that they don't linger on enemies for 250ms
+//it seems like they have no max chain range and they just die fast
+//the last movement step of a lightning projectile doesnt spawn a trail bit
+
+//trail bit spawned at 1.04
+//trail bit faded at 2.16
+//trails take 42f to fade
+//trails take 1400ms to fade
+//ok time to do it
+
 class Lightning extends Ability{
   constructor(){
     super(5, 6, 0, "ab.lightning");
+    this.pelletBased = true;
+    this.projectileCounts = [5, 6, 7, 8, 9];
+    this.effectDuration = 5000;
+    this.effectDurationBuff = 2500;
+    this.slow = 0.1;
+    this.trailDuration = 1000;
+    this.nextUseBuffed = false;
+  }
+  activate(player, players, pellets, enemies, miscEnts, region, area){
+    let targetsSelected = [];
+    for (let i = 0; i < this.projectileCounts[this.tier - 1]; i++){
+      //pick a target for the projectile.
+      let targetSelected = this.pickTarget(targetsSelected, player, enemies);
+      targetsSelected.push(targetSelected);
+
+      let dur = this.effectDuration;
+      if (this.nextUseBuffed){
+        this.nextUseBuffed = false;
+        dur += this.effectDurationBuff;
+      }
+      area.addEnt(new LightningProjectile(player.x, player.y, targetSelected, area, player, dur, this.slow));
+    }
+  }
+  pickTarget(targetsSelected, player, enemies){
+    //look at the closest potential valid target.
+    let dist = 99999;
+    let selectedTarget = undefined;
+    for (let i in enemies){
+      if (dst(player, enemies[i]) < dist && (!targetsSelected.includes(enemies[i]) || enemies.length <= targetsSelected.length) && (!enemies[i].immune)){
+        dist = dst(player, enemies[i]);
+        selectedTarget = enemies[i];
+      }
+    }
+    return selectedTarget;
+  }
+}
+
+class LightningProjectile extends Projectile{
+  constructor(x, y, target, area, player, duration, slow){
+    let projSpeed = 26.667;
+    super(x, y, target ? atan2(target.y - y, target.x - x) : random(0, 360), projSpeed, 400, -1, 8, "#00eeee", area, player, z.lightningProjectile, [], "noOutline", 32, true);
+    this.target = target;
+    this.targetHistory = [this.target];
+    //if there is no target, remove behavior but make it still spawn trail
+    if (!this.target) this.behavior = () => {
+      this.trailClock += dTime;
+      if (this.trailClock > this.trailReleaseInterval){
+        this.spawnTrail(area, players);
+        this.trailClock %= this.trailReleaseInterval;
+      }
+    };
+
+    this.state = "traveling";
+    this.clock = 0;
+    this.baseSpeed = projSpeed;
+
+    this.duration = duration;
+    this.slow = slow;
+
+    this.trailClock = 0;
+    this.trailReleaseInterval = 33;
+
+    this.trailCancelPeriod = 34;
+  }
+  behavior(area, players){
+    switch (this.state) {
+      case "traveling":
+        this.velToAngle();
+        this.angle = atan2(this.target.y - this.y, this.target.x - this.x);
+        this.angleToVel();
+        if (dst(this.target, this) < this.speed){
+          this.state = "locked";
+          this.clock = 0;
+        }
+        this.trailClock += dTime;
+        if (this.trailClock > this.trailReleaseInterval && !(this.lifetime < this.trailCancelPeriod)){
+          this.spawnTrail(area, players);
+          this.trailClock %= this.trailReleaseInterval;
+        }
+        break;
+      case "locked":
+        this.x = this.target.x;
+        this.y = this.target.y;
+        if (this.clock < 70){
+          this.x += random(-4, 4);
+          this.y += random(-4, 4);
+        }
+        this.speed = 0;
+        this.clock += dTime;
+        this.target.gainEffect(new LightningEffect(this.duration - 250, this.slow));
+        if (true){
+          this.state = "traveling";
+          this.speed = this.baseSpeed;
+          //make candidate enemies array
+          let enemies = [];
+          for (let i = 0; i < area.entities.length; i++){
+            let ent = area.entities[i];
+            if (this.targetHistory.includes(ent)) continue;
+            if (ent.mainType !== "enemy") continue;
+            if (ent.immune) continue;
+            enemies.push(ent);
+          }
+          this.target = this.findNewTarget(enemies);
+          if (!this.target || this.targetHistory.length > 2){
+            this.toRemove = true;
+            this.state = "idling";
+            return;
+          }
+          this.targetHistory.push(this.target);
+        }
+      default:
+        break;
+    }
+  }
+  spawnTrail(area, players){
+    area.queueEntSpawn(new LightningTrail(this.x, this.y, this.area, this.player, this.duration, this.slow));
+  }
+  doRemove(area, players){
+    this.spawnTrail(area, players);
+  }
+  findNewTarget(enemies){
+    let dist = 99999;
+    let selectedTarget = undefined;
+    for (let i in enemies){
+      if (dst(this, enemies[i]) < dist){
+        dist = dst(this, enemies[i]);
+        selectedTarget = enemies[i];
+      }
+    }
+    return selectedTarget;
+  }
+}
+
+class LightningTrail extends Projectile{
+  constructor(x, y, area, player, duration, slow){
+    super(x, y, 0, 0, 1400, -1, 8, "#00eeee", area, player, z.lightningProjectile, [], "noOutline", 0, true);
+    this.maxLifetime = 1400;
+    this.clock = 0;
+
+    this.duration = duration;
+    this.slow = slow;
+  }
+  behavior(area, players){
+    this.clock += dTime;
+    let t = this.clock/this.maxLifetime;
+    this.alphaMultiplier = 1 - 1 * t;
+  }
+  detectContact(){
+    this.detectEnemyContact();
+  }
+  contactEffect(enemy){
+    enemy.gainEffect(new LightningEffect(this.duration, this.slow));
+  }
+}
+
+class LightningEffect extends Effect{
+  constructor(duration, slow){
+    super(duration, getEffectPriority("LightningEffect"), false, true);
+    this.slow = slow;
+  }
+  doEffect(target){
+    target.speedMultiplier *= this.slow;
   }
 }
