@@ -5,6 +5,9 @@ class Jolt extends Player{
     this.ability1 = new Vengeance();
     this.ability2 = new Charge();
     this.storedAbility = new Stomp();
+
+    this.ability1.upgradeWith = this.storedAbility;
+    this.storedAbility.upgradeWith = this.ability1;
   }
 }
 

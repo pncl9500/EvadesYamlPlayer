@@ -13,14 +13,18 @@ class Ability{
     }
     this.cost = cost;
     this.rechargingActive = true;
+    this.upgradeWith = null;
   }
-  upgrade(player, forceUpgrade = false){
+  upgrade(player, forceUpgrade = false, canReupgrade = true){
     if ((player.upgradePoints > 0 || forceUpgrade) && this.tier < this.maxTier){
       this.tier++;
       if (!forceUpgrade){
         player.upgradePoints--;
       }
       this.upgradeBehavior(player);
+    }
+    if (this.upgradeWith && canReupgrade) {
+      this.upgradeWith.upgrade(player, true, false);
     }
   }
   upgradeBehavior(player){
