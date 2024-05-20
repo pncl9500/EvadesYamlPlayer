@@ -240,6 +240,7 @@ class BlackHoleEffect extends Effect{
   }
   doEffect(target){
     target.conditionallyHarmless = true;
+    target.harmless = true;
     target.conditionalHarmlessnessHeroTypes.push("Euclid");
     target.alphaMultiplier = 0.4;
     target.speedMultiplier = 0;

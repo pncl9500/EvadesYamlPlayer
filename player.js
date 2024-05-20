@@ -539,7 +539,7 @@ class Player extends Entity{
     if (this.cancelContactDeath){
       return;
     }
-    if (enemy.harmless || (enemy.conditionallyHarmless && !enemy.conditionalHarmlessnessHeroTypes.includes(this.heroName))){return;};
+    if (enemy.harmless && !(enemy.conditionallyHarmless && enemy.conditionalHarmlessnessHeroTypes.includes(this.heroName))){return;};
     if (this.invincible && (!enemy.corrosive || this.corrosiveBypass)) {return;};
     this.die();
   }
