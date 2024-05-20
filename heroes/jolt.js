@@ -277,7 +277,7 @@ class LightningProjectile extends Projectile{
     if (!this.target) this.behavior = () => {
       this.trailClock += dTime;
       if (this.trailClock > this.trailReleaseInterval){
-        this.spawnTrail(area, players);
+        this.spawnTrail(area);
         this.trailClock %= this.trailReleaseInterval;
       }
     };
@@ -306,7 +306,7 @@ class LightningProjectile extends Projectile{
         }
         this.trailClock += dTime;
         if (this.trailClock > this.trailReleaseInterval && !(this.lifetime < this.trailCancelPeriod)){
-          this.spawnTrail(area, players);
+          this.spawnTrail(area);
           this.trailClock %= this.trailReleaseInterval;
         }
         break;
@@ -344,11 +344,11 @@ class LightningProjectile extends Projectile{
         break;
     }
   }
-  spawnTrail(area, players){
+  spawnTrail(area){
     area.queueEntSpawn(new LightningTrail(this.x, this.y, this.area, this.player, this.duration, this.slow));
   }
   doRemove(area, players){
-    this.spawnTrail(area, players);
+    this.spawnTrail(area);
   }
   findNewTarget(enemies){
     let dist = 99999;
