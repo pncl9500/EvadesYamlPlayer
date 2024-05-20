@@ -64,9 +64,12 @@ function drawCheatMenu(){
   if (mouseScroll < maxMouseScroll){
     mouseScroll = maxMouseScroll;
   }
+  let cheatMenuCullLeniency = 50;
   for (var i in cheatMenuItems){
-    cheatMenuItems[i].draw(offset + mouseScroll);
-    cheatMenuItems[i].behavior(offset + mouseScroll);
+    if (offset < -mouseScroll + 720 && offset > -mouseScroll - cheatMenuItems[i].height -cheatMenuCullLeniency){
+      cheatMenuItems[i].draw(offset + mouseScroll);
+      cheatMenuItems[i].behavior(offset + mouseScroll);
+    }
     offset += cheatMenuItems[i].height;
     //relMouseY += cheatMenuItems[i].height;
     offset += cheatMenuPaddingBetween;
