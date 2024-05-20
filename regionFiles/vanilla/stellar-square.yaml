@@ -8,6 +8,8 @@ properties:
 areas:
 - x: var x
   y: var y
+  properties:
+    charge_reduced: True
   zones:
   - type: teleport
     x: 1216
