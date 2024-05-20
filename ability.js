@@ -38,7 +38,7 @@ class Ability{
 
   }
   //for things like rameses latch where you can only use it if you have bandages
-  useConditionSatisfied(){
+  useConditionSatisfied(player){
     return true;
   }
   canUseAbility(player){
@@ -54,7 +54,7 @@ class Ability{
       return;
     }
     if (this.canUseAbility(player)){
-      if (this.useConditionSatisfied()){
+      if (this.useConditionSatisfied(player)){
         this.startCooldown(player);
         this.use(player);
         this.drainEnergy(player);
