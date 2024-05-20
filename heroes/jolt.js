@@ -26,6 +26,7 @@ class Charge extends Ability{
   behavior(player, players, pellets, enemies, miscEnts, region, area){
     if (this.tier === 0) return;
     let speed = 32;
+    if (region.properties && region.properties.charge_reduced) speed = 4;
     if (area.properties && area.properties.charge_reduced) speed = 4;
     for (let p in pellets){
       let pel = pellets[p]
