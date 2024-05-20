@@ -76,6 +76,7 @@ class BandageEffect extends Effect{
       target.die();
       return;
     }
+    if (contactedEnemy.harmless) return;
     target.gainEffect(new UnbandagingEffect(this.unbandagingDuration, target, this.bandageVisual, this.bandageVisualOutline));
     this.toRemove = true;
   }
