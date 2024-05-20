@@ -27,7 +27,6 @@ class Charge extends Ability{
     if (this.tier === 0) return;
     let speed = 32;
     if (area.properties && area.properties.charge_reduced) speed = 4;
-    debugValue = speed;
     for (let p in pellets){
       let pel = pellets[p]
       if (dst(pel, player) > this.ranges[this.tier - 1] + pel.radius) continue;
