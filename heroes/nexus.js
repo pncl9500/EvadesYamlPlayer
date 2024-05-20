@@ -13,6 +13,15 @@ class Barrier extends Ability{
     this.durations = [2500, 2700, 2900, 3100, 3300];
     this.usableWhileDead = true;
   }
+  useConditionSatisfied(player){
+    if (player.dead){
+      if (player.area.players.length > 1){
+        return true;
+      }
+      return false;
+    }
+    return true;
+  }
   activate(player, players, pellets, enemies, miscEnts, region, area){
     let x = player.x;
     let y = player.y;
