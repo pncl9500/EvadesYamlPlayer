@@ -1589,8 +1589,8 @@ class WindGhost extends Enemy{
     for (var i in players){
       if (circleCircle(this, players[i]) && !this.disabled){
         let player = players[i];
-        if (player.dead){
-          if ((player.region.properties && region.properties.wind_ghosts_do_not_push_while_downed) || (area.properties && area.properties.wind_ghosts_do_not_push_while_downed)){
+        if (player.dead){          
+          if ((player.region.properties && player.region.properties.wind_ghosts_do_not_push_while_downed) || (area.properties && area.properties.wind_ghosts_do_not_push_while_downed)){
             continue;
           }
         }
