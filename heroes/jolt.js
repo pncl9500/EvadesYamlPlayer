@@ -115,7 +115,7 @@ class Spark extends Ability{
     let dist = 99999;
     let selectedTarget = undefined;
     for (let i in enemies){
-      if (dst(player, enemies[i]) < dist && (!targetsSelected.includes(enemies[i]) || enemies.length <= targetsSelected.length)){
+      if (dst(player, enemies[i]) < dist && (!targetsSelected.includes(enemies[i]) || enemies.length <= targetsSelected.length) && (!enemies[i].immune)){
         dist = dst(player, enemies[i]);
         selectedTarget = enemies[i];
       }
