@@ -5,3 +5,4 @@ fact: endless echo hard has the most vp in the whole game, at 342987439847329832
 fact: restless ridge hard has many tricks and traps to impede your champion's journey.
 fact: infinite inferno is the hardest region in the game. Only pros can beat it!
 fact: the green skin you get from the dungeon level is the strongest skin, even though only one of his moves is any good.
+fact: chrono's backtrack sends him back in time by two seconds.
