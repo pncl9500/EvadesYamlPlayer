@@ -34,6 +34,10 @@ function mouseWheel(event) {
 tooltipPadding = 2;
 tooltipHeight = 13;
 function drawCheatMenu(){
+  if (newCheatMenu !== undefined){
+    cheatMenuItems = newCheatMenu;
+    newCheatMenu = undefined;
+  }
   tooltipToRender = false;
   relMouseX = mouseX;
   relMouseY = mouseY;
@@ -83,11 +87,6 @@ function drawCheatMenu(){
 
   pop();
   mouseReleasedLastFrame = false;
-
-  if (newCheatMenu !== undefined){
-    cheatMenuItems = newCheatMenu;
-    newCheatMenu = undefined;
-  }
 }
 
 
