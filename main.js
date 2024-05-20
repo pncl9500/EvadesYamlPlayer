@@ -31,6 +31,7 @@ function setup() {
   ui.alertBox.timeUntilVanish = 12000;
   ui.alertBox.alerts.push("Welcome to EvadesYamlPlayer!")
   ui.alertBox.alerts.push("Press escape to open the options menu.")
+  ui.alertBox.alerts.push("Press F to fully level.")
   ui.alertBox.alerts.push(" ")
   ui.alertBox.alerts.push("Note that EvadesYamlPlayer is currently in open beta.")
   ui.alertBox.alerts.push("The game does not currently have every Evades.io feature")
