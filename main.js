@@ -66,6 +66,9 @@ function draw() {
     drawCheatMenu();
   }
   drawDebugValueText();
+
+  //background(0);
+  //drawPretentiousLogo(windowWidth / 2, windowHeight / 2, 250, frameCount * PI / 180);
 }
 
 function skipFrame(){
@@ -242,4 +245,99 @@ regionCodes = {
   ww2: "withering wasteland",
   ss: "stellar square",
   rl: "research lab",
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function drawPretentiousLogo(x, y, r, cycle){
+  //small circle scale (the pretentiousness constant)
+  let scs = 1/(sqrt(3));
+  let linegap = r * 0.2;
+  let arcgap = 0.29;
+  push();
+  translate(x, y);
+  let s = r * 0.01;
+  let ang = PI/2;
+  stroke(255);
+  strokeWeight(6 * s);
+  //lines
+  for (var i = 0; i < 6; i++){
+    strokeCap(ROUND);
+    ang += 2*PI/6;
+    let p1x = cos(ang) * r;
+    let p1y = sin(ang) * r;
+    let p2x = cos(ang + 2*PI/6) * r;
+    let p2y = sin(ang + 2*PI/6) * r;
+    line(p1x, p1y, p2x, p2y);
+    strokeCap(ROUND); //make square?
+    if (i === 1 || i === 5){
+      line(p1x, p1y, 0, 0);
+    }
+    if (i === 3){
+      let ix = cos(ang) * r * scs;
+      let iy = sin(ang) * r * scs;
+      line(p1x, p1y, ix + cos(ang) * linegap, iy + sin(ang) * linegap);
+      line(ix - cos(ang) * linegap, iy - sin(ang) * linegap, 0, 0);
+    }
+  }
+  let mStart = PI/2 + cycle;
+  let cStart = PI/2 + 2 * PI/3 + cycle;
+  let yStart = PI/2 + 4 * PI/3 + cycle;
+  mStart %= 2*PI;
+  cStart %= 2*PI;
+  yStart %= 2*PI;
+
+  //arcs
+  noFill();
+  //arc 1
+  var start = PI/2 + arcgap;
+  var end = PI/2 + 2*PI/3 - arcgap;
+  var ufStart = start - arcgap;
+  var ufEnd = end + arcgap;
+  if (mStart >= start && mStart <= end){ stroke(255, 0, 255); arc(0, 0, r * scs, r * scs, mStart, end); }
+  if (cStart >= start && cStart <= end){ stroke(0, 255, 255); arc(0, 0, r * scs, r * scs, cStart, end); }
+  if (yStart >= start && yStart <= end){ stroke(255, 255, 0); arc(0, 0, r * scs, r * scs, yStart, end); }
+
+  if (cStart >= start && cStart <= ufEnd){ stroke(255, 0, 255); arc(0, 0, r * scs, r * scs, start, min(cStart, end)); }
+  if (yStart >= start && yStart <= ufEnd){ stroke(0, 255, 255); arc(0, 0, r * scs, r * scs, start, min(yStart, end)); }
+  if (mStart >= start && mStart <= ufEnd){ stroke(255, 255, 0); arc(0, 0, r * scs, r * scs, start, min(mStart, end)); }
+
+  let lastColor = "";
+  if (mStart >= ufStart && mStart <= start){ stroke(255, 0, 255); arc(0, 0, r * scs, r * scs, start, end)}
+  if (cStart >= ufStart && cStart <= start){ stroke(0, 255, 255); arc(0, 0, r * scs, r * scs, start, end)}
+  if (yStart >= ufStart && yStart <= start){ stroke(255, 255, 0); arc(0, 0, r * scs, r * scs, start, end)}
+  //arc(0, 0, r * scs, r * scs, start, end);
+
+
+  //background(0);
+  //arc 2
+  var start = PI/2 + 2*PI/3 + arcgap;
+  var end = 5 * PI/2 - arcgap;
+  var ufStart = start - arcgap;
+  var ufEnd = end + arcgap;
+  //arc(0, 0, r * scs, r * scs, start, end);
+  //cyan -> magenta -> yellow
+  //ellipse(r * scs * cos(mStart), r * scs * sin(mStart), 1);
+  //ellipse(r * scs * cos(mStart), r * scs * sin(mStart), 1);
+  if (yStart >= start && mStart < end){ stroke(0, 255, 255); arc(0, 0, r * scs, r * scs, start, yStart); }
+  if (cStart >= start && yStart < end){ stroke(255, 0, 255); arc(0, 0, r * scs, r * scs, start, cStart); }
+  if (mStart >= start && cStart < end){ stroke(255, 255, 0); arc(0, 0, r * scs, r * scs, start, mStart); }
+  
+
+
+
+  strokeCap(ROUND);
 }
