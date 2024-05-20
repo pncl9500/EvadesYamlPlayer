@@ -22,9 +22,9 @@ class Ability{
         player.upgradePoints--;
       }
       this.upgradeBehavior(player);
-    }
-    if (this.upgradeWith && canReupgrade) {
-      this.upgradeWith.upgrade(player, true, false);
+      if (this.upgradeWith && canReupgrade) {
+        this.upgradeWith.upgrade(player, true, false);
+      }
     }
   }
   upgradeBehavior(player){
