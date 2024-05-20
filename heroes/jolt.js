@@ -23,4 +23,15 @@ class Charge extends Ability{
     player.storedAbility = player.ability1;
     player.ability1 = tempStore;
   }
+  behavior(player, players, pellets, enemies, miscEnts, region, area){
+    if (this.tier === 0) return;
+    let speed = 32;
+    for (let p in pellets){
+      let pel = pellets[p]
+      if (dst(pel, player) > this.ranges[this.tier - 1] + pel.radius) continue;
+      let angle = atan2(player.y - pel.y, player.x - pel.x);
+      pel.x += cos(angle) * speed * tFix;
+      pel.y += sin(angle) * speed * tFix;
+    }
+  }
 }
