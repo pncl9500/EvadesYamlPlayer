@@ -1268,7 +1268,7 @@ class ForceSniperA extends GenericSniper{
     this.loss = loss;
   } 
   createBullet(angle, target, area){
-    let bullet = new ForceSniperABullet(this.x, this.y, angle, 16, 10, pal.nm.force_sniper_a, this.loss);
+    let bullet = new ForceSniperABullet(this.x, this.y, angle, 16, this.radius / 2, pal.nm.force_sniper_a, this.loss);
     bullet.parentZone = this.parentZone;
     area.addEnt(bullet);
   }
@@ -1299,7 +1299,7 @@ class ForceSniperB extends GenericSniper{
     this.loss = loss;
   } 
   createBullet(angle, target, area){
-    let bullet = new ForceSniperBBullet(this.x, this.y, angle, 16, 10, pal.nm.force_sniper_b, this.loss);
+    let bullet = new ForceSniperBBullet(this.x, this.y, angle, 16, this.radius / 2, pal.nm.force_sniper_b, this.loss);
     bullet.parentZone = this.parentZone;
     area.addEnt(bullet);
   }
