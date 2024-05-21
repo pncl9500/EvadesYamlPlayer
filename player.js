@@ -687,9 +687,9 @@ class Player extends Entity{
     }
   }
   goToRegionFromId(id){
-    this.regionNum = id;
     this.region = this.game.regions[id];
-    ui.alertBox.setAlertsForRegion(this.region);
+    if (this.regionNum !== id) ui.alertBox.setAlertsForRegion(this.region);
+    this.regionNum = id;
   }
   goToAreaFromId(id){
     this.areaNum = constrain(id, 0, this.region.areas.length - 1);
