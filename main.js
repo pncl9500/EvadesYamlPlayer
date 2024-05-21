@@ -62,6 +62,21 @@ let longGameLagCooldown = 0;
 let serverLagCooldown = 0;
 
 function draw() {
+  let lighting = 1;
+  let region = game.mainPlayer.region;
+  let area = game.mainPlayer.area;
+  if (region.properties && region.properties.lighting !== undefined) lighting = region.properties.lighting;
+  if (area.properties && area.properties.lighting !== undefined) lighting = area.properties.lighting;
+  lightMap.clear();
+  lightMap.background(51, 255 * (1 - lighting));
+  if (settings.regionBackground){
+    if (game.mainPlayer.area.parent.hasOwnProperty("properties") && game.mainPlayer.area.parent.properties.hasOwnProperty("background_color") && !(game.mainPlayer.area.hasOwnProperty("properties") && game.mainPlayer.area.properties !== undefined && game.mainPlayer.area.properties.hasOwnProperty("background_color"))){
+      lightMap.background(game.mainPlayer.area.parent.properties.background_color[0], game.mainPlayer.area.parent.properties.background_color[1], game.mainPlayer.area.parent.properties.background_color[2], floor(game.mainPlayer.area.parent.properties.background_color[3] * 0.3));
+    }
+    if (game.mainPlayer.area.hasOwnProperty("properties") && game.mainPlayer.area.properties !== undefined && game.mainPlayer.area.properties.hasOwnProperty("background_color")){
+      lightMap.background(game.mainPlayer.area.properties.background_color[0], game.mainPlayer.area.properties.background_color[1], game.mainPlayer.area.properties.background_color[2], floor(game.mainPlayer.area.properties.background_color[3] * 0.3));
+    }
+  }
   if (deltaTime > timeCap){
     tFix = 0;
     deltaTime = 0;
@@ -132,6 +147,12 @@ function draw() {
   push();
   doCamTransform(cameraFocusX, cameraFocusY, 1);
   game.draw();
+  if (lighting !== 1){
+    push();
+    scale(lightMapDownsample);
+    image(lightMap, (cameraFocusX - windowWidth / 2) / lightMapDownsample, (cameraFocusY - windowHeight / 2) / lightMapDownsample);
+    pop();
+  }
   ui.draw();
   pop();
 

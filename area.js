@@ -60,6 +60,7 @@ class Area{
     for (var i in toDraw){
       toDraw[i].preDraw();
       toDraw[i].draw();
+      toDraw[i].drawLight();
     }
   }
   drawOnMap(parentRegion){

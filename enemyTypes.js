@@ -217,6 +217,7 @@ class DisablingEnemyEffect extends Effect{
 class Lava extends AuraEnemy{
   constructor(x, y, angle, speed, radius, auraSize){
     super(x, y, angle, speed, radius, pal.nm.lava, pal.nmaur.lava, auraSize)
+    this.light = this.auraSize + 60;
   }
   applyAuraEffectToPlayer(area, players, player){
     player.gainEffect(new LavaEnemyEffect());
@@ -1544,6 +1545,7 @@ class FireTrail extends Enemy{
   constructor(x, y, angle, speed, radius){
     super(x, y, angle, speed, radius, pal.nm.fire_trail);
     this.clock = 0;
+    this.light = radius + 40;
   }
   behavior(area, players){
     this.clock += dTime;
@@ -1565,6 +1567,7 @@ class FireTrailProjectile extends Enemy{
     this.alpha = 1;
     this.clock = 0;
     this.z = parent.z - 0.0001;
+    this.light = radius + 40;
   }
   behavior(area, players){
     this.clock += dTime;
@@ -2018,6 +2021,6 @@ class Snowman extends Enemy{
       }
     }
     this.radiusMultiplier *= this.crumbleSize;
-    this.light = this.radius + this.bonusLight;
+    this.light = this.radiusMultiplier * this.radius + this.bonusLight;
   }
 }

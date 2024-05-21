@@ -24,7 +24,6 @@ unimplementedGimmickMapNames = [
   "Frozen Fjord Hard",
   "Dusty Depths",
   "Research Lab",
-  "Restless Ridge Hard",
 ]
 
 infiniteMaps = [
@@ -50,13 +49,8 @@ requirementMaps = [
 
 lightingMaps = [
   "Burning Bunker",
-  "Burning Bunker Hard",
-  "Frozen Fjord",
-  "Frozen Fjord Hard",
-  "Dusty Depths",
   "Haunted Halls",
   "Mysterious Mansion",
-  "Restless Ridge Hard",
 ]
 
 allImmuneMaps = [

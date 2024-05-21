@@ -31,6 +31,28 @@ class Entity{
     this.restrictedLastFrame = false;
     this.effectRemovalQueue = [];
     this.renderOnMinimap = true;
+
+    this.light = 0;
+
+  }
+  drawLight(){
+    if (this.light === 0) return;
+    lightMap.erase();
+    lightMap.noStroke();
+    let x = this.x - cameraFocusX + windowWidth / 2;
+    let y = this.y - cameraFocusY + windowHeight / 2;
+    let r = this.light;
+    x /= lightMapDownsample;
+    y /= lightMapDownsample;
+    r /= lightMapDownsample;
+    r *= 2;
+
+    lightMap.fill(255, floor(255 / r) * 2);
+    for (let i = 0; i < r; i++){
+      lightMap.ellipse(x, y, i);
+    }
+
+    lightMap.noErase();
   }
   checkPlayerCollision(area, players){
     for(let i in players){
