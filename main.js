@@ -40,6 +40,8 @@ function setup() {
   cheatMenuItems = setCheatMenuItems();
   
   processUrlParams();
+
+
 }
 
 var tFix = 0.5;
@@ -49,6 +51,16 @@ var gameClock = 0;
 /**
  * Called every frame
  */
+
+let serverLagTimer = 0;
+let gameLagTimer = 0;
+
+let storedGameLag = 0;
+
+let shortGameLagCooldown = 0;
+let longGameLagCooldown = 0;
+let serverLagCooldown = 0;
+
 function draw() {
   if (deltaTime > timeCap){
     tFix = 0;
@@ -60,7 +72,59 @@ function draw() {
   }
   dTime *= timeScale;
   tFix = dTime / (1000 / 60) / 2;
+  fFix = tFix;
   
+  serverLagTimer -= deltaTime;
+  gameLagTimer -= deltaTime;
+  shortGameLagCooldown -= deltaTime;
+  longGameLagCooldown -= deltaTime;
+  serverLagCooldown -= deltaTime;
+  if (settings.serverLag && gameLagTimer < 0 && serverLagTimer < 0 && serverLagCooldown < 0){
+    if (random(0, 100) < settings.serverLagChance / (settings.fps / 30)){
+      serverLagTimer = random(settings.serverLagMinLength, settings.serverLagMaxLength);
+      ui.alertBox.alerts.push("server lag injected " + floor(serverLagTimer) + "ms");
+      ui.alertBox.alpha = 255;
+      ui.alertBox.hidden = false;
+      serverLagCooldown = settings.serverLagCooldown;
+    }
+  }
+  if (serverLagTimer > 0){
+    dTime = 0;
+    tFix = 0;
+  }
+  if (settings.shortGameLag && gameLagTimer < 0 && serverLagTimer < 0 && shortGameLagCooldown < 0){
+    if (random(0, 100) < settings.shortGameLagChance / (settings.fps / 30)){
+      gameLagTimer = random(settings.shortGameLagMinLength, settings.shortGameLagMaxLength);
+      ui.alertBox.alerts.push("short lag injected " + floor(gameLagTimer) + "ms");
+      ui.alertBox.alpha = 255;
+      ui.alertBox.hidden = false;
+      shortGameLagCooldown = settings.shortGameLagCooldown
+    }
+  }
+  if (settings.longGameLag && gameLagTimer < 0 && serverLagTimer < 0 && longGameLagCooldown < 0) {
+    if (random(0, 100) < settings.longGameLagChance / (settings.fps / 30)){
+      gameLagTimer = random(settings.longGameLagMinLength, settings.longGameLagMaxLength);
+      ui.alertBox.alerts.push("long lag injected " + floor(gameLagTimer) + "ms");
+      ui.alertBox.alpha = 255;
+      ui.alertBox.hidden = false;
+      longGameLagCooldown = settings.longGameLagCooldown
+    }
+  }
+  if (gameLagTimer > 0){
+    storedGameLag += deltaTime;
+    dTime = 0;
+    tFix = 0;
+    fFix = 0;
+  }
+  if (storedGameLag > 0 && gameLagTimer <= 0){
+    //dTime += min(storedGameLag, 250);
+    dTime += storedGameLag;
+    tFix = dTime / (1000 / 60) / 2;
+    //fFix = deltaTime / (1000 / 60) / 2;
+    //storedGameLag = max(0, storedGameLag - 250);
+    storedGameLag = 0;
+  }
+
   if (!settings.gamePaused){
     updateAll();
   }
@@ -175,6 +239,10 @@ function processUrlParams(){
         break;
       case "test":
         testParamFunc(game.mainPlayer);
+        break;
+      case "30fps":
+        settings.fps = 30;
+        frameRate(30);
         break;
       default:
         break;

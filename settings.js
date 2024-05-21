@@ -73,4 +73,26 @@ settings = {
   fixedWallbounces: true,
 
   agarMode: false,
+
+  serverLag: false,
+  serverLagChance: 0.05,
+  serverLagMinLength: 67,
+  serverLagMaxLength: 4000,
+  serverLagCooldown: 10000,
+
+  shortGameLag: false,
+  shortGameLagChance: 12,
+  shortGameLagMinLength: 17,
+  shortGameLagMaxLength: 60,
+  shortGameLagCooldown: 180,
+
+  longGameLag: false,
+  longGameLagChance: 0.3,
+  longGameLagMinLength: 100,
+  longGameLagMaxLength: 400,
+
+  regularGameLag: false,
+  regularGameLagInterval: 190,
+  regularGameLagMinLength: 40,
+  regularGameLagMaxLength: 50,
 }

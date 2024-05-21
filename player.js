@@ -235,8 +235,8 @@ class Player extends Entity{
     let sy = this.prevMovementY;
     this.sx = sx;
     this.sy = sy;
-    sx *= 1-((1-dim)*tFix);
-    sy *= 1-((1-dim)*tFix);
+    sx *= 1-((1-dim) * fFix);
+    sy *= 1-((1-dim) * fFix);
     //dubious?
     if (this.ctrlVector.x !== 0){
       sx = 0;
@@ -267,8 +267,8 @@ class Player extends Entity{
       sy = 0;
     }
 
-    sx *= 1-((1-dim)*tFix);
-    sy *= 1-((1-dim)*tFix);
+    sx *= 1-((1-dim)*fFix);
+    sy *= 1-((1-dim)*fFix);
 
     this.speedMultiplier *= this.shifting ? 0.5 : 1;
     this.xv = this.ctrlVector.x * this.tempSpeed * tFix * this.speedMultiplier;
