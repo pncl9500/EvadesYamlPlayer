@@ -113,7 +113,7 @@ class BurrowingEffect extends Effect{
   constructor(otherBurrow){
     super(-1, getEffectPriority["BurrowingEffect"], false, false);
     this.otherBurrow = otherBurrow;
-    this.burrowSpeed = 20;
+    this.burrowSpeed = 40;
     this.removedOnDeath = true;
   }
   doEffect(target){
@@ -127,8 +127,8 @@ class BurrowingEffect extends Effect{
       this.toRemove = true;
     }
     let angle = atan2(this.otherBurrow.y - target.y, this.otherBurrow.x - target.x);
-    target.x += cos(angle) * this.burrowSpeed;
-    target.y += sin(angle) * this.burrowSpeed;
+    target.x += cos(angle) * this.burrowSpeed * tFix;
+    target.y += sin(angle) * this.burrowSpeed * tFix;
     if (dst(target, this.otherBurrow) < this.burrowSpeed){
       target.x = this.otherBurrow.x;
       target.y = this.otherBurrow.y;
