@@ -65,8 +65,8 @@ function draw() {
   let lighting = 1;
   let region = game.mainPlayer.region;
   let area = game.mainPlayer.area;
-  if (region.properties && region.properties.lighting !== undefined) lighting = region.properties.lighting;
-  if (area.properties && area.properties.lighting !== undefined) lighting = area.properties.lighting;
+  // if (region.properties && region.properties.lighting !== undefined) lighting = region.properties.lighting;
+  // if (area.properties && area.properties.lighting !== undefined) lighting = area.properties.lighting;
   lightMap.clear();
   lightMap.background(51, 255 * (1 - lighting));
   if (settings.regionBackground){
