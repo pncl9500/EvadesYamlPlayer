@@ -21,6 +21,7 @@ function getEnemyFromSpawner(x, y, d, enemyType, spawner, spawnIndex, zone){
     case "fire_trail": return new FireTrail(x, y, d, s, r);
     case "crumbling": return new Crumbling(x, y, d, s, r);
     //case "cactus": return new Cactus(x, y, d, s, r);
+    case "snowman": return new Snowman(x, y, d, s, r);
     
     //blinking movement
     case "teleporting": return new Teleporting(x, y, d, s, r);

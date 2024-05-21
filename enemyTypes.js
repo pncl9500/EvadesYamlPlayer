@@ -1981,3 +1981,43 @@ class NegativeMagneticGhost extends Enemy{
 //     target.y += this.knockbackY * target.effectVulnerability;
 //   }
 // }
+
+class Snowman extends Enemy{
+  constructor(x, y, angle, speed, radius){
+    super(x, y, angle, speed, radius, pal.nm.snowman);
+    this.hasCollided = false;
+    this.collideTime = 0;
+    this.crumbleSize = 1;
+    this.crumbleSizeShrink = 1;
+    this.pauseTime = 1600;
+    this.bonusLight = 60;
+  }
+  wallBounceEvent(wallX, wallY, tangentPosX, tangentPosY){
+    if (!this.hasCollided){
+      this.hasCollided = true;
+      this.crumbleSizeShrink = this.crumbleSize;
+      this.speedMultiplier *= 0;
+    }
+  }
+  behavior(area, players){
+    if (this.hasCollided){
+      this.collideTime += dTime;
+      this.speedMultiplier *= 0;
+      this.crumbleSize = (this.crumbleSizeShrink - 1) * cos((PI * min(this.collideTime, 600)) / 1200) ** 3 + 1;
+    }
+    if (this.collideTime >= this.pauseTime && this.hasCollided){
+      this.hasCollided = false;
+      this.collideTime = 0;
+    }
+    if (!this.hasCollided){
+      if (this.crumbleSize < 3) {
+        //this.crumbleSize += (0.05 * dTime) / (1e3 / 30);
+        this.crumbleSize += 0.05 * tFix;
+      } else {
+        this.crumbleSize = 3;
+      }
+    }
+    this.radiusMultiplier *= this.crumbleSize;
+    this.light = this.radius + this.bonusLight;
+  }
+}
