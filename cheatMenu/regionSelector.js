@@ -153,6 +153,8 @@ function getRegionSelectorMenu(){
   }
   if (totalMissingEnemies.length > 17){
     list.push(txt(`Enemies left until cc2 event horizon: ${totalMissingEnemies.length - 17}`, 12));
+  } else if (totalMissingEnemies !== 0){
+    list.push(txt(`The cc2 event horizon is here.`, 12));
   }
   return list;
 }
