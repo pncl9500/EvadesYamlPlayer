@@ -97,7 +97,7 @@ class UnbandagingEffect extends Effect{
     this.bandageVisual.radius -= this.shrinkSpeed * dTime;
     this.bandageVisualOutline.radius -= this.shrinkSpeed * dTime;
   }
-  removeEffect(target){
+  removeEffectLate(target){
     this.bandageVisual.toRemove = true;
     this.bandageVisualOutline.toRemove = true;
   }
@@ -178,8 +178,10 @@ class LatchProjectile extends Projectile{
     this.toRemove = true;
     let bandageVisualOutline = new LockedAura(player, player.radius + 3.1, "#aeac97", 0);
     let bandageVisual = new LockedAura(player, player.radius + 2.5, "#dddac1", 0);
-    player.addAura(bandageVisualOutline);
-    player.addAura(bandageVisual);
+    if (!player.hasEffect("UnbandagingEffect")){
+      player.addAura(bandageVisualOutline);
+      player.addAura(bandageVisual);
+    }
     player.gainEffect(new UnbandagingEffect(900, player, bandageVisual, bandageVisualOutline));
     this.player.x = player.x;
     this.player.y = player.y;
