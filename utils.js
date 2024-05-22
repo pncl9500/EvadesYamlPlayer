@@ -76,13 +76,13 @@ function hexToRgba(hex) {
   } : null;
 }
 
-//cosine... if it was a SQUARE
+//cosine... if it was a SQUARE (inaccurate but we just use it for ability wheel rendering so its acceptable)
 function sqcos(ang){
   let mul = (abs(cos(ang)) + abs(sin(ang)));
   return constrain(cos(ang) * mul, -1, 1);
 }
 
-//sine... if it was a SQUARE
+//sine... if it was a SQUARE (inaccurate but we just use it for ability wheel rendering so its acceptable)
 function sqsin(ang){
   let mul = (abs(cos(ang)) + abs(sin(ang)));
   return constrain(sin(ang) * mul, -1, 1);
@@ -94,4 +94,100 @@ function sqsin(ang){
 
 function dst(e1, e2){
   return sqrt(sq(e2.x - e1.x) + sq(e2.y - e1.y));
+}
+
+
+
+
+
+
+function lineCircle(line, circle) {
+  let x1 = line.x1;
+  let x2 = line.x2;
+  let y1 = line.y1;
+  let y2 = line.y2;
+  let cx = circle.x;
+  let cy = circle.y;
+  let r;
+  try {
+    r = circle.getRadius();
+  } catch (error) {
+    r = circle.r;
+  }
+  
+  // is either end INSIDE the circle?
+  // if so, return true immediately
+  let inside1 = pointCircle(x1,y1, cx,cy,r);
+  let inside2 = pointCircle(x2,y2, cx,cy,r);
+  if (inside1 || inside2) return true;
+
+  // get length of the line
+  let distX = x1 - x2;
+  let distY = y1 - y2;
+  let len = sqrt( (distX*distX) + (distY*distY) );
+
+  // get dot product of the line and circle
+  let dot = ( ((cx-x1)*(x2-x1)) + ((cy-y1)*(y2-y1)) ) / Math.pow(len,2);
+
+  // find the closest point on the line
+  let closestX = x1 + (dot * (x2-x1));
+  let closestY = y1 + (dot * (y2-y1));
+
+  // is this point actually on the line segment?
+  // if so keep going, but if not, return false
+  let onSegment = linePoint(x1,y1,x2,y2, closestX,closestY);
+  if (!onSegment) return false;
+
+  // get distance to closest point
+  distX = closestX - cx;
+  distY = closestY - cy;
+  let distance = sqrt( (distX*distX) + (distY*distY) );
+
+  if (distance <= r) {
+    return true;
+  }
+  return false;
+}
+
+
+// POINT/CIRCLE
+function pointCircle(px, py, cx, cy, r) {
+
+  // get distance between the point and circle's center
+  // using the Pythagorean Theorem
+  let distX = px - cx;
+  let distY = py - cy;
+  let distance = sqrt( (distX*distX) + (distY*distY) );
+
+  // if the distance is less than the circle's
+  // radius the point is inside!
+  if (distance <= r) {
+    return true;
+  }
+  return false;
+}
+
+
+// LINE/POINT
+function linePoint(x1, y1, x2, y2, px, py) {
+
+  // get distance from the point to the two ends of the line
+  let d1 = dist(px,py, x1,y1);
+  let d2 = dist(px,py, x2,y2);
+
+  // get the length of the line
+  let lineLen = dist(x1,y1, x2,y2);
+
+  // since floats are so minutely accurate, add
+  // a little buffer zone that will give collision
+  let buffer = 0.01;    // higher # = less accurate
+
+  // if the two distances are equal to the line's
+  // length, the point is on the line!
+  // note we use the buffer here to give a range,
+  // rather than one #
+  if (d1+d2 >= lineLen-buffer && d1+d2 <= lineLen+buffer) {
+    return true;
+  }
+  return false;
 }

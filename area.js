@@ -1,5 +1,5 @@
 class Area{
-  constructor(x, y, zones, properties, parent, name = undefined){
+  constructor(x, y, zones, assets, properties, parent, name = undefined){
     this.loaded = false;
     this.x = x;
     this.y = y;
@@ -8,9 +8,15 @@ class Area{
     this.properties = properties;
     this.parent = parent;
     this.bounds = this.findBounds();
+
     this.players = [];
-    //players do not go in the entities array... for some reason
     this.entities = [];
+    this.walls = [];
+    this.staticAssets = [];
+    this.flashlights = [];
+    
+    this.addAssets(assets);
+
     this.isVictory = false;
     this.cancelMagnetismOnDownedPlayers = false;
     for (let i in this.zones){
@@ -42,7 +48,9 @@ class Area{
     if (settings.drawTiles){
       this.drawTiles();
     }
-
+    for (var i in this.walls){
+      this.walls[i].draw();
+    }
     let toDraw = [];
     for (var i in this.entities){
       let a = this.entities[i].getAura();
@@ -218,6 +226,16 @@ class Area{
           this.entities.push(new Pellet(0, 0, fakeZone, pelletMultiplier, true));
         }
         !noSpawn && this.zones[i].initSpawners();
+      }
+    }
+  }
+  addAssets(assets){
+    for (let i in assets){
+      let a = assets[i];
+      switch (a.type) {
+        case "wall": this.walls.push(new IceWall(a.x, a.y, a.width, a.height, a.texture)); break;
+        default:
+          break;
       }
     }
   }

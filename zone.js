@@ -68,9 +68,24 @@ class Zone{
     }
     for (var spawnIndex = 0; spawnIndex < enemyCount; spawnIndex++){
       let enemyType = random(spawner.types);
-      let area = this.parentRegion.areas[this.parentAreaNum]
-      let x = spawner.x ?? random(this.x + spawner.radius, this.x + this.width - spawner.radius);
-      let y = spawner.y ?? random(this.y + spawner.radius, this.y + this.height - spawner.radius);
+      let area = this.parentRegion.areas[this.parentAreaNum];
+      let x;
+      let y;
+      let viableLocationFound = false;
+      while (!viableLocationFound) {
+        x = spawner.x ?? random(this.x + spawner.radius, this.x + this.width - spawner.radius);
+        y = spawner.y ?? random(this.y + spawner.radius, this.y + this.height - spawner.radius);
+        let radius = spawner.radius;
+        viableLocationFound = true;
+        for (let i in area.walls){
+          let w = area.walls[i];
+          if (rectRect({x: x - radius, y: y - radius, width: radius * 2, height: radius * 2}, {x: w.x, y: w.y, width: w.w, height: w.h})) viableLocationFound = false;
+        }
+        //change later
+        if (spawner.x || spawner.y){
+          viableLocationFound = true;
+        }
+      }
       if (typeof x === "string"){
         let strs = x.split(", ");
         x = random(parseInt(strs[0]), parseInt(strs[1]));

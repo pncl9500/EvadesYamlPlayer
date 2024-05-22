@@ -41,6 +41,10 @@ class Region{
         zones.push(zone);
         lastZone = zone;
       }
+      let assets = [];
+      for (var s = 0; s < (ar.assets ? ar.assets.length : 0); s++){
+        assets.push(ar.assets[s]);
+      }
       var x = ar.x;
       var y = ar.y;
       if (x === "var x"){
@@ -148,7 +152,7 @@ class Region{
           y = lastArea.bounds.bottom + lastArea.y + add;
         }
       }
-      var area = new Area(x, y, zones, ar.properties, this, ar.name);
+      var area = new Area(x, y, zones, assets, ar.properties, this, ar.name);
       this.areas.push(area);
       lastArea = area;
     }

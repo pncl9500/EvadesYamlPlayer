@@ -161,9 +161,24 @@ class Enemy extends Entity{
       this.yv *= -1;
       this.velToAngle();
     }
+    this.wallBounceOnAssetWalls();
   }
   wallBounceEvent(wallX, wallY, tangentPosX, tangentPosY){
 
+  }
+  wallBounceOnAssetWalls(){
+    // let wls = this.parentZone.parentRegion.areas[this.parentZone.parentAreaNum].walls;
+    // for (let w in wls){
+    //   if (lineCircle({x1: w.x + w.w, y1: w.y, x2: w.x + w.w, y2: w.y + w.h}, this)){
+    //     let jut = (w.x + w.w - (this.x - this.radius));
+    //     this.x = w.x + w.w + this.radius + (settings.fixedWallbounces ? jut : 0);
+    //     let wallX = w.x + w.w;
+    //     this.wallBounceEvent(wallX, null, wallX + this.radius, null); 
+    //     this.angleToVel();
+    //     this.xv *= -1; 
+    //     this.velToAngle();
+    //   }
+    // }
   }
 }
 

@@ -51,7 +51,12 @@ class Pellet extends Entity{
       this.x = random(this.zone.x + this.radius, this.zone.x + this.zone.width - this.radius);
       this.y = random(this.zone.y + this.radius, this.zone.y + this.zone.height - this.radius); 
       if (!this.spawnedInVictory){
-        return;
+        viableZoneFound = true;
+        for (let i in this.area.walls){
+          let w = this.area.walls[i];
+          if (rectRect({x: this.x - this.radius, y: this.y - this.radius, width: this.radius * 2, height: this.radius * 2}, {x: w.x, y: w.y, width: w.w, height: w.h})) viableZoneFound = false;
+        }
+        if (viableZoneFound) return;
       }
       viableZoneFound = true;
       for (let i in this.area.zones){
