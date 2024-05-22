@@ -1,6 +1,6 @@
 todo (in no particular order):
 
-31 enemies
+25 enemies
 missing map properties
 Loading custom map files obviously
 Fix mouse controls nullifying low friction
