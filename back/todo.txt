@@ -25,6 +25,8 @@ pellet size change
 fix bugs relating to changing hero type and stuff
 fix friction being insane
 change all p5 functions that have Math. version into Math. version because the Math. versions are faster
+fix pumpkin z layering
+fix pumpkin targetting safe zone players if you spawn into a pumpkin area through URL
 
 ghoul
 cent
