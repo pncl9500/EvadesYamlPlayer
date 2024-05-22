@@ -15,6 +15,16 @@ function drawImage(imgCode, x, y, radius){
   }
 }
 
+function drawImageRect(imgCode, x, y, w, h){
+  if (loadedAssets.includes(imgCode)){
+    image(im[imgCode], x - w / 2, y - w / 2, w, h);
+  } else {
+    noStroke();
+    fill(60);
+    rect(x, y, w, h);
+  }
+}
+
 function loadAssets(){
   im = {
     "missingImage": loadImg("imageAssets/missingImage.png", "missingImage"),
@@ -24,6 +34,13 @@ function loadAssets(){
 
     "ab.flow": loadImg("imageAssets/ab/flow.png", "ab.flow"),
     "ab.harden": loadImg("imageAssets/ab/harden.png", "ab.harden"),
+
+    "ent.torch-1": loadImg("imageAssets/ent/torch-1.png", "ent.torch-1"),
+    "ent.torch-2": loadImg("imageAssets/ent/torch-2.png", "ent.torch-2"),
+    "ent.torch-3": loadImg("imageAssets/ent/torch-3.png", "ent.torch-3"),
+    "ent.torch-4": loadImg("imageAssets/ent/torch-4.png", "ent.torch-4"),
+    "ent.torch-5": loadImg("imageAssets/ent/torch-5.png", "ent.torch-5"),
+    "ent.torch-6": loadImg("imageAssets/ent/torch-6.png", "ent.torch-6"),
 
     "ab.warp": loadImg("imageAssets/ab/warp.png", "ab.warp"),
     "ab.paralysis": loadImg("imageAssets/ab/paralysis.png", "ab.paralysis"),

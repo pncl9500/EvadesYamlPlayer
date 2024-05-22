@@ -45,23 +45,7 @@ class Entity{
     if (this.y + this.radius < game.mainPlayer.y - gsUnitHeight / 2 - lightingCullingPadding) return;
     lightMap.erase();
     lightMap.noStroke();
-    let x = this.x - cameraFocusX;
-    let y = this.y - cameraFocusY;
-    let r = this.light;
-    if (settings.allGlowMode) r = max(r, 60);
-    x /= settings.lightMapDownsample;
-    y /= settings.lightMapDownsample;
-    r /= settings.lightMapDownsample;
-    r *= 2;
-    x += lightMapWidth / 2;
-    y += lightMapHeight / 2;
-
-    lightMap.fill(255, floor(255 / r) * 2);
-    for (let i = 0; i < r; i++){
-      lightMap.ellipse(x, y, i);
-    }
-
-    lightMap.noErase();
+    drawLightGradient(this.x, this.y, settings.allGlowMode ? max(this.light, 60) : this.light)
   }
   checkPlayerCollision(area, players){
     for(let i in players){

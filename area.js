@@ -51,6 +51,10 @@ class Area{
     for (var i in this.walls){
       this.walls[i].draw();
     }
+    for (var i in this.staticAssets){
+      this.staticAssets[i].draw();
+      this.staticAssets[i].drawLight();
+    }
     let toDraw = [];
     for (var i in this.entities){
       let a = this.entities[i].getAura();
@@ -234,6 +238,8 @@ class Area{
       let a = assets[i];
       switch (a.type) {
         case "wall": this.walls.push(new IceWall(a.x, a.y, a.width, a.height, a.texture)); break;
+        case "light_region": this.staticAssets.push(new LightRegion(a.x, a.y, a.width, a.height)); break;
+        case "torch": this.staticAssets.push(new Torch(a.x, a.y, a.upside_down)); break;
         default:
           break;
       }
