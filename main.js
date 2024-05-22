@@ -65,8 +65,8 @@ function draw() {
   let lighting = 1;
   let region = game.mainPlayer.region;
   let area = game.mainPlayer.area;
-  // if (region.properties && region.properties.lighting !== undefined) lighting = region.properties.lighting;
-  // if (area.properties && area.properties.lighting !== undefined) lighting = area.properties.lighting;
+  if (region.properties && region.properties.lighting !== undefined) lighting = region.properties.lighting;
+  if (area.properties && area.properties.lighting !== undefined) lighting = area.properties.lighting;
   lightMap.clear();
   lightMap.background(51, 255 * (1 - lighting));
   if (settings.regionBackground){
@@ -150,19 +150,26 @@ function draw() {
   if (lighting !== 1){
     push();
     scale(lightMapDownsample);
-    image(lightMap, (cameraFocusX - windowWidth / 2) / lightMapDownsample, (cameraFocusY - windowHeight / 2) / lightMapDownsample);
+    image(lightMap, cameraFocusX / lightMapDownsample - lightMapWidth / 2, cameraFocusY / lightMapDownsample - lightMapHeight / 2);
     pop();
   }
   ui.draw();
   pop();
-
+  
   drawCinemaBars();
-
+  
   if (cheatMenuOpen){
     drawCheatMenu();
   }
   drawDebugValueText();
-
+  
+  doCamTransform(cameraFocusX, cameraFocusY, 1);
+  scale(lightMapDownsample);
+  noFill();
+  stroke(255);
+  strokeWeight(20);
+  rect(lightMap, cameraFocusX / lightMapDownsample - lightMapWidth / 2, cameraFocusY / lightMapDownsample - lightMapHeight / 2, lightMapWidth, lightMapHeight);
+  noStroke();
   //background(0);
   //drawPretentiousLogo(windowWidth / 2, windowHeight / 2, 250, frameCount * PI / 180);
 }

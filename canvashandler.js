@@ -48,10 +48,10 @@ var cameraFocusY = 0;
  * Creates the canvas and gets canvas aspect ratio
  */
 
-var lightMapDownsample = 2;
+var lightMapDownsample = 8;
 function initCanvas(){
   createCanvas(windowWidth, windowHeight);
-  lightMap = createGraphics(ceil(windowWidth / lightMapDownsample), ceil(windowHeight / lightMapDownsample));
+  lightMap = newLightMap();
   windowAspectRatio = windowWidth / windowHeight;
   //This is some kludge shit right here
   //drawCinemaBars() sets a bunch of variables needed to scale the game properly
@@ -86,8 +86,16 @@ function doCamTransform(x, y, zoom){
  */
 function windowResized(){
   resizeCanvas(windowWidth, windowHeight);
-  lightMap = createGraphics(ceil(windowWidth / lightMapDownsample), ceil(windowHeight / lightMapDownsample));
   windowAspectRatio = windowWidth / windowHeight;
+  lightMap = newLightMap();
+}
+
+let lightMapWidth;
+let lightMapHeight
+function newLightMap(){
+  lightMapWidth  = ceil(gsPixelWidth / lightMapDownsample / pixelToUnitRatio);
+  lightMapHeight = ceil(gsPixelHeight / lightMapDownsample / pixelToUnitRatio);
+  return createGraphics(lightMapWidth, lightMapHeight);
 }
 
 

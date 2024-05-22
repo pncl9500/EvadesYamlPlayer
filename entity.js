@@ -39,13 +39,15 @@ class Entity{
     if (this.light === 0) return;
     lightMap.erase();
     lightMap.noStroke();
-    let x = this.x - cameraFocusX + windowWidth / 2;
-    let y = this.y - cameraFocusY + windowHeight / 2;
+    let x = this.x - cameraFocusX;
+    let y = this.y - cameraFocusY;
     let r = this.light;
     x /= lightMapDownsample;
     y /= lightMapDownsample;
     r /= lightMapDownsample;
     r *= 2;
+    x += lightMapWidth / 2;
+    y += lightMapHeight / 2;
 
     lightMap.fill(255, floor(255 / r) * 2);
     for (let i = 0; i < r; i++){

@@ -26,6 +26,7 @@ function getCreditsMenu(){
     txt("Pack", 8),
     txt("Bunny", 8),
     txt("Uitro", 8),
+    txt("Xulated", 8),
     pdd(0, 4),
     txt("Accuracy maintainers:", 12),
     txt("Sonic.exe", 8),
