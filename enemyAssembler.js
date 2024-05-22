@@ -28,6 +28,10 @@ function getEnemyFromSpawner(x, y, d, enemyType, spawner, spawnIndex, zone){
     case "firefly": return new Firefly(x, y, d, s, r);
     case "mist": return new Mist(x, y, d, s, r);
     case "phantom": return new Phantom(x, y, d, s, r);
+
+    //pumpkins
+    case "fake_pumpkin": return new FakePumpkin(x, y, d, s, r);
+    //case "pumpkin": return new Pumpkin(x, y, d, s, r);
     
     //blinking movement
     case "teleporting": return new Teleporting(x, y, d, s, r);

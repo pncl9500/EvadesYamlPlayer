@@ -1,5 +1,6 @@
 //z layer of every object
 z = {
+  fakePumpkin: -0.5,
   pellet: 0,
   player: 1,
   mainPlayer: 2,

@@ -173,7 +173,17 @@ class Entity{
         stroke(this.tempColor.r, this.tempColor.g, this.tempColor.b, this.tempColor.a ?? 255);
         break;
       case "image":
-        drawImage(this.image, this.x, this.y, this.radius)
+        drawImage(this.image, this.x, this.y, this.radius);
+        break;
+      case "imageOutline":
+        noFill();
+        stroke(0, (this.tempColor.a ?? 255) * this.alphaMultiplier);
+        strokeWeight(enemyStrokeWidth);
+        push();
+          tint(255, floor(this.alphaMultiplier * 255));
+          drawImage(this.image, this.x, this.y, this.radius);
+        pop();
+        break;
       default:
         break;
     }
