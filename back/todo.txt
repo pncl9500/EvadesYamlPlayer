@@ -1,6 +1,26 @@
 todo (in no particular order):
 
-25 enemies
+
+tree
+frost giant
+charging
+lead sniper
+cactus
+stalactite
+lunging
+cycling
+
+- cc2 event horizon -
+
+electric enemies
+prediction sniper
+ring sniper
+cc2 elementals
+cybot
+cc2h elementals
+cybot hard
+
+
 missing map properties
 Loading custom map files obviously
 Fix mouse controls nullifying low friction
