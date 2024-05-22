@@ -2024,3 +2024,56 @@ class Snowman extends Enemy{
     this.light = this.radiusMultiplier * this.radius + this.bonusLight;
   }
 }
+
+
+
+class Mist extends Enemy{
+  constructor(x, y, angle, speed, radius){
+    super(x, y, angle, speed, radius, pal.nm.normal);
+  }
+}
+
+class Phantom extends Enemy{
+  constructor(x, y, angle, speed, radius){
+    super(x, y, angle, speed, radius, pal.nm.normal);
+  }
+}
+
+class Glowy extends Enemy{
+  constructor(x, y, angle, speed, radius, color = pal.nm.glowy){
+    super(x, y, angle, speed, radius, color);
+    this.stateDuration = 500;
+    this.brightness = 1;
+    this.fading = true;
+    this.clock = this.stateDuration;
+    this.fadeSpeed = 0.06;
+  }
+  behavior(area, players){
+    this.light = 3 * this.radius * this.brightness;
+    if (this.fading && this.clock <= 0){
+      this.brightness -= this.fadeSpeed * tFix;
+      if (this.brightness <= 0){
+        this.brightness = 0;
+        this.fading = false;
+        this.clock = this.stateDuration;
+      }
+    } else if (!this.mode && this.clock <= 0){
+      this.brightness += this.fadeSpeed * tFix;
+      if (this.brightness >= 1){
+        this.brigthness = 1;
+        this.fading = true;
+        this.clock = this.stateDuration;
+      }
+    }
+    if (this.clock > 0){
+      this.clock -= dTime;
+    }
+    this.alphaMultiplier *= this.brightness
+  }
+}
+class Firefly extends Glowy{
+  constructor(x, y, angle, speed, radius){
+    super(x, y, angle, speed, radius, pal.nm.firefly);
+    this.brightness = Math.random();
+  }
+}

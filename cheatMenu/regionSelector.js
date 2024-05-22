@@ -151,5 +151,8 @@ function getRegionSelectorMenu(){
   if (totalMissingEnemies.length === 0){
     list.push(txt("All enemies have been implemented, and I can finally rest.", 8));
   }
+  if (totalMissingEnemies.length > 17){
+    list.push(txt(`Enemies left until cc2 event horizon: ${totalMissingEnemies.length - 17}`, 12));
+  }
   return list;
 }
