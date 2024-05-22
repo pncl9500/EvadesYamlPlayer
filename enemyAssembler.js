@@ -26,8 +26,8 @@ function getEnemyFromSpawner(x, y, d, enemyType, spawner, spawnIndex, zone){
     //invisible enemies
     case "glowy": return new Glowy(x, y, d, s, r);
     case "firefly": return new Firefly(x, y, d, s, r);
-    // case "mist": return new Mist(x, y, d, s, r);
-    // case "phantom": return new Phantom(x, y, d, s, r);
+    case "mist": return new Mist(x, y, d, s, r);
+    case "phantom": return new Phantom(x, y, d, s, r);
     
     //blinking movement
     case "teleporting": return new Teleporting(x, y, d, s, r);

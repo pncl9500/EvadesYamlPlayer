@@ -2027,17 +2027,6 @@ class Snowman extends Enemy{
 
 
 
-class Mist extends Enemy{
-  constructor(x, y, angle, speed, radius){
-    super(x, y, angle, speed, radius, pal.nm.normal);
-  }
-}
-
-class Phantom extends Enemy{
-  constructor(x, y, angle, speed, radius){
-    super(x, y, angle, speed, radius, pal.nm.normal);
-  }
-}
 
 class Glowy extends Enemy{
   constructor(x, y, angle, speed, radius, color = pal.nm.glowy){
@@ -2075,5 +2064,55 @@ class Firefly extends Glowy{
   constructor(x, y, angle, speed, radius){
     super(x, y, angle, speed, radius, pal.nm.firefly);
     this.brightness = Math.random();
+  }
+}
+
+
+
+class Mist extends Enemy{
+  constructor(x, y, angle, speed, radius, color = pal.nm.mist){
+    super(x, y, angle, speed, radius, color);
+    this.brightness = 1;
+    this.inProximity = true;
+    this.detectionRadius = 200;
+    this.fadeSpeed = 0.05;
+  }
+  behavior(area, players){
+    this.light = 3 * this.radius * this.brightness;
+    
+    this.inProximity = false;
+    for (let i in players){
+      if (!players[i].detectable) continue;
+      if (dst(players[i], this) < this.detectionRadius + players[i].getRadius()){
+        this.inProximity = true;
+      }
+    }
+    
+    this.determineFade();
+    this.alphaMultiplier *= this.brightness;
+  }
+  determineFade(){
+    if (this.inProximity){
+      this.brightness -= this.fadeSpeed * tFix;
+      if (this.brightness <= 0) this.brightness = 0;
+    } else {
+      this.brightness += this.fadeSpeed * tFix;
+      if (this.brightness >= 1) this.brightness = 1;
+    }
+  }
+}
+class Phantom extends Mist{
+  constructor(x, y, angle, speed, radius){
+    super(x, y, angle, speed, radius, pal.nm.phantom);
+    this.brightness = 0;
+  }
+  determineFade(){
+    if (!this.inProximity){
+      this.brightness -= this.fadeSpeed * tFix;
+      if (this.brightness <= 0) this.brightness = 0;
+    } else {
+      this.brightness += this.fadeSpeed * tFix;
+      if (this.brightness >= 1) this.brightness = 1;
+    }
   }
 }
