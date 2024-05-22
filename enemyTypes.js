@@ -1590,6 +1590,7 @@ class WindGhost extends Enemy{
   }
   behavior(area, players){
     for (var i in players){
+      if (players[i].fullEffectImmunity) continue;
       if (circleCircle(this, players[i]) && !this.disabled){
         let player = players[i];
         if (player.dead){          
@@ -1631,6 +1632,7 @@ class WindSniperBullet extends Bullet{
     this.gravity = 16;
   }
   playerCollisionEvent(player){
+    if (player.fullEffectImmunity) return;
     while (circleCircle(this, player) && !this.disabled) {
       let dx = player.x - this.x;
       let dy = player.y - this.y;
