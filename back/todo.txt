@@ -1,12 +1,12 @@
 todo (in no particular order):
 
-32 enemies
+31 enemies
 missing map properties
 Loading custom map files obviously
 Fix mouse controls nullifying low friction
 mouse/low friction compatible cent movement
 walls
-lighting
+torches, flashlights, lanterns, light regions
 endless regions
 teleport requirements
 chat box (console) and running console commands through URL
@@ -23,8 +23,9 @@ artificial random spikes and slides simulation???
 make enemy radius decreases ONLY decrease aura while it isnt recovering radius (vanilla behavior)
 pellet size change
 fix bugs relating to changing hero type and stuff
+fix friction being insane
+change all p5 functions that have Math. version into Math. version because the Math. versions are faster
 
-jolt
 ghoul
 cent
 jotunn
