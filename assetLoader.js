@@ -32,6 +32,7 @@ function loadAssets(){
     "ent.pumpkin_off": loadImg("imageAssets/ent/pumpkin_off.png", "ent.pumpkin_off"),
     "ent.pumpkin_on": loadImg("imageAssets/ent/pumpkin_on.png", "ent.pumpkin_on"),
 
+    
     "ab.flow": loadImg("imageAssets/ab/flow.png", "ab.flow"),
     "ab.harden": loadImg("imageAssets/ab/harden.png", "ab.harden"),
 
@@ -88,6 +89,8 @@ function loadAssets(){
 
     "ab.burrow": loadImg("imageAssets/ab/burrow.png", "ab.burrow"),
     "ab.pit": loadImg("imageAssets/ab/pit.png", "ab.pit"),
+
+    "ab.lantern": loadImg("imageAssets/ab/lantern.png", "ab.lantern"),
   }
 }
 

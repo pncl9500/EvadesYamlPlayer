@@ -77,9 +77,11 @@ class Player extends Entity{
     this.ab1macro = false;
     this.ab2macro = false;
     this.ab3macro = false;
-    this.light = 60;
+    
   }
   resetAllModifiers(){
+    //players have their light changed by other things, so it resets every frame.
+    this.light = 60;
     this.detectable = true;
     this.radiusMultiplier = 1;
     this.tempSpeed = this.speed;

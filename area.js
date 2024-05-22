@@ -153,6 +153,10 @@ class Area{
     }
   }
   enter(player){
+    if (this.properties && this.properties.applies_lantern){
+      player.ability3 = new Lantern();
+      player.ability3.upgrade(player, true);
+    }
     this.players.push(player);
     if (!player.visitedAreas.includes(this)){
       player.visitedAreas.push(this);

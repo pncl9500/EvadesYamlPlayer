@@ -95,3 +95,14 @@ class Torch{
     drawLightGradient(this.x, this.y, this.radius);
   }
 }
+
+class Lantern extends ContinuousToggleAbility{
+  constructor(){
+    super(1, 0, 3, "ab.lantern");
+    this.range = 250;
+  }
+  behavior(player, players, pellets, enemies, miscEnts, region, area){
+    if (!this.toggled) return;
+    player.light = this.range;
+  }
+}
