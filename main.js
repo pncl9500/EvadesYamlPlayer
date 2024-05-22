@@ -1,3 +1,5 @@
+p5.disableFriendlyErrors = true;
+
 debugValue = "";
 game = null;
 ui = null;
