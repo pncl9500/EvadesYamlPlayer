@@ -14,39 +14,64 @@ cycling
 
 electric enemies
 prediction sniper
-ring sniper
 cc2 elementals
 cybot
 cc2h elementals
+ring sniper
 cybot hard
 
 
 missing map properties
-Loading custom map files obviously
-Fix mouse controls nullifying low friction
-mouse/low friction compatible cent movement
+
+importing map files
+
+fix friction
+
 walls
-torches, flashlights, lanterns, light regions
+
+flashlight
+
+lantern
+
 endless regions
+
 teleport requirements
+
 chat box (console) and running console commands through URL
+
 leaderboard
-controller control? who even uses this
+
+controller control
+
 mouse deadzone
+
 add asset loading screen
+
 add pretentious logo
+
 arrows pointing to nearby dead players
-local storage stuff so if you were rameses or something you will respawn as rameses
+
 TASing
-artificial delay simulation
-artificial random spikes and slides simulation???
+
+artificial delay
+
+artificial lag spikes
+
 make enemy radius decreases ONLY decrease aura while it isnt recovering radius (vanilla behavior)
+
 pellet size change
+
 fix bugs relating to changing hero type and stuff
-fix friction being insane
+
 change all p5 functions that have Math. version into Math. version because the Math. versions are faster
+
 fix pumpkin z layering
-fix pumpkin targetting safe zone players if you spawn into a pumpkin area through URL
+
+fix pumpkin targetting safe zone players for 1 frame
+
+increase light gradient precision through alpha manipulation
+
+find a way to make torch sprites less laggy
 
 ghoul
 cent
