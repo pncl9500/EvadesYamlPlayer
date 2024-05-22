@@ -9,7 +9,7 @@ settings = {
     0,
     0,
     20,
-    40,
+    30,
   ],
   //the width of each grid line.
   gridLineWidth: 1,

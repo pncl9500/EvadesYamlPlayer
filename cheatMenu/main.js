@@ -118,14 +118,14 @@ function setCheatMenuItems(){
               let tempZoneColors = settings.zoneBaseColors;
               settings.zoneBaseColors = settings.zoneBaseColorsDark;
               settings.zoneBaseColorsDark = tempZoneColors;
-              settings.gridColor = [255,255,250,40];
+              settings.gridColor = [255,255,250,30];
               settings.backgroundBrightness = 5;
             }, () => {
               settings.darkMode = false;
               let tempZoneColors = settings.zoneBaseColors;
               settings.zoneBaseColors = settings.zoneBaseColorsDark;
               settings.zoneBaseColorsDark = tempZoneColors;
-              settings.gridColor = [0,0,20,40];
+              settings.gridColor = [0,0,20,30];
               settings.backgroundBrightness = 51;
             }, () => {
               return settings.darkMode;
@@ -154,6 +154,8 @@ function setCheatMenuItems(){
             btn("High", null, 12, () => {settings.lightMapDownsample = 4; lightMap = newLightMap()}, "Make dark areas have a medium amount of pixels."),]),
         row([txt("Show area header:", 12), 
             tog(11, 11, true, () => {ui.areaHeader.hidden = false}, () => {ui.areaHeader.hidden = true}, () => {return !ui.areaHeader.hidden}, "Enable the area header."),]),
+        row([txt("Thin grid lines:", 12), 
+            tog(11, 11, true, () => {settings.gridLineWidth = 1}, () => {settings.gridLineWidth = 2.5}, () => {return settings.gridLineWidth === 1}, "Makes grid lines much thinner."),]),
         row([txt("Transparent pellets:", 12), 
             tog(11, 11, false, () => {settings.pelletOpacity = 0.15}, () => {settings.pelletOpacity = 1}, undefined, "Make pellets render as transparent."),]),
         row([txt("Fixed mouse angle:", 12), 
