@@ -36,12 +36,13 @@ class Entity{
 
   }
   drawLight(){
-    if (this.light === 0) return;
+    if (this.light === 0 && !settings.allGlowMode) return;
     lightMap.erase();
     lightMap.noStroke();
     let x = this.x - cameraFocusX;
     let y = this.y - cameraFocusY;
     let r = this.light;
+    if (settings.allGlowMode) r = max(r, 60);
     x /= settings.lightMapDownsample;
     y /= settings.lightMapDownsample;
     r /= settings.lightMapDownsample;
