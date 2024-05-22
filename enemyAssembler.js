@@ -6,7 +6,7 @@ function getEnemyFromSpawner(x, y, d, enemyType, spawner, spawnIndex, zone){
     return spawner[prop] ?? defaults.spawnerProps[prop];
   }
   switch (enemyType) {
-    //"generic" enemies
+    //"generic" enemies (really just stuff i can't think of a category for)
     case "normal": return new Normal(x, y, d, s, r);
     case "immune": return new Immune(x, y, d, s, r);
     case "dasher": return new Dasher(x, y, d, s, r);
@@ -19,8 +19,10 @@ function getEnemyFromSpawner(x, y, d, enemyType, spawner, spawnIndex, zone){
     case "flower": return new Flower(x, y, d, s, r, property("growth_multiplier"));
     case "seedling": return new Seedling(x, y, d, s, r);
     case "fire_trail": return new FireTrail(x, y, d, s, r);
-    case "crumbling": return new Crumbling(x, y, d, s, r);
     //case "cactus": return new Cactus(x, y, d, s, r);
+
+    //wall hitters
+    case "crumbling": return new Crumbling(x, y, d, s, r);
     case "snowman": return new Snowman(x, y, d, s, r);
 
     //invisible enemies
@@ -31,7 +33,7 @@ function getEnemyFromSpawner(x, y, d, enemyType, spawner, spawnIndex, zone){
 
     //pumpkins
     case "fake_pumpkin": return new FakePumpkin(x, y, d, s, r);
-    //case "pumpkin": return new Pumpkin(x, y, d, s, r);
+    case "pumpkin": return new Pumpkin(x, y, d, s, r);
     
     //blinking movement
     case "teleporting": return new Teleporting(x, y, d, s, r);

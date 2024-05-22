@@ -2126,3 +2126,85 @@ class FakePumpkin extends Enemy{
     this.inherentlyHarmless = true;
   }
 }
+
+class Pumpkin extends Enemy{
+  constructor(x, y, angle, speed, radius){
+    super(x, y, angle, speed, radius, pal.nm.pumpkin);
+    this.renderType = "imageOutline";
+    this.image = "ent.pumpkin_off"
+
+    this.staticXv = this.xv;
+    this.staticYv = this.yv;
+    this.nextAngle = 0;
+    this.clock = 0;
+    this.nextAngleDetected = false;
+    this.staticSpeed = speed;
+
+    this.active = false;
+    this.activationRange = 240;
+
+    this.target = null;
+  }
+  getTarget(players){
+    let min = 99999;
+    let player;
+    for (let i in players){
+      if (!players[i].detectable) continue;
+      if (dst(this, players[i]) < min){
+        player = players[i];
+      }
+    }
+    return player;
+  }
+  behavior(area, players){
+    this.harmless = true;
+    if (!this.active){
+      this.speedMultiplier = 0;
+      this.light = 0;
+    }
+    let min = this.activationRange;
+    let index;
+    for (let i in players){
+      if (!players[i].detectable) continue;
+      if (dst(this, players[i]) < min){
+        min = dst(this, players[i]);
+        index = i;
+        this.target = players[i];
+      }
+    }
+    if (index){
+      this.image = "ent.pumpkin_on";
+      this.active = true;
+    }
+    if (this.active){
+      this.light = this.tempRadius * this.radiusMultiplier + 30;
+      this.clock += dTime;
+      if (this.clock > 3000){
+        this.image = "ent.pumpkin_off";
+        this.nextAngleDetected = false;
+        this.clock = 0;
+        this.active = false;
+      }
+      if (this.clock < 1000){
+        let ang = Math.random();
+        this.xv = Math.cos(ang * PI * 2) * 4;
+        this.yv = Math.sin(ang * PI * 2) * 4;
+      } else {
+        if (!this.nextAngleDetected){
+          //???
+          //do pumpkins always target the original player they were activated by,
+          //or do they just go towards the nearest player if their original target
+          //is out of range? well, commenting this line of code makes them always
+          //target the original player, so that is what will stay in-game until
+          //i do more testing to figure out what the vanilla behavior is.
+          //this.target = this.getTarget(players);
+          if (!this.target) return;
+          this.nextAngle = Math.atan2(this.target.y - this.y, this.target.x - this.x);
+          this.nextAngleDetected = true;
+          this.xv = Math.cos(this.nextAngle) * this.staticSpeed;
+          this.yv = Math.sin(this.nextAngle) * this.staticSpeed;
+        }
+      }
+    }
+  }
+}

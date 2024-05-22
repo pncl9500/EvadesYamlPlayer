@@ -1,6 +1,8 @@
 const enemyStrokeWidth = 2;
 const ringEnemyStrokeWidth = 4;
 
+imageCullingPadding = 100;
+lightingCullingPadding = 200;
 class Entity{
   /**
      * Creates an entity which is a circle that does stuff.
@@ -37,6 +39,10 @@ class Entity{
   }
   drawLight(){
     if (this.light === 0 && !settings.allGlowMode) return;
+    if (this.x - this.radius > game.mainPlayer.x + gsUnitWidth / 2 + lightingCullingPadding) return;
+    if (this.y - this.radius > game.mainPlayer.y + gsUnitHeight / 2 + lightingCullingPadding) return;
+    if (this.x + this.radius < game.mainPlayer.x - gsUnitWidth / 2 - lightingCullingPadding) return;
+    if (this.y + this.radius < game.mainPlayer.y - gsUnitHeight / 2 - lightingCullingPadding) return;
     lightMap.erase();
     lightMap.noStroke();
     let x = this.x - cameraFocusX;
@@ -148,6 +154,13 @@ class Entity{
     ellipse(this.x, this.y, max(this.radius, minEntityMinimapRadius) / map.storedRatio * map.markerScale);
   }
   draw(){
+    //cull offscreen image type outlines (REALLY helps with performance, turn it off and try hh2 16)
+    if (this.renderType === "imageOutline" || this.renderType === "image"){
+      if (this.x - this.radius > game.mainPlayer.x + gsUnitWidth / 2 + imageCullingPadding) return;
+      if (this.y - this.radius > game.mainPlayer.y + gsUnitHeight / 2 + imageCullingPadding) return;
+      if (this.x + this.radius < game.mainPlayer.x - gsUnitWidth / 2 - imageCullingPadding) return;
+      if (this.y + this.radius < game.mainPlayer.y - gsUnitHeight / 2 - imageCullingPadding) return;
+    }
     // noStroke();
     // fill(0);
     // textSize(12);
