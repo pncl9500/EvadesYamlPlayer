@@ -153,7 +153,8 @@ class Area{
     }
   }
   enter(player){
-    if (this.properties && this.properties.applies_lantern){
+    //only apply lantern if there is no ability 3 already
+    if (this.properties && this.properties.applies_lantern && player.ability3.constructor.name === "Ability"){
       player.ability3 = new Lantern();
       player.ability3.upgrade(player, true);
     }
