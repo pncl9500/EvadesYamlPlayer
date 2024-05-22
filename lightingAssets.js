@@ -68,7 +68,6 @@ class Torch{
       this.imageId %= this.imageSet.length;
       this.clock = 0;
     }
-    debugValue = this.imageSet[this.imageId];
     push();
     if (this.upsideDown){
       translate(this.x, this.y);
