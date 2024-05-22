@@ -2119,7 +2119,7 @@ class Phantom extends Mist{
 
 class FakePumpkin extends Enemy{
   constructor(x, y, angle, speed, radius){
-    super(x, y, angle, speed, radius, pal.nm.fake_pumpkin);
+    super(x, y, angle, 0, radius, pal.nm.fake_pumpkin);
     this.z = z.fakePumpkin;
     this.renderType = "imageOutline";
     this.image = "ent.pumpkin_off"
