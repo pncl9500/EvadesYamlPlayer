@@ -56,17 +56,23 @@ class Torch{
       "ent.torch-5",
       "ent.torch-6",
     ];
-    //guessed interval. not accurate but lets be honest who actually cares about the timing of each torch sprite
+    //guessed interval. not accurate (maybe it is? evades devs might have picked this number) but lets be honest who actually cares about the timing of each torch sprite
     //the answer is me i'll test and fix it later
     this.spriteInterval = 166.666;
     this.clock = Math.random() * this.spriteInterval;
+    this.radius = 18;
   }
   draw(){
+    if (settings.hideTorches) return;
+    if (this.x - this.radius > game.mainPlayer.x + gsUnitWidth / 2 + imageCullingPadding) return;
+    if (this.y - this.radius > game.mainPlayer.y + gsUnitHeight / 2 + imageCullingPadding) return;
+    if (this.x + this.radius < game.mainPlayer.x - gsUnitWidth / 2 - imageCullingPadding) return;
+    if (this.y + this.radius < game.mainPlayer.y - gsUnitHeight / 2 - imageCullingPadding) return;
     this.clock += dTime;
     if (this.clock > this.spriteInterval){
       this.imageId += 1;
       this.imageId %= this.imageSet.length;
-      this.clock = 0;
+      this.clock %= this.spriteInterval;
     }
     push();
     if (this.upsideDown){

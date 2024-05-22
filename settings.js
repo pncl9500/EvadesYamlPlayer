@@ -98,4 +98,5 @@ settings = {
 
   lightMapDownsample: 5,
   nightMode: false,
+  hideTorches : false,
 }

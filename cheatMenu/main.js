@@ -162,6 +162,8 @@ function setCheatMenuItems(){
             tog(11, 11, true, () => {settings.mouseAngleFix = true}, () => {settings.mouseAngleFix = false}, undefined, "Fix mouse movement so the player's angle points directly towards the mouse at all times. NOT accurate to vanilla evades."),]),
         row([txt("Fixed wallbounces:", 12), 
             tog(11, 11, true, () => {settings.fixedWallbounces = true}, () => {settings.fixedWallbounces = false}, undefined, "Make enemy wallbounces behave independently from the framerate. Unknown if it is accurate to vanilla evades, and it may look weird with high enemy speeds."),]),
+        row([txt("Hide torches:", 12), 
+            tog(11, 11, false, () => {settings.hideTorches = true}, () => {settings.hideTorches = false}, undefined, "Hide torches. Enable if framerate drops in areas with torches. Does not disable the light they produce."),]),
     txt("Quick Cheats", 20), bigLine(),
         row([txt("Change area:", 12), 
             btn("-40", 18, 12, () => {game.mainPlayer.changeAreaCheat(-40); game.mainPlayer.moveToAreaStart()}, "Move back 40 areas."),
