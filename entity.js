@@ -42,9 +42,9 @@ class Entity{
     let x = this.x - cameraFocusX;
     let y = this.y - cameraFocusY;
     let r = this.light;
-    x /= lightMapDownsample;
-    y /= lightMapDownsample;
-    r /= lightMapDownsample;
+    x /= settings.lightMapDownsample;
+    y /= settings.lightMapDownsample;
+    r /= settings.lightMapDownsample;
     r *= 2;
     x += lightMapWidth / 2;
     y += lightMapHeight / 2;

@@ -95,4 +95,6 @@ settings = {
   regularGameLagInterval: 190,
   regularGameLagMinLength: 40,
   regularGameLagMaxLength: 50,
+
+  lightMapDownsample: 8
 }

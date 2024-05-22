@@ -149,8 +149,8 @@ function draw() {
   game.draw();
   if (lighting !== 1){
     push();
-    scale(lightMapDownsample);
-    image(lightMap, cameraFocusX / lightMapDownsample - lightMapWidth / 2, cameraFocusY / lightMapDownsample - lightMapHeight / 2);
+    scale(settings.lightMapDownsample);
+    image(lightMap, cameraFocusX / settings.lightMapDownsample - lightMapWidth / 2, cameraFocusY / settings.lightMapDownsample - lightMapHeight / 2);
     pop();
   }
   ui.draw();
@@ -163,13 +163,6 @@ function draw() {
   }
   drawDebugValueText();
   
-  doCamTransform(cameraFocusX, cameraFocusY, 1);
-  scale(lightMapDownsample);
-  noFill();
-  stroke(255);
-  strokeWeight(20);
-  rect(lightMap, cameraFocusX / lightMapDownsample - lightMapWidth / 2, cameraFocusY / lightMapDownsample - lightMapHeight / 2, lightMapWidth, lightMapHeight);
-  noStroke();
   //background(0);
   //drawPretentiousLogo(windowWidth / 2, windowHeight / 2, 250, frameCount * PI / 180);
 }

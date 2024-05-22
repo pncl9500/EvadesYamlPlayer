@@ -47,8 +47,6 @@ var cameraFocusY = 0;
 /**
  * Creates the canvas and gets canvas aspect ratio
  */
-
-var lightMapDownsample = 8;
 function initCanvas(){
   createCanvas(windowWidth, windowHeight);
   lightMap = newLightMap();
@@ -93,8 +91,8 @@ function windowResized(){
 let lightMapWidth;
 let lightMapHeight
 function newLightMap(){
-  lightMapWidth  = ceil(gsPixelWidth / lightMapDownsample / pixelToUnitRatio);
-  lightMapHeight = ceil(gsPixelHeight / lightMapDownsample / pixelToUnitRatio);
+  lightMapWidth  = ceil(gsPixelWidth / settings.lightMapDownsample / pixelToUnitRatio);
+  lightMapHeight = ceil(gsPixelHeight / settings.lightMapDownsample / pixelToUnitRatio);
   return createGraphics(lightMapWidth, lightMapHeight);
 }
 
