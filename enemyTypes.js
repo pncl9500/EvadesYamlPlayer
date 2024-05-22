@@ -2079,12 +2079,15 @@ class Mist extends Enemy{
     this.detectionRadius = 200;
     this.fadeSpeed = 0.05;
   }
+  playerValid(player){
+    return !player.detectable;
+  }
   behavior(area, players){
     this.light = 3 * this.radius * this.brightness;
     
     this.inProximity = false;
     for (let i in players){
-      if (!players[i].detectable) continue;
+      if (this.playerValid(players[i])) continue;
       if (dst(players[i], this) < this.detectionRadius + players[i].getRadius()){
         this.inProximity = true;
       }
@@ -2116,6 +2119,9 @@ class Phantom extends Mist{
       this.brightness += this.fadeSpeed * tFix;
       if (this.brightness >= 1) this.brightness = 1;
     }
+  }
+  playerValid(player){
+    return !player.detectable && !player.hasEffect("SafeZoneEffect");
   }
 }
 

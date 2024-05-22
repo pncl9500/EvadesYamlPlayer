@@ -96,6 +96,6 @@ settings = {
   regularGameLagMinLength: 40,
   regularGameLagMaxLength: 50,
 
-  lightMapDownsample: 8,
+  lightMapDownsample: 5,
   nightMode: false,
 }
