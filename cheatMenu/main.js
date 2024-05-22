@@ -200,7 +200,14 @@ function setCheatMenuItems(){
             btn("Clear players", null, 12, () => {clearDummyPlayers()}, "Delete all players except for the currently controlled one."),
             btn("Cycle players", null, 12, () => {game.cycleMainPlayer()}, "Change the main player to the next player. Hotkey: [Q]"),]),
         row([txt("Edit players:", 12), 
-            btn("Open list", 37, 12, () => {queueCheatMenuChange(getPlayerSelectorMenu())}, "Select a player to edit."),]),
+            btn("Open list", 37, 12, () => {queueCheatMenuChange(getPlayerSelectorMenu())}, "Select a player to edit."),
+            btn("Cancel all macros", null, 12, () => {
+              for (let i = 0; i < game.players.length; i++){
+                game.players[i].ab1macro = false;
+                game.players[i].ab2macro = false;
+                game.players[i].ab3macro = false;
+              }
+            }, "Turn off all macros."),]),
         row([txt("Change controls on cycle:", 12), 
             tog(11, 11, true, () => {settings.changeCtrlsOnCycle = true}, () => {settings.changeCtrlsOnCycle = false}, () => {return settings.changeCtrlsOnCycle;}, "Automatically transfer the controls of the current main player to the new main player when cycling main players. Disable if you're editing controls and want to keep your changes consistent."),]),
         row([txt("Remove dead players:", 12), 
