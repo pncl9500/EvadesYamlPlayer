@@ -372,8 +372,6 @@ function setCheatMenuItems(){
         tog(11, 11, false, () => {settings.mirrorMap = true}, () => {settings.mirrorMap = false}, undefined, "Make the minimap accurately render the entire area."),]),
       row([txt("Agar mode:", 12), 
         tog(11, 11, false, () => {settings.agarMode = true}, () => {settings.agarMode = false}, undefined, "Become larger whenever you collect a pellet."),]),
-      row([txt("Secret lighting quality:", 12), 
-          btn("Ambient", null, 12, () => {lightMapDownsample = 192; lightMap = newLightMap()}, "Make dark areas have so few pixels it loops back around to looking cool."),]),
       row([txt("Freaky mode:", 12), 
         tog(11, 11, false, () => {}, () => {}, undefined, "Make the game freaky."),]),
     txt("Info", 20), bigLine(),
