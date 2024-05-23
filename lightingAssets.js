@@ -192,7 +192,6 @@ class FlashlightAura extends LockedAura{
     if (Math.abs(a - b) < this.rotationSpeed){
       this.dir = targetDir;
     }
-    debugValue = targetDir;
   }
 }
 
