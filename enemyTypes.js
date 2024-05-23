@@ -1955,37 +1955,60 @@ class NegativeMagneticGhost extends Enemy{
 }
 
 
-// class Cactus extends Enemy{
-//   constructor(x, y, angle, speed, radius){
-//     super(x, y, angle, speed, radius, pal.nm.cactus);
-//     this.inherentlyHarmless = true;
-//     this.pushTime = 200;
-//     this.staticRadius = radius;
-//   }
-//   behavior(area, players){
-//     this.baseRadius += tFix * this.staticRadius / 2 / 2000 * 30;
-//     if(this.baseRadius > this.staticRadius) this.baseRadius = this.staticRadius;
-//     for (let i in players){
-//       if (circleCircle(this, players[i]) && !players[i].invincible) {
-//         player.gainEffect(new CactusKnockbackEffect(this, this.pushTime, this.radius * 8 + 50))
-//         this.baseRadius = this.staticRadius / 2;
-//       }
-//     }
-//   }
-// }
+class Cactus extends Enemy{
+  constructor(x, y, angle, speed, radius){
+    super(x, y, angle, speed, radius, pal.nm.cactus);
+    this.inherentlyHarmless = true;
+    this.pushTime = 200;
+    this.staticRadius = radius;
+  }
+  behavior(area, players){
+    this.baseRadius += tFix * this.staticRadius / 2 / 2000 * 30;
+    if(this.baseRadius > this.staticRadius) this.baseRadius = this.staticRadius;
+    for (let i in players){
+      if (circleCircle(this, players[i]) && !players[i].invincible) {
+        players[i].gainEffect(new CactusKnockbackEffect(this, this.pushTime, this.radius * 8 + 50))
+        this.baseRadius = this.staticRadius / 2;
+      }
+    }
+  }
+}
 
-// class CactusKnockbackEffect extends Effect{
-//   constructor(enemy, pushTime, enemyRadius){
-//     super(pushTime, getEffectPriority("CactusKnockbackEffect"), true, true);
-//     this.pushTime = pushTime;
-//     this.enemy = enemy;
-//     this.enemyRadius = enemyRadius;
-//   }
-//   doEffect(target){
-//     target.x += this.knockbackX * target.effectVulnerability;
-//     target.y += this.knockbackY * target.effectVulnerability;
-//   }
-// }
+class CactusKnockbackEffect extends Effect{
+  constructor(enemy, pushTime, enemyRadius){
+    super(-1, getEffectPriority("CactusKnockbackEffect"), true, true);
+    this.pushTime = pushTime;
+    this.enemy = enemy;
+    this.enemyRadius = enemyRadius;
+  }
+  gainEffect(target){
+    let dist = dst(target, this.enemy) - target.radius;
+    let distRemaining = this.enemyRadius - dist;
+    let angle = Math.atan2(this.enemy.y - target.y, this.enemy.x - target.x) - Math.PI;
+    let yRemaining = Math.sin(angle) * distRemaining;
+    let xRemaining = Math.cos(angle) * distRemaining;
+    let ticksUntilFinished = this.pushTime / tFix;
+    this.knockbackX = xRemaining / ticksUntilFinished;
+    this.knockbackY = yRemaining / ticksUntilFinished;
+    this.multiplier = target.effectVulnerability;
+    this.knockbackX *= 32;
+    this.knockbackY *= 32;
+  }
+  doEffect(target){
+    if (this.pushTime > 0){
+      target.x += this.knockbackX * this.multiplier;
+      target.y += this.knockbackY * this.multiplier;
+      this.pushTime -= dTime;
+      if (this.multiplier > 0){
+        this.multiplier -= 0.17 * tFix;
+      }
+      if (this.multiplier < 0) this.multiplier = 0;
+    } else if (this.pushTime < 0){
+      this.pushTime = 0;
+      this.toRemove = true;
+    }
+  }
+}
 
 class Snowman extends Enemy{
   constructor(x, y, angle, speed, radius){

@@ -20,7 +20,7 @@ function getEnemyFromSpawner(x, y, d, enemyType, spawner, spawnIndex, zone){
     case "seedling": return new Seedling(x, y, d, s, r);
     case "fire_trail": return new FireTrail(x, y, d, s, r);
     case "cycling": return new Cycling(x, y, d, s, r);
-    //case "cactus": return new Cactus(x, y, d, s, r);
+    case "cactus": return new Cactus(x, y, d, s, r);
 
     //wall hitters
     case "crumbling": return new Crumbling(x, y, d, s, r);

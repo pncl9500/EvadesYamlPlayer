@@ -10,8 +10,8 @@ lunging
 
 -=+O0O+=- CC2 EVENT HORIZON -=+O0O+=-
 
-electric enemies
 prediction sniper
+electric enemies
 cc2 elementals
 cybot
 cc2h elementals
