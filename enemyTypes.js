@@ -2220,3 +2220,80 @@ class Pumpkin extends Enemy{
     }
   }
 }
+
+class Tree extends Enemy{
+  constructor(x, y, angle, speed, radius){
+    super(x, y, angle, speed, radius, pal.nm.tree);
+    this.staticSpeed = speed;
+    this.releaseTime = 4000;
+    this.clock = Math.random() * 3500;
+    this.clock2 = Math.random() * 500;
+    this.clock3 = 0;
+    this.waiting = true;
+    this.shake = false;
+    this.currentXv = this.xv;
+    this.currentYv = this.yv;
+    this.preShakeXv = this.xv;
+    this.preShakeYv = this.yv;
+  }
+  behavior(area, players){
+    this.clock += dTime;
+    this.clock2 += dTime;
+    this.clock3 += dTime;
+    if (this.clock > this.releaseTime){
+      this.spawnBullets(area);
+      this.clock %= this.releaseTime;
+      this.xv = this.preShakeXv;
+      this.yv = this.preShakeYv;
+      this.shake = false;
+    }
+    if (this.xv !== 0 && this.yv !== 0){
+      this.currentXv = this.xv;
+      this.currentYv = this.yv;
+    }
+    if (this.clock2 > 500){
+      this.waiting = !this.waiting;
+      this.clock2 %= 500;
+    }
+    if (this.clock > 3500){
+      if (!this.shake){
+        this.preShakeXv = this.currentXv;
+        this.preShakeYv = this.currentYv
+      }
+      this.shake = true;
+      if (this.clock3 > 50){
+        this.xv = -this.currentXv;
+        this.yv = -this.currentYv;
+        this.clock3 = 0;
+      }
+    } else if (this.waiting){
+      this.xv = 0;
+      this.yv = 0;
+    } else {
+      this.xv = this.currentXv;
+      this.yv = this.currentYv;
+      let deg = (this.clock2 / 5 + 90) * Math.PI / 180;
+      this.speedMultiplier = Math.abs(Math.sin(deg));
+      if (this.speedMultiplier > 1.5) this.speedMultiplier = 1.5;
+    }
+  }
+  spawnBullets(area){
+    let count = Math.floor(Math.random() * 6) + 2;
+    for (let i = 0; i < count; i++) {
+      let tb = new TreeBullet(this.x, this.y, i * Math.PI / (count / 2));
+      this.createBullet(tb);
+    }
+  }
+}
+
+class TreeBullet extends Bullet{
+  constructor(x, y, angle){
+    super(x, y, angle, 6, 12, "#035b12", 2000);
+    this.dir = 6 / 150;
+  }
+  behavior(area, players) {
+    this.velToAngle();
+    this.angle += this.dir * tFix;
+    this.angleToVel();
+  }
+}

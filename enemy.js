@@ -46,6 +46,10 @@ class Enemy extends Entity{
     this.disabled = false;
     this.alphaMultiplier = 1;
   }
+  createBullet(bullet){
+    bullet.parentZone = this.parentZone;
+    this.parentZone.parentRegion.areas[this.parentZone.parentAreaNum].addEnt(bullet);
+  }
   velToAngle(){
     this.angle = atan2(this.yv, this.xv);
   }
