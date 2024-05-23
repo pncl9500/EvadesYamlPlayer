@@ -2327,9 +2327,13 @@ class Cycling extends Enemy{
       this.changed = true;
       try {
         this.self.toRemove = true;
+        this.x = this.self.x;
+        this.y = this.self.y;
+        this.angle = this.self.angle;
       } catch (error) {
 
       }
+      this.angleToVel();
       this.self = getEnemyFromSpawner(this.x, this.y, this.angle, random(this.enemyTypes), {radius: this.baseRadius, speed: this.baseSpeed}, 0, this.parentZone);
       this.self.parentZone = this.parentZone;
       area.addEnt(this.self);
