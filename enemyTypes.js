@@ -2128,7 +2128,7 @@ class Phantom extends Mist{
 class FakePumpkin extends Enemy{
   constructor(x, y, angle, speed, radius){
     super(x, y, angle, 0, radius, pal.nm.fake_pumpkin);
-    this.z = z.fakePumpkin + Math.random() * this.z.randEpsilon;
+    this.z = z.fakePumpkin;
     this.renderType = "imageOutline";
     this.image = "ent.pumpkin_off"
     this.inherentlyHarmless = true;
@@ -2167,11 +2167,11 @@ class Pumpkin extends Enemy{
     return player;
   }
   behavior(area, players){
+    this.z = this.image === "ent.pumpkin_on" ? this.initialZ : z.fakePumpkin;
     if (!this.active){
       this.speedMultiplier = 0;
       this.light = 0;
       this.harmless = true;
-      this.z = z.fakePumpkin + Math.random() * this.z.randEpsilon;
     }
     let min = this.activationRange;
     let index;
@@ -2188,7 +2188,6 @@ class Pumpkin extends Enemy{
       this.active = true;
     }
     if (this.active){
-      this.z = this.initialZ;
       this.light = this.tempRadius * this.radiusMultiplier + 30;
       this.clock += dTime;
       if (this.clock > 3000){
