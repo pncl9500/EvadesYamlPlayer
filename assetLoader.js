@@ -105,6 +105,7 @@ function loadAssets(){
     "ab.pit": loadImg("imageAssets/ab/pit.png", "ab.pit"),
 
     "ab.lantern": loadImg("imageAssets/ab/lantern.png", "ab.lantern"),
+    "ab.flashlight": loadImg("imageAssets/ab/flashlight.png", "ab.flashlight"),
   }
 }
 

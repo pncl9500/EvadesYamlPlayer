@@ -149,7 +149,7 @@ class FlashlightSpawner extends Entity{
 
 class Flashlight extends ToggleAbility{
   constructor(){
-    super(1, 0, 1, "ab.lantern");
+    super(1, 0, 1, "ab.flashlight");
     this.aura = new FlashlightAura({x: 0, y: 0, lastDir: 0});
   }
   update(){
