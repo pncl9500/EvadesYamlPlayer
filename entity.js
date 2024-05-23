@@ -43,8 +43,6 @@ class Entity{
     if (this.y - this.radius > game.mainPlayer.y + gsUnitHeight / 2 + lightingCullingPadding) return;
     if (this.x + this.radius < game.mainPlayer.x - gsUnitWidth / 2 - lightingCullingPadding) return;
     if (this.y + this.radius < game.mainPlayer.y - gsUnitHeight / 2 - lightingCullingPadding) return;
-    lightMap.erase();
-    lightMap.noStroke();
     drawLightGradient(this.x, this.y, settings.allGlowMode ? max(this.light, 60) : this.light)
   }
   checkPlayerCollision(area, players){

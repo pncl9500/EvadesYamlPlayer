@@ -9,6 +9,8 @@ function drawLightGradient(x0, y0, r0){
   x += lightMapWidth / 2;
   y += lightMapHeight / 2;
 
+  lightMap.erase();
+  lightMap.noStroke();
   lightMap.fill(255, floor(255 / r) * 2);
   for (let i = 0; i < r; i++){
     lightMap.ellipse(x, y, i);
@@ -49,8 +51,6 @@ class LightRegion{
     if (this.y - this.radius > game.mainPlayer.y + gsUnitHeight / 2 + lightingCullingPadding) return;
     if (this.x + this.radius < game.mainPlayer.x - gsUnitWidth / 2 - lightingCullingPadding) return;
     if (this.y + this.radius < game.mainPlayer.y - gsUnitHeight / 2 - lightingCullingPadding) return;
-    lightMap.erase();
-    lightMap.noStroke();
     drawLightGradient(this.x, this.y, this.radius);
   }
 }
@@ -104,8 +104,6 @@ class Torch{
     if (this.y - this.radius > game.mainPlayer.y + gsUnitHeight / 2 + lightingCullingPadding) return;
     if (this.x + this.radius < game.mainPlayer.x - gsUnitWidth / 2 - lightingCullingPadding) return;
     if (this.y + this.radius < game.mainPlayer.y - gsUnitHeight / 2 - lightingCullingPadding) return;
-    lightMap.erase();
-    lightMap.noStroke();
     drawLightGradient(this.x, this.y, this.radius);
   }
 }
