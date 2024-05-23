@@ -4,7 +4,6 @@ todo (in no particular order):
 frost giant
 charging
 lead sniper
-cactus
 stalactite
 lunging
 
