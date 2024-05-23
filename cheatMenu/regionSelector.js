@@ -2,13 +2,13 @@ outdatedMapNames = [
   
 ]
 
-extrapolatedMapNames = [
-  "Dusty Depths",
-  "Research Lab",
-  "Withering Wasteland",
-  "Burning Bunker",
-  "Burning Bunker Hard",
-  "Shifting Sands",
+poorlyExtrapolatedMapNames = [
+  // "Dusty Depths", - only change is pellet count which i think is okay
+  // "Research Lab", - very confident its accurate
+  // "Withering Wasteland", - very confident its accurate
+  // "Burning Bunker", - i have no idea, its not really an "outdated file" moreso something went wrong with the export of the switch_interval property. I think my fixes are okay enough
+  // "Burning Bunker Hard", - only change is pellet count which i think is okay
+  // "Shifting Sands", - if there is a difference its pretty much unnoticeable
 ]
 
 unimplementedGimmickMapNames = [
@@ -128,7 +128,7 @@ function getRegionSelectorMenu(){
       but.hoveredColor = {r: 90, g: 90, b: 40};
       items.push(but);
     }
-    if (extrapolatedMapNames.includes(game.regions[i].name)){
+    if (poorlyExtrapolatedMapNames.includes(game.regions[i].name)){
       let but = btn(" ! ", null, 12, () => {}, `${game.regions[i].name}'s map file is a modified version of an outdated file and has not been obtained from a developer. May not be fully accurate.`);
       but.color = {r: 255, g: 255, b: 220};
       but.hoveredColor = {r: 90, g: 90, b: 40};
