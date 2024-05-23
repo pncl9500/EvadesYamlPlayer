@@ -1,5 +1,5 @@
 outdatedMapNames = [
-  "Burning Bunker Hard",
+  
 ]
 
 extrapolatedMapNames = [
@@ -7,6 +7,7 @@ extrapolatedMapNames = [
   "Research Lab",
   "Withering Wasteland",
   "Burning Bunker",
+  "Burning Bunker Hard",
   "Shifting Sands",
 ]
 
