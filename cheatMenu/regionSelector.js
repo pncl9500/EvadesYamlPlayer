@@ -133,7 +133,7 @@ function getRegionSelectorMenu(){
   }
   list.push(txt("", 8));
   list.push(txt(`Total missing enemies (${totalMissingEnemies.length}/${totalEnemyTypes}, ${round((totalMissingEnemies.length/totalEnemyTypes) * 1000) / 10}% missing, ${totalEnemyTypes- totalMissingEnemies.length}/${totalEnemyTypes} complete, ${round(((totalEnemyTypes - totalMissingEnemies.length)/totalEnemyTypes) * 1000) / 10}% complete):`, 12));
-  totalMissingEnemies.push("ring_sniper")
+  totalMissingEnemies.push("ring_sniper");
   for (let i in totalMissingEnemies){
     list.push(txt(totalMissingEnemies[i], 8));
   }
