@@ -3,9 +3,14 @@ todo (in no particular order):
 
 frost giant
 charging
-lead sniper
 stalactite
 lunging
+fix friction
+lead sniper
+walls
+flashlight
+fix pumpkin z layering
+fix pumpkin targetting safe zone players for 1 frame
 
 -=+O0O+=- CC2 EVENT HORIZON -=+O0O+=-
 
@@ -18,17 +23,9 @@ ring sniper
 cybot hard
 
 
-missing map properties
-
 importing map files
 
-fix friction
 
-walls
-
-flashlight
-
-lantern
 
 endless regions
 
@@ -62,9 +59,6 @@ fix bugs relating to changing hero type and stuff
 
 change all p5 functions that have Math. version into Math. version because the Math. versions are faster
 
-fix pumpkin z layering
-
-fix pumpkin targetting safe zone players for 1 frame
 
 increase light gradient precision through alpha manipulation
 
