@@ -25,12 +25,26 @@ function drawImageRect(imgCode, x, y, w, h){
   }
 }
 
+function drawImageUnscaled(imgCode, x, y, w){
+  if (loadedAssets.includes(imgCode)){
+    let width = w * 2;
+    let height = width * (im[imgCode].height / im[imgCode].width);
+    image(im[imgCode], x - width / 2, y - height / 2, width, height);
+  } else {
+    noStroke();
+    fill(60);
+    rect(x, y, width, width);
+  }
+}
+
 function loadAssets(){
   im = {
     "missingImage": loadImg("imageAssets/missingImage.png", "missingImage"),
 
     "ent.pumpkin_off": loadImg("imageAssets/ent/pumpkin_off.png", "ent.pumpkin_off"),
     "ent.pumpkin_on": loadImg("imageAssets/ent/pumpkin_on.png", "ent.pumpkin_on"),
+
+    "ent.flashlight_item": loadImg("imageAssets/ent/flashlight_item.png", "ent.flashlight_item"),
 
     
     "ab.flow": loadImg("imageAssets/ab/flow.png", "ab.flow"),

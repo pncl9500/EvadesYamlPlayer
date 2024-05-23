@@ -172,6 +172,9 @@ class Entity{
       case "image":
         drawImage(this.image, this.x, this.y, this.radius);
         break;
+      case "imageUnscaled":
+        drawImageUnscaled(this.image, this.x, this.y, this.radius);
+        break;
       case "imageOutline":
         noFill();
         stroke(0, (this.tempColor.a ?? 255) * this.alphaMultiplier);
@@ -184,7 +187,7 @@ class Entity{
       default:
         break;
     }
-    if (!(this.renderType === "image")){
+    if (!(this.renderType === "image") && !(this.renderType === "imageUnscaled")){
       if (settings.squareMode){
         rect(this.x - this.radius, this.y - this.radius, this.radius * 2, this.radius * 2)
       } else {

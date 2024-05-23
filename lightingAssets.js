@@ -106,3 +106,13 @@ class Lantern extends ContinuousToggleAbility{
     player.light = this.range;
   }
 }
+
+class FlashlightSpawner extends Entity{
+  constructor(x, y){
+    super(x, y, 16, "#000000", z.flashlightSpawner, "imageUnscaled");
+    this.image = "ent.flashlight_item";
+  }
+  drawOnMap(){
+    
+  }
+}

@@ -13,7 +13,7 @@ class Area{
     this.entities = [];
     this.walls = [];
     this.staticAssets = [];
-    this.flashlights = [];
+    this.leftoverAssets = [];
     
     this.addAssets(assets);
 
@@ -237,6 +237,12 @@ class Area{
         !noSpawn && this.zones[i].initSpawners();
       }
     }
+    for (let i in this.leftoverAssets){
+      let a = this.leftoverAssets[i];
+      if (a.type === "flashlight_spawner"){
+        this.entities.push(new FlashlightSpawner(a.x, a.y));
+      }
+    }
   }
   addAssets(assets){
     for (let i in assets){
@@ -246,6 +252,7 @@ class Area{
         case "light_region": this.staticAssets.push(new LightRegion(a.x, a.y, a.width, a.height)); break;
         case "torch": this.staticAssets.push(new Torch(a.x, a.y, a.upside_down)); break;
         default:
+          this.leftoverAssets.push(a);
           break;
       }
     }

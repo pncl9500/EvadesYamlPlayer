@@ -1,7 +1,8 @@
 //z layer of every object
 z = {
+  flashlightSpawner: -0.5,
   fakePumpkin: -0.5,
-  pellet: 0,
+  pellet: 0.5,
   player: 1,
   mainPlayer: 2,
   genericProjectile: 0.5,
