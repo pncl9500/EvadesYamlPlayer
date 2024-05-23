@@ -14,11 +14,25 @@ function drawLightGradient(x0, y0, r0){
     lightMap.ellipse(x, y, i);
   }
   lightMap.noErase();
+}
 
+function drawLightArc(x0, y0, r0, ang, arcWidth){
+  let x = x0 - cameraFocusX;
+  let y = y0 - cameraFocusY;
+  let r = r0;
+  x /= settings.lightMapDownsample;
+  y /= settings.lightMapDownsample;
+  r /= settings.lightMapDownsample;
+  r *= 2;
+  x += lightMapWidth / 2;
+  y += lightMapHeight / 2;
 
-  //test
-  // lightMap.fill(0);
-  // lightMap.ellipse(x, y, 2);
+  lightMap.erase();
+  lightMap.fill(255, floor(255 / r) * 2);
+  for (let i = 0; i < r; i++){
+    lightMap.arc(x, y, i, i, ang - arcWidth / 2, ang + arcWidth / 2);
+  }
+  lightMap.noErase();
 }
 
 class LightRegion{
@@ -111,8 +125,75 @@ class FlashlightSpawner extends Entity{
   constructor(x, y){
     super(x, y, 16, "#000000", z.flashlightSpawner, "imageUnscaled");
     this.image = "ent.flashlight_item";
+    this.downTime = 1000;
+    this.clock = 0;
   }
   drawOnMap(){
     
   }
+  update(){
+    this.clock += dTime;
+    for (let i = 0; i < game.players.length; i++){
+      if (this.clock > this.downTime && circleCircle(game.players[i], this) && game.players[i].ability3.constructor.name === "Ability"){
+        this.clock = 0;
+        game.players[i].ability3 = new Flashlight();
+        game.players[i].ability3.upgrade(game.players[i], true);
+      }
+    }
+  }
+  draw(){
+    this.renderType = (this.clock < this.downTime) ? "none" : "imageUnscaled";
+    super.draw();
+  }
 }
+
+class Flashlight extends ToggleAbility{
+  constructor(){
+    super(1, 0, 1, "ab.lantern");
+    this.aura = new FlashlightAura({x: 0, y: 0, lastDir: 0});
+  }
+  update(){
+    this.aura.update();
+  }
+  toggleOn(player, players, pellets, enemies, miscEnts, region, area){
+    this.aura.parent = player;
+    player.addAura(this.aura);
+  }
+  toggleOff(player, players, pellets, enemies, miscEnts, region, area){
+    this.aura.toRemove = true;
+  }
+  remove(){
+    this.aura.toRemove = true;
+  }
+}
+
+class FlashlightAura extends LockedAura{
+  constructor(parent){
+    super(parent, 0, "#00000000", 0);
+    this.dir = parent.lastDir;
+    this.rotationSpeed = PI/12;
+  }
+  drawLight(){
+    drawLightArc(this.parent.x, this.parent.y, 480, this.dir, 35 * PI/180);
+  }
+  update(){
+    let targetDir = (this.parent.lastDir + 2 * PI) % (2 * PI);
+    this.dir = (this.dir + 2 * PI) % (2 * PI);
+    let turnDirection = -1;
+    let a = this.dir;
+    let b = targetDir;
+    if (a < b && b - a <= PI){
+      turnDirection = 1;
+    }
+    if (a > b && a - b > PI){
+      turnDirection = 1;
+    }
+    this.dir += this.rotationSpeed * turnDirection * tFix;
+    if (Math.abs(a - b) < this.rotationSpeed){
+      this.dir = targetDir;
+    }
+    debugValue = targetDir;
+  }
+}
+
+

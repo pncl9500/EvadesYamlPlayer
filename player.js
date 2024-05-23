@@ -532,6 +532,7 @@ class Player extends Entity{
   }
   drawAuras(){
     for (var i = 0; i < this.auras.length; i++){
+      this.auras[i].drawLight();
       this.auras[i].draw();
     }
   }
@@ -878,11 +879,13 @@ class Player extends Entity{
     if (this.areaNum === 0){
       //remove magnet if player has magnet and is on area 1
       if (this.ability3.constructor.name.startsWith("Magnetism")){
+        this.ability3.remove();
         this.ability3 = new Ability();
       }
       //dont give magnet on area 1
       return;
     }
+    this.ability3.remove();
     this.ability3 = this.magnetismDirection === 1 ? new MagnetismDown() : new MagnetismUp();
   }
 }
