@@ -450,7 +450,6 @@ class AlertBox extends UIpanel{
     if (infiniteMaps.includes(region.name)){ this.alerts.push("Missing mechanic in " + region.name + ": infinite map"); }
     if (wallMaps.includes(region.name)){ this.alerts.push("Missing mechanic in " + region.name + ": walls"); }
     if (requirementMaps.includes(region.name)){ this.alerts.push("Missing mechanic in " + region.name + ": blocked teleports"); }
-    if (allImmuneMaps.includes(region.name)){ this.alerts.push("Missing mechanic in " + region.name + ": all enemies immune"); }
     if (stellarSquareMaps.includes(region.name)){ this.alerts.push("Missing mechanic in " + region.name + ": is stellar square"); }
     if (levelRemovalMaps.includes(region.name)){ this.alerts.push("Missing mechanic in " + region.name + ": level removal"); }
 

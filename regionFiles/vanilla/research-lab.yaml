@@ -1,6 +1,7 @@
 name: Research Lab
 properties:
   warping_disabled: true
+  all_enemies_immune: true
   pellet_count: 0
 areas:
   - properties:

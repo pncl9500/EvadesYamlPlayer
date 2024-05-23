@@ -22,7 +22,6 @@ unimplementedGimmickMapNames = [
   "Frozen Fjord",
   "Frozen Fjord Hard",
   "Dusty Depths",
-  "Research Lab",
 ]
 
 infiniteMaps = [
@@ -44,10 +43,6 @@ requirementMaps = [
   //technically pyramid and halls too, but the requirements don't affect the gameplay of the map, so we might as well
   //exclude them. also, it would be annoying for players if we *did* give these teleports functioning requirements, whereas
   //in cyber castle maps it is somewhat expected.
-]
-
-allImmuneMaps = [
-  "Research Lab",
 ]
 
 levelRemovalMaps = [

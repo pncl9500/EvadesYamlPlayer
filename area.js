@@ -183,6 +183,14 @@ class Area{
   load(throughTp){
     this.loaded = true;
     this.spawnBaseEnts();
+    if (this.parent.properties && this.parent.properties.all_enemies_immune || this.properties && this.properties.all_enemies_immune){
+      //make all enemies immune
+      for (let i in this.entities){
+        if (this.entities[i].mainType === "enemy"){
+          this.entities[i].immune = true;
+        }
+      }
+    }
     if (this.parent.areas.indexOf(this) === 0 && throughTp){
       this.scanForUnknownEnemyTypes();
     }
