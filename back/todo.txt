@@ -10,6 +10,7 @@ lead sniper
 walls
 fix pumpkin targeting safe zone players for 1 frame
 fix pumpkin bouncing off walls incorrectly
+snow
 
 -=+O0O+=- CC2 EVENT HORIZON -=+O0O+=-
 
