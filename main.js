@@ -72,14 +72,14 @@ function draw() {
   if (settings.nightMode) lighting = 0;
   lightMap.clear();
   lightMap.background(51, 255 * (1 - lighting));
-  // if (settings.regionBackground){
-  //   if (game.mainPlayer.area.parent.hasOwnProperty("properties") && game.mainPlayer.area.parent.properties.hasOwnProperty("background_color") && !(game.mainPlayer.area.hasOwnProperty("properties") && game.mainPlayer.area.properties !== undefined && game.mainPlayer.area.properties.hasOwnProperty("background_color"))){
-  //     lightMap.background(game.mainPlayer.area.parent.properties.background_color[0], game.mainPlayer.area.parent.properties.background_color[1], game.mainPlayer.area.parent.properties.background_color[2], floor(game.mainPlayer.area.parent.properties.background_color[3] * 0.3));
-  //   }
-  //   if (game.mainPlayer.area.hasOwnProperty("properties") && game.mainPlayer.area.properties !== undefined && game.mainPlayer.area.properties.hasOwnProperty("background_color")){
-  //     lightMap.background(game.mainPlayer.area.properties.background_color[0], game.mainPlayer.area.properties.background_color[1], game.mainPlayer.area.properties.background_color[2], floor(game.mainPlayer.area.properties.background_color[3] * 0.3));
-  //   }
-  // }
+  if (settings.regionBackground){
+    if (game.mainPlayer.area.parent.hasOwnProperty("properties") && game.mainPlayer.area.parent.properties.hasOwnProperty("background_color") && !(game.mainPlayer.area.hasOwnProperty("properties") && game.mainPlayer.area.properties !== undefined && game.mainPlayer.area.properties.hasOwnProperty("background_color"))){
+      lightMap.background(game.mainPlayer.area.parent.properties.background_color[0], game.mainPlayer.area.parent.properties.background_color[1], game.mainPlayer.area.parent.properties.background_color[2], floor(game.mainPlayer.area.parent.properties.background_color[3] * 0.3));
+    }
+    if (game.mainPlayer.area.hasOwnProperty("properties") && game.mainPlayer.area.properties !== undefined && game.mainPlayer.area.properties.hasOwnProperty("background_color")){
+      lightMap.background(game.mainPlayer.area.properties.background_color[0], game.mainPlayer.area.properties.background_color[1], game.mainPlayer.area.properties.background_color[2], floor(game.mainPlayer.area.properties.background_color[3] * 0.3));
+    }
+  }
   if (deltaTime > timeCap){
     tFix = 0;
     deltaTime = 0;
