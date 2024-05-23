@@ -8,12 +8,8 @@ lunging
 fix friction
 lead sniper
 walls
-flashlight
-fix pumpkin z layering
 fix pumpkin targeting safe zone players for 1 frame
 fix pumpkin bouncing off walls incorrectly
-fix pumpkin
-FIX PUMPKIN
 
 -=+O0O+=- CC2 EVENT HORIZON -=+O0O+=-
 
