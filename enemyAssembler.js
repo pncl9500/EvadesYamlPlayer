@@ -19,6 +19,7 @@ function getEnemyFromSpawner(x, y, d, enemyType, spawner, spawnIndex, zone){
     case "flower": return new Flower(x, y, d, s, r, property("growth_multiplier"));
     case "seedling": return new Seedling(x, y, d, s, r);
     case "fire_trail": return new FireTrail(x, y, d, s, r);
+    case "cycling": return new Cycling(x, y, d, s, r);
     //case "cactus": return new Cactus(x, y, d, s, r);
 
     //wall hitters

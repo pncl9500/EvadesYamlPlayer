@@ -2296,3 +2296,51 @@ class TreeBullet extends Bullet{
     this.angleToVel();
   }
 }
+
+class Cycling extends Enemy{
+  constructor(x, y, angle, speed, radius){
+    super(x, y, angle, speed, radius, pal.nm.cycling);
+    this.changed = false;
+    this.changeInterval = 3000;
+    this.clock = 0;
+    this.enemyTypes = [
+      "normal",
+      "homing",
+      "slowing",
+      "draining",
+      "sizing",
+      "freezing",
+      "disabling",
+      "enlarging",
+      "immune",
+      "corrosive",
+      "toxic",
+    ]
+    this.self;
+    this.baseRadius = radius;
+    this.baseSpeed = speed;
+  }
+  behavior(area, players){
+    this.clock += dTime;
+    if (this.clock > this.changeInterval){
+      this.clock %= this.changeInterval;
+      this.changed = true;
+      try {
+        this.self.toRemove = true;
+      } catch (error) {
+
+      }
+      this.self = getEnemyFromSpawner(this.x, this.y, this.angle, random(this.enemyTypes), {radius: this.baseRadius, speed: this.baseSpeed}, 0, this.parentZone);
+      this.self.parentZone = this.parentZone;
+      area.addEnt(this.self);
+    }
+    if (this.changed){
+
+    }
+  }
+  draw(){
+    if (!this.changed){
+      super.draw();
+    }
+  }
+}
