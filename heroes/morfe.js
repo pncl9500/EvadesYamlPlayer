@@ -305,7 +305,7 @@ class MinimizeEffect extends Effect{
     target.speedMultiplier *= 0.25;
     target.radiusMultiplier *= 0.5; 
   }
-  removeEffect(target){
+  removeEffectLate(target){
     target.gainEffect(new SizeRecoveryEffect(0.5, 2500));
   }
 }
@@ -315,14 +315,8 @@ class SizeRecoveryEffect extends Effect{
     super(duration, getEffectPriority("SizeRecoveryEffect"), true);
     this.radiusMul = radiusMul;
     this.radiusChange = (1 - radiusMul) / duration;
-    //it bugs out and becomes small for 1 frame without this kludge
-    this.hasExisted = false;
   }
   doEffect(target){
-    if (this.hasExisted === false){
-      this.hasExisted = true;
-      return;
-    }
     this.radiusMul += this.radiusChange * dTime;
     target.radiusMultiplier *= this.radiusMul; 
   }
