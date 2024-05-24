@@ -2403,12 +2403,15 @@ class Lunging extends Enemy{
 
     this.coolSpeed = 0.03;
     this.heatSpeed = 0.015;
+
+    this.heating = false;
   }
   computeSpeed(){
     this.xv = Math.cos(this.angle) * this.baseSpeed;
     this.yv = Math.sin(this.angle) * this.baseSpeed;
   }
   behavior(area, players){
+    this.heating = false;
     this.color = lerpCol({r: this.baseR, g: this.baseG, b: this.baseB}, this.t, this.heatedR, this.heatedG, this.heatedB);
     let closestPlayerIndex = undefined;
     let closestPlayer = undefined;
@@ -2443,8 +2446,6 @@ class Lunging extends Enemy{
         this.lungeCooldownTimer = 0;
       } else {
         this.lungeCooldownTimer += dTime;
-        this.t -= tFix * this.coolSpeed;
-        this.t = Math.max(this.t, 0);
       }
     } else {
       let lungeTimeRatio = this.lungeTimer / this.timeToLunge;
@@ -2452,6 +2453,7 @@ class Lunging extends Enemy{
         let targetAngle = Math.atan2(dy, dx) + Math.random() * PI/8 - PI/16;
         if (this.timeDuringLunge === 0){
           this.lungeTimer += dTime;
+          this.heating = true;
           this.t += tFix * this.heatSpeed;
           this.t = Math.min(this.t, 1);
           if (this.lungeTimer >= this.timeToLunge){
@@ -2465,8 +2467,6 @@ class Lunging extends Enemy{
       } else {
         if (this.lungeTimer > 0){
           this.lungeTimer -= dTime;
-          this.t -= tFix * this.coolSpeed;
-          this.t = Math.max(this.t, 0);
         }
         if (this.lungeTimer < 0){
           this.lungeTimer = 0;
@@ -2476,6 +2476,10 @@ class Lunging extends Enemy{
         this.x -= 2 * tFix * (Math.random() < 0.5) ? 1 : -1;
         this.y -= 2 * tFix * (Math.random() < 0.5) ? 1 : -1;
       }
+    }
+    if (!this.heating){
+      this.t -= tFix * this.coolSpeed;
+      this.t = Math.max(this.t, 0);
     }
   }
 }
