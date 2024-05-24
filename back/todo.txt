@@ -9,6 +9,7 @@ fix pumpkin bouncing off walls incorrectly
 snow
 fix friction
 lead sniper
+floor textures
 
 -=+O0O+=- CC2 EVENT HORIZON -=+O0O+=-
 
