@@ -2303,7 +2303,7 @@ class Tree extends Enemy{
     let count = Math.floor(Math.random() * 6) + 2;
     for (let i = 0; i < count; i++) {
       let tb = new TreeBullet(this.x, this.y, i * Math.PI / (count / 2));
-      this.createBullet(tb);
+      this.spawnBullet(tb);
     }
   }
 }
@@ -2482,4 +2482,47 @@ class Lunging extends Enemy{
       this.t = Math.max(this.t, 0);
     }
   }
+}
+
+class Stalactite extends Enemy{
+  constructor(x, y, angle, speed, radius){
+    super(x, y, angle, speed, radius, pal.nm.stalactite);
+    this.onWall = true;
+    this.clock = 0;
+  }
+  behavior(area, players){
+    if (this.onWall){
+      if (this.clock === 0) this.makeBullet(area);
+      this.clock += dTime;
+      if (this.clock > 1000){
+        this.onWall = false;
+        this.clock = 0;
+      } else {
+        this.speedMultiplier = 0;
+      }
+    }
+  }
+  wallBounceEvent(){
+    this.onWall = true;
+  }
+  makeBullet(area){
+    this.spawnBullet(new StalactiteProjectile(this.x, this.y, this.radius / 2));
+  }
+}
+
+class StalactiteProjectile extends Bullet{
+  constructor(x, y, radius){
+    super(x, y, random() * 2 * PI, 3, radius, "#614c37", 1500);
+    this.immune = false;
+    this.interactAsBullet = false;
+    this.fadeStart = 1000
+    this.renderType = "outline";
+  }
+  behavior(area, players){
+    if (this.clock > this.fadeStart){
+      this.alphaMultiplier = map(this.clock, this.fadeStart, 1500, 1, 0);
+    }
+  }
+  //override default bullet wallbounce behavior
+  wallBounceEvent(wallX, wallY){}
 }

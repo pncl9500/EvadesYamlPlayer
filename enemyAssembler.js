@@ -90,6 +90,7 @@ function getEnemyFromSpawner(x, y, d, enemyType, spawner, spawnIndex, zone){
     //pseudo sniper
     case "radiating_bullets": return new RadiatingBullets(x, y, d, s, r, property("release_time"), property("release_interval"));
     case "tree": return new Tree(x, y, d, s, r);
+    case "stalactite": return new Stalactite(x, y, d, s, r);
 
     //ghost
     case "disabling_ghost": return new DisablingGhost(x, y, d, s, r);

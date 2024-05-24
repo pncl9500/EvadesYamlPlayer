@@ -46,7 +46,7 @@ class Enemy extends Entity{
     this.disabled = false;
     this.alphaMultiplier = 1;
   }
-  createBullet(bullet){
+  spawnBullet(bullet){
     bullet.parentZone = this.parentZone;
     this.parentZone.parentRegion.areas[this.parentZone.parentAreaNum].addEnt(bullet);
   }
