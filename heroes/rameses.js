@@ -125,7 +125,7 @@ class Latch extends Ability{
 //estimate as 19 i guess
 class LatchProjectile extends Projectile{
   constructor(x, y, angle, area, player){
-    super(x, y, angle, 19, 2000, -1, 18, "#F7F89F", area, player, z.genericProjectile, [], "noOutline", 32, true);
+    super(x, y, angle, 20, 2000, -1, 18, "#F7F89F", area, player, z.genericProjectile, [], "noOutline", 32, true);
     this.targetAngle = angle;
     //what are the numbers supposed to be here? speed and lifetime are unclear too.
     this.homingRange = 280;

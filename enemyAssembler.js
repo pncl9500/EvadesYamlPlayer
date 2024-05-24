@@ -91,6 +91,21 @@ function getEnemyFromSpawner(x, y, d, enemyType, spawner, spawnIndex, zone){
     case "radiating_bullets": return new RadiatingBullets(x, y, d, s, r, property("release_time"), property("release_interval"));
     case "tree": return new Tree(x, y, d, s, r);
     case "stalactite": return new Stalactite(x, y, d, s, r);
+    // case "frost_giant": return new FrostGiant(x, y, d, s, r,
+    //   property("direction"),
+    //   property("turn_speed"),
+    //   property("shot_interval"),
+    //   property("cone_angle"),
+    //   property("pause_interval"),
+    //   property("pause_duration"),
+    //   property("turn_acceleration"),
+    //   property("shot_acceleration"),
+    //   property("pattern"),
+    //   property("immune"),
+    //   property("projectile_duration"),
+    //   property("projectile_radius"),
+    //   property("projectile_speed"),
+    // );
 
     //ghost
     case "disabling_ghost": return new DisablingGhost(x, y, d, s, r);

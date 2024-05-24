@@ -2526,3 +2526,22 @@ class StalactiteProjectile extends Bullet{
   //override default bullet wallbounce behavior
   wallBounceEvent(wallX, wallY){}
 }
+
+// class FrostGiant extends Enemy{
+//   constructor(x, y, angle, speed, radius, direction, turn_speed, shot_interval, cone_angle, pause_interval, pause_duration, turn_acceleration, shot_acceleration, pattern, immune, projectile_duration, projectile_radius, projectile_speed){
+//     super(x, y, angle, speed, radius, pal.nm.frost_giant);
+//     this.direction = direction;
+//     this.turn_speed = turn_speed * (PI/180);
+//     this.shot_interval = shot_interval;
+//     this.cone_angle = cone_angle * (PI/180);
+//     this.pause_interval = pause_interval;
+//     this.pause_duration = pause_duration;
+//     this.turn_acceleration = turn_acceleration * (PI/180);
+//     this.shot_acceleration = shot_acceleration;
+//     this.pattern = pattern;
+//     this.immune = immune;
+//     this.projectile_duration = projectile_duration;
+//     this.projectile_radius = projectile_radius;
+//     this.projectile_speed = projectile_speed;
+//   }
+// }
