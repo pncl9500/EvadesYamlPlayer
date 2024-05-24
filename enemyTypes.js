@@ -2545,3 +2545,10 @@ class StalactiteProjectile extends Bullet{
 //     this.projectile_speed = projectile_speed;
 //   }
 // }
+
+// class Charging extends Enemy{
+//   constructor(x, y, angle, speed, radius){
+//     super(x, y, angle, speed, radius, pal.nm.charging);
+//     this.chargingSpeed = 1;
+//   }
+// }
