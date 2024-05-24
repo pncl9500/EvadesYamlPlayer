@@ -2371,3 +2371,111 @@ class Cycling extends Enemy{
     }
   }
 }
+
+class Lunging extends Enemy{
+  constructor(x, y, angle, speed, radius){
+    super(x, y, angle, speed, radius, pal.nm.lunging);
+    this.baseSpeed = speed;
+    this.resetParams();
+
+    this.baseR = this.color.r;
+    this.baseG = this.color.g;
+    this.baseB = this.color.b;
+
+    //estimated color
+    this.heatedR = 240;
+    this.heatedG = 10;
+    this.heatedB = 0;
+
+    this.t = 0;
+  }
+  resetParams(){
+    this.lungeSpeed = this.baseSpeed;
+    this.normalSpeed = 0;
+    this.timeToLunge = 1500;
+    this.lungeTimer = 0;
+    this.maxLungeTime = 2000;
+    this.timeDuringLunge = 0;
+    this.lungeCooldownMax = 500;
+    this.lungeCooldownTimer = 0;
+    this.baseSpeed = 0;
+    this.computeSpeed();
+
+    this.coolSpeed = 0.03;
+    this.heatSpeed = 0.015;
+  }
+  computeSpeed(){
+    this.xv = Math.cos(this.angle) * this.baseSpeed;
+    this.yv = Math.sin(this.angle) * this.baseSpeed;
+  }
+  behavior(area, players){
+    this.color = lerpCol({r: this.baseR, g: this.baseG, b: this.baseB}, this.t, this.heatedR, this.heatedG, this.heatedB);
+    let closestPlayerIndex = undefined;
+    let closestPlayer = undefined;
+    let closestDistanceSquared = undefined;
+    let min = 250;
+    let dx;
+    let dy;
+    for (let i in players){
+      if (players[i].detectable && dst(players[i], this) < min){
+        min = dst(players[i], this);
+        closestPlayerIndex = i;
+        closestPlayer = players[i];
+        dx = closestPlayer.x - this.x;
+        dy = closestPlayer.y - this.y;
+        closestDistanceSquared = dx ** 2 + dy ** 2;
+      }
+    }
+    if (this.timeDuringLunge > 0){
+      if (this.timeDuringLunge >= this.maxLungeTime){
+        this.timeDuringLunge = 0;
+        this.lungeCooldownTimer = 1;
+        this.baseSpeed = this.normalSpeed;
+        this.computeSpeed();
+      } else {
+        this.timeDuringLunge += dTime;
+        this.baseSpeed = this.lungeSpeed * (1 - this.timeDuringLunge / this.maxLungeTime);
+        this.computeSpeed();
+      }
+    }
+    if (this.lungeCooldownTimer > 0){
+      if (this.lungeCooldownTimer > this.lungeCooldownMax){
+        this.lungeCooldownTimer = 0;
+      } else {
+        this.lungeCooldownTimer += dTime;
+        this.t -= tFix * this.coolSpeed;
+        this.t = Math.max(this.t, 0);
+      }
+    } else {
+      let lungeTimeRatio = this.lungeTimer / this.timeToLunge;
+      if (closestPlayer != undefined){
+        let targetAngle = Math.atan2(dy, dx) + Math.random() * PI/8 - PI/16;
+        if (this.timeDuringLunge === 0){
+          this.lungeTimer += dTime;
+          this.t += tFix * this.heatSpeed;
+          this.t = Math.min(this.t, 1);
+          if (this.lungeTimer >= this.timeToLunge){
+            this.lungeTimer = 0;
+            this.timeDuringLunge = 1;
+            this.baseSpeed = this.lungeSpeed;
+            this.angle = targetAngle;
+            this.computeSpeed();
+          }
+        }
+      } else {
+        if (this.lungeTimer > 0){
+          this.lungeTimer -= dTime;
+          this.t -= tFix * this.coolSpeed;
+          this.t = Math.max(this.t, 0);
+        }
+        if (this.lungeTimer < 0){
+          this.lungeTimer = 0;
+        }
+      }
+      if (lungeTimeRatio > 0.75){
+        this.x -= 2 * tFix * (Math.random() < 0.5) ? 1 : -1;
+        this.y -= 2 * tFix * (Math.random() < 0.5) ? 1 : -1;
+      }
+    }
+  }
+}
