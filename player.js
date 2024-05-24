@@ -280,8 +280,29 @@ class Player extends Entity{
     this.yv += sy;
     if (this.magnetism) {this.yv -= sy; this.yv = magneticSpeed * tFix * ((this.dead && !(this.area.cancelMagnetismOnDownedPlayers)) ? 1 : this.speedMultiplier) * this.magneticSpeedMultiplier * (this.shifting ? 2 : 1)};
     if (this.partialMagnetism) {this.yv -= sy; this.yv += magneticSpeed * tFix * ((this.dead && !(this.area.cancelMagnetismOnDownedPlayers)) ? 1 : this.speedMultiplier) * this.magneticSpeedMultiplier * (this.shifting ? 2 : 1)};
+    let wls = this.area.walls;
     this.x += this.xv;
+    let r = (this.tempRadius ?? this.radius) * this.radiusMultiplier;
+    let selfRect = {x: this.x - r, y: this.y - r, width: r * 2, height: r * 2};
+    // for (let w in wls){
+    //   if (rectRect(selfRect, wls[w])){
+    //     if (this.xv > 0){
+    //       this.x = wls[w].x - r - 1;
+    //     } else {
+    //       this.x = wls[w].x + wls[w].w + r + 1;
+    //     }
+    //   }
+    // }
     this.y += this.yv;
+    // for (let w in wls){
+    //   if (rectRect(selfRect, wls[w])){
+    //     if (this.yv > 0){
+    //       this.y = wls[w].y - r - 1;
+    //     } else {
+    //       this.y = wls[w].y + wls[w].h + r + 1;
+    //     }
+    //   }
+    // }
     this.prevMovementX = this.xv;
     this.prevMovementY = this.yv;
   }

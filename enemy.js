@@ -165,24 +165,71 @@ class Enemy extends Entity{
       this.yv *= -1;
       this.velToAngle();
     }
-    this.wallBounceOnAssetWalls();
+    this.checkIceWalls();
   }
   wallBounceEvent(wallX, wallY, tangentPosX, tangentPosY){
 
   }
-  wallBounceOnAssetWalls(){
-    // let wls = this.parentZone.parentRegion.areas[this.parentZone.parentAreaNum].walls;
-    // for (let w in wls){
-    //   if (lineCircle({x1: w.x + w.w, y1: w.y, x2: w.x + w.w, y2: w.y + w.h}, this)){
-    //     let jut = (w.x + w.w - (this.x - this.radius));
-    //     this.x = w.x + w.w + this.radius + (settings.fixedWallbounces ? jut : 0);
-    //     let wallX = w.x + w.w;
-    //     this.wallBounceEvent(wallX, null, wallX + this.radius, null); 
-    //     this.angleToVel();
-    //     this.xv *= -1; 
-    //     this.velToAngle();
-    //   }
-    // }
+  checkIceWalls(){
+    return;
+    let wls = this.parentZone.parentRegion.areas[this.parentZone.parentAreaNum].walls;
+    for (let w in wls){
+      if (circleRect(this, wls[w])){
+        let side = "";
+        let wl = wls[w];
+        //check left wall
+        var x1 = wl.x;
+        var y1 = wl.y;
+        var x2 = wl.x;
+        var y2 = wl.y + wl.h;
+        if (lineCircle({x1: x1, y1: y1, x2: x2, y2: y2}, this)){ side = "left" }
+        //check right wall
+        var x1 = wl.x + wl.w;
+        var y1 = wl.y;
+        var x2 = wl.x + wl.w;
+        var y2 = wl.y + wl.h;
+        if (lineCircle({x1: x1, y1: y1, x2: x2, y2: y2}, this)){ side = "right" }
+        //check top wall
+        var x1 = wl.x;
+        var y1 = wl.y;
+        var x2 = wl.x + wl.w;
+        var y2 = wl.y;
+        if (lineCircle({x1: x1, y1: y1, x2: x2, y2: y2}, this)){ side = "up" }
+        //check bottom wall
+        var x1 = wl.x;
+        var y1 = wl.y + wl.h;
+        var x2 = wl.x + wl.w;
+        var y2 = wl.y + wl.h;
+        if (lineCircle({x1: x1, y1: y1, x2: x2, y2: y2}, this)){ side = "down" }
+        if (side != ""){
+          console.log(side);
+        }
+        switch (side) {
+          case "right":
+            if (this.xv === 0) break;
+            var jut = (wl.x + wl.w - (this.x - this.radius));
+            this.x = wl.x + wl.w + this.radius + (settings.fixedWallbounces ? jut : 0);
+            var wallX = wl.x + wl.w;
+            this.wallBounceEvent(wallX, null, wallX + this.radius, null); 
+            this.angleToVel();
+            this.xv *= -1; 
+            this.velToAngle();
+            break;
+          case "left":
+            if (this.xv === 0) break;
+            var jut = ((wl.x + wl.w) - (this.x + this.radius));
+            this.x = wl.x + wl.w - this.radius + (settings.fixedWallbounces ? jut : 0);
+            var wallX = wl.x + wl.w;
+            this.wallBounceEvent(wallX, null, wallX - this.radius, null); 
+            this.angleToVel();
+            this.xv *= -1;
+            this.velToAngle();
+            break;
+          default:
+            break;
+        }
+      }
+    }
   }
 }
 

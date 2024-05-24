@@ -4,6 +4,8 @@ class IceWall{
     this.y = y;
     this.w = w;
     this.h = h;
+    this.width = w;
+    this.height = h;
     if (!texture){
       this.draw = () => {};
     }
