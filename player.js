@@ -263,27 +263,34 @@ class Player extends Entity{
     let sy = this.prevMovementY;
     this.sx = sx;
     this.sy = sy;
-    if (this.ctrlVector.x !== 0){
-      sx = 0;
-    }
-    if (this.ctrlVector.y !== 0){
-      sy = 0;
-    }
 
-    sx *= 1-((1-dim)*fFix);
-    sy *= 1-((1-dim)*fFix);
+    sx *= 1-((1-dim)) * fFix;
+    sy *= 1-((1-dim)) * fFix;
 
     this.speedMultiplier *= this.shifting ? 0.5 : 1;
     this.xv = this.ctrlVector.x * this.tempSpeed * tFix * this.speedMultiplier;
     this.yv = this.ctrlVector.y * this.tempSpeed * tFix * this.speedMultiplier;
+    let mxv = 1 * this.tempSpeed * tFix * this.speedMultiplier;
+    let myv = 1 * this.tempSpeed * tFix * this.speedMultiplier;
+    let mDist = sqrt(mxv**2 + myv**2);
     this.xv += sx;
     this.yv += sy;
+    //cap speed
+    if (abs(this.xv) > mxv){
+      this.xv *= mxv / abs(this.xv);
+    }
+    if (abs(this.yv) > myv){
+      this.yv *= myv / abs(this.yv);
+    }
     if (this.magnetism) {this.yv -= sy; this.yv = magneticSpeed * tFix * ((this.dead && !(this.area.cancelMagnetismOnDownedPlayers)) ? 1 : this.speedMultiplier) * this.magneticSpeedMultiplier * (this.shifting ? 2 : 1)};
     if (this.partialMagnetism) {this.yv -= sy; this.yv += magneticSpeed * tFix * ((this.dead && !(this.area.cancelMagnetismOnDownedPlayers)) ? 1 : this.speedMultiplier) * this.magneticSpeedMultiplier * (this.shifting ? 2 : 1)};
-    let wls = this.area.walls;
     this.x += this.xv;
-    let r = (this.tempRadius ?? this.radius) * this.radiusMultiplier;
-    let selfRect = {x: this.x - r, y: this.y - r, width: r * 2, height: r * 2};
+    this.y += this.yv;
+    this.prevMovementX = this.xv;
+    this.prevMovementY = this.yv;
+    // let wls = this.area.walls;
+    //let r = (this.tempRadius ?? this.radius) * this.radiusMultiplier;
+    //let selfRect = {x: this.x - r, y: this.y - r, width: r * 2, height: r * 2};
     // for (let w in wls){
     //   if (rectRect(selfRect, wls[w])){
     //     if (this.xv > 0){
@@ -293,7 +300,8 @@ class Player extends Entity{
     //     }
     //   }
     // }
-    this.y += this.yv;
+    //delete the higher one when you bring this back
+    //this.y += this.yv;
     // for (let w in wls){
     //   if (rectRect(selfRect, wls[w])){
     //     if (this.yv > 0){
@@ -303,8 +311,6 @@ class Player extends Entity{
     //     }
     //   }
     // }
-    this.prevMovementX = this.xv;
-    this.prevMovementY = this.yv;
   }
   addXp(xp){
     //levelup
