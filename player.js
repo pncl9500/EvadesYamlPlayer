@@ -272,7 +272,6 @@ class Player extends Entity{
     this.yv = this.ctrlVector.y * this.tempSpeed * tFix * this.speedMultiplier;
     let mxv = 1 * this.tempSpeed * tFix * this.speedMultiplier;
     let myv = 1 * this.tempSpeed * tFix * this.speedMultiplier;
-    let mDist = sqrt(mxv**2 + myv**2);
     this.xv += sx;
     this.yv += sy;
     //cap speed
