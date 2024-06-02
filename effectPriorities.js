@@ -12,19 +12,20 @@ effectPriorities = {
 
   MinimumSpeedZoneEffect: -2000,
 
+  
   PoisonSniperEffect: 1700,
   
   BarrierEffect: -1000,
   StreamEffect: 1950,
-
+  
   CheatInvincibilityEffect: 4000,
   CheatInfiniteAbilityEffect: 4000,
-
+  
   EnergizeEffect: 1000,
   VigorEffect: 200,
   FullVigorEffect: 200,
   DepartEffect: 200,
-
+  
   SlowingEnemyEffect: 500,
   DrainingEnemyEffect: 500,
   FreezingEnemyEffect: 500,
@@ -37,7 +38,7 @@ effectPriorities = {
   ReducingEnemyPostEffect: 490, //before enlarging (important)
   InvinEnemyEffect: 500,
   BlockingEnemyEffect: -99999, //REALLY low (important)
-
+  
   //on enemy
   FreezeEffect: 1000,
   StompedEffect: 1010,
@@ -47,7 +48,8 @@ effectPriorities = {
   DistortEffect: 1000,
   VengeanceSlowEffect: 1000,
   VengeanceFreezeEffect: 1001,
-
+  ParasitizeEffect: 1500, //above all other enemy size change effects
+  
   IsGhostEffect: 2000,
 
 }

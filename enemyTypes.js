@@ -2298,8 +2298,11 @@ class Tree extends Enemy{
       this.speedMultiplier = Math.abs(Math.sin(deg));
       if (this.speedMultiplier > 1.5) this.speedMultiplier = 1.5;
     }
+    this.xv *= this.speedMultiplier * this.xSpeedMultiplier;
+    this.yv *= this.speedMultiplier * this.ySpeedMultiplier;
   }
   spawnBullets(area){
+    if (this.disabled) return;
     let count = Math.floor(Math.random() * 6) + 2;
     for (let i = 0; i < count; i++) {
       let tb = new TreeBullet(this.x, this.y, i * Math.PI / (count / 2));

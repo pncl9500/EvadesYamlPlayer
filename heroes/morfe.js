@@ -298,15 +298,17 @@ class MinimizeProjectile extends Projectile{
 }
 
 class MinimizeEffect extends Effect{
-  constructor(duration = 4000){
+  constructor(duration = 4000, speedMul = 0.25, radiusMul = 0.5){
     super(duration, getEffectPriority("MinimizeEffect"), false);
+    this.speedMul = speedMul;
+    this.radiusMul = radiusMul;
   }
   doEffect(target){
-    target.speedMultiplier *= 0.25;
-    target.radiusMultiplier *= 0.5; 
+    target.speedMultiplier *= this.speedMul;
+    target.radiusMultiplier *= this.radiusMul; 
   }
   removeEffectLate(target){
-    target.gainEffect(new SizeRecoveryEffect(0.5, 2500));
+    target.gainEffect(new SizeRecoveryEffect(this.radiusMul, 2500));
   }
 }
 

@@ -337,6 +337,9 @@ class Player extends Entity{
   addAura(aura){
     this.auras.push(aura);
   }
+  removeAura(aura){
+    this.auras.splice(this.auras.indexOf(aura), 1);
+  }
   upgradeSpeed(){
     if (this.upgradePoints > 0 && this.speed < gameConsts.maxSpeed){
       this.speed += gameConsts.speedIncrement;

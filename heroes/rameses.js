@@ -72,11 +72,11 @@ class BandageEffect extends Effect{
     target.cancelContactDeath = true;
   }
   playerEnemyContact(target, contactedEnemy){
+    if (contactedEnemy.harmless) return;
     if (contactedEnemy.corrosive){
       target.die();
       return;
     }
-    if (contactedEnemy.harmless) return;
     if (target.invincible) return;
     target.gainEffect(new UnbandagingEffect(this.unbandagingDuration, target, this.bandageVisual, this.bandageVisualOutline));
     this.toRemove = true;

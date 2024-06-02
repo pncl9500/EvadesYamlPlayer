@@ -104,6 +104,9 @@ function loadAssets(){
     "ab.burrow": loadImg("imageAssets/ab/burrow.png", "ab.burrow"),
     "ab.pit": loadImg("imageAssets/ab/pit.png", "ab.pit"),
 
+    "ab.parasitize": loadImg("imageAssets/ab/parasitize.png", "ab.parasitize"),
+    "ab.expel": loadImg("imageAssets/ab/expel.png", "ab.expel"),
+
     "ab.lantern": loadImg("imageAssets/ab/lantern.png", "ab.lantern"),
     "ab.flashlight": loadImg("imageAssets/ab/flashlight.png", "ab.flashlight"),
   }
