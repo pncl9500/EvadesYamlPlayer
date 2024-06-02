@@ -10,7 +10,7 @@ class Toukka extends Player{
 
 class Expel extends Ability{
   constructor(){
-    super(5, [4000,2000,1000,500,250], 10, "ab.expel");
+    super(5, [3000,2500,2000,1500,1000], 10, "ab.expel");
   }
   useConditionSatisfied(player){
     return player.nests.length > 0;
@@ -21,7 +21,7 @@ class Expel extends Ability{
       nest.clock = nest.maxDur;
       for (let i in nest.effects){
         if (nest.effects[i].constructor.name === "ParasitizeEffect"){
-          nest.effects[i].targetRadiusMultiplier /= 2;
+          nest.effects[i].targetRadiusMultiplier /= 1.5;
         }
       }
       for (let i in enemies){
