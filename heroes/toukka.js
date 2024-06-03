@@ -41,7 +41,7 @@ class Expel extends Ability{
 
 class Parasitize extends Ability{
   constructor(){
-    super(5, [7000, 6500, 6000, 5500, 5000], 10, "ab.parasitize");
+    super(5, [6000, 5500, 5000, 4500, 4000], 10, "ab.parasitize");
   }
   activate(player, players, pellets, enemies, miscEnts, region, area){
     let ang = player.lastDir
@@ -64,7 +64,7 @@ class ParasitizeProjectile extends Projectile{
     if (enemy.immune) return;
     let ef = new ParasitizeEffect(this.player);
     enemy.gainEffect(ef);
-    this.player.gainEffect(new ParasitizeLungeEffect(enemy));
+    //this.player.gainEffect(new ParasitizeLungeEffect(enemy));
     this.player.nests.push(enemy);
   }
 }
@@ -113,7 +113,7 @@ class ParasitizeEffect extends Effect{
   gainEffect(target){
     this.storedRenderType = target.renderType;
     target.renderType = "noOutline";
-    this.targetRadiusMultiplier = Math.max(Math.min(175 / target.baseRadius, 6), 75 / target.baseRadius);
+    this.targetRadiusMultiplier = Math.max(Math.min(180 / target.baseRadius, 6.5), 75 / target.baseRadius);
     this.targetRadiusMultiplier = Math.min(this.targetRadiusMultiplier, target.parentZone.height / 2 / target.baseRadius)
     target.playerContactFunctions.push(this.pcf)
     if (this.targetX < target.parentZone.x){
@@ -147,9 +147,11 @@ class ParasitizeEffect extends Effect{
     for (let i = 0; i < ents.length; i++){
       if (ents[i] === target) continue;
       if (ents[i].mainType === "enemy" && circleCircle(target, ents[i])){
-        ents[i].gainEffect(new DistortEffect(0.3, 0));
+        ents[i].gainEffect(new DistortEffect(0.5, 0));
       }
     }
+    // target.x += (this.targetX - target.x) * 0.09 * tFix;
+    // target.y += (this.targetY - target.y) * 0.09 * tFix;
   }
   removeEffectLate(target){
     target.renderType = this.storedRenderType;
