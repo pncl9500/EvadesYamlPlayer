@@ -193,9 +193,15 @@ class RemainEffect extends Effect{
   doEffect(target){
     if (!target.dead) return;
     target.speedMultiplier = Math.max(target.speedMultiplier, this.speedMul);
-    if (target.hasEffectLate("SafeZoneEffect")){
+    let toRevive = false;
+    for (let i in target.zonesTouched){
+      if (target.zonesTouched[i].type === "safe"){
+        toRevive = true;
+      }
+    }
+    if (toRevive){
       target.doRevive = true;
-      target.gainEffect(new RemainFlashEffect(1000));
+      target.gainEffect(new RemainFlashEffect(900));
     }
   }
 }
@@ -205,6 +211,7 @@ class RemainFlashEffect extends Effect{
     super(duration, getEffectPriority("GenericInvincibilityEffect"), false, false);
   }
   doEffect(target){
+    target.invincible = true;
     let t = this.life / this.duration;
     target.tempColor = lerpCol(target.tempColor, t, 173, 218, 224);
   }
