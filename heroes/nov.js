@@ -31,6 +31,29 @@ class Nov extends Player{
     this.remainPool.toRemove = true;
     super.revive();
   }
+  instantRespawnAppropriate(){
+    //when is instant respawn appropriate?
+    //if nov has no pellets
+    if (this.pelletsOnDeath === 0) return true;
+    return false;
+  }
+  behavior(){
+    let toRevive = true;
+    let potentialRevivalEntityTypes = [
+      "RemainPool",
+      "EclipseProjectile",
+    ]
+    for (let i in this.area.entities){
+      if (potentialRevivalEntityTypes.includes(this.area.entities[i].constructor.name)){
+        toRevive = false;
+      }
+    }
+    if (settings.instantRespawn && this.deathEffect && toRevive){
+      this.x = this.mostRecentSafeZone.x + this.mostRecentSafeZone.width / 2;
+      this.y = this.mostRecentSafeZone.y + this.mostRecentSafeZone.height / 2;
+      this.revive();
+    }
+  }
 }
 
 class RemainPool extends Projectile{
