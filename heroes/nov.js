@@ -60,6 +60,7 @@ class RemainPool extends Projectile{
   constructor(x, y, mult, radius, area, player){
     super(x, y, 0, 0, -1, -1, radius, "#00000020", area, player, z.genericProjectile, [], "noOutline", 0, false);
     this.mult = mult;
+    this.renderOnMinimap = false;
   }
   detectContact(){
     this.detectPlayerContact();
@@ -122,6 +123,7 @@ class EclipseProjectile extends Projectile{
     this.clock = 0;
     this.maxDur = lifetime;
     this.shrinking = false;
+    this.renderOnMinimap = false;
   }
   detectContact(){
     this.detectEnemyContact();
