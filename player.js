@@ -77,6 +77,9 @@ class Player extends Entity{
     this.ab1macro = false;
     this.ab2macro = false;
     this.ab3macro = false;
+
+    this.lastDeathX = this.x;
+    this.lastDeathY = this.y;
     
   }
   resetAllModifiers(){
@@ -482,6 +485,8 @@ class Player extends Entity{
     if (this.dead){
       return;
     }
+    this.lastDeathX = this.x;
+    this.lastDeathY = this.y;
     for (var i = 0; i < this.effects.length; i++){
       if (this.effects[i].removedOnDeath){
         this.effects.splice(i, 1);

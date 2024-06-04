@@ -107,6 +107,9 @@ function loadAssets(){
     "ab.parasitize": loadImg("imageAssets/ab/parasitize.png", "ab.parasitize"),
     "ab.expel": loadImg("imageAssets/ab/expel.png", "ab.expel"),
 
+    "ab.eclipse": loadImg("imageAssets/ab/eclipse.png", "ab.eclipse"),
+    "ab.remain": loadImg("imageAssets/ab/remain.png", "ab.remain"),
+
     "ab.lantern": loadImg("imageAssets/ab/lantern.png", "ab.lantern"),
     "ab.flashlight": loadImg("imageAssets/ab/flashlight.png", "ab.flashlight"),
   }

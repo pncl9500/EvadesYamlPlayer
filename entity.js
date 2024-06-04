@@ -69,6 +69,19 @@ class Entity{
     }
     return false;
   }
+  hasEffectLate(effectConstructorName){
+    for (var i in this.effects){
+      if(this.effects[i].constructor.name === effectConstructorName){
+        return this.effects[i];
+      }
+    }
+    for (var i in this.effectRemovalQueue){
+      if(this.effectRemovalQueue[i].constructor.name === effectConstructorName){
+        return this.effectRemovalQueue[i];
+      }
+    }
+    return false;
+  }
   canGainEffect(effect){
     return true;
   }

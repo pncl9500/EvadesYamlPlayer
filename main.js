@@ -242,6 +242,9 @@ function processUrlParams(){
       case "hero":
         game.mainPlayer.swapHero(val);
         break;
+      case "inst":
+        settings.instantRespawn = (val === "false") ? false : true
+        break;
       case "points":
         game.mainPlayer.upgradePoints = 150;
         break;

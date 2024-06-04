@@ -1,6 +1,7 @@
 effectPriorities = {
   //on player
   DeadEffect: 2000,
+  RemainEffect: 3000, //above death effect
   SafeZoneEffect: -200,
   HardenEffect: 1000,
   FlowEffect: 10,
@@ -49,7 +50,6 @@ effectPriorities = {
   VengeanceSlowEffect: 1000,
   VengeanceFreezeEffect: 1001,
   ParasitizeEffect: 1500, //above all other enemy size change effects
-  
   IsGhostEffect: 2000,
 
 }

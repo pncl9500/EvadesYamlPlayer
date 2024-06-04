@@ -165,6 +165,7 @@ pal = {
     fab: "bdab73",
     leporid: "aab5af",
     toukka: "424f34",
+    nov: "806854",
     
     
     oldmorfe: "00dd00",
