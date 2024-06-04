@@ -19,7 +19,7 @@ class Nov extends Player{
   }
   die(){
     if (this.dead) return;
-    if (this.remainActive){
+    if (this.remainActive && this.storedPellets > 0){
       this.remainPool = new RemainPool(this.x, this.y, this.remainSpeedMultiplier, this.radius + this.storedPellets * 5, this.area, this);
       this.area.addEnt(this.remainPool);
     }
