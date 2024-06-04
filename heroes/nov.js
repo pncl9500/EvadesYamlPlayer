@@ -68,6 +68,14 @@ class Eclipse extends Ability{
   behavior(player, players, pellets, enemies, miscEnts, region, area){
     if (this.tier < 1) return;
     this.aura.radius = player.baseRadius + player.storedPellets * 5;
+    if (player.storedPellets === 0) return;
+    for (let i in players){
+      console.log(this.aura);
+      this.aura.tempRadius = this.aura.radius;
+      if (players[i].dead && circleCircle(this.aura, players[i])){
+        players[i].gainEffect(new RemainEffect(player.remainSpeedMultiplier));
+      }
+    }
   }
   activate(player, players, pellets, enemies, miscEnts, region, area){
     let ang = player.lastDir;
