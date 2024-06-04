@@ -177,7 +177,7 @@ class EclipseEffect extends Effect{
 class Remain extends Ability{
   constructor(){
     super(5, 0, 0, "ab.remain");
-    this.moveSpeeds = [0.15, 0.2, 0.25, 0.3, 0.35];
+    this.moveSpeeds = [2, 3, 4, 5, 6];
   }
   upgradeBehavior(player){
     player.remainActive = true;
@@ -186,13 +186,14 @@ class Remain extends Ability{
 }
 
 class RemainEffect extends Effect{
-  constructor(speedMul){
+  constructor(speed){
     super(0, getEffectPriority("RemainEffect"), 3000, false, true);
-    this.speedMul = speedMul;
+    this.speed = speed;
   }
   doEffect(target){
     if (!target.dead) return;
-    target.speedMultiplier = Math.max(target.speedMultiplier, this.speedMul);
+    target.speedMultiplier = 1;
+    target.tempSpeed = this.speed;
     let toRevive = false;
     for (let i in target.zonesTouched){
       if (target.zonesTouched[i].type === "safe"){
