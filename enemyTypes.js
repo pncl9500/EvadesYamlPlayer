@@ -377,12 +377,12 @@ class Sizing extends Enemy{
   }
   behavior(area, players){
     if (this.growing) {
-      this.baseRadius += (tFix * 0.08) * this.minRadius;
+      this.baseRadius += (tFix * 0.1) * this.minRadius;
       if (this.baseRadius > this.maxRadius) {
         this.growing = false;
       }
     } else {
-      this.baseRadius -= (tFix * 0.08) * this.minRadius;
+      this.baseRadius -= (tFix * 0.1) * this.minRadius;
       if (this.baseRadius < this.minRadius) {
         this.growing = true;
       }
