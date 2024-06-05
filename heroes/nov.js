@@ -134,13 +134,16 @@ class EclipseProjectile extends Projectile{
     if (this.shrinking) return;
     entity.gainEffect(new EclipseEffect());
     if (entity.immune) return;
-    let angle = Math.atan2(entity.y - this.y, entity.x - this.x);
-    let dist = this.radius + entity.radius;
-    let xDest = Math.cos(angle) * dist + this.x;
-    let yDest = Math.sin(angle) * dist + this.y;
-    entity.x += (xDest - entity.x) * 1 * tFix;
-    entity.y += (yDest - entity.y) * 1 * tFix;
-    entity.wallSnap();
+    // let angle = Math.atan2(entity.y - this.y, entity.x - this.x);
+    // //let dist = this.radius + entity.radius;
+    // // let xDest = Math.cos(angle) * dist + this.x;
+    // // let yDest = Math.sin(angle) * dist + this.y;
+    // // entity.x += (xDest - entity.x) * 1 * tFix;
+    // // entity.y += (yDest - entity.y) * 1 * tFix;
+    // let pushSpeed = max(1, 7 - entity.radius / 6);
+    // entity.x += Math.cos(angle) * pushSpeed * tFix;
+    // entity.y += Math.sin(angle) * pushSpeed * tFix;
+    // entity.wallSnap();
   }
   contactPlayer(player){
     if (!this.player.remainActive) return;
@@ -167,10 +170,12 @@ class EclipseEffect extends Effect{
     super(4000, getEffectPriority("EclipseEffect"), false, true);
   }
   doEffect(target){
-    target.speedMultiplier = 0;
+    target.speedMultiplier *= 0.1;
+    target.radiusMultiplier *= 0.5;
   }
   removeEffectLate(target){
-    target.gainEffect(new SpeedRecoveryEffect(0, 3000))
+    target.gainEffect(new SpeedRecoveryEffect(0.1, 3000))
+    target.gainEffect(new SizeRecoveryEffect(0.5, 3000))
   }
 }
 
