@@ -44,6 +44,7 @@ function getCreditsMenu(){
     txt("Frozen Fjord Hard by PotatoNuke", 8),
     txt("Endless Echo by PotatoNuke", 8),
     txt("Peculiar Pyramid Hard by PotatoNuke", 8),
+    txt("Dangerous District Hard by PotatoNuke", 8),
     txt("Restless Ridge by Extirpater", 8),
     txt("Restless Ridge Hard by Amasterclasher, TheTroll, and DD1", 8),
     txt("Assorted Alcove by TTTruck", 8),
