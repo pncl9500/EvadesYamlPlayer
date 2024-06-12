@@ -15,6 +15,9 @@ class Irit extends Player{
   doExitTranslate(exitZone){
     if (this.corporeal) return super.doExitTranslate(exitZone);
   }
+  doTeleportTranslate(teleport){
+    if (this.corporeal) return super.doTeleportTranslate(teleport);
+  }
 }
 
 class BlankAbility extends Ability{
