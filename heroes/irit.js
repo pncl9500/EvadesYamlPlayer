@@ -8,6 +8,7 @@ class Irit extends Player{
   }
   die(){
     super.die();
+    this.onTpZoneLastFrame = false;
     this.corporeal = true;
     this.removeEffect("AstralProjectionEffect");
   }
