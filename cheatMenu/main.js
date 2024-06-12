@@ -454,6 +454,10 @@ class CheatInvincibilityEffect extends Effect{
   constructor(){
     super(0, getEffectPriority("CheatInvincibilityEffect"), false, true);
   }
+  doEffectBeforeAbilities(target){
+    target.fullEffectImmunity = true;
+    target.effectVulnerability = 0;
+  }
   doEffect(target){
     target.invincible = true;
     target.corrosiveBypass = true;
