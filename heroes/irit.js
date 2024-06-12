@@ -25,7 +25,7 @@ class BlankAbility extends Ability{
 
 class AstralProjection extends Ability{
   constructor(parent){
-    super(5, [17000, 15000, 13000, 11000, 9000], 30, "ab.astralprojection");
+    super(5, [18000, 16000, 14000, 12000, 10000], 30, "ab.astralprojection");
     this.parent = parent;
   }
   useConditionSatisfied(){
