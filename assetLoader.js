@@ -110,6 +110,9 @@ function loadAssets(){
     "ab.eclipse": loadImg("imageAssets/ab/eclipse.png", "ab.eclipse"),
     "ab.remain": loadImg("imageAssets/ab/remain.png", "ab.remain"),
 
+    "ab.astralprojection": loadImg("imageAssets/ab/astralprojection.png", "ab.astralprojection"),
+    //"ab.remain": loadImg("imageAssets/ab/remain.png", "ab.remain"),
+
     "ab.lantern": loadImg("imageAssets/ab/lantern.png", "ab.lantern"),
     "ab.flashlight": loadImg("imageAssets/ab/flashlight.png", "ab.flashlight"),
   }

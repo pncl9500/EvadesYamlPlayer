@@ -111,7 +111,14 @@ class Entity{
     this.effects.push(effect);
     this.effects.sort((a, b) => (a.priority > b.priority) ? 1 : -1);
   }
-
+  removeEffect(effectConstructorName){
+    for (let i = 0; i < this.effects.length; i++){
+      if (this.effects[i].constructor.name === effectConstructorName){
+        this.effects.splice(i, 1);
+        i--;
+      }
+    }
+  }
   applyEffects(){
     //loop through ERQ
     for (let j = 0; j < this.effectRemovalQueue.length; j++){
