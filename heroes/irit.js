@@ -18,6 +18,9 @@ class Irit extends Player{
   doTeleportTranslate(teleport){
     if (this.corporeal) return super.doTeleportTranslate(teleport);
   }
+  handleZonesTouched(){
+    if (this.corporeal) return super.handleZonesTouched();
+  }
 }
 
 class BlankAbility extends Ability{
