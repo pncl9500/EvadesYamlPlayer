@@ -71,7 +71,7 @@ class AstralProjectionPassiveEffect extends Effect{
 
 class AstralProjectionBody extends Entity{
   constructor(parent, duration){
-    super(parent.x, parent.y, parent.baseRadius, parent.color, parent.z, parent.renderType);
+    super(parent.x, parent.y, 32, parent.color, parent.z, parent.renderType);
     this.parent = parent;
     this.clock = 0;
     this.duration = duration;
