@@ -54,6 +54,9 @@ class Wall extends Enemy{
     this.trackPos %= this.perimeter;
     this.getPosFromTrackPosition();
   }
+  wallSnap(){
+
+  }
   wallBounce(){
     //disable default behavior (everything is controlled in GPFTP)
   }
