@@ -6,6 +6,14 @@ class Irit extends Player{
     this.ability2 = new BlankAbility();
     this.corporeal = true;
   }
+  die(){
+    super.die();
+    this.corporeal = true;
+    this.removeEffect("AstralProjectionEffect");
+  }
+  doExitTranslate(exitZone){
+    if (this.corporeal) return super.doExitTranslate(exitZone);
+  }
 }
 
 class BlankAbility extends Ability{
