@@ -50,6 +50,7 @@ class AstralProjectionPassiveEffect extends Effect{
   }
   playerEnemyContact(target, contactedEnemy){
     if (this.parentAbility.currentCooldown > 0) return;
+    if (contactedEnemy.corrosive) return;
     let effectLength = 3000;
     target.gainEffect(new AstralProjectionEffect(effectLength));
     target.gainEffect(new AstralProjectionPushEffect(1500, target.lastDir + Math.PI));
