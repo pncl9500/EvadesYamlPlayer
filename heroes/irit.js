@@ -53,7 +53,7 @@ class AstralProjectionPassiveEffect extends Effect{
     if (this.parentAbility.currentCooldown > 0) return;
     if (contactedEnemy.harmless) return;
     if (contactedEnemy.corrosive) return target.die();
-    let effectLength = 3000;
+    let effectLength = 3300;
     target.gainEffect(new AstralProjectionEffect(effectLength));
     target.gainEffect(new AstralProjectionPushEffect(1500, target.lastDir + Math.PI));
     target.corporeal = false;
