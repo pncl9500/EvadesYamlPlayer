@@ -33,6 +33,7 @@ class AstralProjection extends Ability{
   }
   behavior(player, players, pellets, enemies, miscEnts, region, area){
     if (this.tier === 0) return;
+    if (this.parent.hasEffect("DeadEffect")) return;
     if (!this.parent.corporeal) return;
     if (this.parent.energy - this.parent.tempMinEnergy < this.cost) return;
     player.gainEffect(new AstralProjectionPassiveEffect(this));
