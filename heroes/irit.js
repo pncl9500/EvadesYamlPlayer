@@ -114,7 +114,7 @@ class AstralProjectionEffect extends Effect{
     target.alphaMultiplier = 0.4;
     target.tempSpeed = 13;
   }
-  removeEffect(target){
+  removeEffectLate(target){
     if (!target.corporeal){
       target.corporeal = true;
       target.die();
