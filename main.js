@@ -272,6 +272,11 @@ function processUrlParams(){
         settings.fps = 30;
         frameRate(30);
         break;
+      case "quality":
+        if (val === "low") pixelDensity(basePixelDensity / 4);
+        if (val === "medium") pixelDensity(basePixelDensity / 2);
+        if (val === "high") pixelDensity(basePixelDensity);
+        break;
       default:
         break;
     }
