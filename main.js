@@ -5,6 +5,13 @@ game = null;
 ui = null;
 cheatMenuOpen = false;
 
+showProfile = false;
+profile = {
+  full: 0,
+  update: 0,
+  draw: 0,
+}
+
 /**
  * Loaded before the game is opened
  */
@@ -65,6 +72,7 @@ let longGameLagCooldown = 0;
 let serverLagCooldown = 0;
 
 function draw() {
+  let prS = millis();
   let lighting = 1;
   let region = game.mainPlayer.region;
   let area = game.mainPlayer.area;
@@ -169,6 +177,8 @@ function draw() {
   
   //background(0);
   //drawPretentiousLogo(windowWidth / 2, windowHeight / 2, 250, frameCount * PI / 180);
+  let prE = millis();
+  profile.full = prE - prS;
 }
 
 function skipFrame(){
@@ -190,11 +200,21 @@ function drawDebugValueText(){
   noStroke();
   textSize(24);
   text(debugValue, 0, 24);
+  if (showProfile){
+    h = 48;
+    fill(255); if (frameRate < 50) fill(255, 80, 80); text(`fps: ${round(frameRate())}`, 0, h); h += 24;
+    fill(255); if (profile.full > 16) fill(255, 80, 80); text(`full: ${profile.full}`, 0, h); h += 24;
+    fill(255); if (profile.update > 16) fill(255, 80, 80); text(`update: ${profile.update}`, 0, h); h += 24;
+    fill(255); if (profile.draw > 16) fill(255, 80, 80); text(`draw: ${profile.draw}`, 0, h); h += 24;
+  }
 }
 
 function updateAll(){
+  let prS = millis();
   gameClock += dTime;
   game.update();
+  let prE = millis();
+  profile.update = prE - prS;
 }
 
 function processUrlParams(){
@@ -277,6 +297,8 @@ function processUrlParams(){
         if (val === "medium") pixelDensity(basePixelDensity / 2);
         if (val === "high") pixelDensity(basePixelDensity);
         break;
+      case "profile":
+        showProfile = true;
       default:
         break;
     }

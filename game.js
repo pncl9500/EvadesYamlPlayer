@@ -5,7 +5,10 @@ class Game{
     this.mainPlayer = null;
   }
   draw(){
+    let prS = millis();
     this.mainPlayer.area.draw(this.mainPlayer.region);
+    let prE = millis();
+    profile.draw = prE - prS;
   }
   update(){
     this.doSettingEffects();
