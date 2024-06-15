@@ -203,9 +203,9 @@ function drawDebugValueText(){
   if (showProfile){
     h = 48;
     fill(255); if (frameRate < 50) fill(255, 80, 80); text(`fps: ${round(frameRate())}`, 0, h); h += 24;
-    fill(255); if (profile.full > 16) fill(255, 80, 80); text(`full: ${profile.full}`, 0, h); h += 24;
-    fill(255); if (profile.update > 16) fill(255, 80, 80); text(`update: ${profile.update}`, 0, h); h += 24;
-    fill(255); if (profile.draw > 16) fill(255, 80, 80); text(`draw: ${profile.draw}`, 0, h); h += 24;
+    fill(255); if (profile.full > 16) fill(255, 80, 80); text(`full: ${round(profile.full * 10) / 10}`, 0, h); h += 24;
+    fill(255); if (profile.update > 16) fill(255, 80, 80); text(`update: ${round(profile.update * 10) / 10}`, 0, h); h += 24;
+    fill(255); if (profile.draw > 16) fill(255, 80, 80); text(`draw: ${round(profile.draw * 10) / 10}`, 0, h); h += 24;
   }
 }
 
