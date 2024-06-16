@@ -26,7 +26,7 @@ function setup() {
   loadAssets();
   document.title = "YAML Player"
   basePixelDensity = pixelDensity();
-  pixelDensity(basePixelDensity / 2)
+  pixelDensity(basePixelDensity)
 
   frameRate(settings.fps);
   textFont('Helvetica');
