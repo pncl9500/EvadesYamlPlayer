@@ -1,5 +1,5 @@
 outdatedMapNames = [
-  "Glacial Gorge Hard"
+  
 ]
 
 poorlyExtrapolatedMapNames = [

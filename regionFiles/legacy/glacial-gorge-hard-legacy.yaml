@@ -1,3 +1,5 @@
+# GGH before June 16, 2024.
+# Not the original GGH.
 name: Glacial Gorge Hard
 properties:
   friction: 0.15
@@ -530,9 +532,9 @@ areas:
       speed: 12
     - types:
       - icicle
-      count: 5
-      radius: 24
-      speed: 9
+      count: 3
+      radius: 56
+      speed: 20
       horizontal: true
   - type: safe
     x: last_right
@@ -583,9 +585,9 @@ areas:
       speed: 12
     - types:
       - icicle
-      count: 7
-      radius: 24
-      speed: 9.5
+      count: 3
+      radius: 52
+      speed: 20
       horizontal: true
   - type: safe
     x: last_right
@@ -638,17 +640,17 @@ areas:
       - icicle
       count: 4
       radius: 18
-      speed: 11
+      speed: 12
     - types:
       - icicle
-      count: 3
+      count: 4
       radius: 24
       speed: 6
     - types:
       - icicle
-      count: 8
-      radius: 24
-      speed: 10
+      count: 3
+      radius: 48
+      speed: 20
       horizontal: true
   - type: safe
     x: last_right
@@ -696,7 +698,7 @@ areas:
       - icicle
       count: 4
       radius: 12
-      speed: 15
+      speed: 18
     - types:
       - icicle
       count: 4
@@ -704,25 +706,19 @@ areas:
       speed: 12
     - types:
       - icicle
-      count: 5
+      count: 4
       radius: 24
       speed: 6
     - types:
       - liquid
-      count: 3
+      count: 4
       radius: 18
       speed: 1.5
     - types:
       - icicle
-      count: 4
-      radius: 24
-      speed: 8
-      horizontal: true
-    - types:
-      - icicle
-      count: 6
-      radius: 14
-      speed: 11
+      count: 3
+      radius: 44
+      speed: 20
       horizontal: true
   - type: safe
     x: last_right
@@ -783,20 +779,14 @@ areas:
       speed: 12
     - types:
       - liquid
-      count: 5
+      count: 4
       radius: 18
       speed: 1.5
     - types:
       - icicle
-      count: 4
-      radius: 24
-      speed: 8.5
-      horizontal: true
-    - types:
-      - icicle
-      count: 4
-      radius: 14
-      speed: 11
+      count: 3
+      radius: 40
+      speed: 20
       horizontal: true
   - type: safe
     x: last_right
@@ -842,20 +832,19 @@ areas:
     spawner:
     - types:
       - icicle
-      count: 12
+      count: 10
       radius: 12
+      speed: 24
+    - types:
+      - slippery
+      count: 1
+      radius: 2
+      speed: 4.5
+    - types:
+      - icicle
+      count: 3
+      radius: 36
       speed: 20
-    - types:
-      - icicle
-      count: 4
-      radius: 24
-      speed: 9
-      horizontal: true
-    - types:
-      - icicle
-      count: 6
-      radius: 14
-      speed: 11
       horizontal: true
   - type: safe
     x: last_right
@@ -901,25 +890,14 @@ areas:
     spawner:
     - types:
       - icicle
-      count: 10
-      radius: 15
-      speed: 18
-    - types:
-      - icicle
-      count: 10
+      count: 15
       radius: 20
-      speed: 10
+      speed: 24
     - types:
       - icicle
-      count: 6
-      radius: 18
-      speed: 9
-      horizontal: true
-    - types:
-      - icicle
-      count: 6
-      radius: 10
-      speed: 11
+      count: 3
+      radius: 32
+      speed: 20
       horizontal: true
   - type: safe
     x: last_right
@@ -965,20 +943,19 @@ areas:
     spawner:
     - types:
       - icicle
-      count: 20
-      radius: 24
-      speed: 12.5
+      count: 15
+      radius: 28
+      speed: 24
+    - types:
+      - slippery
+      count: 1
+      radius: 2
+      speed: 7.5
     - types:
       - icicle
-      count: 6
-      radius: 18
-      speed: 8
-      horizontal: true
-    - types:
-      - icicle
-      count: 8
-      radius: 10
-      speed: 10
+      count: 3
+      radius: 32
+      speed: 20
       horizontal: true
   - type: safe
     x: last_right
@@ -1024,25 +1001,19 @@ areas:
     spawner:
     - types:
       - icicle
-      count: 10
+      count: 8
       radius: 36
-      speed: 21
+      speed: 30
     - types:
       - liquid
-      count: 6
+      count: 5
       radius: 18
       speed: 3
     - types:
       - icicle
-      count: 6
-      radius: 18
-      speed: 8.5
-      horizontal: true
-    - types:
-      - icicle
-      count: 8
-      radius: 10
-      speed: 10
+      count: 3
+      radius: 32
+      speed: 20
       horizontal: true
   - type: safe
     x: last_right
@@ -1088,35 +1059,24 @@ areas:
     spawner:
     - types:
       - icicle
-      count: 6
-      radius: 28
-      speed: 12
+      count: 2
+      radius: 30
+      speed: 18
     - types:
       - icicle
-      count: 8
-      radius: 20
-      speed: 12
-    - types:
-      - icicle
-      count: 12
-      radius: 10
-      speed: 14
+      count: 15
+      radius: 12
+      speed: 18
     - types:
       - liquid
       count: 4
-      radius: 15
-      speed: 2
+      radius: 18
+      speed: 3
     - types:
       - icicle
-      count: 6
-      radius: 10
-      speed: 8
-      horizontal: true
-    - types:
-      - icicle
-      count: 6
-      radius: 14
-      speed: 8
+      count: 3
+      radius: 32
+      speed: 20
       horizontal: true
   - type: safe
     x: last_right
@@ -1162,15 +1122,14 @@ areas:
     spawner:
     - types:
       - slippery
-      count: 6
-      slippery_radius: 100
-      radius: 18
-      speed: 10
+      count: 2
+      radius: 5
+      speed: 12
     - types:
       - wall
       count: 5
       radius: 30
-      speed: 8.5
+      speed: 4.5
   - type: safe
     x: last_right
     y: 0
@@ -1215,15 +1174,14 @@ areas:
     spawner:
     - types:
       - slippery
-      count: 8
-      slippery_radius: 100
-      radius: 25
+      count: 4
+      radius: 5
       speed: 12
     - types:
       - wall
       count: 5
       radius: 30
-      speed: 9
+      speed: 4.5
   - type: safe
     x: last_right
     y: 0
@@ -1268,27 +1226,14 @@ areas:
     spawner:
     - types:
       - slippery
-      count: 8
-      slippery_radius: 100
+      count: 3
       radius: 5
-      speed: 15
-    - types:
-      - slippery
-      count: 2
-      slippery_radius: 140
-      radius: 25
-      speed: 10.5
+      speed: 18
     - types:
       - wall
       count: 5
       radius: 30
-      speed: 9.5
-    - types:
-      - wall
-      count: 5
-      radius: 15
-      speed: 9.5
-      move_clockwise: False
+      speed: 4.5
   - type: safe
     x: last_right
     y: 0
@@ -1327,27 +1272,14 @@ areas:
     spawner:
     - types:
       - slippery
-      count: 8
-      slippery_radius: 100
-      radius: 5
-      speed: 12
-    - types:
-      - slippery
       count: 4
-      slippery_radius: 140
-      radius: 25
-      speed: 10
+      radius: 5
+      speed: 18
     - types:
       - wall
       count: 5
       radius: 30
-      speed: 10
-    - types:
-      - wall
-      count: 5
-      radius: 15
-      speed: 10
-      move_clockwise: False
+      speed: 4.5
   - type: safe
     x: last_right
     y: 0
@@ -1386,39 +1318,14 @@ areas:
     spawner:
     - types:
       - slippery
-      count: 5
-      slippery_radius: 100
+      count: 3
       radius: 5
-      speed: 11
-    - types:
-      - slippery
-      count: 5
-      slippery_radius: 50
-      radius: 15
-      speed: 13
-    - types:
-      - slippery
-      count: 2
-      slippery_radius: 140
-      radius: 20
-      speed: 8
-    - types:
-      - slippery
-      count: 2
-      slippery_radius: 180
-      radius: 30
-      speed: 8
+      speed: 24
     - types:
       - wall
       count: 5
       radius: 30
-      speed: 10.5
-    - types:
-      - wall
-      count: 5
-      radius: 15
-      speed: 10.5
-      move_clockwise: False
+      speed: 4.5
   - type: safe
     x: last_right
     y: 0
@@ -1457,39 +1364,14 @@ areas:
     spawner:
     - types:
       - slippery
-      count: 6
-      slippery_radius: 100
+      count: 5
       radius: 5
-      speed: 9
-    - types:
-      - slippery
-      count: 12
-      slippery_radius: 50
-      radius: 15
-      speed: 11
-    - types:
-      - slippery
-      count: 3
-      slippery_radius: 140
-      radius: 20
-      speed: 9
-    - types:
-      - slippery
-      count: 2
-      slippery_radius: 160
-      radius: 25
-      speed: 6
+      speed: 24
     - types:
       - wall
       count: 5
       radius: 30
-      speed: 11
-    - types:
-      - wall
-      count: 5
-      radius: 15
-      speed: 11
-      move_clockwise: False
+      speed: 4.5
   - type: safe
     x: last_right
     y: 0
@@ -1528,32 +1410,19 @@ areas:
     spawner:
     - types:
       - slippery
-      count: 6
-      slippery_radius: 100
+      count: 5
       radius: 5
-      speed: 11
-    - types:
-      - slippery
-      count: 6
-      slippery_radius: 80
-      radius: 15
-      speed: 11
+      speed: 12
     - types:
       - liquid
-      count: 14
-      radius: 20
-      speed: 1.5
+      count: 8
+      radius: 18
+      speed: 2
     - types:
       - wall
       count: 5
       radius: 30
-      speed: 11
-    - types:
-      - wall
-      count: 5
-      radius: 15
-      speed: 11
-      move_clockwise: False
+      speed: 4.5
   - type: safe
     x: last_right
     y: 0
@@ -1592,42 +1461,19 @@ areas:
     spawner:
     - types:
       - slippery
-      count: 4
-      slippery_radius: 100
-      radius: 15
-      speed: 8
-    - types:
-      - slippery
-      count: 8
-      slippery_radius: 80
+      count: 7
       radius: 5
-      speed: 9
+      speed: 12
     - types:
       - liquid
-      count: 10
-      radius: 20
+      count: 14
+      radius: 24
       speed: 2
-    - types:
-      - liquid
-      count: 10
-      radius: 35
-      speed: 1.5
-    - types:
-      - liquid
-      count: 6
-      radius: 12
-      speed: 4
     - types:
       - wall
       count: 5
       radius: 30
-      speed: 11
-    - types:
-      - wall
-      count: 5
-      radius: 15
-      speed: 11
-      move_clockwise: False
+      speed: 4.5
   - type: safe
     x: last_right
     y: 0
@@ -1666,39 +1512,14 @@ areas:
     spawner:
     - types:
       - slippery
-      count: 4
-      slippery_radius: 100
-      radius: 20
-      speed: 8
-    - types:
-      - slippery
-      count: 8
-      slippery_radius: 80
+      count: 13
       radius: 5
-      speed: 8
-    - types:
-      - slippery
-      count: 8
-      slippery_radius: 50
-      radius: 5
-      speed: 9
-    - types:
-      - slippery
-      count: 10
-      slippery_radius: 40
-      radius: 20
-      speed: 10
+      speed: 12
     - types:
       - wall
-      count: 6
+      count: 5
       radius: 30
-      speed: 12
-    - types:
-      - wall
-      count: 8
-      radius: 20
-      speed: 12
-      move_clockwise: False
+      speed: 4.5
   - type: safe
     x: last_right
     y: 0
@@ -1737,45 +1558,14 @@ areas:
     spawner:
     - types:
       - slippery
-      count: 2
-      slippery_radius: 135
+      count: 13
       radius: 30
-      speed: 2
+      speed: 18
     - types:
-      - slippery
-      count: 4
-      slippery_radius: 100
-      radius: 10
-      speed: 6
-    - types:
-      - slippery
+      - wall
       count: 5
-      slippery_radius: 80
-      radius: 15
-      speed: 8
-    - types:
-      - slippery
-      count: 12
-      slippery_radius: 50
-      radius: 25
-      speed: 10
-    - types:
-      - slippery
-      count: 10
-      slippery_radius: 50
-      radius: 5
-      speed: 12
-    - types:
-      - wall
-      count: 10
-      radius: 18
-      speed: 12
-    - types:
-      - wall
-      count: 10
-      radius: 18 
-      speed: 12
-      move_clockwise: False
+      radius: 30
+      speed: 4.5
   - type: safe
     x: last_right
     y: 0
@@ -1814,14 +1604,14 @@ areas:
     spawner:
     - types:
       - ice_ghost
-      count: 9
+      count: 8
       radius: 36
       speed: 6
     - types:
-      - liquid
-      count: 12
+      - normal
+      count: 6
       radius: 18
-      speed: 3
+      speed: 12
     - types:
       - wall
       count: 5
@@ -1869,15 +1659,10 @@ areas:
       radius: 36
       speed: 6
     - types:
-      - liquid
-      count: 10
-      radius: 25
-      speed: 2
-    - types:
-      - liquid
+      - normal
       count: 6
       radius: 18
-      speed: 3
+      speed: 18
     - types:
       - wall
       count: 5
@@ -1926,20 +1711,14 @@ areas:
       speed: 6
     - types:
       - liquid
-      count: 25
+      count: 18
       radius: 18
       speed: 3
     - types:
       - wall
-      count: 6
+      count: 5
       radius: 30
       speed: 10.5
-    - types:
-      - wall
-      count: 6
-      radius: 20
-      speed: 10.5
-      move_clockwise: False
   - type: safe
     x: last_right
     y: 0
@@ -1978,25 +1757,19 @@ areas:
     spawner:
     - types:
       - ice_ghost
-      count: 14
+      count: 16
       radius: 36
-      speed: 11
+      speed: 12
     - types:
       - liquid
-      count: 36
+      count: 30
       radius: 18
       speed: 3
     - types:
       - wall
-      count: 6
+      count: 5
       radius: 30
       speed: 10.5
-    - types:
-      - wall
-      count: 6
-      radius: 20
-      speed: 10.5
-      move_clockwise: False
   - type: safe
     x: last_right
     y: 0
@@ -2035,12 +1808,12 @@ areas:
     spawner:
     - types:
       - ice_ghost
-      count: 9
-      radius: 60
-      speed: 4
+      count: 14
+      radius: 36
+      speed: 12
     - types:
       - icicle
-      count: 35
+      count: 24
       radius: 18
       speed: 18
     - types:
@@ -2086,17 +1859,17 @@ areas:
     spawner:
     - types:
       - ice_ghost
-      count: 6
-      radius: 60
-      speed: 4
+      count: 14
+      radius: 36
+      speed: 12
     - types:
       - icicle
-      count: 14
+      count: 12
       radius: 12
       speed: 24
     - types:
       - icicle
-      count: 13
+      count: 12
       radius: 18
       speed: 18
     - types:
@@ -2146,30 +1919,25 @@ areas:
     height: last_height
     spawner:
     - types:
-      - ice_sniper
-      count: 2
-      radius: 30
-      speed: 2
-    - types:
       - ice_ghost
-      count: 8
-      radius: 60
-      speed: 5
+      count: 14
+      radius: 36
+      speed: 12
     - types:
       - icicle
-      count: 8
+      count: 7
       radius: 12
-      speed: 26
+      speed: 30
     - types:
       - icicle
-      count: 8
+      count: 7
       radius: 18
       speed: 24
     - types:
       - icicle
-      count: 8
+      count: 7
       radius: 24
-      speed: 20
+      speed: 18
     - types:
       - wall
       count: 5
@@ -2212,30 +1980,25 @@ areas:
     height: last_height
     spawner:
     - types:
-      - ice_sniper
-      count: 3
-      radius: 35
-      speed: 2
-    - types:
       - ice_ghost
-      count: 5
-      radius: 65
-      speed: 3
+      count: 14
+      radius: 36
+      speed: 12
     - types:
       - icicle
-      count: 18
-      radius: 25
-      speed: 16
+      count: 7
+      radius: 24
+      speed: 18
     - types:
       - icicle
-      count: 8
+      count: 7
       radius: 32
       speed: 12
     - types:
       - icicle
-      count: 6
+      count: 7
       radius: 40
-      speed: 6.5
+      speed: 6
     - types:
       - wall
       count: 5
@@ -2279,40 +2042,29 @@ areas:
     spawner:
     - types:
       - ice_ghost
-      count: 8
-      radius: 55
-      speed: 10
+      count: 14
+      radius: 36
+      speed: 12
     - types:
       - liquid
-      count: 12
+      count: 7
       radius: 24
-      speed: 3.5
+      speed: 4
     - types:
       - liquid
-      count: 10
+      count: 7
       radius: 32
-      speed: 2
+      speed: 3
     - types:
       - liquid
-      count: 10
+      count: 7
       radius: 40
       speed: 2
     - types:
-      - liquid
-      count: 12
-      radius: 10
-      speed: 2
-    - types:
       - wall
-      count: 6
+      count: 5
       radius: 30
-      speed: 15
-    - types:
-      - wall
-      count: 6
-      radius: 20
-      speed: 15
-      move_clockwise: False
+      speed: 10.5
   - type: safe
     x: last_right
     y: 0
@@ -2351,47 +2103,24 @@ areas:
     spawner:
     - types:
       - ice_ghost
-      count: 7
-      radius: 25
-      speed: 8
-    - types:
-      - liquid
-      count: 12
-      radius: 35
-      speed: 3.5
-    - types:
-      - icicle
-      count: 20
-      radius: 25
-      speed: 7
-    - types:
-      - icicle
-      count: 20
-      radius: 20
-      speed: 8
-    - types:
-      - icicle
-      count: 9
-      radius: 20
-      speed: 7
-      horizontal: true
-    - types:
-      - icicle
-      count: 9
-      radius: 25
-      speed: 8
-      horizontal: true
-    - types:
-      - wall
       count: 10
+      radius: 45
+      speed: 14.4
+    - types:
+      - ice_ghost
+      count: 21
+      radius: 27
+      speed: 21.6
+    - types:
+      - normal
+      count: 16
       radius: 18
-      speed: 12
+      speed: 19.2
     - types:
       - wall
-      count: 10
-      radius: 18 
-      speed: 12
-      move_clockwise: False
+      count: 5
+      radius: 30
+      speed: 10.5
   - type: safe
     x: last_right
     y: 0
