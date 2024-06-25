@@ -58,6 +58,7 @@ function getCreditsMenu(){
     txt("Magnetic Monopole Dipole balanced by Piger", 8),
     txt("Magnetic Monopole Dipole Hard balanced by Piger", 8),
     txt("Burning Bunker Hard balanced by Piger", 8),
+    txt("Glacial Gorge Hard balanced by Raqzv and Piger", 8),
     txt("Other maps created by Evades.io developers or dedicated Evades.io community members.", 8),
     pdd(0, 3000),
     txt("Shoutout to gloglonzo", 8),
