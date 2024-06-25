@@ -457,6 +457,10 @@ class AlertBox extends UIpanel{
   }
 }
 
+function clr(){
+  ui.alertBox.alerts = [];
+}
+
 function cog(text, params = {}){
   let colorString = params.c ?? "ffffff"
   let colorObj = hexToRgb(colorString);

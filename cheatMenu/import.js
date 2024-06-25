@@ -21,6 +21,7 @@ function drawFileImporter(){
 }
 
 function handleRegionFile(file){
+  clr();
   closeFileImporter();
   cheatMenuOpen = false;
   if ((file.subtype !== "json") && (file.subtype !== "x-yaml")){
