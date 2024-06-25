@@ -35,14 +35,16 @@ function handleRegionFile(file){
   }
   cog("Importing " + file.name + "...");
   if (file.subtype === "x-yaml" || yamlOverride){
+    cog("File read as YAML");
     importYAMLmapFile(file);
   }
   if (file.subtype === "json"){
+    cog("File read as JSON");
     importJSONmapFile(file);
   }
   cog(" ")
-  cog("Please note that map behavior may not be accurate to the")
-  cog("vanilla game or other sandboxes.")
+  cog("Please note that map behavior may not be accurate to")
+  cog("the vanilla game or other sandboxes.")
 }
 
 function importJSONmapFile(file){
@@ -53,8 +55,10 @@ function importJSONmapFile(file){
 
 function importYAMLmapFile(file){
   let yaml = file.data;
+  console.log("pre:")
   console.log(yaml);
   yaml = atob(yaml.substring(31));
+  console.log("post:")
   console.log(yaml);
   let region = regionFromYAML(yaml, true);
   createImportGame(region);
