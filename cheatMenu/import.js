@@ -24,6 +24,8 @@ function handleRegionFile(file){
   clr();
   closeFileImporter();
   cheatMenuOpen = false;
+  console.log("file:");
+  console.log(file);
   if ((file.subtype !== "json") && (file.subtype !== "x-yaml")){
     cog(file.name + " is not in the correct format.");
     cog(`read subtype: ${file.subtype}`)
