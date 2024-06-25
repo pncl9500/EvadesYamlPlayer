@@ -54,10 +54,11 @@ function importJSONmapFile(file){
 }
 
 function importYAMLmapFile(file){
-  console.log(2);
+  console.log(3);
   let yaml = file.data;
   console.log("pre:")
   console.log(yaml);
+  console.log(yaml.substring(36));
   if (file.subtype === undefined){
     yaml = atob(yaml.substring(36));
   } else {
