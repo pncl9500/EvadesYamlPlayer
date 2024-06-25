@@ -618,12 +618,13 @@ class Player extends Entity{
         case "removal":
           this.resetToSpawn();
         case "exit":
+        case "pseudo_teleport":
         case "teleport":
           //another kludge, player would move slightly when teleporting in magnetic levels if
           //the game didn't temporarily give them this effect
           this.gainEffect(new CancelMagnetismEffect(60));
           if (!this.onTpZoneLastFrame){
-            if (zone.type === "exit"){
+            if (zone.type === "exit" || zone.type === "pseudo_teleport"){
               this.doExitTranslate(zone); 
             }
             if (zone.type === "teleport"){

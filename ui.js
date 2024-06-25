@@ -457,3 +457,13 @@ class AlertBox extends UIpanel{
   }
 }
 
+function cog(text, params = {}){
+  let colorString = params.c ?? "ffffff"
+  let colorObj = hexToRgb(colorString);
+  let box = ui.alertBox;
+  box.alpha = 255;
+  if (box.hidden) box.alerts = [];
+  box.alerts.push(text);
+  box.hidden = false;
+  box.timeUntilVanish = 12000;
+}

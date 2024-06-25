@@ -26,6 +26,7 @@ class Zone{
       case "removal":
         fill(settings.zoneBaseColors.removal.r, settings.zoneBaseColors.removal.g, settings.zoneBaseColors.removal.b);
         break;
+      case "pseudo_teleport":
       case "teleport":
         fill(settings.zoneBaseColors.teleport.r, settings.zoneBaseColors.teleport.g, settings.zoneBaseColors.teleport.b);
         break;

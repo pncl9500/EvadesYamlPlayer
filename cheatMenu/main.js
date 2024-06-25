@@ -34,6 +34,12 @@ function mouseWheel(event) {
 tooltipPadding = 2;
 tooltipHeight = 13;
 function drawCheatMenu(){
+  let mip = false;
+  if (fileImporterOpen) {
+    mip = mouseIsPressed;
+    mouseIsPressed = false;
+    mouseReleasedLastFrame = false;
+  }
   if (newCheatMenu !== undefined){
     cheatMenuItems = newCheatMenu;
     newCheatMenu = undefined;
@@ -89,6 +95,10 @@ function drawCheatMenu(){
   }
 
   pop();
+if (fileImporterOpen){
+  mouseIsPressed = mip;
+  drawFileImporter();
+}
   mouseReleasedLastFrame = false;
 }
 
@@ -131,6 +141,9 @@ function setCheatMenuItems(){
               return settings.darkMode;
             }, "Enable dark mode."),]),
     txt("Sandbox settings", 20), bigLine(),
+        row([btn("Import Map", null, 12, () => {tryImportSelector()}, "Import a map file."),
+          btn(" ! ", null, 12, () => {}, "Only JSON files can be imported for now. Use https://sonic3xe.github.io/evades-region-editor/ to quickly convert evades files (linked in credits)"),
+        ]),
         row([txt("Change hero: ", 12), 
             btn("Open list", 37, 12, () => {queueCheatMenuChange(getHeroSelectorMenu())}, "Select a hero."),]),
         row([txt("Change region: ", 12), 

@@ -24,6 +24,7 @@ function preload(){
 */
 function setup() {
   loadAssets();
+  makeFileInput();
   document.title = "YAML Player"
   basePixelDensity = pixelDensity();
   pixelDensity(basePixelDensity)

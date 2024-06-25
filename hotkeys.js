@@ -1,5 +1,5 @@
 function keyPressed() {
-  if (keyCode === 27) { if (cheatMenuOpen){closeCheatMenu();} else {openCheatMenu();} }
+  if (keyCode === 27) { if (cheatMenuOpen){closeCheatMenu();} else {openCheatMenu();} closeFileImporter()}
 
   if (game.players.length === 0){
     //suppress inputs other than escape menu if no players exist

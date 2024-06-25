@@ -1,0 +1,53 @@
+fileImporterOpen = false
+function makeFileInput(){
+  regionFileInput = createFileInput(handleRegionFile, false);
+  regionFileInput.position(windowWidth / 2, windowHeight / 2);
+  regionFileInput.hide();
+}
+function tryImportSelector(){
+  fileImporterOpen = true;
+  regionFileInput.position(windowWidth / 2, windowHeight / 2);
+  regionFileInput.show();
+}
+
+function closeFileImporter(){
+  fileImporterOpen = false;
+  regionFileInput.hide();
+}
+
+function drawFileImporter(){
+  background(0, 200);
+  regionFileInput.position(windowWidth / 2, windowHeight / 2);
+}
+
+function handleRegionFile(file){
+  closeFileImporter();
+  cheatMenuOpen = false;
+  if ((file.subtype !== "json") && (file.subtype !== "x-yaml")){
+    cog(file.name + " is not in the correct format.");
+    return;
+  }
+  if (file.subtype === "x-yaml"){
+    cog("YAML files are not supported yet. Convert to JSON first.")
+  }
+  cog("Importing " + file.name + "...");
+  if (file.subtype === "json"){
+    importJSONmapFile(file);
+  }
+}
+
+function importJSONmapFile(file){
+  json = file.data;
+  let region = new Region(json.name, json.properties, json.areas, true);
+  let newGame = new Game();
+  newGame.regions = [region]; 
+  newGame.setMainPlayer(game.mainPlayer);
+  newGame.addPlayer(game.mainPlayer);
+  newGame.mainPlayer.x = 176 + random(-64,64);
+  newGame.mainPlayer.y = 240 + random(-96,96);
+  game = newGame;
+  game.mainPlayer.game = game;
+  game.mainPlayer.region = game.regions[0];
+  game.mainPlayer.area = game.regions[0].areas[0];
+  game.mainPlayer.resetToSpawn();
+}

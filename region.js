@@ -1,12 +1,12 @@
 class Region{
-  constructor(name, properties, areaArray){
+  constructor(name, properties, areaArray, convertTeleports = false){
     this.name = name;
     this.properties = properties;
     this.areas = [];
     this.unknownEnemyTypes = [];
-    this.buildRegions(areaArray);
+    this.buildRegions(areaArray, convertTeleports);
   }
-  buildRegions(areaArray){
+  buildRegions(areaArray, convertTeleports = false){
     //clean this code up later, its really bad
     var lastArea = null;
     for (var a = 0; a < areaArray.length; a++){
@@ -36,8 +36,11 @@ class Region{
         if (y === "last_y"){
           y = lastZone.y;
         }
-
-        var zone = new Zone(zn.type, x, y, w, h, zn.properties, zn.spawner, zn.translate, this, a);
+        let type = zn.type;
+        if (convertTeleports && type === "teleport"){
+          type = "pseudo_teleport"
+        }
+        var zone = new Zone(type, x, y, w, h, zn.properties, zn.spawner, zn.translate, this, a);
         zones.push(zone);
         lastZone = zone;
       }
