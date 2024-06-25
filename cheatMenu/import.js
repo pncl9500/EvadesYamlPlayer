@@ -26,13 +26,15 @@ function handleRegionFile(file){
   cheatMenuOpen = false;
   console.log("file:");
   console.log(file);
-  if ((file.subtype !== "json") && (file.subtype !== "x-yaml")){
+  yamlOverride = false;
+  if (file.subtype === undefined) yamlOverride = true;
+  if ((file.subtype !== "json") && (file.subtype !== "x-yaml") && !yamlOverride){
     cog(file.name + " is not in the correct format.");
     cog(`read subtype: ${file.subtype}`)
     return;
   }
   cog("Importing " + file.name + "...");
-  if (file.subtype === "x-yaml"){
+  if (file.subtype === "x-yaml" || yamlOverride){
     importYAMLmapFile(file);
   }
   if (file.subtype === "json"){
