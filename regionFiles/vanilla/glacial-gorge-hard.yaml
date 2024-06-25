@@ -1666,13 +1666,13 @@ areas:
     spawner:
     - types:
       - slippery
-      count: 4
+      count: 6
       slippery_radius: 100
       radius: 20
       speed: 8
     - types:
       - slippery
-      count: 8
+      count: 10
       slippery_radius: 80
       radius: 5
       speed: 8
@@ -1683,11 +1683,10 @@ areas:
       radius: 5
       speed: 9
     - types:
-      - slippery
+      - liquid
       count: 10
-      slippery_radius: 40
       radius: 20
-      speed: 10
+      speed: 2
     - types:
       - wall
       count: 6
@@ -1737,34 +1736,33 @@ areas:
     spawner:
     - types:
       - slippery
-      count: 2
+      count: 4
       slippery_radius: 135
       radius: 30
       speed: 2
     - types:
       - slippery
-      count: 4
+      count: 6
       slippery_radius: 100
       radius: 10
       speed: 6
     - types:
       - slippery
-      count: 5
+      count: 8
       slippery_radius: 80
       radius: 15
       speed: 8
     - types:
       - slippery
-      count: 12
+      count: 10
       slippery_radius: 50
       radius: 25
       speed: 10
     - types:
-      - slippery
-      count: 10
-      slippery_radius: 50
-      radius: 5
-      speed: 12
+      - liquid
+      count: 16
+      radius: 20
+      speed: 2.5
     - types:
       - wall
       count: 10
@@ -2152,22 +2150,22 @@ areas:
       speed: 2
     - types:
       - ice_ghost
-      count: 8
-      radius: 60
+      count: 10
+      radius: 50
       speed: 5
     - types:
       - icicle
-      count: 8
+      count: 12
       radius: 12
       speed: 26
     - types:
       - icicle
-      count: 8
+      count: 10
       radius: 18
       speed: 24
     - types:
       - icicle
-      count: 8
+      count: 10
       radius: 24
       speed: 20
     - types:
@@ -2218,22 +2216,22 @@ areas:
       speed: 2
     - types:
       - ice_ghost
-      count: 5
-      radius: 65
+      count: 8
+      radius: 50
       speed: 3
     - types:
       - icicle
-      count: 18
+      count: 16
       radius: 25
       speed: 16
     - types:
       - icicle
-      count: 8
+      count: 10
       radius: 32
       speed: 12
     - types:
       - icicle
-      count: 6
+      count: 8
       radius: 40
       speed: 6.5
     - types:
