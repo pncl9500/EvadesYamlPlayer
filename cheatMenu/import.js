@@ -34,6 +34,9 @@ function handleRegionFile(file){
   if (file.subtype === "json"){
     importJSONmapFile(file);
   }
+  cog(" ")
+  cog("Please note that map behavior may not be accurate to the")
+  cog("vanilla game or other sandboxes.")
 }
 
 function importJSONmapFile(file){
