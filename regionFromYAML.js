@@ -25,10 +25,10 @@ function regionFromName(name){
   return regionFromYAML(YAMLfromStrs(loadedYAMLstrs[name]));
 }
 
-function regionFromYAML(regionData){
+function regionFromYAML(regionData, convertTeleports = false){
   json = YAML.parse(regionData);
   //now the YAML is in json and we are happy
-  region = new Region(json.name, json.properties, json.areas);
+  region = new Region(json.name, json.properties, json.areas, convertTeleports);
   return region;
 }
 

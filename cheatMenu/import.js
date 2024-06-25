@@ -28,10 +28,10 @@ function handleRegionFile(file){
     cog(file.name + " is not in the correct format.");
     return;
   }
-  if (file.subtype === "x-yaml"){
-    cog("YAML files are not supported yet. Convert to JSON first.")
-  }
   cog("Importing " + file.name + "...");
+  if (file.subtype === "x-yaml"){
+    importYAMLmapFile(file);
+  }
   if (file.subtype === "json"){
     importJSONmapFile(file);
   }
@@ -43,6 +43,19 @@ function handleRegionFile(file){
 function importJSONmapFile(file){
   json = file.data;
   let region = new Region(json.name, json.properties, json.areas, true);
+  createImportGame(region);
+}
+
+function importYAMLmapFile(file){
+  let yaml = file.data;
+  console.log(yaml);
+  yaml = atob(yaml.substring(31));
+  console.log(yaml);
+  let region = regionFromYAML(yaml, true);
+  createImportGame(region);
+}
+
+function createImportGame(region){
   let newGame = new Game();
   newGame.regions = [region]; 
   newGame.setMainPlayer(game.mainPlayer);
