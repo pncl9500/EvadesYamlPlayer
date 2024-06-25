@@ -45,8 +45,8 @@ function setup() {
   ui.alertBox.alerts.push("Press F to fully level.")
   ui.alertBox.alerts.push(" ")
   ui.alertBox.alerts.push("Note that EvadesYamlPlayer is currently in open beta.")
-  ui.alertBox.alerts.push("The game does not currently have every Evades.io feature")
-  ui.alertBox.alerts.push("and may crash without warning.")
+  ui.alertBox.alerts.push("The game does not have every Evades.io feature and may")
+  ui.alertBox.alerts.push("crash without warning.")
 
   cheatMenuItems = setCheatMenuItems();
   
