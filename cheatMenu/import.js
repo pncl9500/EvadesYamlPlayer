@@ -58,9 +58,8 @@ function importYAMLmapFile(file){
   let yaml = file.data;
   console.log("pre:")
   console.log(yaml);
-  console.log(yaml.substring(36));
   if (file.subtype === undefined){
-    yaml = atob(yaml.substring(36));
+    yaml = atob(yaml.substring(37));
   } else {
     yaml = atob(yaml.substring(31));
   }
