@@ -1,3 +1,4 @@
+ver = "0"
 p5.disableFriendlyErrors = true;
 
 debugValue = "";
@@ -203,6 +204,7 @@ function drawDebugValueText(){
   text(debugValue, 0, 24);
   if (showProfile){
     h = 48;
+    fill(255); text(`ver: ${ver}`, 0, h); h += 24;
     fill(255); if (frameRate < 50) fill(255, 80, 80); text(`fps: ${round(frameRate())}`, 0, h); h += 24;
     fill(255); if (profile.full > 16) fill(255, 80, 80); text(`full: ${round(profile.full * 10) / 10}`, 0, h); h += 24;
     fill(255); if (profile.update > 16) fill(255, 80, 80); text(`update: ${round(profile.update * 10) / 10}`, 0, h); h += 24;
