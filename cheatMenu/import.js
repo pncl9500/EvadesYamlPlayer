@@ -58,10 +58,16 @@ function importYAMLmapFile(file){
   let yaml = file.data;
   console.log("pre:")
   console.log(yaml);
-  if (file.subtype === undefined){
-    yaml = atob(yaml.substring(37));
-  } else {
-    yaml = atob(yaml.substring(31));
+  try {
+    if (file.subtype === undefined){
+      yaml = atob(yaml.substring(37));
+    } else {
+      yaml = atob(yaml.substring(31));
+    }
+  } catch (error) {
+    cog("Something went wrong.")
+    cog("Please try converting your file to JSON")
+    cog("and trying that file instead.")
   }
   console.log("post:")
   console.log(yaml);
