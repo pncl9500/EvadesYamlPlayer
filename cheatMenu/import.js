@@ -54,7 +54,6 @@ function importJSONmapFile(file){
 }
 
 function importYAMLmapFile(file){
-  console.log(4);
   let yaml = file.data;
   console.log("pre:")
   console.log(yaml);
