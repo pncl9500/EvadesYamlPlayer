@@ -11,9 +11,9 @@ function drawLightGradient(x0, y0, r0){
 
   lightMap.erase();
   lightMap.noStroke();
-  lightMap.fill(255, floor(255 / r) * 2);
-  for (let i = 0; i < r; i++){
-    lightMap.ellipse(x, y, i);
+  lightMap.fill(255, floor(255 / r) * 3);
+  for (let i = 0; i <= r / 2; i++){
+    lightMap.ellipse(x, y, i * 2);
   }
   lightMap.noErase();
 }

@@ -2495,6 +2495,7 @@ class Stalactite extends Enemy{
     super(x, y, angle, speed, radius, pal.nm.stalactite);
     this.onWall = true;
     this.clock = 0;
+    this.immune = true;
   }
   behavior(area, players){
     if (this.onWall){
@@ -2533,6 +2534,13 @@ class StalactiteProjectile extends Bullet{
   wallBounceEvent(wallX, wallY){}
 }
 
+// class Charging extends Enemy{
+//   constructor(x, y, angle, speed, radius){
+//     super(x, y, angle, speed, radius, pal.nm.charging);
+//     this.chargingSpeed = 1;
+//   }
+// }
+
 // class FrostGiant extends Enemy{
 //   constructor(x, y, angle, speed, radius, direction, turn_speed, shot_interval, cone_angle, pause_interval, pause_duration, turn_acceleration, shot_acceleration, pattern, immune, projectile_duration, projectile_radius, projectile_speed){
 //     super(x, y, angle, speed, radius, pal.nm.frost_giant);
@@ -2549,12 +2557,5 @@ class StalactiteProjectile extends Bullet{
 //     this.projectile_duration = projectile_duration;
 //     this.projectile_radius = projectile_radius;
 //     this.projectile_speed = projectile_speed;
-//   }
-// }
-
-// class Charging extends Enemy{
-//   constructor(x, y, angle, speed, radius){
-//     super(x, y, angle, speed, radius, pal.nm.charging);
-//     this.chargingSpeed = 1;
 //   }
 // }
