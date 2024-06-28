@@ -51,10 +51,10 @@ class Region{
       var x = ar.x;
       var y = ar.y;
       if (x === "var x"){
-        x = regionOffsets[this.name].x;
+        x = regionOffsets[this.name] !== undefined ? regionOffsets[this.name].x : 0;
       }
       if (y === "var y"){
-        y = regionOffsets[this.name].y;
+        y = regionOffsets[this.name] !== undefined ? regionOffsets[this.name].y : 0;
       }
       //WHY?!?!?!?!
       if (typeof x === "string"){
