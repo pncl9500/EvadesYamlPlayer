@@ -3,7 +3,7 @@ class Jotunn extends Player{
     super(x, y, radius, pal.hero.jotunn, name, isMain, game, regionNum, areaNum, ctrlSets, putInArea);
     this.heroName = "Jötunn";
     this.ability1 = new Decay();
-    this.ability2 = new BlankAbility();
+    this.ability2 = new Shatter(this.ability1);
   }
 }
 
@@ -35,5 +35,34 @@ class DecayEffect extends Effect{
     target.tempColor.r = target.tempColor.r * 0.7;
     target.tempColor.g = target.tempColor.g * 0.72;
     target.tempColor.b = target.tempColor.b * 1.15;
+  }
+}
+
+class Shatter extends Ability{
+  constructor(other){
+    super(5, [10000, 9000, 8000, 7000, 6000], 30, "ab.shatter");
+    this.radius = 170;
+    this.other = other;
+    this.effectLength = 4000;
+  }
+  activate(player, players, pellets, enemies, miscEnts, region, area){
+    if (this.other.tier === 0){
+      return;
+    }
+    for (var i in enemies){
+      if (circleCircle({x: player.x, y: player.y, r: this.radius}, enemies[i])){
+        enemies[i].gainEffect(new ShatterEffect(this.effectLength));
+      }
+    }
+  }
+}
+
+class ShatterEffect extends Effect{
+  constructor(duration){
+    super(duration, getEffectPriority("ShatterEffect"), false);
+  }
+  doEffect(target){
+    target.harmless = true;
+    target.alphaMultiplier = 0.4;
   }
 }
