@@ -98,6 +98,12 @@ function loadAssets(){
     "ab.magnetism_down": loadImg("imageAssets/ab/magnetism_down.png", "ab.magnetism_down"),
     "ab.magnetism_up": loadImg("imageAssets/ab/magnetism_up.png", "ab.magnetism_up"),
 
+    "ab.shriek": loadImg("imageAssets/ab/shriek.png", "ab.shriek"),
+    "ab.shadow": loadImg("imageAssets/ab/shadow.png", "ab.shadow"),
+
+    "ab.decay": loadImg("imageAssets/ab/decay.png", "ab.decay"),
+    "ab.shatter": loadImg("imageAssets/ab/shatter.png", "ab.shatter"),
+
     "ab.masonry": loadImg("imageAssets/ab/masonry.png", "ab.masonry"),
     "ab.tether": loadImg("imageAssets/ab/tether.png", "ab.tether"),
 
