@@ -131,6 +131,9 @@ class Ability{
   toggleOff(player, players, pellets, enemies, miscEnts, region, area){
     
   }
+  remove(){
+    
+  }
 }
 
 class ToggleAbility extends Ability{

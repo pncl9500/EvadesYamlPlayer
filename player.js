@@ -915,8 +915,8 @@ class Player extends Entity{
       //dont give magnet on area 1
       return;
     }
-    this.ability3.remove();
-    this.ability3 = this.magnetismDirection === 1 ? new MagnetismDown() : new MagnetismUp();
+    if (this.ability3) this.ability3.remove();
+    this.ability3 = (this.magnetismDirection === 1) ? new MagnetismDown() : new MagnetismUp();
   }
 }
 //this is actually helpful somehow
