@@ -13,6 +13,10 @@ heroList = {
   "rameses": Rameses,
   "ram": Rameses,
   "jolt": Jolt,
+  "jotunn": Jotunn,
+  "jötunn": Jotunn,
+  "jot": Jotunn,
+  "jöt": Jotunn,
 
   "fab": Fab,
   "leporid": Leporid,
@@ -38,6 +42,7 @@ vanillaHeroes = [
   "reaper",
   "rameses",
   "jolt",
+  "jotunn",
 ]
 
 modHeroes = [
