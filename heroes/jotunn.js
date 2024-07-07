@@ -59,10 +59,21 @@ class Shatter extends Ability{
 
 class ShatterEffect extends Effect{
   constructor(duration){
-    super(duration, getEffectPriority("ShatterEffect"), false);
+    super(duration, getEffectPriority("ShatterEffect"), false, false);
+    this.prevRenderType = "";
+    this.dur = duration;
   }
   doEffect(target){
     target.harmless = true;
     target.alphaMultiplier = 0.4;
+    target.shatterTimer -= dTime;
+  }
+  gainEffect(target){
+    this.prevRenderType = target.renderType;
+    target.renderType = "shattered";
+    target.shatterTimer = this.dur;
+  }
+  removeEffectLate(target){
+    target.renderType = this.prevRenderType;
   }
 }
