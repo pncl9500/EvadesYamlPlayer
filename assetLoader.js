@@ -111,7 +111,7 @@ function loadAssets(){
     "ab.remain": loadImg("imageAssets/ab/remain.png", "ab.remain"),
 
     "ab.astralprojection": loadImg("imageAssets/ab/astralprojection.png", "ab.astralprojection"),
-    //"ab.remain": loadImg("imageAssets/ab/remain.png", "ab.remain"),
+    "ab.shackle": loadImg("imageAssets/ab/shackle.png", "ab.shackle"),
 
     "ab.lantern": loadImg("imageAssets/ab/lantern.png", "ab.lantern"),
     "ab.flashlight": loadImg("imageAssets/ab/flashlight.png", "ab.flashlight"),

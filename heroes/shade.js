@@ -66,6 +66,16 @@ class NightEnemyEffect extends Effect{
   }
 }
 
+class GenericHarmlessEffect extends Effect{
+  constructor(duration){
+    super(duration, getEffectPriority("GenericHarmlessEffect"), false);
+  }
+  doEffect(target){
+    target.harmless = true;
+    target.alphaMultiplier = 0.4;
+  }
+}
+
 class Vengeance extends Ability{
   constructor(){
     super(5, [3000, 2500, 2000, 1500, 1000], 5, "ab.vengeance");

@@ -3,7 +3,7 @@ class Irit extends Player{
     super(x, y, radius, pal.hero.irit, name, isMain, game, regionNum, areaNum, ctrlSets, putInArea);
     this.heroName = "Irit";
     this.ability1 = new AstralProjection(this);
-    this.ability2 = new BlankAbility();
+    this.ability2 = new Shackle(this);
     this.corporeal = true;
   }
   die(){
@@ -26,6 +26,89 @@ class Irit extends Player{
 class BlankAbility extends Ability{
   constructor(){
     super(5, 0, 0, null);
+  }
+}
+
+class Shackle extends ToggleAbility{
+  constructor(parent){
+    super(5, [10000,9500,9000,8500,8000], 15, "ab.shackle");
+    this.ranges = [100, 125, 150, 175, 200];
+    this.duration = 2500;
+    this.aura = new LockedAura({x: 0, y: 0}, this.ranges[this.tier - 1], "#2654d139", z.genericAura + random() * z.randEpsilon);
+    this.parent = parent;
+  }
+  upgradeBehavior(player){
+    this.aura.radius = this.ranges[this.tier - 1];
+  }
+  update(){
+    this.currentCooldown -= dTime;
+    this.aura.update();
+  }
+  toggleOn(player, players, pellets, enemies, miscEnts, region, area){
+    this.aura.parent = player;
+    player.addAura(this.aura);
+  }
+  toggleOff(player, players, pellets, enemies, miscEnts, region, area){
+    this.aura.toRemove = true;
+  }
+  activate(player, players, pellets, enemies, miscEnts, region, area){
+    let affectedEnts = getEntsInRadius(enemies, player.x, player.y, this.ranges[this.tier - 1]);
+    for (var i in affectedEnts){
+      affectedEnts[i].gainEffect(new ShacklePassEffect(1000, this.duration, this.parent));
+    }
+  }
+}
+
+class ShacklePassEffect extends Effect{
+  constructor(duration, shackleDuration, parent){
+    super(duration, getEffectPriority("ShacklePassEffect"), false);
+    this.childDuration = shackleDuration
+    this.parent = parent;
+  }
+  doEffect(target){
+    target.tempColor = {r: 50, g: 90, b: 150};
+    target.speedMultiplier *= 0.75;
+  }
+  removeEffectLate(target){
+    target.gainEffect(new ShackleEffect(this.childDuration, this.parent))
+  }
+}
+
+class ShackleEffect extends Effect{
+  constructor(duration, parent){
+    console.log(duration);
+    super(duration, getEffectPriority("ShackleEffect"), false);
+    this.pcf = (player, enemy) => {
+      player.doRevive = true;
+    }
+    this.parent = parent;
+    this.offsetX = 0;
+    this.offsetY = 0;
+  }
+  doEffect(target){
+    target.harmless = true;
+    target.tempColor = {r: 70, g: 150, b: 210};
+    target.alphaMultiplier = 0.4;
+    target.speedMultiplier = 0;
+    target.disabled = true;
+    if (this.parent.area !== target.parentZone.parentRegion.areas[target.parentZone.parentAreaNum]){
+      this.toRemove = true;
+    } else {
+      target.x = this.parent.x + this.offsetX;
+      target.y = this.parent.y + this.offsetY;
+      target.wallSnap();
+    }
+  }
+  gainEffect(target){
+    target.playerContactFunctions.push(this.pcf)
+    this.offsetX = target.x - this.parent.x;
+    this.offsetY = target.y - this.parent.y;
+  }
+  removeEffect(target){
+    target.playerContactFunctions.splice(target.playerContactFunctions.indexOf(this.pcf));
+  }
+  removeEffectLate(target){
+    target.gainEffect(new GenericHarmlessEffect(1000));
   }
 }
 
