@@ -62,6 +62,7 @@ class ShatterEffect extends Effect{
     super(duration, getEffectPriority("ShatterEffect"), false, false);
     this.prevRenderType = "";
     this.dur = duration;
+    this.prevImmuneState = false;
   }
   doEffect(target){
     target.harmless = true;
@@ -73,8 +74,11 @@ class ShatterEffect extends Effect{
     target.renderType = "shattered";
     target.shatterTimer = this.dur;
     target.maxShatterTimer = this.dur;
+    this.prevImmuneState = target.immune;
+    target.immune = true;
   }
   removeEffectLate(target){
     target.renderType = this.prevRenderType;
+    target.immune = this.prevImmuneState;
   }
 }
