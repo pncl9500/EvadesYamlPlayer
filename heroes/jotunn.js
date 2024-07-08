@@ -72,6 +72,7 @@ class ShatterEffect extends Effect{
     this.prevRenderType = target.renderType;
     target.renderType = "shattered";
     target.shatterTimer = this.dur;
+    target.maxShatterTimer = this.dur;
   }
   removeEffectLate(target){
     target.renderType = this.prevRenderType;

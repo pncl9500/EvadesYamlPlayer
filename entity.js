@@ -172,6 +172,9 @@ class Entity{
         return;
       case "noOutline":
         break;
+      case "shattered":
+        this.drawShattered(1 - (this.shatterTimer / this.maxShatterTimer));
+        break;
       case "outline":
         if (settings.drawOutlines){
           stroke(0, (this.tempColor.a ?? 255) * this.alphaMultiplier);
@@ -201,7 +204,7 @@ class Entity{
       default:
         break;
     }
-    if (!(this.renderType === "image") && !(this.renderType === "imageUnscaled")){
+    if (!(this.renderType === "image") && !(this.renderType === "imageUnscaled")  && !(this.renderType === "shattered")){
       if (settings.squareMode){
         rect(this.x - this.radius, this.y - this.radius, this.radius * 2, this.radius * 2)
       } else {
@@ -215,5 +218,55 @@ class Entity{
   }
   doRemove(area, players){
     
+  }
+  drawShattered(t){
+    //total animation length - 120 frames
+    //shatter anim notes
+    //first part - shrinks
+    //takes 7 frames to shrink (0.0583t)
+    //shrinks to like 25% radius probably
+    //stays small for 9 frames ish (0.075t)
+    //fast spinning for 15 frames ish (0.125t), 3 particles, slightly larger than previous size
+    //it can be assumed to reconverge for the rest of the duration, so 0.7417t
+    let state = "converge";
+    let st = (t - 0.2583) / 0.7417;
+    if (t < 0.2583) {state = "diverge"; st = (t - 0.133) / 0.125}
+    if (t < 0.133) {state = "stay"; st = (t - 0.0583) / 0.075}
+    if (t < 0.0583) {state = "shrink"; st = t / 0.0583}
+    if (!this.shatterAngle) this.shatterAngle = 0;
+    switch (state) {
+      case "shrink":
+        var r = this.radius * (1 - 0.75 * st);
+        this.el(this.x, this.y, r);
+        break;
+      case "stay":
+        var r = this.radius * 0.25;
+        this.el(this.x, this.y, r);
+        break;
+      case "diverge":
+        var angle = st * Math.PI / 0.75;
+        var dist = st * 1 * this.radius * 0.8;
+        var cx = this.x;
+        var cy = this.y;
+        var r = 0.25 * this.radius;
+        this.el(cx + dist * Math.cos(angle), cy + dist * Math.sin(angle), r);
+        this.el(cx + dist * Math.cos(angle + Math.PI / 1.5), cy + dist * Math.sin(angle + Math.PI / 1.5), r);
+        this.el(cx + dist * Math.cos(angle + Math.PI / 0.75), cy + dist * Math.sin(angle + Math.PI / 0.75), r);
+        break;
+      case "converge":
+        var angle = Math.PI / 0.75 - st * Math.PI;
+        var dist = this.radius * 0.8 * (1 - st);
+        var cx = this.x;
+        var cy = this.y;
+        var r = 0.25 * this.radius + 0.75 * this.radius * st;
+        this.el(cx + dist * Math.cos(angle), cy + dist * Math.sin(angle), r);
+        this.el(cx + dist * Math.cos(angle + Math.PI / 1.5), cy + dist * Math.sin(angle + Math.PI / 1.5), r);
+        this.el(cx + dist * Math.cos(angle + Math.PI / 0.75), cy + dist * Math.sin(angle + Math.PI / 0.75), r);
+      default:
+        break;
+    }
+  }
+  el(x, y, r){
+    ellipse(x, y, r);
   }
 }
