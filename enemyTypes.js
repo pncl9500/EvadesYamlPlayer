@@ -1964,6 +1964,7 @@ class Cactus extends Enemy{
     this.inherentlyHarmless = true;
     this.pushTime = 200;
     this.staticRadius = radius;
+    this.immune = true;
   }
   behavior(area, players){
     this.baseRadius += tFix * this.staticRadius / 2 / 2000 * 30;
