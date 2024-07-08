@@ -1979,11 +1979,12 @@ class Cactus extends Enemy{
 }
 
 class CactusKnockbackEffect extends Effect{
-  constructor(enemy, pushTime, enemyRadius){
+  constructor(enemy, pushTime, enemyRadius, ignoreVuln = false){
     super(-1, getEffectPriority("CactusKnockbackEffect"), true, true);
     this.pushTime = pushTime;
     this.enemy = enemy;
     this.enemyRadius = enemyRadius;
+    this.ignoreVuln = ignoreVuln;
   }
   gainEffect(target){
     let dist = dst(target, this.enemy) - target.radius;
@@ -1995,6 +1996,7 @@ class CactusKnockbackEffect extends Effect{
     this.knockbackX = xRemaining / ticksUntilFinished;
     this.knockbackY = yRemaining / ticksUntilFinished;
     this.multiplier = target.effectVulnerability;
+    if (this.ignoreVuln) this.multiplier = 1;
     this.knockbackX *= 32;
     this.knockbackY *= 32;
   }

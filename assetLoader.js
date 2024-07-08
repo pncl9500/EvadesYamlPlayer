@@ -119,6 +119,8 @@ function loadAssets(){
     "ab.astralprojection": loadImg("imageAssets/ab/astralprojection.png", "ab.astralprojection"),
     "ab.shackle": loadImg("imageAssets/ab/shackle.png", "ab.shackle"),
 
+    "ab.impulse": loadImg("imageAssets/ab/impulse.png", "ab.impulse"),
+
     "ab.lantern": loadImg("imageAssets/ab/lantern.png", "ab.lantern"),
     "ab.flashlight": loadImg("imageAssets/ab/flashlight.png", "ab.flashlight"),
   }

@@ -167,6 +167,7 @@ pal = {
     toukka: "424f34",
     nov: "82776c",
     irit: "9caff0",
+    tecto: "bd2700",
     
     
     oldmorfe: "00dd00",

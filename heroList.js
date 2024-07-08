@@ -23,6 +23,7 @@ heroList = {
   "toukka": Toukka,
   "nov": Nov,
   "irit": Irit,
+  "tecto": Tecto,
   
   "oldmorfe": OldMorfe,
   "ogmorfe": OldMorfe,
@@ -51,6 +52,7 @@ modHeroes = [
   "toukka",
   "nov",
   "irit",
+  "tecto",
 ]
 
 variantHeroes = [
