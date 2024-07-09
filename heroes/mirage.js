@@ -41,7 +41,6 @@ class ObscureProjectile extends Projectile{
     this.detectEnemyContact();
   }
   contactEffect(enemy){
-    debugValue = this.invin;
     this.parent.gainEffect(new ObscureEffect());
     this.parent.x = enemy.x;
     this.parent.y = enemy.y;
