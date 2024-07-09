@@ -75,7 +75,7 @@ class MiseryEntity extends Entity{
 
     this.clock = 0;
     this.speed = 0;
-    this.maxSpeed = parent.speed * 1.25;
+    this.maxSpeed = parent.speed * 1.2;
   }
   update(){
     if (this.area != this.parent.area){
@@ -111,9 +111,10 @@ class MiseryEntity extends Entity{
   chase(){
     let ang = Math.atan2(this.parent.y - this.y, this.parent.x - this.x);
     let dist = dst(this.parent, this);
-    let speedMultiplier = Math.max(1, (dist - 500) / 100);
+    let speedMultiplier = Math.max(1, (dist - 400) / 50);
     this.x += this.speed * sqcos(ang) * tFix * speedMultiplier;
     this.y += this.speed * sqsin(ang) * tFix * speedMultiplier;
+    speedMultiplier *= this.parent.speedMultiplier;
     if (circleCircle(this, this.parent)){
       if (this.parent.hasEffect("SafeZoneEffect")) return;
       this.toRemove = true;
