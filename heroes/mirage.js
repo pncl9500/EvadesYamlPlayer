@@ -41,7 +41,7 @@ class ObscureProjectile extends Projectile{
     this.detectEnemyContact();
   }
   contactEffect(enemy){
-    this.parent.gainEffect(new ObscureEffect());
+    this.parent.gainEffect(new ObscureEffect(this.invin));
     this.parent.x = enemy.x;
     this.parent.y = enemy.y;
     this.toRemove = true;
@@ -50,10 +50,10 @@ class ObscureProjectile extends Projectile{
 
 class ObscureEffect extends Effect{
   constructor(duration){
-    super(duration, getEffectPriority("GenericInvincibilityEffect"), false, true);
+    super(duration, getEffectPriority("GenericInvincibilityEffect"), false, false);
   }
   doEffect(target){
     target.invincible = true;
-    target.tempColor = {r: 0, g: 0, b: 75};
+    target.tempColor = {r: 0, g: 0, b: 65};
   }
 }
