@@ -131,19 +131,21 @@ function getRegionSelectorMenu(){
     }
     list.push(row(items));
   }
-  list.push(txt("", 8));
-  list.push(txt(`Total missing enemies (${totalMissingEnemies.length}/${totalEnemyTypes}, ${round((totalMissingEnemies.length/totalEnemyTypes) * 1000) / 10}% missing, ${totalEnemyTypes- totalMissingEnemies.length}/${totalEnemyTypes} complete, ${round(((totalEnemyTypes - totalMissingEnemies.length)/totalEnemyTypes) * 1000) / 10}% complete):`, 12));
-  totalMissingEnemies.push("ring_sniper");
-  for (let i in totalMissingEnemies){
-    list.push(txt(totalMissingEnemies[i], 8));
-  }
-  if (totalMissingEnemies.length === 0){
-    list.push(txt("All enemies have been implemented, and I can finally rest.", 8));
-  }
-  if (totalMissingEnemies.length > 17){
-    list.push(txt(`Enemies left until cc2 event horizon: ${totalMissingEnemies.length - 17}`, 12));
-  } else if (totalMissingEnemies !== 0){
-    list.push(txt(`The cc2 event horizon is here.`, 12));
+  if (keyIsDown(16)){
+    list.push(txt("", 8));
+    list.push(txt(`Total missing enemies (${totalMissingEnemies.length}/${totalEnemyTypes}, ${round((totalMissingEnemies.length/totalEnemyTypes) * 1000) / 10}% missing, ${totalEnemyTypes- totalMissingEnemies.length}/${totalEnemyTypes} complete, ${round(((totalEnemyTypes - totalMissingEnemies.length)/totalEnemyTypes) * 1000) / 10}% complete):`, 12));
+    totalMissingEnemies.push("ring_sniper");
+    for (let i in totalMissingEnemies){
+      list.push(txt(totalMissingEnemies[i], 8));
+    }
+    if (totalMissingEnemies.length === 0){
+      list.push(txt("All enemies have been implemented, and I can finally rest.", 8));
+    }
+    if (totalMissingEnemies.length > 17){
+      list.push(txt(`Enemies left until cc2 event horizon: ${totalMissingEnemies.length - 17}`, 12));
+    } else if (totalMissingEnemies !== 0){
+      list.push(txt(`The cc2 event horizon is here.`, 12));
+    }
   }
   return list;
 }
