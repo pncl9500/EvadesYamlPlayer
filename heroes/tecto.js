@@ -9,7 +9,7 @@ class Tecto extends Player{
 
 class Impulse extends Ability{
   constructor(){
-    super(5, [2000, 1750, 1500, 1250, 1000], 10, "ab.impulse");
+    super(5, [2000, 1800, 1600, 1400, 1200], 10, "ab.impulse");
   }
   activate(player, players, pellets, enemies, miscEnts, region, area){
     let fakeEnemy = new Enemy(player.x - Math.cos(player.lastDir), player.y - Math.sin(player.lastDir), 0, 0, 32, "#000000")
@@ -30,9 +30,9 @@ class ImpulseEffect extends Effect{
     if (contactedEnemy.hasEffect("ShatterEffect")) return;
     this.toRemove = true;
     let fakeEnemy = new Enemy(target.x + Math.cos(target.lastDir), target.y + Math.sin(target.lastDir), 0, 0, 32, "#000000")
-    target.gainEffect(new CactusKnockbackEffect(fakeEnemy, 1500, 4000, true));
-    target.gainEffect(new ShatterEffect(1000));
+    target.gainEffect(new CactusKnockbackEffect(fakeEnemy, 1500, 3600, true));
     contactedEnemy.gainEffect(new ShatterEffect(3000));
-    target.gainEffect(new OrbitInvincibilityEffect(1000));
+    target.gainEffect(new ShatterEffect(750));
+    target.gainEffect(new OrbitInvincibilityEffect(750));
   }
 }
