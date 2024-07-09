@@ -104,6 +104,13 @@ function loadAssets(){
     "ab.decay": loadImg("imageAssets/ab/decay.png", "ab.decay"),
     "ab.shatter": loadImg("imageAssets/ab/shatter.png", "ab.shatter"),
 
+    "ab.shift": loadImg("imageAssets/ab/shift.png", "ab.shift"),
+    "ab.obscure": loadImg("imageAssets/ab/obscure.png", "ab.obscure"),
+
+    "ab.sweet_tooth": loadImg("imageAssets/ab/sweet_tooth.png", "ab.sweet_tooth"),
+    "ab.sugar_rush": loadImg("imageAssets/ab/sugar_rush.png", "ab.sugar_rush"),
+    "pr.sweet_tooth_item": loadImg("imageAssets/ent/sweet_tooth_item.png", "pr.sweet_tooth_item"),
+
     "ab.masonry": loadImg("imageAssets/ab/masonry.png", "ab.masonry"),
     "ab.tether": loadImg("imageAssets/ab/tether.png", "ab.tether"),
 

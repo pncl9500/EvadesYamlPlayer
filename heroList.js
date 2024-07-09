@@ -17,6 +17,8 @@ heroList = {
   "jötunn": Jotunn,
   "jot": Jotunn,
   "jöt": Jotunn,
+  "candy": Candy,
+  "mirage": Mirage,
 
   "fab": Fab,
   "leporid": Leporid,
@@ -44,6 +46,8 @@ vanillaHeroes = [
   "rameses",
   "jolt",
   "jotunn",
+  "candy",
+  "mirage",
 ]
 
 modHeroes = [

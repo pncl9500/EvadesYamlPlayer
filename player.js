@@ -648,7 +648,7 @@ class Player extends Entity{
             break;
           }
           this.mostRecentSafeX = this.x;
-          this.mostRecentSafeY = this.x;
+          this.mostRecentSafeY = this.y;
           this.mostRecentSafeZone = zone;
           break;
         default:
