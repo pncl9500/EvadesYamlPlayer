@@ -54,6 +54,6 @@ class ObscureEffect extends Effect{
   }
   doEffect(target){
     target.invincible = true;
-    target.tempColor = {r: 0, g: 0, b: 65};
+    target.tempColor = {r: 0, g: 0, b: 70};
   }
 }
