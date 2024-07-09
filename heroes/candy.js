@@ -34,6 +34,8 @@ class SugarRush extends Ability{
     this.aura.radius = this.radius;
     if (this.auraLife < 0){
       this.aura.toRemove = true;
+    } else {
+      player.tempColor = {r: 214, g: 110, b: 162};
     }
   }
 }
