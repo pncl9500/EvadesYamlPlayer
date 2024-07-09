@@ -115,7 +115,9 @@ class MiseryEntity extends Entity{
     this.x += this.speed * sqcos(ang) * tFix * speedMultiplier;
     this.y += this.speed * sqsin(ang) * tFix * speedMultiplier;
     if (circleCircle(this, this.parent)){
+      if (this.parent.hasEffect("SafeZoneEffect")) return;
       this.toRemove = true;
+      if (this.parent.invincible && this.parent.corrosiveBypass) return;
       this.parent.die();
     }
   }
