@@ -21,7 +21,7 @@ class SugarRush extends Ability{
   }
   activate(player, players, pellets, enemies, miscEnts, region, area){
     this.aura.parent = player;
-    this.auraLife = 2000;
+    this.auraLife = this.duration;
     this.aura.toRemove = false;
     player.auras.push(this.aura);
   }
@@ -36,7 +36,24 @@ class SugarRush extends Ability{
       this.aura.toRemove = true;
     } else {
       player.tempColor = {r: 214, g: 110, b: 162};
+      for (let i in enemies){
+        //dude
+        //this.aura.radius = this.radius;
+        if (circleCircle({x: player.x, y: player.y, r: this.radius}, enemies[i])){
+          enemies[i].gainEffect(new SugarRushEffect(this.slow, this.effectDuration));
+        }
+      }
     }
+  }
+}
+
+class SugarRushEffect extends Effect{
+  constructor(speedMul, duration = 0){
+    super(duration, getEffectPriority("SugarRushEffect"), false, true);
+    this.speedMul = speedMul;
+  }
+  doEffect(target){
+    target.speedMultiplier *= this.speedMul;
   }
 }
 
