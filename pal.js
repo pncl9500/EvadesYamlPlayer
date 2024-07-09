@@ -158,9 +158,9 @@ pal = {
     demona: "7d3c9e",
     stheno: "cfa6ec",
     factorb: "6e391e",
+    cybot: "926be3",
     alk: "8b0146",
     aranes: "212121",
-    cybot: "926be3",
 
     fab: "bdab73",
     leporid: "aab5af",

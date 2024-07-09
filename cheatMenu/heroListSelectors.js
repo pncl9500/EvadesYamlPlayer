@@ -19,7 +19,13 @@ function getHeroSelectorMenu(playerToChange = game.mainPlayer, backMenuDestinati
   ];
 
   list = list.concat(getHeroSelectorSectionFromArray(playerToChange, vanillaHeroes));
+  //why is this here
   list = list.concat()
+
+  if (keyIsDown(16)){
+    list.push(new HeroTracker());
+  }
+
   return list;
 }
 
@@ -105,4 +111,28 @@ function getPlayerCreationSectionFromArray(set){
     list.push(nb);
   }
   return list;
+}
+
+class HeroTracker extends CheatMenuItem{
+  constructor(){
+    super(500, 500);
+  }
+  draw(offset){
+    for (let i = 0; i < Object.keys(pal.hero).length; i++){
+      let c = hexToRgb(pal.hero[Object.keys(pal.hero)[i]]);
+      fill(c.r, c.g, c.b);
+      let x = i % 18;
+      let y = floor(i / 18);
+      ellipse(x * 16 + 16, offset + y * 16 + 16, 7, 7);
+      if (!vanillaHeroes.includes(Object.keys(pal.hero)[i])){
+        fill(0, 165);
+        ellipse(x * 16 + 16, offset + y * 16 + 16, 7, 7);
+        fill(0);
+        ellipse(x * 16 + 16, offset + y * 16 + 16, 4.6, 4.6);
+      }
+      if (Object.keys(pal.hero)[i] === "cybot"){
+        i = Object.keys(pal.hero).length;
+      }
+    }
+  }
 }
