@@ -134,5 +134,23 @@ class HeroTracker extends CheatMenuItem{
         i = Object.keys(pal.hero).length;
       }
     }
+    offset += floor(vanillaHeroes.length / 18);
+    offset += 48;
+    for (let i = 0; i < modHeroes.length; i++){
+      let c = hexToRgb(pal.hero[modHeroes[i]]);
+      fill(c.r, c.g, c.b);
+      let x = i % 18;
+      let y = floor(i / 18);
+      ellipse(x * 16 + 16, offset + y * 16 + 16, 7, 7);
+    }
+    offset += floor(modHeroes.length / 18);
+    offset += 32;
+    for (let i = 0; i < variantHeroes.length; i++){
+      let c = hexToRgb(pal.hero[variantHeroes[i]]);
+      fill(c.r, c.g, c.b);
+      let x = i % 18;
+      let y = floor(i / 18);
+      ellipse(x * 16 + 16, offset + y * 16 + 16, 7, 7);
+    }
   }
 }
