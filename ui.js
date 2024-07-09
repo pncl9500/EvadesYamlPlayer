@@ -113,9 +113,9 @@ class HeroCard extends UIpanel{
     this.drawStatUpgraderText(-this.width / 2 + this.lineDistance + 40, -this.height + 37, round(game.mainPlayer.speed * 10) / 10, "Speed", "1", true, game.mainPlayer.speed < gameConsts.maxSpeed)
     this.drawStatUpgraderText(-this.width / 2 + this.lineDistance + 40 + 80, -this.height + 37, `${round(game.mainPlayer.energy)} / ${game.mainPlayer.maxEnergy}`, "Energy", "2", true, game.mainPlayer.maxEnergy < gameConsts.maxEnergy)
     this.drawStatUpgraderText(-this.width / 2 + this.lineDistance + 40 + 160, -this.height + 37, round(game.mainPlayer.regen * 10) / 10, "Regen", "3", true, game.mainPlayer.regen < gameConsts.maxRegen)
-    this.drawStatUpgraderButton(-this.width / 2 + this.lineDistance + 40 + 240, -this.height + 37, "4", game.mainPlayer.ability1.tier < game.mainPlayer.ability1.maxTier);
-    this.drawStatUpgraderButton(-this.width / 2 + this.lineDistance + 40 + 320, -this.height + 37, "5", game.mainPlayer.ability2.tier < game.mainPlayer.ability2.maxTier);
-    hasThird && this.drawStatUpgraderButton(-this.width / 2 + this.lineDistance + 40 + 400, -this.height + 37, "6", game.mainPlayer.ability3.tier < game.mainPlayer.ability3.maxTier);
+    this.drawStatUpgraderButton(-this.width / 2 + this.lineDistance + 40 + 240, -this.height + 37, "4", game.mainPlayer.ability1.tier < game.mainPlayer.ability1.maxTier && game.mainPlayer.ability1.canBeUpgradedManually);
+    this.drawStatUpgraderButton(-this.width / 2 + this.lineDistance + 40 + 320, -this.height + 37, "5", game.mainPlayer.ability2.tier < game.mainPlayer.ability2.maxTier && game.mainPlayer.ability2.canBeUpgradedManually);
+    hasThird && this.drawStatUpgraderButton(-this.width / 2 + this.lineDistance + 40 + 400, -this.height + 37, "6", game.mainPlayer.ability3.tier < game.mainPlayer.ability3.maxTier && game.mainPlayer.ability3.canBeUpgradedManually);
     if (game.mainPlayer.upgradePoints < 1){
       this.drawAbilityUpgradeText(-this.width / 2 + this.lineDistance + 40 + 240, -this.height + 37, "Locked", "[Z] or [J]", game.mainPlayer.ability1.tier === 0);
       this.drawAbilityUpgradeText(-this.width / 2 + this.lineDistance + 40 + 320, -this.height + 37, "Locked", "[X] or [K]", game.mainPlayer.ability2.tier === 0);

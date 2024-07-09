@@ -3,7 +3,14 @@ class Tecto extends Player{
     super(x, y, radius, pal.hero.tecto, name, isMain, game, regionNum, areaNum, ctrlSets, putInArea);
     this.heroName = "Tecto";
     this.ability1 = new Impulse();
-    this.ability2 = new BlankAbility();
+    this.ability2 = new Misery();
+    this.ability1.upgradeWith = this.ability2;
+  }
+  die(){
+    super.die();
+    if (this.ability2.entity){
+      this.ability2.entity.toRemove = true;
+    }
   }
 }
 
@@ -34,5 +41,82 @@ class ImpulseEffect extends Effect{
     contactedEnemy.gainEffect(new ShatterEffect(3000));
     target.gainEffect(new ShatterEffect(750));
     target.gainEffect(new OrbitInvincibilityEffect(750));
+  }
+}
+
+class Misery extends Ability{
+  constructor(){
+    super(1, 0, 0, "ab.misery");
+    this.canBeUpgradedManually = false;
+    this.entity = null;
+  }
+  behavior(player, players, pellets, enemies, miscEnts, region, area){
+    if (player.dead) return;
+    if (this.tier === 0) return;
+    if (miscEnts.includes(this.entity)) return;
+    this.entity = new MiseryEntity(player);
+    area.addEnt(this.entity);
+  }
+}
+
+class MiseryEntity extends Entity{
+  constructor(parent){
+    super(parent.x, parent.y, parent.radius, "#000000", z.miseryEntity, "shattered");
+    this.parent = parent;
+    this.area = parent.area;
+    this.startX = parent.x;
+    this.startY = parent.y;
+    this.renderType = "shattered";
+
+    this.startTime = 850;
+
+    this.shatterTimer = this.startTime;
+    this.maxShatterTimer = this.startTime;
+
+    this.clock = 0;
+    this.speed = 0;
+    this.maxSpeed = parent.speed * 1.25;
+  }
+  update(){
+    if (this.area != this.parent.area){
+      this.toRemove = true;
+      return;
+    }
+    this.clock += dTime;
+    if (this.clock < this.startTime) {
+      this.shatterTimer -= dTime
+    } else {
+      this.shatterTimer = 0;
+      this.renderType = "noOutline";
+    }
+    this.behavior();
+  }
+  draw(){
+    push();
+    translate(random(-3, 3), random(-3, 3));
+    super.draw();
+    pop();
+  }
+  behavior(){
+    if (this.clock > this.startTime){
+      this.chase();
+      this.speed += this.maxSpeed * 0.07 * tFix;
+      if (this.parent.hasEffect("SafeZoneEffect")){
+        this.speed -= this.maxSpeed * 0.13 * tFix;
+      }
+      if (this.speed > this.maxSpeed) this.speed = this.maxSpeed;
+      if (this.speed < 0) this.speed = 0;
+    }
+    }
+  chase(){
+    let ang = Math.atan2(this.parent.y - this.y, this.parent.x - this.x);
+    let dist = dst(this.parent, this);
+    let speedMultiplier = Math.max(1, (dist - 500) / 100);
+    this.x += this.speed * sqcos(ang) * tFix * speedMultiplier;
+    this.y += this.speed * sqsin(ang) * tFix * speedMultiplier;
+    if (circleCircle(this, this.parent)){
+      this.toRemove = true;
+      this.parent.die();
+    }
   }
 }

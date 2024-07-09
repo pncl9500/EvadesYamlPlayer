@@ -14,6 +14,7 @@ class Ability{
     this.cost = cost;
     this.rechargingActive = true;
     this.upgradeWith = null;
+    this.canBeUpgradedManually = true;
   }
   upgrade(player, forceUpgrade = false, canReupgrade = true){
     if ((player.upgradePoints > 0 || forceUpgrade) && this.tier < this.maxTier){

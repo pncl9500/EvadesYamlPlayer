@@ -19,4 +19,6 @@ z = {
   vengeanceProjectile: 2500,
   sparkProjectile: 2510,
   lightningProjectile: 2511,
+
+  miseryEntity: 5000,
 }

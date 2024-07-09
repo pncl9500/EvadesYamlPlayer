@@ -120,6 +120,7 @@ function loadAssets(){
     "ab.shackle": loadImg("imageAssets/ab/shackle.png", "ab.shackle"),
 
     "ab.impulse": loadImg("imageAssets/ab/impulse.png", "ab.impulse"),
+    "ab.misery": loadImg("imageAssets/ab/misery.png", "ab.misery"),
 
     "ab.lantern": loadImg("imageAssets/ab/lantern.png", "ab.lantern"),
     "ab.flashlight": loadImg("imageAssets/ab/flashlight.png", "ab.flashlight"),
