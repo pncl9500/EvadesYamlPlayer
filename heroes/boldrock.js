@@ -133,7 +133,7 @@ class EarthquakeEffect extends Effect{
 
 class EarthquakeResidue extends Projectile{
   constructor(enemy, parent){
-    super(enemy.x, enemy.y, Math.random() * 2 * PI, 0.7, 3000, -1, enemy.radius * enemy.radiusMultiplier * 0.4, "#523e2539", parent.area, parent, z.genericProjectile, [], "outline", 0, true);
+    super(enemy.x, enemy.y, Math.random() * 2 * PI, 0.7, 3000, -1, enemy.radius * enemy.radiusMultiplier * 0.4, "#523e2539", parent.area, parent, z.boldrockResidue, [], "outline", 0, true);
     this.clock = 0;
     this.parent = parent;
   }

@@ -8,6 +8,7 @@ z = {
   genericProjectile: 0.5,
   enemy: 2000,
   enemyRadiusZfactor: -0.3,
+  boldrockResidue: 2400,
   randEpsilon: 0.0001,
   genericAura: 200,
   //auraRadiusZfactor: -0.3,
