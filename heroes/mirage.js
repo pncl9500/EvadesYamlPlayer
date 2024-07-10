@@ -31,9 +31,9 @@ class Obscure extends Ability{
 
 class ObscureProjectile extends Projectile{
   constructor(angle, parent, invin){
-    let speed = 52
-    let lifetime = 400;
-    super(parent.x, parent.y, angle, speed, lifetime, -1, 15, pal.hero.mirage, parent.area, parent, z.genericProjectile);
+    let speed = 50
+    let lifetime = 384;
+    super(parent.x, parent.y, angle, speed, lifetime, -1, 14, pal.hero.mirage, parent.area, parent, z.genericProjectile);
     this.parent = parent;
     this.invin = invin;
   }

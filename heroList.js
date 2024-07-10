@@ -19,6 +19,9 @@ heroList = {
   "jöt": Jotunn,
   "candy": Candy,
   "mirage": Mirage,
+  "boldrock": Boldrock,
+  "bold": Boldrock,
+  "rock": Boldrock,
 
   "fab": Fab,
   "leporid": Leporid,
@@ -48,6 +51,7 @@ vanillaHeroes = [
   "jotunn",
   "candy",
   "mirage",
+  "boldrock"
 ]
 
 modHeroes = [
