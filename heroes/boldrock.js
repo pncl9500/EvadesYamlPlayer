@@ -11,7 +11,7 @@ class Boldrock extends Player{
     this.crumbleStage = 0;
   }
   die(){
-    if (!rechargeCooldownOnDeath){
+    if (!settings.rechargeCooldownOnDeath){
       this.crumbleStage = 0;
       this.ability1.reduc = 0;
     }
