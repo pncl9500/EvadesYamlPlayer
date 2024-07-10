@@ -111,7 +111,7 @@ class Earthquake extends ToggleAbility{
         //spawn residue
         area.addEnt(new EarthquakeResidue(affectedEnts[i], player));
       }
-      affectedEnts[i].gainEffect(new EarthquakeEffect(this.duration));
+      if (affectedEnts[i].spawnResidueOnEarthquake) affectedEnts[i].gainEffect(new EarthquakeEffect(this.duration));
     }
   }
 }
