@@ -7,7 +7,7 @@ class Boldrock extends Player{
     super(x, y, radius, pal.hero.boldrock, name, isMain, game, regionNum, areaNum, ctrlSets, putInArea);
     this.heroName = "Boldrock";
     this.ability1 = new Crumble(this);
-    this.ability2 = new BlankAbility();
+    this.ability2 = new Earthquake(this);
     this.crumbleStage = 0;
   }
   die(){
@@ -60,7 +60,7 @@ class CrumbleProjectile extends Projectile{
   constructor(parent, angle){
     let reduced;
     reduced = ((parent.region.properties && parent.region.properties.crumble_reduced) || (parent.area.properties && parent.area.properties.crumble_reduced));
-    super(parent.x, parent.y, angle, 18, reduced ? 500 : 3000, -1, 9, pal.hero.boldrock, parent.area, parent, z.genericProjectile, [], "noOutline", 8, false);
+    super(parent.x, parent.y, angle, 18, reduced ? 500 : 3000, -1, 9, pal.hero.boldrock, parent.area, parent, z.genericProjectile, [], "noOutline", 8, true);
     this.clock = 0;
     this.parent = parent;
   }
@@ -79,5 +79,74 @@ class CrumbleProjectile extends Projectile{
   contactEffect(enemy){
     this.parent.gainEffect(new OrbitInvincibilityEffect(1000));
     this.toRemove = true;
+  }
+}
+
+class Earthquake extends ToggleAbility{
+  constructor(parent){
+    super(5, 3000, 15, "ab.earthquake");
+    this.ranges = [100, 120, 140, 160, 180];
+    this.duration = 6000;
+    this.aura = new LockedAura({x: 0, y: 0}, this.ranges[this.tier - 1], "#a1844639", z.genericAura + random() * z.randEpsilon);
+    this.parent = parent;
+  }
+  upgradeBehavior(player){
+    this.aura.radius = this.ranges[this.tier - 1];
+  }
+  update(){
+    this.currentCooldown -= dTime;
+    this.aura.update();
+  }
+  toggleOn(player, players, pellets, enemies, miscEnts, region, area){
+    this.aura.parent = player;
+    player.addAura(this.aura);
+  }
+  toggleOff(player, players, pellets, enemies, miscEnts, region, area){
+    this.aura.toRemove = true;
+  }
+  activate(player, players, pellets, enemies, miscEnts, region, area){
+    let affectedEnts = getEntsInRadius(enemies, player.x, player.y, this.ranges[this.tier - 1]);
+    for (var i in affectedEnts){
+      if (!affectedEnts[i].hasEffect("EarthquakeEffect")){
+        //spawn residue
+        area.addEnt(new EarthquakeResidue(affectedEnts[i], player));
+      }
+      affectedEnts[i].gainEffect(new EarthquakeEffect(this.duration));
+    }
+  }
+}
+
+class EarthquakeEffect extends Effect{
+  constructor(duration = 6000){
+    super(duration, getEffectPriority("EarthquakeEffect"), false);
+    this.speedMul = 0.25;
+    this.radiusMul = 0.5;
+  }
+  doEffect(target){
+    target.speedMultiplier *= this.speedMul;
+    target.radiusMultiplier *= this.radiusMul; 
+  }
+  removeEffectLate(target){
+    target.gainEffect(new SizeRecoveryEffect(this.radiusMul, 2500));
+  }
+}
+
+class EarthquakeResidue extends Projectile{
+  constructor(enemy, parent){
+    super(enemy.x, enemy.y, Math.random() * 2 * PI, 1, 3000, -1, enemy.radius * enemy.radiusMultiplier * 0.4, "#523e2539", parent.area, parent, z.genericProjectile, [], "outline", 8, true);
+    this.clock = 0;
+    this.parent = parent;
+  }
+  behavior(){
+
+  }
+  detectContact(){
+    this.detectPlayerContact();
+  }
+  contactEffect(player){
+    if (this.parent !== player) return;
+    this.toRemove = true;
+    this.parent.ability1.currentCooldown -= 2;
+    this.parent.ability2.currentCooldown -= 750;
   }
 }
