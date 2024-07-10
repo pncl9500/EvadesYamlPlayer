@@ -133,12 +133,16 @@ class EarthquakeEffect extends Effect{
 
 class EarthquakeResidue extends Projectile{
   constructor(enemy, parent){
-    super(enemy.x, enemy.y, Math.random() * 2 * PI, 1, 3000, -1, enemy.radius * enemy.radiusMultiplier * 0.4, "#523e2539", parent.area, parent, z.genericProjectile, [], "outline", 8, true);
+    super(enemy.x, enemy.y, Math.random() * 2 * PI, 0.7, 3000, -1, enemy.radius * enemy.radiusMultiplier * 0.4, "#523e2539", parent.area, parent, z.genericProjectile, [], "outline", 0, true);
     this.clock = 0;
     this.parent = parent;
   }
   behavior(){
-
+    if (this.parent.area !== this.area) return;
+    if (dst(this.parent, this) > 75) return;
+    let ang = Math.atan2(this.parent.y - this.y, this.parent.x - this.x);
+    this.x += Math.cos(ang) * 4 * tFix;
+    this.y += Math.sin(ang) * 4 * tFix;
   }
   detectContact(){
     this.detectPlayerContact();
