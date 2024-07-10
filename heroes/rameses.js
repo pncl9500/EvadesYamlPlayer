@@ -5,6 +5,12 @@ class Rameses extends Player{
     this.ability1 = new Bandages();
     this.ability2 = new Latch();
   }
+  die(){
+    if (settings.rechargeCooldownOnDeath && this.ability1.tier > 0 && this.maxEnergy > 50 && !this.hasEffect("BandageEffect") && !this.hasEffect("UnbandagingEffect")){
+      this.ability1.giveBandages(this);
+    }
+    super.die();
+  }
 }
 
 class Bandages extends Ability{
