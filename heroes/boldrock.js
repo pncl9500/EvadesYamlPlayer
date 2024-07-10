@@ -11,8 +11,10 @@ class Boldrock extends Player{
     this.crumbleStage = 0;
   }
   die(){
-    this.crumbleStage = 0;
-    this.ability1.reduc = 0;
+    if (!rechargeCooldownOnDeath){
+      this.crumbleStage = 0;
+      this.ability1.reduc = 0;
+    }
     super.die();
   }
 }
@@ -31,6 +33,12 @@ class Crumble extends Ability{
     if (this.parent.crumbleStage >= 1) this.reduc += 5;
     if (this.parent.crumbleStage >= 2) this.reduc += 2;
     if (this.parent.crumbleStage >= 3) this.reduc += 1;
+
+    let ang = Math.random() * 2 * PI;
+    for (let i = 0; i < 5; i++){
+      let off = i * 2 * PI / 5;
+      area.addEnt(new CrumbleProjectile(this.parent, ang + off))
+    }
   }
   behavior(player, players, pellets, enemies, miscEnts, region, area){
     player.gainEffect(new CrumbleReduc(this.reduc));
@@ -48,4 +56,28 @@ class CrumbleReduc extends Effect{
   }
 }
 
-
+class CrumbleProjectile extends Projectile{
+  constructor(parent, angle){
+    let reduced;
+    reduced = ((parent.region.properties && parent.region.properties.crumble_reduced) || (parent.area.properties && parent.area.properties.crumble_reduced));
+    super(parent.x, parent.y, angle, 18, reduced ? 500 : 3000, -1, 9, pal.hero.boldrock, parent.area, parent, z.genericProjectile, [], "noOutline", 8, false);
+    this.clock = 0;
+    this.parent = parent;
+  }
+  behavior(){
+    this.clock += dTime;
+    if (this.clock > 101){
+      this.speed = 0;
+    }
+    if (this.lifetime < 500){
+      this.alphaMultiplier = this.lifetime / 500;
+    }
+  }
+  detectContact(){
+    this.detectEnemyContact();
+  }
+  contactEffect(enemy){
+    this.parent.gainEffect(new OrbitInvincibilityEffect(1000));
+    this.toRemove = true;
+  }
+}

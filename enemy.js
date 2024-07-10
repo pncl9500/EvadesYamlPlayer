@@ -19,6 +19,7 @@ class Enemy extends Entity{
     //all enemies have parentZone property
 
     this.playerContactFunctions = [];
+    this.spawnResidueOnEarthquake = true;
   }
   setAsGhost(){
     this.gainEffect(new IsGhostEffect());
