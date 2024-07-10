@@ -43,7 +43,6 @@ class CrumbleReduc extends Effect{
     this.reduc = reduc;
   }
   doEffect(target){
-    debugValue = this.reduc;
     let mul = (15 - this.reduc) / 15;
     target.tempRadius *= mul;
   }
