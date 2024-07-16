@@ -110,6 +110,8 @@ class Entity{
   removeEffect(effectConstructorName){
     for (let i = 0; i < this.effects.length; i++){
       if (this.effects[i].constructor.name === effectConstructorName){
+        this.effects[i].removeEffect(this);
+        this.effectRemovalQueue.push(this.effects[i]);
         this.effects.splice(i, 1);
         i--;
       }

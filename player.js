@@ -142,6 +142,9 @@ class Player extends Entity{
       this.effects[i].applyBeforeAbilities(this);
     }
   }
+  lavaDie(){
+    this.die();
+  }
   behavior(){
 
   }

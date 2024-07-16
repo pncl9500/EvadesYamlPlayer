@@ -240,7 +240,7 @@ class LavaEnemyEffect extends Effect{
     if (newEnergy > target.maxEnergy){
       target.energy = 0;
       if (!(target.isMain && settings.invincibilityCheat)){
-        target.die();
+        target.lavaDie();
       }
     } else {
       target.energy = newEnergy;

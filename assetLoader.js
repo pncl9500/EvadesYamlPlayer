@@ -114,6 +114,9 @@ function loadAssets(){
     "ab.crumble": loadImg("imageAssets/ab/crumble.png", "ab.crumble"),
     "ab.earthquake": loadImg("imageAssets/ab/earthquake.png", "ab.earthquake"),
 
+    "ab.radioactive_gloop": loadImg("imageAssets/ab/radioactive_gloop.png", "ab.radioactive_gloop"),
+    "ab.sticky_coat": loadImg("imageAssets/ab/sticky_coat.png", "ab.sticky_coat"),
+
     "ab.masonry": loadImg("imageAssets/ab/masonry.png", "ab.masonry"),
     "ab.tether": loadImg("imageAssets/ab/tether.png", "ab.tether"),
 

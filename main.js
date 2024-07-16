@@ -1,4 +1,4 @@
-ver = "0"
+ver = "612"
 p5.disableFriendlyErrors = true;
 
 debugValue = "";
@@ -49,6 +49,7 @@ function setup() {
   ui.alertBox.alerts.push("Note that EvadesYamlPlayer is currently in open beta.")
   ui.alertBox.alerts.push("The game does not have every Evades.io feature and may")
   ui.alertBox.alerts.push("crash without warning.")
+  ui.alertBox.alerts.push(`Current patch: ${ver}`)
 
   cheatMenuItems = setCheatMenuItems();
   
