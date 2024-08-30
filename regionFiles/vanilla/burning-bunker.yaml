@@ -2112,7 +2112,6 @@ areas:
       count: 1
       radius: 1919
       speed: .1
-      switch_interval: 6000
     - types:
       - sizing
       count: 35
@@ -9072,7 +9071,6 @@ areas:
       count: 1
       radius: 1919
       speed: .1
-      switch_interval: 6000
     - types:
       - fire_trail
       count: 5
@@ -13077,7 +13075,6 @@ areas:
       count: 1
       radius: 1919
       speed: .1
-      switch_interval: 6000
     - types:
       - slowing
       count: 20
@@ -17380,7 +17377,6 @@ areas:
       count: 1
       radius: 1919
       speed: .1
-      switch_interval: 6000
     - types:
       - fire_trail
       count: 6

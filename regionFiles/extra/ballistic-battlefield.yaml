@@ -1,135 +1,37 @@
-name: Magnetic Monopole
+name: Central Core
 properties:
-  friction: 0.75
-  magnetism: true
   background_color:
-  - 191
-  - 0
-  - 255
-  - 125
+  - 109
+  - 194
+  - 12
+  - 65
+  friction: 0.75
 areas:
-# 1
+# Area 1
 - x: var x
   y: var y
   zones:
   - type: teleport
     x: 0
     y: 0
-    width: 32
-    height: 192
-    translate:
-      x: 94796
-      y: 0
-    properties:
-      background_color:
-      - 0
-      - 0
-      - 0
-      - 100
-  - type: safe
-    x: 32
-    y: 32
-    width: 288
-    height: 128
-    properties:
-      minimum_speed: 10
-  - type: teleport
-    x: 32
-    y: 0
-    width: 256
-    height: 32
+    width: 320
+    height: 64
     translate:
       x: 0
-      y: -1280
-  - type: teleport
-    x: 32
-    y: 160
-    width: 256
-    height: 32
-    translate:
-      x: -1952
-      y: 11048
+      y: -1120
   - type: safe
-    x: 288
-    y: 0
-    width: 32
-    height: 32
-    properties:
-      minimum_speed: 10
-  - type: safe
-    x: 288
-    y: 160
-    width: 32
-    height: 32
-    properties:
-      minimum_speed: 10
-  - type: active
-    x: 320
-    y: 0
-    width: 2560
-    height: 192
-    spawner:
-    - count: 2
-      radius: 15
-      speed: 2.5
-      move_clockwise: False
-      types:
-      - wall
-  - height: last_height
-    type: safe
-    width: 256
-    x: last_right
-    y: 0
-  - height: last_height
-    translate:
-      x: 160
-      y: 0
-    type: exit
-    width: 64
-    x: last_right
-    y: 0
-  - height: 32
-    translate:
-      x: -1472
-      y: 7072
-    type: exit
-    width: 32
-    x: 1600
-    y: 0
-# 2
-- x: last_right
-  y: last_y
-  zones:
-  - height: 352
-    translate:
-      x: -160
-      y: 0
-    type: exit
-    width: 64
     x: 0
-    y: 0
-  - height: last_height
-    type: safe
-    width: 256
-    x: last_right
-    y: 0
-  - height: last_height
+    y: 64
+    width: 320
+    height: 416
+  - height: 480
     spawner:
-    - count: 6
-      radius: 24
-      speed: 1
-      types:
-      - normal
-    - count: 3
-      radius: 12
+    - count: 5
+      radius: 6
       speed: 4
       types:
-      - normal
-    - count: 1
-      radius: 6
-      speed: 1
-      types:
-      - magnetic_reduction
+      - immune
+      - homing
     type: active
     width: 2560
     x: last_right
@@ -147,11 +49,11 @@ areas:
     width: 64
     x: last_right
     y: 0
-# 3
+# Area 2
 - x: last_right
   y: last_y
   zones:
-  - height: 352
+  - height: 480
     translate:
       x: -160
       y: 0
@@ -166,419 +68,12 @@ areas:
     y: 0
   - height: last_height
     spawner:
-    - count: 3
-      radius: 24
-      speed: 1.5
-      types:
-      - normal
-    - count: 4
-      radius: 12
-      speed: 0.5
-      types:
-      - normal
-    - count: 2
-      radius: 36
-      speed: 2.5
-      types:
-      - normal
-    - count: 3
-      radius: 6
-      speed: 2
-      types:
-      - magnetic_reduction
-    - count: 3
-      radius: 15
-      speed: 3
-      move_clockwise: False
-      types:
-      - wall
-    - count: 3
-      radius: 15
-      speed: 3
-      types:
-      - wall
-    type: active
-    width: 2560
-    x: last_right
-    y: 0
-  - height: last_height
-    type: safe
-    width: 256
-    x: last_right
-    y: 0
-  - height: last_height
-    translate:
-      x: 160
-      y: 0
-    type: exit
-    width: 64
-    x: last_right
-    y: 0
-# 4
-- x: last_right
-  y: last_y
-  zones:
-  - height: 352
-    translate:
-      x: -160
-      y: 0
-    type: exit
-    width: 64
-    x: 0
-    y: 0
-  - height: last_height
-    type: safe
-    width: 256
-    x: last_right
-    y: 0
-  - height: last_height
-    spawner:
-    - count: 8
-      radius: 24
-      speed: 1.5
-      types:
-      - normal
-    - count: 4
-      radius: 48
-      speed: 1.5
-      types:
-      - normal
-    - count: 2
-      radius: 6
-      speed: 7
-      types:
-      - magnetic_reduction
-    - count: 3
-      radius: 15
-      speed: 3
-      types:
-      - wall
-    - count: 3
-      radius: 15
-      speed: 3
-      move_clockwise: False
-      types:
-      - wall
-    type: active
-    width: 2560
-    x: last_right
-    y: 0
-  - height: last_height
-    type: safe
-    width: 256
-    x: last_right
-    y: 0
-  - height: last_height
-    translate:
-      x: 160
-      y: 0
-    type: exit
-    width: 64
-    x: last_right
-    y: 0
-# 5
-- x: last_right
-  y: last_y
-  zones:
-  - height: 352
-    translate:
-      x: -160
-      y: 0
-    type: exit
-    width: 64
-    x: 0
-    y: 0
-  - height: last_height
-    type: safe
-    width: 256
-    x: last_right
-    y: 0
-  - height: last_height
-    spawner:
-    - count: 8
-      radius: 9
-      speed: 2
-      types:
-      - normal
     - count: 10
       radius: 6
-      speed: 2.5
-      types:
-      - magnetic_reduction
-    - count: 3
-      radius: 15
-      speed: 3
-      move_clockwise: False
-      types:
-      - wall
-    - count: 3
-      radius: 15
-      speed: 3
-      types:
-      - wall
-    type: active
-    width: 2560
-    x: last_right
-    y: 0
-  - height: last_height
-    type: safe
-    width: 256
-    x: last_right
-    y: 0
-  - height: last_height
-    translate:
-      x: 160
-      y: 0
-    type: exit
-    width: 64
-    x: last_right
-    y: 0
-# 6
-- x: last_right
-  y: last_y
-  zones:
-  - height: 352
-    translate:
-      x: -160
-      y: 0
-    type: exit
-    width: 64
-    x: 0
-    y: 0
-  - height: last_height
-    type: safe
-    width: 256
-    x: last_right
-    y: 0
-  - height: last_height
-    spawner:
-    - count: 4
-      radius: 36
-      speed: 7
-      types:
-      - normal
-    - count: 9
-      radius: 7
-      speed: 1
-      types:
-      - normal
-    - count: 2
-      radius: 6
-      speed: 1
-      types:
-      - magnetic_reduction
-    - count: 3
-      radius: 15
-      speed: 3
-      types:
-      - wall
-    - count: 3
-      radius: 15
-      speed: 3
-      move_clockwise: False
-      types:
-      - wall
-    type: active
-    width: 2560
-    x: last_right
-    y: 0
-  - height: last_height
-    type: safe
-    width: 256
-    x: last_right
-    y: 0
-  - height: last_height
-    translate:
-      x: 160
-      y: 0
-    type: exit
-    width: 64
-    x: last_right
-    y: 0
-# 7
-- x: last_right
-  y: last_y
-  zones:
-  - height: 320
-    translate:
-      x: -160
-      y: 0
-    type: exit
-    width: 64
-    x: 0
-    y: 0
-  - height: 352
-    type: safe
-    width: 288
-    x: 64
-    y: 0
-  - height: 32
-    type: safe
-    width: 64
-    x: 0
-    y: 320
-  - height: 2560
-    spawner:
-    - count: 5
-      radius: 12
-      speed: 4
-      types:
-      - normal
-    - count: 8
-      radius: 12
-      speed: 1
-      types:
-      - magnetic_reduction
-    - count: 2
-      radius: 70
-      speed: 2
-      types:
-      - magnetic_reduction
-    - count: 3
-      radius: 15
-      speed: 3
-      types:
-      - wall
-    - count: 3
-      radius: 15
-      speed: 3
-      move_clockwise: False
-      types:
-      - wall
-    type: active
-    width: 352
-    x: 0
-    y: 352
-  - height: 352
-    type: safe
-    width: 288
-    x: 0
-    y: 2912
-  - height: 32
-    type: safe
-    width: 64
-    x: 288
-    y: 2912
-  - height: 320
-    translate:
-      x: 160
-      y: 0
-    type: exit
-    width: 64
-    x: 288
-    y: 2944
-# 8
-- x: last_right
-  y: 111392
-  zones:
-  - height: 352
-    translate:
-      x: -160
-      y: 0
-    type: exit
-    width: 64
-    x: 0
-    y: 0
-  - height: last_height
-    type: safe
-    width: 256
-    x: last_right
-    y: 0
-  - height: last_height
-    spawner:
-    - count: 4
-      radius: 12
-      speed: 2
-      types:
-      - normal
-    - count: 3
-      radius: 18
-      speed: 1
-      types:
-      - normal
-    - count: 2
-      radius: 12
-      speed: 2
-      types:
-      - negative_magnetic_sniper
-    - count: 3
-      radius: 15
-      speed: 4.5
-      move_clockwise: False
-      types:
-      - wall
-    - count: 3
-      radius: 15
-      speed: 4.5
-      types:
-      - wall
-    type: active
-    width: 2560
-    x: last_right
-    y: 0
-  - height: last_height
-    type: safe
-    width: 256
-    x: last_right
-    y: 0
-  - height: last_height
-    translate:
-      x: 160
-      y: 0
-    type: exit
-    width: 64
-    x: last_right
-    y: 0
-# 9
-- x: last_right
-  y: last_y
-  zones:
-  - height: 352
-    translate:
-      x: -160
-      y: 0
-    type: exit
-    width: 64
-    x: 0
-    y: 0
-  - height: last_height
-    type: safe
-    width: 256
-    x: last_right
-    y: 0
-  - height: last_height
-    spawner:
-    - count: 3
-      radius: 18
-      speed: 3
-      types:
-      - normal
-    - count: 5
-      radius: 24
-      speed: 4
-      types:
-      - normal
-    - count: 1
-      radius: 6
       speed: 5
       types:
-      - magnetic_reduction
-    - count: 2
-      radius: 18
-      speed: 2
-      types:
-      - negative_magnetic_sniper
-    - count: 3
-      radius: 15
-      speed: 4.5
-      types:
-      - wall
-    - count: 3
-      radius: 15
-      speed: 4.5
-      move_clockwise: False
-      types:
-      - wall
+      - immune
+      - homing
     type: active
     width: 2560
     x: last_right
@@ -596,418 +91,11 @@ areas:
     width: 64
     x: last_right
     y: 0
-# 10
+# Area 3
 - x: last_right
   y: last_y
   zones:
-  - height: 352
-    translate:
-      x: -160
-      y: 0
-    type: exit
-    width: 64
-    x: 0
-    y: 0
-  - height: last_height
-    type: safe
-    width: 256
-    x: last_right
-    y: 0
-  - height: last_height
-    spawner:
-    - count: 5
-      radius: 12
-      speed: 6
-      types:
-      - normal
-    - count: 4
-      radius: 30
-      speed: 2
-      types:
-      - normal
-    - count: 2
-      radius: 12
-      speed: 6
-      types:
-      - negative_magnetic_sniper
-    - count: 2
-      radius: 30
-      speed: 2
-      types:
-      - negative_magnetic_sniper
-    - count: 3
-      radius: 15
-      speed: 4.5
-      move_clockwise: False
-      types:
-      - wall
-    - count: 3
-      radius: 15
-      speed: 4.5
-      types:
-      - wall
-    type: active
-    width: 2560
-    x: last_right
-    y: 0
-  - height: last_height
-    type: safe
-    width: 256
-    x: last_right
-    y: 0
-  - height: last_height
-    translate:
-      x: 160
-      y: 0
-    type: exit
-    width: 64
-    x: last_right
-    y: 0
-# 11
-- x: last_right
-  y: last_y
-  zones:
-  - height: 352
-    translate:
-      x: -160
-      y: 0
-    type: exit
-    width: 64
-    x: 0
-    y: 0
-  - height: last_height
-    type: safe
-    width: 256
-    x: last_right
-    y: 0
-  - height: last_height
-    spawner:
-    - count: 3
-      radius: 12
-      speed: 6
-      types:
-      - normal
-    - count: 3
-      radius: 18
-      speed: 5
-      types:
-      - normal
-    - count: 2
-      radius: 24
-      speed: 4
-      types:
-      - normal
-    - count: 2
-      radius: 30
-      speed: 3
-      types:
-      - normal
-    - count: 1
-      radius: 36
-      speed: 2
-      types:
-      - normal
-    - count: 1
-      radius: 12
-      speed: 7
-      types:
-      - negative_magnetic_sniper
-    - count: 1
-      radius: 18
-      speed: 6.5
-      types:
-      - negative_magnetic_sniper
-    - count: 1
-      radius: 24
-      speed: 5.5
-      types:
-      - negative_magnetic_sniper
-    - count: 1
-      radius: 30
-      speed: 4.5
-      types:
-      - negative_magnetic_sniper
-    - count: 1
-      radius: 36
-      speed: 3.5
-      types:
-      - negative_magnetic_sniper
-    - count: 3
-      radius: 15
-      speed: 4.5
-      types:
-      - wall
-    - count: 3
-      radius: 15
-      speed: 4.5
-      move_clockwise: False
-      types:
-      - wall
-    type: active
-    width: 2560
-    x: last_right
-    y: 0
-  - height: last_height
-    type: safe
-    width: 256
-    x: last_right
-    y: 0
-  - height: last_height
-    translate:
-      x: 160
-      y: 0
-    type: exit
-    width: 64
-    x: last_right
-    y: 0
-# 12
-- x: last_right
-  y: last_y
-  zones:
-  - height: 352
-    translate:
-      x: -160
-      y: 0
-    type: exit
-    width: 64
-    x: 0
-    y: 0
-  - height: last_height
-    type: safe
-    width: 256
-    x: last_right
-    y: 0
-  - height: last_height
-    spawner:
-    - count: 5
-      radius: 6
-      speed: 9
-      types:
-      - magnetic_reduction
-    - count: 5
-      radius: 24
-      speed: 2
-      types:
-      - negative_magnetic_sniper
-    - count: 3
-      radius: 15
-      speed: 4.5
-      move_clockwise: False
-      types:
-      - wall
-    - count: 3
-      radius: 15
-      speed: 4.5
-      types:
-      - wall
-    type: active
-    width: 2560
-    x: last_right
-    y: 0
-  - height: last_height
-    type: safe
-    width: 256
-    x: last_right
-    y: 0
-  - height: last_height
-    translate:
-      x: 160
-      y: 0
-    type: exit
-    width: 64
-    x: last_right
-    y: 0
-# 13
-- x: last_right
-  y: last_y
-  zones:
-  - height: 352
-    translate:
-      x: -160
-      y: 0
-    type: exit
-    width: 64
-    x: 0
-    y: 0
-  - height: last_height
-    type: safe
-    width: 256
-    x: last_right
-    y: 0
-  - height: last_height
-    spawner:
-    - count: 8
-      radius: 30
-      speed: 1
-      types:
-      - normal
-    - count: 3
-      radius: 30
-      speed: 11
-      types:
-      - negative_magnetic_sniper
-    - count: 3
-      radius: 15
-      speed: 4.5
-      types:
-      - wall
-    - count: 3
-      radius: 15
-      speed: 4.5
-      move_clockwise: False
-      types:
-      - wall
-    type: active
-    width: 2560
-    x: last_right
-    y: 0
-  - height: last_height
-    type: safe
-    width: 256
-    x: last_right
-    y: 0
-  - height: last_height
-    translate:
-      x: 160
-      y: 0
-    type: exit
-    width: 64
-    x: last_right
-    y: 0
-# 14
-- x: last_right
-  y: 108480
-  zones:
-  - height: 320
-    translate:
-      x: -160
-      y: 0
-    type: exit
-    width: 64
-    x: 0
-    y: 2944
-  - height: 352
-    type: safe
-    width: 288
-    x: 64
-    y: 2912
-  - height: 32
-    type: safe
-    width: 64
-    x: 0
-    y: 2912
-  - height: 2560
-    spawner:
-    - count: 4
-      radius: 12
-      speed: 5
-      types:
-      - normal
-    - count: 2
-      radius: 42
-      speed: 4
-      types:
-      - negative_magnetic_sniper
-    - count: 2
-      radius: 70
-      speed: 2
-      types:
-      - negative_magnetic_sniper
-    - count: 3
-      radius: 15
-      speed: 4.5
-      types:
-      - wall
-    - count: 3
-      radius: 15
-      speed: 4.5
-      move_clockwise: False
-      types:
-      - wall
-    type: active
-    width: 352
-    x: 0
-    y: 352
-  - height: 352
-    type: safe
-    width: 288
-    x: 0
-    y: 0
-  - height: 32
-    type: safe
-    width: 64
-    x: 288
-    y: 320
-  - height: 320
-    translate:
-      x: 160
-      y: 0
-    type: exit
-    width: 64
-    x: 288
-    y: 0
-# 15
-- x: last_right
-  y: last_y
-  zones:
-  - height: 352
-    translate:
-      x: -160
-      y: 0
-    type: exit
-    width: 64
-    x: 0
-    y: 0
-  - height: last_height
-    type: safe
-    width: 256
-    x: last_right
-    y: 0
-  - height: last_height
-    spawner:
-    - count: 2
-      radius: 54
-      speed: 3
-      types:
-      - normal
-    - count: 2
-      radius: 30
-      speed: 5
-      types:
-      - positive_magnetic_sniper
-    - count: 3
-      radius: 15
-      speed: 6
-      move_clockwise: False
-      types:
-      - wall
-    - count: 3
-      radius: 15
-      speed: 6
-      types:
-      - wall
-    type: active
-    width: 2560
-    x: last_right
-    y: 0
-  - height: last_height
-    type: safe
-    width: 256
-    x: last_right
-    y: 0
-  - height: last_height
-    translate:
-      x: 160
-      y: 0
-    type: exit
-    width: 64
-    x: last_right
-    y: 0
-# 16
-- x: last_right
-  y: last_y
-  zones:
-  - height: 352
+  - height: 480
     translate:
       x: -160
       y: 0
@@ -1023,29 +111,19 @@ areas:
   - height: last_height
     spawner:
     - count: 6
-      radius: 24
-      speed: 4
+      radius: 9
+      speed: 6.6
       types:
-      - normal
-    - count: 1
+      - immune
+      - homing
+    - count: 2
       radius: 12
-      speed: 4
+      speed: 3
       types:
-      - negative_magnetic_sniper
-    - count: 1
-      radius: 12
-      speed: 4
-      types:
-      - positive_magnetic_sniper
-    - count: 3
-      radius: 15
-      speed: 6
-      types:
-      - wall
-    - count: 3
-      radius: 15
-      speed: 6
-      move_clockwise: False
+      - sniper
+    - count: 8
+      radius: 30
+      speed: 5
       types:
       - wall
     type: active
@@ -1065,11 +143,63 @@ areas:
     width: 64
     x: last_right
     y: 0
-# 17
+# Area 4
 - x: last_right
   y: last_y
   zones:
-  - height: 352
+  - height: 480
+    translate:
+      x: -160
+      y: 0
+    type: exit
+    width: 64
+    x: 0
+    y: 0
+  - height: last_height
+    type: safe
+    width: 256
+    x: last_right
+    y: 0
+  - height: last_height
+    spawner:
+    - count: 11
+      radius: 12
+      speed: 7
+      types:
+      - immune
+      - homing
+    - count: 3
+      radius: 12
+      speed: 3
+      types:
+      - sniper
+    - count: 8
+      radius: 30
+      speed: 5
+      types:
+      - wall
+    type: active
+    width: 2560
+    x: last_right
+    y: 0
+  - height: last_height
+    type: safe
+    width: 256
+    x: last_right
+    y: 0
+  - height: last_height
+    translate:
+      x: 160
+      y: 0
+    type: exit
+    width: 64
+    x: last_right
+    y: 0
+# Area 5
+- x: last_right
+  y: last_y
+  zones:
+  - height: 480
     translate:
       x: -160
       y: 0
@@ -1085,29 +215,18 @@ areas:
   - height: last_height
     spawner:
     - count: 8
-      radius: 6
-      speed: 3
+      radius: 12
+      speed: 7.5
       types:
-      - magnetic_reduction
-    - count: 1
-      radius: 36
-      speed: 3
-      types:
-      - negative_magnetic_sniper
-    - count: 3
+      - immune
+    - count: 10
       radius: 12
       speed: 6
       types:
-      - positive_magnetic_sniper
-    - count: 3
-      radius: 15
-      speed: 6
-      move_clockwise: False
-      types:
-      - wall
-    - count: 3
-      radius: 15
-      speed: 6
+      - homing
+    - count: 8
+      radius: 30
+      speed: 5
       types:
       - wall
     type: active
@@ -1127,11 +246,716 @@ areas:
     width: 64
     x: last_right
     y: 0
-# 18
+# Area 6
 - x: last_right
   y: last_y
   zones:
-  - height: 352
+  - height: 480
+    translate:
+      x: -160
+      y: 0
+    type: exit
+    width: 64
+    x: 0
+    y: 0
+  - height: last_height
+    type: safe
+    width: 256
+    x: last_right
+    y: 0
+  - height: last_height
+    spawner:
+    - count: 16
+      radius: 12
+      speed: 7
+      types:
+      - immune
+    - count: 13
+      radius: 16
+      speed: 4
+      types:
+      - immune
+    - count: 8
+      radius: 30
+      speed: 5
+      types:
+      - wall
+    type: active
+    width: 2560
+    x: last_right
+    y: 0
+  - height: last_height
+    type: safe
+    width: 256
+    x: last_right
+    y: 0
+  - height: last_height
+    translate:
+      x: 160
+      y: 0
+    type: exit
+    width: 64
+    x: last_right
+    y: 0
+# Area 7
+- x: last_right
+  y: last_y
+  zones:
+  - height: 480
+    translate:
+      x: -160
+      y: 0
+    type: exit
+    width: 64
+    x: 0
+    y: 0
+  - height: last_height
+    type: safe
+    width: 256
+    x: last_right
+    y: 0
+  - height: last_height
+    spawner:
+    - count: 2
+      radius: 12
+      speed: 3
+      types:
+      - sniper
+    - count: 35
+      radius: 18
+      speed: 7
+      types:
+      - homing
+      - immune
+    - count: 8
+      radius: 30
+      speed: 5
+      types:
+      - wall
+    type: active
+    width: 2560
+    x: last_right
+    y: 0
+  - height: last_height
+    type: safe
+    width: 256
+    x: last_right
+    y: 0
+  - height: last_height
+    translate:
+      x: 160
+      y: 0
+    type: exit
+    width: 64
+    x: last_right
+    y: 0
+# Area 8
+- x: last_right
+  y: last_y
+  zones:
+  - height: 480
+    translate:
+      x: -160
+      y: 0
+    type: exit
+    width: 64
+    x: 0
+    y: 0
+  - height: last_height
+    type: safe
+    width: 256
+    x: last_right
+    y: 0
+  - height: last_height
+    spawner:
+    - count: 42
+      radius: 12
+      speed: 3
+      types:
+      - immune
+    - count: 6
+      radius: 12
+      speed: 7
+      types:
+      - homing
+    - count: 4
+      radius: 12
+      speed: 8
+      types:
+      - sniper
+    - count: 8
+      radius: 30
+      speed: 5
+      types:
+      - wall
+    type: active
+    width: 2560
+    x: last_right
+    y: 0
+  - height: last_height
+    type: safe
+    width: 256
+    x: last_right
+    y: 0
+  - height: last_height
+    translate:
+      x: 160
+      y: 0
+    type: exit
+    width: 64
+    x: last_right
+    y: 0
+# Area 9
+- x: last_right
+  y: last_y
+  zones:
+  - height: 480
+    translate:
+      x: -160
+      y: 0
+    type: exit
+    width: 64
+    x: 0
+    y: 0
+  - height: last_height
+    type: safe
+    width: 256
+    x: last_right
+    y: 0
+  - height: last_height
+    spawner:
+    - count: 75
+      radius: 12
+      speed: 4
+      types:
+      - immune
+    - count: 5
+      radius: 12
+      speed: 5
+      types:
+      - homing
+      - sniper
+    - count: 8
+      radius: 30
+      speed: 5
+      types:
+      - wall
+    type: active
+    width: 2560
+    x: last_right
+    y: 0
+  - height: last_height
+    type: safe
+    width: 256
+    x: last_right
+    y: 0
+  - height: last_height
+    translate:
+      x: 160
+      y: 0
+    type: exit
+    width: 64
+    x: last_right
+    y: 0
+# Area 10
+- x: last_right
+  y: last_y
+  zones:
+  - height: 480
+    translate:
+      x: -160
+      y: 0
+    type: exit
+    width: 64
+    x: 0
+    y: 0
+  - height: last_height
+    type: safe
+    width: 256
+    x: last_right
+    y: 0
+  - height: last_height
+    spawner:
+    - count: 25
+      radius: 18
+      speed: 8
+      types:
+      - homing
+      - immune
+    - count: 6
+      radius: 12
+      speed: 6
+      types:
+      - sniper
+    - count: 8
+      radius: 30
+      speed: 5
+      types:
+      - wall
+    type: active
+    width: 2560
+    x: last_right
+    y: 0
+  - height: last_height
+    type: safe
+    width: 256
+    x: last_right
+    y: 0
+  - height: last_height
+    translate:
+      x: 160
+      y: 0
+    type: exit
+    width: 64
+    x: last_right
+    y: 0
+# Area 11
+- x: last_right
+  y: last_y
+  zones:
+  - height: 480
+    translate:
+      x: -160
+      y: 0
+    type: exit
+    width: 64
+    x: 0
+    y: 0
+  - height: last_height
+    type: safe
+    width: 256
+    x: last_right
+    y: 0
+  - height: last_height
+    spawner:
+    - count: 25
+      radius: 9
+      speed: 6
+      types:
+      - draining
+    - count: 10
+      radius: 18
+      speed: 6
+      types:
+      - freezing
+    - count: 2
+      radius: 12
+      speed: 3
+      types:
+      - regen_sniper
+    - count: 8
+      radius: 30
+      speed: 8
+      types:
+      - wall
+    type: active
+    width: 2560
+    x: last_right
+    y: 0
+  - height: last_height
+    type: safe
+    width: 256
+    x: last_right
+    y: 0
+  - height: last_height
+    translate:
+      x: 160
+      y: 0
+    type: exit
+    width: 64
+    x: last_right
+    y: 0
+# Area 12
+- x: last_right
+  y: last_y
+  zones:
+  - height: 480
+    translate:
+      x: -160
+      y: 0
+    type: exit
+    width: 64
+    x: 0
+    y: 0
+  - height: last_height
+    type: safe
+    width: 256
+    x: last_right
+    y: 0
+  - height: last_height
+    spawner:
+    - count: 15
+      radius: 18
+      speed: 6
+      types:
+      - freezing
+    - count: 5
+      radius: 12
+      speed: 3
+      types:
+      - regen_sniper
+    - count: 8
+      radius: 30
+      speed: 8
+      types:
+      - wall
+    type: active
+    width: 2560
+    x: last_right
+    y: 0
+  - height: last_height
+    type: safe
+    width: 256
+    x: last_right
+    y: 0
+  - height: last_height
+    translate:
+      x: 160
+      y: 0
+    type: exit
+    width: 64
+    x: last_right
+    y: 0
+# Area 13
+- x: last_right
+  y: last_y
+  zones:
+  - height: 480
+    translate:
+      x: -160
+      y: 0
+    type: exit
+    width: 64
+    x: 0
+    y: 0
+  - height: last_height
+    type: safe
+    width: 256
+    x: last_right
+    y: 0
+  - height: last_height
+    spawner:
+    - count: 40
+      radius: 9
+      speed: 9
+      types:
+      - slowing
+      - draining
+      - immune
+    - count: 5
+      radius: 12
+      speed: 6
+      types:
+      - regen_sniper
+    - count: 8
+      radius: 30
+      speed: 8
+      types:
+      - wall
+    type: active
+    width: 2560
+    x: last_right
+    y: 0
+  - height: last_height
+    type: safe
+    width: 256
+    x: last_right
+    y: 0
+  - height: last_height
+    translate:
+      x: 160
+      y: 0
+    type: exit
+    width: 64
+    x: last_right
+    y: 0
+# Area 14
+- x: last_right
+  y: last_y
+  zones:
+  - height: 480
+    translate:
+      x: -160
+      y: 0
+    type: exit
+    width: 64
+    x: 0
+    y: 0
+  - height: last_height
+    type: safe
+    width: 256
+    x: last_right
+    y: 0
+  - height: last_height
+    spawner:
+    - count: 50
+      radius: 12
+      speed: 5
+      types:
+      - slowing
+      - immune
+    - count: 6
+      radius: 12
+      speed: 6
+      types:
+      - regen_sniper
+      - speed_sniper
+    - count: 8
+      radius: 30
+      speed: 8
+      types:
+      - wall
+    type: active
+    width: 2560
+    x: last_right
+    y: 0
+  - height: last_height
+    type: safe
+    width: 256
+    x: last_right
+    y: 0
+  - height: last_height
+    translate:
+      x: 160
+      y: 0
+    type: exit
+    width: 64
+    x: last_right
+    y: 0
+# Area 15
+- x: last_right
+  y: last_y
+  zones:
+  - height: 480
+    translate:
+      x: -160
+      y: 0
+    type: exit
+    width: 64
+    x: 0
+    y: 0
+  - height: last_height
+    type: safe
+    width: 256
+    x: last_right
+    y: 0
+  - height: last_height
+    spawner:
+    - count: 1
+      radius: 12
+      speed: 12
+      types:
+      - sniper
+    - count: 5
+      radius: 12
+      speed: 10
+      types:
+      - speed_sniper
+    - count: 20
+      radius: 18
+      speed: 3
+      types:
+      - slowing
+      - freezing
+    - count: 8
+      radius: 30
+      speed: 8
+      types:
+      - wall
+    type: active
+    width: 2560
+    x: last_right
+    y: 0
+  - height: last_height
+    type: safe
+    width: 256
+    x: last_right
+    y: 0
+  - height: last_height
+    translate:
+      x: 160
+      y: 0
+    type: exit
+    width: 64
+    x: last_right
+    y: 0
+# Area 16
+- x: last_right
+  y: last_y
+  zones:
+  - height: 480
+    translate:
+      x: -160
+      y: 0
+    type: exit
+    width: 64
+    x: 0
+    y: 0
+  - height: last_height
+    type: safe
+    width: 256
+    x: last_right
+    y: 0
+  - height: last_height
+    spawner:
+    - count: 5
+      radius: 9
+      speed: 11
+      types:
+      - sniper
+    - count: 5
+      radius: 24
+      speed: 10
+      types:
+      - speed_sniper
+    - count: 25
+      radius: 12
+      speed: 3
+      types:
+      - freezing
+      - slowing
+    - count: 8
+      radius: 30
+      speed: 8
+      types:
+      - wall
+    type: active
+    width: 2560
+    x: last_right
+    y: 0
+  - height: last_height
+    type: safe
+    width: 256
+    x: last_right
+    y: 0
+  - height: last_height
+    translate:
+      x: 160
+      y: 0
+    type: exit
+    width: 64
+    x: last_right
+    y: 0
+# Area 17
+- x: last_right
+  y: last_y
+  zones:
+  - height: 480
+    translate:
+      x: -160
+      y: 0
+    type: exit
+    width: 64
+    x: 0
+    y: 0
+  - height: last_height
+    type: safe
+    width: 256
+    x: last_right
+    y: 0
+  - height: last_height
+    spawner:
+    - count: 1
+      radius: 30
+      speed: 14
+      types:
+      - speed_sniper
+    - count: 50
+      radius: 12
+      speed: 7
+      types:
+      - draining
+      - slowing
+      - immune
+    - count: 8
+      radius: 30
+      speed: 8
+      types:
+      - wall
+    type: active
+    width: 2560
+    x: last_right
+    y: 0
+  - height: last_height
+    type: safe
+    width: 256
+    x: last_right
+    y: 0
+  - height: last_height
+    translate:
+      x: 160
+      y: 0
+    type: exit
+    width: 64
+    x: last_right
+    y: 0
+# Area 18
+- x: last_right
+  y: last_y
+  zones:
+  - height: 480
+    translate:
+      x: -160
+      y: 0
+    type: exit
+    width: 64
+    x: 0
+    y: 0
+  - height: last_height
+    type: safe
+    width: 256
+    x: last_right
+    y: 0
+  - height: last_height
+    spawner:
+    - count: 25
+      radius: 30
+      speed: 6
+      types:
+      - draining
+      - slowing
+    - count: 5
+      radius: 12
+      speed: 10
+      types:
+      - immune
+    - count: 1
+      radius: 12
+      speed: 17
+      types:
+      - speed_sniper
+    - count: 1
+      radius: 12
+      speed: 17
+      types:
+      - sniper
+    - count: 8
+      radius: 30
+      speed: 8
+      types:
+      - wall
+    type: active
+    width: 2560
+    x: last_right
+    y: 0
+  - height: last_height
+    type: safe
+    width: 256
+    x: last_right
+    y: 0
+  - height: last_height
+    translate:
+      x: 160
+      y: 0
+    type: exit
+    width: 64
+    x: last_right
+    y: 0
+# Area 19
+- x: last_right
+  y: last_y
+  zones:
+  - height: 480
     translate:
       x: -160
       y: 0
@@ -1147,29 +971,20 @@ areas:
   - height: last_height
     spawner:
     - count: 13
-      radius: 8
-      speed: 3
+      radius: 12
+      speed: 15
       types:
-      - normal
-    - count: 2
-      radius: 10
-      speed: 5
+      - sniper
+      - slowing
+    - count: 5
+      radius: 9
+      speed: 9
       types:
-      - negative_magnetic_sniper
-    - count: 2
-      radius: 10
-      speed: 5
-      types:
-      - positive_magnetic_sniper
-    - count: 3
-      radius: 15
-      speed: 6
-      types:
-      - wall
-    - count: 3
-      radius: 15
-      speed: 6
-      move_clockwise: False
+      - speed_sniper
+      - regen_sniper
+    - count: 8
+      radius: 30
+      speed: 8
       types:
       - wall
     type: active
@@ -1189,11 +1004,11 @@ areas:
     width: 64
     x: last_right
     y: 0
-# 19
+# Area 20
 - x: last_right
   y: last_y
   zones:
-  - height: 352
+  - height: 480
     translate:
       x: -160
       y: 0
@@ -1208,30 +1023,31 @@ areas:
     y: 0
   - height: last_height
     spawner:
-    - count: 9
-      radius: 12
-      speed: 6
-      types:
-      - normal
-    - count: 3
-      radius: 18
+    - count: 100
+      radius: 3
       speed: 3
       types:
-      - negative_magnetic_sniper
+      - immune
+    - count: 20
+      radius: 12
+      speed: 2
+      types:
+      - slowing
+      - draining
+    - count: 13
+      radius: 18
+      speed: 2
+      types:
+      - freezing
     - count: 2
-      radius: 36
+      radius: 20
+      speed: 10
+      types:
+      - speed_sniper
+      - regen_sniper
+    - count: 8
+      radius: 30
       speed: 8
-      types:
-      - positive_magnetic_sniper
-    - count: 3
-      radius: 15
-      speed: 6
-      move_clockwise: False
-      types:
-      - wall
-    - count: 3
-      radius: 15
-      speed: 6
       types:
       - wall
     type: active
@@ -1251,11 +1067,946 @@ areas:
     width: 64
     x: last_right
     y: 0
-# 20
+# Area 21
 - x: last_right
   y: last_y
   zones:
-  - height: 352
+  - height: 480
+    translate:
+      x: -160
+      y: 0
+    type: exit
+    width: 64
+    x: 0
+    y: 0
+  - height: last_height
+    type: safe
+    width: 256
+    x: last_right
+    y: 0
+  - height: last_height
+    spawner:
+    - count: 50
+      radius: 9
+      speed: 4
+      types:
+      - disabling
+    - count: 10
+      radius: 18
+      speed: 3
+      types:
+      - disabling
+    - count: 20
+      radius: 12
+      speed: 4
+      types:
+      - homing
+    - count: 2
+      radius: 12
+      speed: 3
+      types:
+      - ice_sniper
+    - count: 8
+      radius: 30
+      speed: 5
+      types:
+      - wall
+    type: active
+    width: 2560
+    x: last_right
+    y: 0
+  - height: last_height
+    type: safe
+    width: 256
+    x: last_right
+    y: 0
+  - height: last_height
+    translate:
+      x: 160
+      y: 0
+    type: exit
+    width: 64
+    x: last_right
+    y: 0
+# Area 22
+- x: last_right
+  y: last_y
+  zones:
+  - height: 480
+    translate:
+      x: -160
+      y: 0
+    type: exit
+    width: 64
+    x: 0
+    y: 0
+  - height: last_height
+    type: safe
+    width: 256
+    x: last_right
+    y: 0
+  - height: last_height
+    spawner:
+    - count: 40
+      radius: 9
+      speed: 2
+      types:
+      - disabling
+    - count: 10
+      radius: 18
+      speed: 1.5
+      types:
+      - disabling
+    - count: 3
+      radius: 18
+      speed: 9
+      types:
+      - ice_sniper
+    - count: 2
+      radius: 12
+      speed: 13
+      types:
+      - homing
+    - count: 8
+      radius: 30
+      speed: 5
+      types:
+      - wall
+    type: active
+    width: 2560
+    x: last_right
+    y: 0
+  - height: last_height
+    type: safe
+    width: 256
+    x: last_right
+    y: 0
+  - height: last_height
+    translate:
+      x: 160
+      y: 0
+    type: exit
+    width: 64
+    x: last_right
+    y: 0
+# Area 23
+- x: last_right
+  y: last_y
+  zones:
+  - height: 480
+    translate:
+      x: -160
+      y: 0
+    type: exit
+    width: 64
+    x: 0
+    y: 0
+  - height: last_height
+    type: safe
+    width: 256
+    x: last_right
+    y: 0
+  - height: last_height
+    spawner:
+    - count: 30
+      radius: 4
+      speed: 6
+      types:
+      - disabling
+    - count: 5
+      radius: 8
+      speed: 5
+      types:
+      - disabling
+    - count: 4
+      radius: 18
+      speed: 10
+      types:
+      - ice_sniper
+    - count: 3
+      radius: 18
+      speed: 1
+      types:
+      - radiating_bullets
+    - count: 8
+      radius: 30
+      speed: 5
+      types:
+      - wall
+    type: active
+    width: 2560
+    x: last_right
+    y: 0
+  - height: last_height
+    type: safe
+    width: 256
+    x: last_right
+    y: 0
+  - height: last_height
+    translate:
+      x: 160
+      y: 0
+    type: exit
+    width: 64
+    x: last_right
+    y: 0
+# Area 24
+- x: last_right
+  y: last_y
+  zones:
+  - height: 480
+    translate:
+      x: -160
+      y: 0
+    type: exit
+    width: 64
+    x: 0
+    y: 0
+  - height: last_height
+    type: safe
+    width: 256
+    x: last_right
+    y: 0
+  - height: last_height
+    spawner:
+    - count: 5
+      radius: 12
+      speed: 10
+      types:
+      - disabling
+    - count: 5
+      radius: 3
+      speed: 2
+      types:
+      - disabling
+    - count: 10
+      radius: 18
+      speed: 10
+      types:
+      - radiating_bullets
+      - ice_sniper
+    - count: 8
+      radius: 30
+      speed: 5
+      types:
+      - wall
+    type: active
+    width: 2560
+    x: last_right
+    y: 0
+  - height: last_height
+    type: safe
+    width: 256
+    x: last_right
+    y: 0
+  - height: last_height
+    translate:
+      x: 160
+      y: 0
+    type: exit
+    width: 64
+    x: last_right
+    y: 0
+# Area 25
+- x: last_right
+  y: last_y
+  zones:
+  - height: 480
+    translate:
+      x: -160
+      y: 0
+    type: exit
+    width: 64
+    x: 0
+    y: 0
+  - height: last_height
+    type: safe
+    width: 256
+    x: last_right
+    y: 0
+  - height: last_height
+    spawner:
+    - count: 15
+      radius: 18
+      speed: 1
+      types:
+      - radiating_bullets
+    - count: 2
+      radius: 12
+      speed: 10
+      types:
+      - homing
+    - count: 2
+      radius: 18
+      speed: 5
+      types:
+      - homing
+    - count: 3
+      radius: 24
+      speed: 3
+      types:
+      - homing
+    - count: 8
+      radius: 30
+      speed: 5
+      types:
+      - wall
+    type: active
+    width: 2560
+    x: last_right
+    y: 0
+  - height: last_height
+    type: safe
+    width: 256
+    x: last_right
+    y: 0
+  - height: last_height
+    translate:
+      x: 160
+      y: 0
+    type: exit
+    width: 64
+    x: last_right
+    y: 0
+# Area 26
+- x: last_right
+  y: last_y
+  zones:
+  - height: 480
+    translate:
+      x: -160
+      y: 0
+    type: exit
+    width: 64
+    x: 0
+    y: 0
+  - height: last_height
+    type: safe
+    width: 256
+    x: last_right
+    y: 0
+  - height: last_height
+    spawner:
+    - count: 25
+      radius: 3
+      speed: 10
+      types:
+      - disabling
+    - count: 10
+      radius: 24
+      speed: 4
+      types:
+      - disabling
+    - count: 1
+      radius: 18
+      speed: 16
+      types:
+      - radiating_bullets
+    - count: 1
+      radius: 12
+      speed: 13
+      types:
+      - ice_sniper
+    - count: 8
+      radius: 30
+      speed: 5
+      types:
+      - wall
+    type: active
+    width: 2560
+    x: last_right
+    y: 0
+  - height: last_height
+    type: safe
+    width: 256
+    x: last_right
+    y: 0
+  - height: last_height
+    translate:
+      x: 160
+      y: 0
+    type: exit
+    width: 64
+    x: last_right
+    y: 0
+# Area 27
+- x: last_right
+  y: last_y
+  zones:
+  - height: 480
+    translate:
+      x: -160
+      y: 0
+    type: exit
+    width: 64
+    x: 0
+    y: 0
+  - height: last_height
+    type: safe
+    width: 256
+    x: last_right
+    y: 0
+  - height: last_height
+    spawner:
+    - count: 10
+      radius: 18
+      speed: 5
+      types:
+      - homing
+    - count: 5
+      radius: 18
+      speed: 11
+      types:
+      - radiating_bullets
+    - count: 10
+      radius: 9
+      speed: 9
+      types:
+      - disabling
+    - count: 4
+      radius: 24
+      speed: 9
+      types:
+      - disabling
+    - count: 8
+      radius: 30
+      speed: 5
+      types:
+      - wall
+    type: active
+    width: 2560
+    x: last_right
+    y: 0
+  - height: last_height
+    type: safe
+    width: 256
+    x: last_right
+    y: 0
+  - height: last_height
+    translate:
+      x: 160
+      y: 0
+    type: exit
+    width: 64
+    x: last_right
+    y: 0
+# Area 28
+- x: last_right
+  y: last_y
+  zones:
+  - height: 480
+    translate:
+      x: -160
+      y: 0
+    type: exit
+    width: 64
+    x: 0
+    y: 0
+  - height: last_height
+    type: safe
+    width: 256
+    x: last_right
+    y: 0
+  - height: last_height
+    spawner:
+    - count: 20
+      radius: 24
+      speed: 3
+      types:
+      - disabling
+    - count: 10
+      radius: 9
+      speed: 5
+      types:
+      - disabling
+    - count: 7
+      radius: 9
+      speed: 7
+      types:
+      - disabling
+    - count: 5
+      radius: 24
+      speed: 6
+      types:
+      - homing
+    - count: 1
+      radius: 18
+      speed: 9
+      types:
+      - ice_sniper
+    - count: 2
+      radius: 24
+      speed: 10
+      types:
+      - radiating_bullets
+    - count: 8
+      radius: 30
+      speed: 5
+      types:
+      - wall
+    type: active
+    width: 2560
+    x: last_right
+    y: 0
+  - height: last_height
+    type: safe
+    width: 256
+    x: last_right
+    y: 0
+  - height: last_height
+    translate:
+      x: 160
+      y: 0
+    type: exit
+    width: 64
+    x: last_right
+    y: 0
+# Area 29
+- x: last_right
+  y: last_y
+  zones:
+  - height: 480
+    translate:
+      x: -160
+      y: 0
+    type: exit
+    width: 64
+    x: 0
+    y: 0
+  - height: last_height
+    type: safe
+    width: 256
+    x: last_right
+    y: 0
+  - height: last_height
+    spawner:
+    - count: 25
+      radius: 9
+      speed: 9
+      types:
+      - disabling
+    - count: 3
+      radius: 18
+      speed: 13
+      types:
+      - ice_sniper
+    - count: 15
+      radius: 24
+      speed: 6
+      types:
+      - homing
+    - count: 8
+      radius: 30
+      speed: 5
+      types:
+      - wall
+    type: active
+    width: 2560
+    x: last_right
+    y: 0
+  - height: last_height
+    type: safe
+    width: 256
+    x: last_right
+    y: 0
+  - height: last_height
+    translate:
+      x: 160
+      y: 0
+    type: exit
+    width: 64
+    x: last_right
+    y: 0
+# Area 30
+- x: last_right
+  y: last_y
+  zones:
+  - height: 480
+    translate:
+      x: -160
+      y: 0
+    type: exit
+    width: 64
+    x: 0
+    y: 0
+  - height: last_height
+    type: safe
+    width: 256
+    x: last_right
+    y: 0
+  - height: last_height
+    spawner:
+    - count: 80
+      radius: 3
+      speed: 1
+      types:
+      - disabling
+    - count: 5
+      radius: 12
+      speed: 6
+      types:
+      - homing
+    - count: 4
+      radius: 24
+      speed: 5
+      types:
+      - homing
+    - count: 4
+      radius: 36
+      speed: 4
+      types:
+      - homing
+    - count: 4
+      radius: 48
+      speed: 3
+      types:
+      - homing
+    - count: 3
+      radius: 60
+      speed: 2
+      types:
+      - homing
+    - count: 3
+      radius: 75
+      speed: 1
+      types:
+      - homing
+    - count: 1
+      radius: 60
+      speed: 10
+      types:
+      - ice_sniper
+    - count: 1
+      radius: 60
+      speed: 10
+      types:
+      - radiating_bullets
+    - count: 8
+      radius: 30
+      speed: 5
+      types:
+      - wall
+    type: active
+    width: 2560
+    x: last_right
+    y: 0
+  - height: last_height
+    type: safe
+    width: 256
+    x: last_right
+    y: 0
+  - height: last_height
+    translate:
+      x: 160
+      y: 0
+    type: exit
+    width: 64
+    x: last_right
+    y: 0
+# Area 31
+- x: last_right
+  y: last_y
+  zones:
+  - height: 480
+    translate:
+      x: -160
+      y: 0
+    type: exit
+    width: 64
+    x: 0
+    y: 0
+  - height: last_height
+    type: safe
+    width: 256
+    x: last_right
+    y: 0
+  - height: last_height
+    spawner:
+    - count: 15
+      radius: 30
+      speed: 8
+      types:
+      - sniper
+    - count: 10
+      radius: 12
+      speed: 11
+      types:
+      - immune
+    - count: 8
+      radius: 30
+      speed: 11
+      types:
+      - wall
+    type: active
+    width: 2560
+    x: last_right
+    y: 0
+  - height: last_height
+    type: safe
+    width: 256
+    x: last_right
+    y: 0
+  - height: last_height
+    translate:
+      x: 160
+      y: 0
+    type: exit
+    width: 64
+    x: last_right
+    y: 0
+# Area 32
+- x: last_right
+  y: last_y
+  zones:
+  - height: 480
+    translate:
+      x: -160
+      y: 0
+    type: exit
+    width: 64
+    x: 0
+    y: 0
+  - height: last_height
+    type: safe
+    width: 256
+    x: last_right
+    y: 0
+  - height: last_height
+    spawner:
+    - count: 10
+      radius: 12
+      speed: 9
+      types:
+      - sniper
+    - count: 10
+      radius: 24
+      speed: 3
+      types:
+      - slowing
+      - draining
+    - count: 10
+      radius: 6
+      speed: 10
+      types:
+      - slowing
+      - draining
+    - count: 8
+      radius: 30
+      speed: 11
+      types:
+      - wall
+    type: active
+    width: 2560
+    x: last_right
+    y: 0
+  - height: last_height
+    type: safe
+    width: 256
+    x: last_right
+    y: 0
+  - height: last_height
+    translate:
+      x: 160
+      y: 0
+    type: exit
+    width: 64
+    x: last_right
+    y: 0
+# Area 33
+- x: last_right
+  y: last_y
+  zones:
+  - height: 480
+    translate:
+      x: -160
+      y: 0
+    type: exit
+    width: 64
+    x: 0
+    y: 0
+  - height: last_height
+    type: safe
+    width: 256
+    x: last_right
+    y: 0
+  - height: last_height
+    spawner:
+    - count: 8
+      radius: 12
+      speed: 3
+      types:
+      - sniper
+    - count: 7
+      radius: 12
+      speed: 13
+      types:
+      - slowing
+      - draining
+    - count: 6
+      radius: 18
+      speed: 10
+      types:
+      - slowing
+      - draining
+    - count: 5
+      radius: 24
+      speed: 7
+      types:
+      - slowing
+      - draining
+    - count: 6
+      radius: 36
+      speed: 6
+      types:
+      - slowing
+      - draining
+    - count: 7
+      radius: 48
+      speed: 4
+      types:
+      - slowing
+      - draining
+    - count: 8
+      radius: 30
+      speed: 11
+      types:
+      - wall
+    type: active
+    width: 2560
+    x: last_right
+    y: 0
+  - height: last_height
+    type: safe
+    width: 256
+    x: last_right
+    y: 0
+  - height: last_height
+    translate:
+      x: 160
+      y: 0
+    type: exit
+    width: 64
+    x: last_right
+    y: 0
+# Area 34
+- x: last_right
+  y: last_y
+  zones:
+  - height: 480
+    translate:
+      x: -160
+      y: 0
+    type: exit
+    width: 64
+    x: 0
+    y: 0
+  - height: last_height
+    type: safe
+    width: 256
+    x: last_right
+    y: 0
+  - height: last_height
+    spawner:
+    - count: 40
+      radius: 18
+      speed: 6
+      types:
+      - immune
+    - count: 10
+      radius: 24
+      speed: 10
+      types:
+      - sniper
+    - count: 15
+      radius: 9
+      speed: 6
+      types:
+      - slowing
+      - draining
+    - count: 8
+      radius: 30
+      speed: 11
+      types:
+      - wall
+    type: active
+    width: 2560
+    x: last_right
+    y: 0
+  - height: last_height
+    type: safe
+    width: 256
+    x: last_right
+    y: 0
+  - height: last_height
+    translate:
+      x: 160
+      y: 0
+    type: exit
+    width: 64
+    x: last_right
+    y: 0
+# Area 35
+- x: last_right
+  y: last_y
+  zones:
+  - height: 480
+    translate:
+      x: -160
+      y: 0
+    type: exit
+    width: 64
+    x: 0
+    y: 0
+  - height: last_height
+    type: safe
+    width: 256
+    x: last_right
+    y: 0
+  - height: last_height
+    spawner:
+    - count: 60
+      radius: 12
+      speed: 5
+      types:
+      - immune
+    - count: 60
+      radius: 9
+      speed: 2
+      types:
+      - slowing
+      - draining
+    - count: 2
+      radius: 60
+      speed: 10
+      types:
+      - sniper
+    - count: 8
+      radius: 30
+      speed: 11
+      types:
+      - wall
+    type: active
+    width: 2560
+    x: last_right
+    y: 0
+  - height: last_height
+    type: safe
+    width: 256
+    x: last_right
+    y: 0
+  - height: last_height
+    translate:
+      x: 160
+      y: 0
+    type: exit
+    width: 64
+    x: last_right
+    y: 0
+# Area 36
+- x: last_right
+  y: last_y
+  zones:
+  - height: 480
     translate:
       x: -160
       y: 0
@@ -1272,224 +2023,28 @@ areas:
     spawner:
     - count: 15
       radius: 12
-      speed: 1.5
+      speed: 8
       types:
-      - normal
-    - count: 1
-      radius: 36
-      speed: 10
-      types:
-      - negative_magnetic_sniper
-    - count: 1
-      radius: 36
-      speed: 10
-      types:
-      - positive_magnetic_sniper
-    - count: 3
-      radius: 15
-      speed: 6
-      types:
-      - wall
-    - count: 3
-      radius: 15
-      speed: 6
-      move_clockwise: False
-      types:
-      - wall
-    type: active
-    width: 2560
-    x: last_right
-    y: 0
-  - height: last_height
-    type: safe
-    width: 256
-    x: last_right
-    y: 0
-  - height: last_height
-    translate:
-      x: 160
-      y: 0
-    type: exit
-    width: 64
-    x: last_right
-    y: 0
-# 21
-- x: last_right
-  y: last_y
-  zones:
-  - height: 320
-    translate:
-      x: -160
-      y: 0
-    type: exit
-    width: 64
-    x: 0
-    y: 0
-  - height: 352
-    type: safe
-    width: 288
-    x: 64
-    y: 0
-  - height: 32
-    type: safe
-    width: 64
-    x: 0
-    y: 320
-  - height: 2560
-    spawner:
-    - count: 4
-      radius: 12
-      speed: 6
-      types:
-      - normal
-    - count: 2
-      radius: 24
-      speed: 4
-      types:
-      - negative_magnetic_sniper
-    - count: 1
-      radius: 24
-      speed: 4
-      types:
-      - positive_magnetic_sniper
-    - count: 2
-      radius: 70
-      speed: 2
-      types:
-      - positive_magnetic_sniper
-    - count: 3
-      radius: 15
-      speed: 6
-      types:
-      - wall
-    - count: 3
-      radius: 15
-      speed: 6
-      move_clockwise: False
-      types:
-      - wall
-    type: active
-    width: 352
-    x: 0
-    y: 352
-  - height: 352
-    type: safe
-    width: 288
-    x: 0
-    y: 2912
-  - height: 32
-    type: safe
-    width: 64
-    x: 288
-    y: 2912
-  - height: 320
-    translate:
-      x: 160
-      y: 0
-    type: exit
-    width: 64
-    x: 288
-    y: 2944
-# 22
-- x: last_right
-  y: 111392
-  zones:
-  - height: 352
-    translate:
-      x: -160
-      y: 0
-    type: exit
-    width: 64
-    x: 0
-    y: 0
-  - height: last_height
-    type: safe
-    width: 256
-    x: last_right
-    y: 0
-  - height: last_height
-    spawner:
-    - count: 5
-      radius: 24
-      speed: 2
-      types:
-      - normal
-    - count: 3
-      radius: 6
-      speed: 2
-      types:
-      - magnetic_nullification
-    - count: 3
-      radius: 15
-      speed: 7.5
-      move_clockwise: False
-      types:
-      - wall
-    - count: 3
-      radius: 15
-      speed: 7.5
-      types:
-      - wall
-    type: active
-    width: 2560
-    x: last_right
-    y: 0
-  - height: last_height
-    type: safe
-    width: 256
-    x: last_right
-    y: 0
-  - height: last_height
-    translate:
-      x: 160
-      y: 0
-    type: exit
-    width: 64
-    x: last_right
-    y: 0
-# 23
-- x: last_right
-  y: last_y
-  zones:
-  - height: 352
-    translate:
-      x: -160
-      y: 0
-    type: exit
-    width: 64
-    x: 0
-    y: 0
-  - height: last_height
-    type: safe
-    width: 256
-    x: last_right
-    y: 0
-  - height: last_height
-    spawner:
-    - count: 5
-      radius: 18
-      speed: 0.5
-      types:
-      - normal
+      - freezing
+      - draining
     - count: 6
-      radius: 6
-      speed: 3
+      radius: 24
+      speed: 6
       types:
-      - magnetic_reduction
-    - count: 3
-      radius: 6
-      speed: 3
+      - freezing
+    - count: 4
+      radius: 48
+      speed: 5
       types:
-      - magnetic_nullification
-    - count: 3
-      radius: 15
-      speed: 7.5
+      - freezing
+    - count: 1
+      radius: 100
+      speed: 15
       types:
-      - wall
-    - count: 3
-      radius: 15
-      speed: 7.5
-      move_clockwise: False
+      - regen_sniper
+    - count: 8
+      radius: 30
+      speed: 11
       types:
       - wall
     type: active
@@ -1509,11 +2064,92 @@ areas:
     width: 64
     x: last_right
     y: 0
-# 24
+# Area 37
 - x: last_right
   y: last_y
   zones:
-  - height: 352
+  - height: 480
+    translate:
+      x: -160
+      y: 0
+    type: exit
+    width: 64
+    x: 0
+    y: 0
+  - height: last_height
+    type: safe
+    width: 256
+    x: last_right
+    y: 0
+  - height: last_height
+    spawner:
+    - count: 20
+      radius: 12
+      speed: 9
+      types:
+      - slowing
+      - draining
+      - immune
+    - count: 15
+      radius: 24
+      speed: 7.5
+      types:
+      - slowing
+      - draining
+      - immune
+    - count: 10
+      radius: 36
+      speed: 5
+      types:
+      - slowing
+      - draining
+      - immune
+    - count: 7
+      radius: 48
+      speed: 3.5
+      types:
+      - slowing
+      - draining
+      - immune
+    - count: 5
+      radius: 60
+      speed: 1
+      types:
+      - slowing
+      - draining
+      - immune
+    - count: 1
+      radius: 100
+      speed: 10
+      types:
+      - speed_sniper
+    - count: 8
+      radius: 30
+      speed: 11
+      types:
+      - wall
+    type: active
+    width: 2560
+    x: last_right
+    y: 0
+  - height: last_height
+    type: safe
+    width: 256
+    x: last_right
+    y: 0
+  - height: last_height
+    translate:
+      x: 160
+      y: 0
+    type: exit
+    width: 64
+    x: last_right
+    y: 0
+# Area 38
+- x: last_right
+  y: last_y
+  zones:
+  - height: 480
     translate:
       x: -160
       y: 0
@@ -1530,85 +2166,78 @@ areas:
     spawner:
     - count: 10
       radius: 12
-      speed: 4.5
+      speed: 1
       types:
-      - normal
+      - ice_sniper
+    - count: 30
+      radius: 3
+      speed: 10
+      types:
+      - disabling
+    - count: 1
+      radius: 100
+      speed: 5
+      types:
+      - ice_sniper
+    - count: 8
+      radius: 30
+      speed: 11
+      types:
+      - wall
+    type: active
+    width: 2560
+    x: last_right
+    y: 0
+  - height: last_height
+    type: safe
+    width: 256
+    x: last_right
+    y: 0
+  - height: last_height
+    translate:
+      x: 160
+      y: 0
+    type: exit
+    width: 64
+    x: last_right
+    y: 0
+# Area 39
+- x: last_right
+  y: last_y
+  zones:
+  - height: 480
+    translate:
+      x: -160
+      y: 0
+    type: exit
+    width: 64
+    x: 0
+    y: 0
+  - height: last_height
+    type: safe
+    width: 256
+    x: last_right
+    y: 0
+  - height: last_height
+    spawner:
     - count: 2
-      radius: 6
-      speed: 9
+      radius: 80
+      speed: 11
       types:
-      - magnetic_nullification
-    - count: 3
-      radius: 15
-      speed: 7.5
-      move_clockwise: False
+      - radiating_bullets
+    - count: 10
+      radius: 12
+      speed: 10
       types:
-      - wall
-    - count: 3
-      radius: 15
-      speed: 7.5
+      - radiating_bullets
+    - count: 15
+      radius: 3
+      speed: 4
       types:
-      - wall
-    type: active
-    width: 2560
-    x: last_right
-    y: 0
-  - height: last_height
-    type: safe
-    width: 256
-    x: last_right
-    y: 0
-  - height: last_height
-    translate:
-      x: 160
-      y: 0
-    type: exit
-    width: 64
-    x: last_right
-    y: 0
-# 25
-- x: last_right
-  y: last_y
-  zones:
-  - height: 352
-    translate:
-      x: -160
-      y: 0
-    type: exit
-    width: 64
-    x: 0
-    y: 0
-  - height: last_height
-    type: safe
-    width: 256
-    x: last_right
-    y: 0
-  - height: last_height
-    spawner:
-    - count: 5
-      radius: 24
-      speed: 2
-      types:
-      - normal
-    - count: 4
-      radius: 36
-      speed: 3
-      types:
-      - negative_magnetic_sniper
-    - count: 6
-      radius: 6
-      speed: 2
-      types:
-      - magnetic_nullification
-    - count: 3
-      radius: 15
-      speed: 7.5
-      types:
-      - wall
-    - count: 3
-      radius: 15
-      speed: 7.5
-      move_clockwise: False
+      - homing
+    - count: 8
+      radius: 30
+      speed: 11
       types:
       - wall
     type: active
@@ -1628,11 +2257,11 @@ areas:
     width: 64
     x: last_right
     y: 0
-# 26
+# Area 40
 - x: last_right
   y: last_y
   zones:
-  - height: 352
+  - height: 480
     translate:
       x: -160
       y: 0
@@ -1647,34 +2276,138 @@ areas:
     y: 0
   - height: last_height
     spawner:
-    - count: 4
+    - count: 1
+      radius: 120
+      speed: 6
+      types:
+      - radiating_bullets
+    - count: 1
+      radius: 120
+      speed: 6
+      types:
+      - speed_sniper
+    - count: 1
+      radius: 120
+      speed: 6
+      types:
+      - regen_sniper
+    - count: 1
+      radius: 120
+      speed: 6
+      types:
+      - ice_sniper
+    - count: 1
+      radius: 120
+      speed: 6
+      types:
+      - sniper
+    - count: 8
       radius: 9
       speed: 7
       types:
-      - normal
+      - disabling
+      - slowing
+      - draining
+      - freezing
+      - homing
+    - count: 8
+      radius: 12
+      speed: 7
+      types:
+      - disabling
+      - slowing
+      - draining
+      - freezing
+      - homing
+    - count: 6
+      radius: 24
+      speed: 5
+      types:
+      - disabling
+      - slowing
+      - draining
+      - freezing
+      - homing
+    - count: 5
+      radius: 48
+      speed: 4
+      types:
+      - disabling
+      - slowing
+      - draining
+      - immune
+      - homing
+    - count: 5
+      radius: 60
+      speed: 4
+      types:
+      - disabling
+      - slowing
+      - draining
+      - immune
+      - homing
+    - count: 3
+      radius: 9
+      speed: 3
+      types:
+      - disabling
+    - count: 2
+      radius: 9
+      speed: 4
+      types:
+      - slowing
     - count: 2
       radius: 12
+      speed: 4
+      types:
+      - draining
+    - count: 2
+      radius: 18
+      speed: 6
+      types:
+      - freezing
+    - count: 2
+      radius: 24
+      speed: 6
+      types:
+      - homing
+    - count: 1
+      radius: 48
+      speed: 7
+      types:
+      - immune
+    - count: 2
+      radius: 12
+      speed: 6.5
+      types:
+      - speed_sniper
+    - count: 2
+      radius: 12
+      speed: 6.5
+      types:
+      - regen_sniper
+    - count: 2
+      radius: 12
+      speed: 6
+      types:
+      - ice_sniper
+    - count: 4
+      radius: 12
+      speed: 7
+      types:
+      - sniper
+    - count: 2
+      radius: 12
+      speed: 7
+      types:
+      - radiating_bullets
+    - count: 16
+      radius: 30
       speed: 11
       types:
-      - positive_magnetic_sniper
-    - count: 3
-      radius: 6
-      speed: 7
-      types:
-      - magnetic_nullification
-    - count: 3
-      radius: 15
-      speed: 7.5
-      move_clockwise: False
-      types:
-      - wall
-    - count: 3
-      radius: 15
-      speed: 7.5
-      types:
       - wall
     type: active
-    width: 2560
+    width: 5120
     x: last_right
     y: 0
   - height: last_height
@@ -1690,706 +2423,11 @@ areas:
     width: 64
     x: last_right
     y: 0
-# 27
+# Victory Area
 - x: last_right
   y: last_y
   zones:
-  - height: 352
-    translate:
-      x: -160
-      y: 0
-    type: exit
-    width: 64
-    x: 0
-    y: 0
-  - height: last_height
-    type: safe
-    width: 256
-    x: last_right
-    y: 0
-  - height: last_height
-    spawner:
-    - count: 3
-      radius: 15
-      speed: 5
-      types:
-      - normal
-    - count: 3
-      radius: 15
-      speed: 5
-      types:
-      - negative_magnetic_sniper
-    - count: 3
-      radius: 15
-      speed: 5
-      types:
-      - positive_magnetic_sniper
-    - count: 3
-      radius: 6
-      speed: 5
-      types:
-      - magnetic_nullification
-    - count: 3
-      radius: 15
-      speed: 7.5
-      types:
-      - wall
-    - count: 3
-      radius: 15
-      speed: 7.5
-      move_clockwise: False
-      types:
-      - wall
-    type: active
-    width: 2560
-    x: last_right
-    y: 0
-  - height: last_height
-    type: safe
-    width: 256
-    x: last_right
-    y: 0
-  - height: last_height
-    translate:
-      x: 160
-      y: 0
-    type: exit
-    width: 64
-    x: last_right
-    y: 0
-# 28
-- x: last_right
-  y: 108480
-  zones:
-  - height: 320
-    translate:
-      x: -160
-      y: 0
-    type: exit
-    width: 64
-    x: 0
-    y: 2944
-  - height: 352
-    type: safe
-    width: 288
-    x: 64
-    y: 2912
-  - height: 32
-    type: safe
-    width: 64
-    x: 0
-    y: 2912
-  - height: 2560
-    spawner:
-    - count: 2
-      radius: 12
-      speed: 7
-      types:
-      - normal
-    - count: 10
-      radius: 6
-      speed: 4
-      types:
-      - magnetic_reduction
-    - count: 2
-      radius: 12
-      speed: 7
-      types:
-      - negative_magnetic_sniper
-    - count: 2
-      radius: 12
-      speed: 7
-      types:
-      - positive_magnetic_sniper
-    - count: 2
-      radius: 70
-      speed: 3
-      types:
-      - magnetic_nullification
-    - count: 3
-      radius: 15
-      speed: 7.5
-      types:
-      - wall
-    - count: 3
-      radius: 15
-      speed: 7.5
-      move_clockwise: False
-      types:
-      - wall
-    type: active
-    width: 352
-    x: 0
-    y: 352
-  - height: 352
-    type: safe
-    width: 288
-    x: 0
-    y: 0
-  - height: 32
-    type: safe
-    width: 64
-    x: 288
-    y: 320
-  - height: 320
-    translate:
-      x: 160
-      y: 0
-    type: exit
-    width: 64
-    x: 288
-    y: 0
-# Dipole 1
-- name: Dipole 1
-  x: 1952
-  y: 112480
-  zones:
-  - height: 352
-    type: safe
-    width: 352
-    x: 0
-    y: 2912
-  - height: 2560
-    spawner:
-    - count: 20
-      radius: 12
-      speed: 3
-      types:
-      - magnetic_reduction
-    - count: 8
-      radius: 30
-      speed: 2
-      types:
-      - spiral
-    type: active
-    width: 352
-    x: 0
-    y: 352
-  - height: 352
-    type: safe
-    width: 288
-    x: 0
-    y: 0
-  - height: 32
-    type: safe
-    width: 64
-    x: 288
-    y: 320
-  - height: 320
-    translate:
-      x: 160
-      y: 0
-    type: exit
-    width: 64
-    x: 288
-    y: 0
-  properties:
-    pellet_count: 50
-    pellet_multiplier: 5
-    background_color:
-    - 225
-    - 225
-    - 0
-    - 125
-# Dipole 2
-- name: Dipole 2
-  x: last_right
-  y: last_y
-  zones:
-  - height: 352
-    translate:
-      x: -160
-      y: 0
-    type: exit
-    width: 64
-    x: 0
-    y: 0
-  - height: last_height
-    type: safe
-    width: 256
-    x: last_right
-    y: 0
-  - height: last_height
-    spawner:
-    - count: 5
-      radius: 12
-      speed: 12
-      types:
-      - draining
-    - count: 10
-      radius: 16
-      speed: 12
-      types:
-      - negative_magnetic_sniper
-    - count: 5
-      radius: 15
-      speed: 3
-      types:
-      - wall
-    - count: 5
-      radius: 15
-      speed: 6
-      types:
-      - wall
-    - count: 5
-      radius: 15
-      speed: 3
-      move_clockwise: False
-      types:
-      - wall
-    - count: 5
-      radius: 15
-      speed: 6
-      move_clockwise: False
-      types:
-      - wall
-    type: active
-    width: 5120
-    x: last_right
-    y: 0
-  - height: last_height
-    type: safe
-    width: 256
-    x: last_right
-    y: 0
-  - height: last_height
-    translate:
-      x: 160
-      y: 0
-    type: exit
-    width: 64
-    x: last_right
-    y: 0
-  properties:
-    pellet_multiplier: 5
-    background_color:
-    - 225
-    - 225
-    - 0
-    - 125
-# Dipole 3
-- name: Dipole 3
-  x: last_right
-  y: last_y
-  zones:
-  - height: 352
-    translate:
-      x: -160
-      y: 0
-    type: exit
-    width: 64
-    x: 0
-    y: 0
-  - height: last_height
-    type: safe
-    width: 256
-    x: last_right
-    y: 0
-  - height: last_height
-    spawner:
-    - count: 7
-      radius: 12
-      speed: 10
-      types:
-      - draining
-    - count: 9
-      radius: 20
-      speed: 10
-      types:
-      - negative_magnetic_sniper
-    - count: 5
-      radius: 15
-      speed: 3
-      types:
-      - wall
-    - count: 5
-      radius: 15
-      speed: 6
-      types:
-      - wall
-    - count: 5
-      radius: 15
-      speed: 3
-      move_clockwise: False
-      types:
-      - wall
-    - count: 5
-      radius: 15
-      speed: 6
-      move_clockwise: False
-      types:
-      - wall
-    type: active
-    width: 5120
-    x: last_right
-    y: 0
-  - height: last_height
-    type: safe
-    width: 256
-    x: last_right
-    y: 0
-  - height: last_height
-    translate:
-      x: 160
-      y: 0
-    type: exit
-    width: 64
-    x: last_right
-    y: 0
-  properties:
-    pellet_multiplier: 5
-    background_color:
-    - 225
-    - 225
-    - 0
-    - 125
-# Dipole 4
-- name: Dipole 4
-  x: last_right
-  y: last_y
-  zones:
-  - height: 352
-    translate:
-      x: -160
-      y: 0
-    type: exit
-    width: 64
-    x: 0
-    y: 0
-  - height: last_height
-    type: safe
-    width: 256
-    x: last_right
-    y: 0
-  - height: last_height
-    spawner:
-    - count: 20
-      radius: 12
-      speed: 8
-      types:
-      - slowing
-    - count: 8
-      radius: 24
-      speed: 8
-      types:
-      - positive_magnetic_sniper
-    - count: 5
-      radius: 15
-      speed: 3
-      types:
-      - wall
-    - count: 5
-      radius: 15
-      speed: 6
-      types:
-      - wall
-    - count: 5
-      radius: 15
-      speed: 3
-      move_clockwise: False
-      types:
-      - wall
-    - count: 5
-      radius: 15
-      speed: 6
-      move_clockwise: False
-      types:
-      - wall
-    type: active
-    width: 5120
-    x: last_right
-    y: 0
-  - height: last_height
-    type: safe
-    width: 256
-    x: last_right
-    y: 0
-  - height: last_height
-    translate:
-      x: 160
-      y: 0
-    type: exit
-    width: 64
-    x: last_right
-    y: 0
-  properties:
-    pellet_multiplier: 5
-    background_color:
-    - 225
-    - 225
-    - 0
-    - 125
-# Dipole 5
-- name: Dipole 5
-  x: last_right
-  y: last_y
-  zones:
-  - height: 352
-    translate:
-      x: -160
-      y: 0
-    type: exit
-    width: 64
-    x: 0
-    y: 0
-  - height: last_height
-    type: safe
-    width: 256
-    x: last_right
-    y: 0
-  - height: last_height
-    spawner:
-    - count: 35
-      radius: 12
-      speed: 6
-      types:
-      - slowing
-    - count: 7
-      radius: 28
-      speed: 6
-      types:
-      - positive_magnetic_sniper
-    - count: 5
-      radius: 18
-      speed: 3
-      types:
-      - wall
-    - count: 5
-      radius: 15
-      speed: 6
-      types:
-      - wall
-    - count: 5
-      radius: 15
-      speed: 3
-      move_clockwise: False
-      types:
-      - wall
-    - count: 5
-      radius: 15
-      speed: 6
-      move_clockwise: False
-      types:
-      - wall
-    type: active
-    width: 5120
-    x: last_right
-    y: 0
-  - height: last_height
-    type: safe
-    width: 256
-    x: last_right
-    y: 0
-  - height: last_height
-    translate:
-      x: 160
-      y: 0
-    type: exit
-    width: 64
-    x: last_right
-    y: 0
-  properties:
-    pellet_multiplier: 5
-    background_color:
-    - 225
-    - 225
-    - 0
-    - 125
-# Dipole 6
-- name: Dipole 6
-  x: last_right
-  y: last_y
-  zones:
-  - height: 352
-    translate:
-      x: -160
-      y: 0
-    type: exit
-    width: 64
-    x: 0
-    y: 0
-  - height: last_height
-    type: safe
-    width: 256
-    x: last_right
-    y: 0
-  - height: last_height
-    spawner:
-    - count: 25
-      radius: 12
-      speed: 4
-      types:
-      - magnetic_reduction
-    - count: 5
-      radius: 12
-      speed: 4
-      types:
-      - magnetic_nullification
-    - count: 6
-      radius: 32
-      speed: 4
-      types:
-      - poison_sniper
-    - count: 5
-      radius: 15
-      speed: 3
-      types:
-      - wall
-    - count: 5
-      radius: 15
-      speed: 6
-      types:
-      - wall
-    - count: 5
-      radius: 15
-      speed: 3
-      move_clockwise: False
-      types:
-      - wall
-    - count: 5
-      radius: 15
-      speed: 6
-      move_clockwise: False
-      types:
-      - wall
-    type: active
-    width: 5120
-    x: last_right
-    y: 0
-  - height: last_height
-    type: safe
-    width: 256
-    x: last_right
-    y: 0
-  - height: last_height
-    translate:
-      x: 160
-      y: 0
-    type: exit
-    width: 64
-    x: last_right
-    y: 0
-  properties:
-    pellet_multiplier: 5
-    background_color:
-    - 225
-    - 225
-    - 0
-    - 125
-# Dipole 7
-- name: Dipole 7
-  x: last_right
-  y: last_y
-  zones:
-  - height: 352
-    translate:
-      x: -160
-      y: 0
-    type: exit
-    width: 64
-    x: 0
-    y: 0
-  - height: last_height
-    type: safe
-    width: 256
-    x: last_right
-    y: 0
-  - height: last_height
-    spawner:
-    - count: 25
-      radius: 12
-      speed: 2
-      types:
-      - magnetic_reduction
-    - count: 12
-      radius: 12
-      speed: 2
-      types:
-      - magnetic_nullification
-    - count: 5
-      radius: 36
-      speed: 2
-      types:
-      - poison_sniper
-    - count: 5
-      radius: 15
-      speed: 3
-      types:
-      - wall
-    - count: 5
-      radius: 15
-      speed: 6
-      types:
-      - wall
-    - count: 5
-      radius: 15
-      speed: 3
-      move_clockwise: False
-      types:
-      - wall
-    - count: 5
-      radius: 15
-      speed: 6
-      move_clockwise: False
-      types:
-      - wall
-    type: active
-    width: 5120
-    x: last_right
-    y: 0
-  - height: last_height
-    type: safe
-    width: 256
-    x: last_right
-    y: 0
-  - height: last_height
-    translate:
-      x: 160
-      y: 0
-    type: exit
-    width: 64
-    x: last_right
-    y: 0
-  properties:
-    pellet_multiplier: 5
-    background_color:
-    - 225
-    - 225
-    - 0
-    - 125
-# Dipole 8 Victory
-- x: last_right
-  y: 112480
-  zones:
-  - height: 320
-    translate:
-      x: -160
-      y: 0
-    type: exit
-    width: 64
-    x: 0
-    y: 0
-  - height: 3104
-    type: victory
-    width: 352
-    x: 0
-    y: 0
-  - height: 160
-    type: removal
-    width: 352
-    x: 0
-    y: 3104
-  properties:
-    background_color:
-    - 225
-    - 225
-    - 0
-    - 125
-# 37 Magno Victory
-- x: 80160
-  y: 108480
-  zones:
-  - height: 352
+  - height: 480
     translate:
       x: -160
       y: 0

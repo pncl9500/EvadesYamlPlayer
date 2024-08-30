@@ -246,7 +246,6 @@ class Player extends Entity{
     this.sy = sy;
     sx *= 1-((1-dim) * fFix);
     sy *= 1-((1-dim) * fFix);
-    //dubious?
     if (this.ctrlVector.x !== 0){
       sx = 0;
     }

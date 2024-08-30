@@ -50,14 +50,15 @@ areas:
     width: 2560
     height: 480
     spawner:
-    - count: 6
+    - count: 12
       radius: 18
       speed: 8
       types:
       - repelling_ghost
     - count: 2
       radius: 165
-      speed: 4
+      speed: 5
+      move_clockwise: False
       types:
       - wall
   - type: dummy
@@ -140,14 +141,14 @@ areas:
     y: 0
   - height: last_height
     spawner:
-    - count: 10
+    - count: 20
       radius: 18
       speed: 12
       types:
       - repelling_ghost
     - count: 6
       radius: 135
-      speed: 6
+      speed: 7
       types:
       - wall
     type: active
@@ -244,7 +245,7 @@ areas:
       - 50
       minimum_speed: 10
   - type: dummy
-    x: 2048
+    x: 2040
     y: 128
     width: 864
     height: 96
@@ -256,7 +257,7 @@ areas:
       - 50
       minimum_speed: 10
   - type: dummy
-    x: 2048
+    x: 2040
     y: 256
     width: 864
     height: 96
@@ -282,14 +283,15 @@ areas:
     y: 0
   - height: last_height
     spawner:
-    - count: 12
+    - count: 20
       radius: 18
       speed: 12
       types:
       - repelling_ghost
     - count: 6
       radius: 135
-      speed: 8
+      speed: 9
+      move_clockwise: False
       types:
       - wall
     type: active
@@ -333,7 +335,7 @@ areas:
       - 50
       minimum_speed: 10
   - type: dummy
-    x: 2048
+    x: 2040
     y: 128
     width: 864
     height: 96
@@ -345,7 +347,7 @@ areas:
       - 50
       minimum_speed: 10
   - type: dummy
-    x: 2048
+    x: 2040
     y: 256
     width: 864
     height: 96
@@ -472,14 +474,14 @@ areas:
     y: 0
   - height: last_height
     spawner:
-    - count: 16
+    - count: 30
       radius: 18
       speed: 12
       types:
       - repelling_ghost
     - count: 7
       radius: 120
-      speed: 11
+      speed: 12
       types:
       - wall
     type: active
@@ -710,14 +712,15 @@ areas:
     y: 0
   - height: last_height
     spawner:
-    - count: 24
+    - count: 40
       radius: 18
       speed: 12
       types:
       - repelling_ghost
     - count: 6
       radius: 140
-      speed: 12
+      speed: 13
+      move_clockwise: False
       types:
       - wall
     type: active
@@ -888,24 +891,24 @@ areas:
     y: 0
   - height: last_height
     spawner:
-    - count: 6
+    - count: 12
       radius: 12
       speed: 5
       types:
       - wind_ghost
-    - count: 10
+    - count: 20
       radius: 18
       speed: 12
       types:
       - repelling_ghost
-    - count: 4
+    - count: 6
       radius: 0
       speed: 12
       types:
       - slowing
     - count: 5
       radius: 120
-      speed: 13
+      speed: 14
       types:
       - wall
     type: active
@@ -1016,24 +1019,25 @@ areas:
     y: 0
   - height: last_height
     spawner:
-    - count: 10
+    - count: 18
       radius: 12
       speed: 8
       types:
       - wind_ghost
-    - count: 16
+    - count: 30
       radius: 18
       speed: 16
       types:
       - repelling_ghost
-    - count: 6
+    - count: 10
       radius: 0
       speed: 12
       types:
       - slowing
     - count: 4
       radius: 120
-      speed: 14
+      speed: 15
+      move_clockwise: False
       types:
       - wall
     type: active
@@ -1192,24 +1196,24 @@ areas:
     y: 0
   - height: last_height
     spawner:
-    - count: 6
+    - count: 8
       radius: 24
       speed: 6
       types:
       - wind_ghost
-    - count: 6
+    - count: 8
       radius: 24
       speed: 10
       types:
       - repelling_ghost
-    - count: 10
+    - count: 16
       radius: 0
       speed: 12
       types:
       - slowing
     - count: 6
       radius: 135
-      speed: 14
+      speed: 15
       types:
       - wall
     type: active
@@ -1392,24 +1396,25 @@ areas:
     y: 0
   - height: last_height
     spawner:
-    - count: 8
+    - count: 12
       radius: 24
       speed: 4
       types:
       - wind_ghost
-    - count: 8
+    - count: 12
       radius: 24
       speed: 6
       types:
       - repelling_ghost
-    - count: 16
+    - count: 24
       radius: 0
       speed: 12
       types:
       - slowing
     - count: 5
       radius: 135
-      speed: 14
+      speed: 15
+      move_clockwise: False
       types:
       - wall
     type: active
@@ -1520,12 +1525,12 @@ areas:
     y: 0
   - height: last_height
     spawner: 
-    - count: 24
+    - count: 40
       radius: 12
       speed: 8
       types:
       - wind_ghost
-    - count: 24
+    - count: 40
       radius: 12
       speed: 8
       types:
@@ -1595,12 +1600,13 @@ areas:
     - count: 1
       radius: 180
       speed: 8
+      move_clockwise: False
+      spawn_top: False
       types:
       - wall
     - count: 24
       radius: 8
       speed: 3
-      move_clockwise: False
       types:
       - wall
     type: active
@@ -1704,12 +1710,13 @@ areas:
     - count: 1
       radius: 180
       speed: 11
+      move_clockwise: False
+      spawn_top: False
       types:
       - wall
     - count: 24
       radius: 8
       speed: 3
-      move_clockwise: False
       types:
       - wall
     type: active
@@ -1828,12 +1835,13 @@ areas:
     - count: 1
       radius: 180
       speed: 14
+      move_clockwise: False
+      spawn_top: False
       types:
       - wall
     - count: 24
       radius: 8
       speed: 3
-      move_clockwise: False
       types:
       - wall
     type: active
@@ -1962,12 +1970,13 @@ areas:
     - count: 1
       radius: 180
       speed: 17
+      move_clockwise: False
+      spawn_top: False
       types:
       - wall
     - count: 24
       radius: 8
       speed: 3
-      move_clockwise: False
       types:
       - wall
     type: active
@@ -2086,12 +2095,13 @@ areas:
     - count: 1
       radius: 180
       speed: 20
+      move_clockwise: False
+      spawn_top: False
       types:
       - wall
     - count: 24
       radius: 8
       speed: 3
-      move_clockwise: False
       types:
       - wall
     type: active
@@ -2187,12 +2197,12 @@ areas:
     y: 0
   - height: last_height
     spawner:
-    - count: 6
+    - count: 8
       radius: 12
       speed: 8
       types:
       - wind_ghost
-    - count: 12
+    - count: 14
       radius: 18
       speed: 8
       types:
@@ -2200,13 +2210,13 @@ areas:
     - count: 5
       radius: 90
       speed: 4
-      move_clockwise: False
-      spawn_top: False
       types:
       - wall
     - count: 1
       radius: 140
-      speed: 8.5
+      speed: 8.7
+      move_clockwise: False
+      spawn_top: False
       types:
       - wall
     type: active
@@ -2245,17 +2255,17 @@ areas:
     y: 0
   - height: last_height
     spawner:
-    - count: 8
+    - count: 10
       radius: 18
       speed: 8
       types:
       - wind_ghost
-    - count: 12
+    - count: 14
       radius: 24
       speed: 8
       types:
       - switch
-    - count: 4
+    - count: 10
       radius: 24
       speed: 8
       types:
@@ -2269,7 +2279,7 @@ areas:
       - wall
     - count: 1
       radius: 140
-      speed: 10.5
+      speed: 10.8
       types:
       - wall
     type: active
@@ -2308,12 +2318,12 @@ areas:
     y: 0
   - height: last_height
     spawner:
-    - count: 10
+    - count: 14
       radius: 18
       speed: 7
       types:
       - wind_ghost
-    - count: 12
+    - count: 14
       radius: 30
       speed: 8
       types:
@@ -2326,13 +2336,13 @@ areas:
     - count: 5
       radius: 90
       speed: 6
-      move_clockwise: False
-      spawn_top: False
       types:
       - wall
     - count: 1
       radius: 140
-      speed: 12.5
+      speed: 13
+      move_clockwise: False
+      spawn_top: False
       types:
       - wall
     type: active
@@ -2371,12 +2381,12 @@ areas:
     y: 0
   - height: last_height
     spawner:
-    - count: 8
+    - count: 10
       radius: 24
       speed: 8
       types:
       - wind_ghost
-    - count: 8
+    - count: 10
       radius: 40
       speed: 8
       types:
@@ -2395,7 +2405,7 @@ areas:
       - wall
     - count: 1
       radius: 140
-      speed: 14.5
+      speed: 15.2
       types:
       - wall
     type: active
@@ -2434,17 +2444,17 @@ areas:
     y: 0
   - height: last_height
     spawner:
-    - count: 8
+    - count: 10
       radius: 30
       speed: 8
       types:
       - wind_ghost
-    - count: 8
+    - count: 10
       radius: 50
       speed: 8
       types:
       - switch
-    - count: 6
+    - count: 10
       radius: 50
       speed: 8
       types:
@@ -2452,13 +2462,13 @@ areas:
     - count: 5
       radius: 90
       speed: 8
-      move_clockwise: False
-      spawn_top: False
       types:
       - wall
     - count: 1
       radius: 140
-      speed: 16.5
+      speed: 17.3
+      move_clockwise: False
+      spawn_top: False
       types:
       - wall
     type: active
@@ -2497,31 +2507,31 @@ areas:
     y: 0
   - height: last_height
     spawner:
-    - count: 8
+    - count: 10
       radius: 18
       speed: 6
       types:
       - wind_ghost
-    - count: 16
+    - count: 20
       radius: 24
       speed: 6
       types:
       - switch
-    - count: 6
+    - count: 10
       radius: 24
       speed: 6
       types:
       - slowing
     - count: 5
-      radius: 110
-      speed: 5
+      radius: 125
+      speed: 4
       move_clockwise: False
       spawn_top: False
       types:
       - wall
     - count: 1
-      radius: 160
-      speed: 10.75
+      radius: 165
+      speed: 9
       types:
       - wall
     type: active
@@ -2560,31 +2570,31 @@ areas:
     y: 0
   - height: last_height
     spawner:
-    - count: 6
+    - count: 8
       radius: 18
       speed: 7
       types:
       - wind_ghost
-    - count: 14
+    - count: 16
       radius: 30
       speed: 7
       types:
       - switch
-    - count: 10
+    - count: 12
       radius: 30
       speed: 7
       types:
       - slowing
     - count: 5
-      radius: 110
-      speed: 6
-      move_clockwise: False
-      spawn_top: False
+      radius: 125
+      speed: 5
       types:
       - wall
     - count: 1
-      radius: 160
-      speed: 13
+      radius: 165
+      speed: 11.5
+      move_clockwise: False
+      spawn_top: False
       types:
       - wall
     type: active
@@ -2623,31 +2633,31 @@ areas:
     y: 0
   - height: last_height
     spawner:
-    - count: 6
+    - count: 8
       radius: 18
       speed: 8
       types:
       - wind_ghost
-    - count: 6
+    - count: 8
       radius: 40
       speed: 8
       types:
       - switch
-    - count: 6
+    - count: 8
       radius: 40
       speed: 8
       types:
       - slowing
     - count: 5
-      radius: 110
-      speed: 7
+      radius: 125
+      speed: 6
       move_clockwise: False
       spawn_top: False
       types:
       - wall
     - count: 1
-      radius: 160
-      speed: 15.25
+      radius: 165
+      speed: 14
       types:
       - wall
     type: active
@@ -2686,7 +2696,7 @@ areas:
     y: 0
   - height: last_height
     spawner:
-    - count: 10
+    - count: 14
       radius: 12
       speed: 10
       types:
@@ -2696,21 +2706,21 @@ areas:
       speed: 10
       types:
       - switch
-    - count: 6
+    - count: 10
       radius: 40
       speed: 10
       types:
       - slowing
     - count: 5
-      radius: 110
-      speed: 8
-      move_clockwise: False
-      spawn_top: False
+      radius: 125
+      speed: 7
       types:
       - wall
     - count: 1
-      radius: 160
-      speed: 17.5
+      radius: 165
+      speed: 16.5
+      move_clockwise: False
+      spawn_top: False
       types:
       - wall
     type: active
@@ -2749,26 +2759,26 @@ areas:
     y: 0
   - height: last_height
     spawner:
-    - count: 20
+    - count: 24
       radius: 12
       speed: 12
       types:
       - wind_ghost
-    - count: 10
+    - count: 12
       radius: 60
       speed: 12
       types:
       - switch
     - count: 5
-      radius: 110
-      speed: 9
+      radius: 125
+      speed: 8
       move_clockwise: False
       spawn_top: False
       types:
       - wall
     - count: 1
-      radius: 160
-      speed: 19.75
+      radius: 165
+      speed: 19
       types:
       - wall
     type: active
@@ -2792,30 +2802,6 @@ areas:
 - x: last_right
   y: last_y
   zones:
-  - type: dummy
-    x: 320
-    y: 128
-    width: 2560
-    height: 64
-    properties:
-      background_color:
-      - 255
-      - 65
-      - 235
-      - 50
-      minimum_speed: 18
-  - type: dummy
-    x: 320
-    y: 288
-    width: 2560
-    height: 64
-    properties:
-      background_color:
-      - 255
-      - 65
-      - 235
-      - 50
-      minimum_speed: 18
   - height: 480
     translate:
       x: -160
@@ -2831,49 +2817,40 @@ areas:
     y: 0
   - height: last_height
     spawner:
-    - count: 50
+    - count: 6
+      radius: 40
+      speed: 2
+      types:
+      - wind_ghost
+    - count: 12
+      radius: 40
+      speed: 3
+      types:
+      - repelling_ghost
+    - count: 12
       radius: 0
-      slowing_radius: 80
-      speed: 10
+      speed: 3
       types:
       - slowing
-    - count: 6
-      radius: 120
-      speed: 15
+    - count: 4
+      radius: 80
+      speed: 10
+      move_clockwise: False
+      types:
+      - wall
+    - count: 4
+      radius: 80
+      speed: 10
       types:
       - wall
     type: active
     width: 2560
     x: last_right
     y: 0
-  - type: dummy
-    x: 320
-    y: 128
-    width: 2560
-    height: 64
-    properties:
-      background_color:
-      - 255
-      - 65
-      - 235
-      - 50
-      minimum_speed: 18
-  - type: dummy
-    x: 320
-    y: 288
-    width: 2560
-    height: 64
-    properties:
-      background_color:
-      - 255
-      - 65
-      - 235
-      - 50
-      minimum_speed: 18
   - height: 480
     type: safe
     width: 256
-    x: 2880
+    x: last_right
     y: 0
   - height: last_height
     translate:
@@ -2887,30 +2864,6 @@ areas:
 - x: last_right
   y: last_y
   zones:
-  - type: dummy
-    x: 320
-    y: 128
-    width: 2560
-    height: 64
-    properties:
-      background_color:
-      - 255
-      - 65
-      - 235
-      - 50
-      minimum_speed: 18
-  - type: dummy
-    x: 320
-    y: 288
-    width: 2560
-    height: 64
-    properties:
-      background_color:
-      - 255
-      - 65
-      - 235
-      - 50
-      minimum_speed: 18
   - height: 480
     translate:
       x: -160
@@ -2926,49 +2879,40 @@ areas:
     y: 0
   - height: last_height
     spawner:
-    - count: 50
-      radius: 0
-      draining_radius: 80
-      speed: 10
+    - count: 8
+      radius: 50
+      speed: 3
       types:
-      - draining
-    - count: 6
-      radius: 120
-      speed: 20
+      - wind_ghost
+    - count: 16
+      radius: 50
+      speed: 5
+      types:
+      - repelling_ghost
+    - count: 18
+      radius: 0
+      speed: 5
+      types:
+      - slowing
+    - count: 4
+      radius: 80
+      speed: 12
+      move_clockwise: False
+      types:
+      - wall
+    - count: 4
+      radius: 80
+      speed: 12
       types:
       - wall
     type: active
     width: 2560
     x: last_right
     y: 0
-  - type: dummy
-    x: 320
-    y: 128
-    width: 2560
-    height: 64
-    properties:
-      background_color:
-      - 255
-      - 65
-      - 235
-      - 50
-      minimum_speed: 18
-  - type: dummy
-    x: 320
-    y: 288
-    width: 2560
-    height: 64
-    properties:
-      background_color:
-      - 255
-      - 65
-      - 235
-      - 50
-      minimum_speed: 18
   - height: 480
     type: safe
     width: 256
-    x: 2880
+    x: last_right
     y: 0
   - height: last_height
     translate:
@@ -2982,30 +2926,6 @@ areas:
 - x: last_right
   y: last_y
   zones:
-  - type: dummy
-    x: 320
-    y: 128
-    width: 2560
-    height: 64
-    properties:
-      background_color:
-      - 255
-      - 65
-      - 235
-      - 50
-      minimum_speed: 18
-  - type: dummy
-    x: 320
-    y: 288
-    width: 2560
-    height: 64
-    properties:
-      background_color:
-      - 255
-      - 65
-      - 235
-      - 50
-      minimum_speed: 18
   - height: 480
     translate:
       x: -160
@@ -3021,49 +2941,40 @@ areas:
     y: 0
   - height: last_height
     spawner:
-    - count: 50
-      radius: 0
-      gravity_radius: 80
-      speed: 10
+    - count: 10
+      radius: 60
+      speed: 4
       types:
-      - gravity
-    - count: 6
-      radius: 120
-      speed: 22
+      - wind_ghost
+    - count: 20
+      radius: 60
+      speed: 7
+      types:
+      - repelling_ghost
+    - count: 24
+      radius: 0
+      speed: 7
+      types:
+      - slowing
+    - count: 4
+      radius: 80
+      speed: 14
+      move_clockwise: False
+      types:
+      - wall
+    - count: 4
+      radius: 80
+      speed: 14
       types:
       - wall
     type: active
     width: 2560
     x: last_right
     y: 0
-  - type: dummy
-    x: 320
-    y: 128
-    width: 2560
-    height: 64
-    properties:
-      background_color:
-      - 255
-      - 65
-      - 235
-      - 50
-      minimum_speed: 18
-  - type: dummy
-    x: 320
-    y: 288
-    width: 2560
-    height: 64
-    properties:
-      background_color:
-      - 255
-      - 65
-      - 235
-      - 50
-      minimum_speed: 18
   - height: 480
     type: safe
     width: 256
-    x: 2880
+    x: last_right
     y: 0
   - height: last_height
     translate:
@@ -3166,11 +3077,14 @@ areas:
     - count: 1
       radius: 212
       speed: 21
+      move_clockwise: False
+      spawn_top: False
       types:
       - wall
     - count: 9
       radius: 30
       speed: 5
+      move_clockwise: False
       types:
       - wall
     type: active
@@ -3265,23 +3179,23 @@ areas:
     y: 0
   - height: last_height
     spawner:
-    - count: 20
+    - count: 24
       radius: 12
       speed: 2
       types:
       - slowing
-    - count: 20
+    - count: 28
       radius: 33
       speed: 10
       types:
       - switch
     - x: '512, 1208'
-      radius: 66
+      radius: 78
       speed: 2
       types:
       - sizing
     - x: '1992, 2688'
-      radius: 66
+      radius: 78
       speed: 2
       types:
       - sizing
@@ -3332,35 +3246,35 @@ areas:
     y: 0
   - height: last_height
     spawner:
-    - count: 20
+    - count: 24
       radius: 12
       speed: 2
       types:
       - draining
-    - count: 20
+    - count: 28
       radius: 33
       speed: 10
       types:
       - switch
     - x: '512, 1208'
-      radius: 66
+      radius: 78
       speed: 2
       types:
       - sizing
     - x: '1992, 2688'
-      radius: 66
+      radius: 78
       speed: 2
       types:
       - sizing
     - count: 2
       radius: 160
       speed: 3
-      move_clockwise: False
       types:
       - wall
     - count: 4
       radius: 90
       speed: 6
+      move_clockwise: False
       types:
       - wall
     type: active
@@ -3399,23 +3313,23 @@ areas:
     y: 0
   - height: last_height
     spawner:
-    - count: 20
+    - count: 18
       radius: 12
       speed: 2
       types:
       - gravity
-    - count: 20
+    - count: 28
       radius: 33
       speed: 10
       types:
       - switch
     - x: '512, 1208'
-      radius: 66
+      radius: 78
       speed: 2
       types:
       - sizing
     - x: '1992, 2688'
-      radius: 66
+      radius: 78
       speed: 2
       types:
       - sizing
@@ -3466,14 +3380,14 @@ areas:
     y: 0
   - height: last_height
     spawner:
-    - count: 20
+    - count: 22
       radius: 12
-      speed: 9.5
+      speed: 10
       types:
       - slowing
-    - count: 20
+    - count: 22
       radius: 12
-      speed: 9.5
+      speed: 10
       types:
       - draining
     - count: 4
