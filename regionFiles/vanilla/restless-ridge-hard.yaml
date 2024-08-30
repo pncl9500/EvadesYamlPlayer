@@ -1,6 +1,5 @@
 name: Restless Ridge Hard
 properties:
-  pellet_count: 50
   friction: 0.75
   wind_ghosts_do_not_push_while_downed: true
   background_color:
@@ -13,8 +12,6 @@ areas:
   - x: 135052
     y: 43040
     name: Area 1
-    properties:
-      pellet_count: 25
     zones:
       - type: teleport
         x: 0
@@ -5740,13 +5737,13 @@ areas:
             move_clockwise: False
             types:
               - wall
-          - count: 150
+          - count: 180
             radius: 32
             speed: 7
             types:
               - switch
               - wind_ghost
-          - count: 50
+          - count: 60
             radius: 24
             speed: 6
             types:
@@ -10133,8 +10130,7 @@ areas:
               - draining
           - count: 150
             radius: 50
-            speed: 3
-            reverse: True
+            speed: -3
             types:
               - homing
         # Active 33
@@ -15725,10 +15721,18 @@ areas:
       # Safe 1
       - height: 576
         type: safe
-        width: 416
+        width: 480
         x: 1824
         y: 0
       # First exit 24
+      - height: 288
+        translate:
+          x: -46080
+          y: -44864
+        type: exit
+        width: 64
+        x: 2240
+        y: 0
       - height: 576
         spawner:
           - count: 1

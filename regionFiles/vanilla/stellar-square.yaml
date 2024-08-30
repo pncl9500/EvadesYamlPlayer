@@ -2,13 +2,14 @@ name: Stellar Square
 properties:
   friction: 0.75
   warping_disabled: True
-  max_level: 1000
+  max_level: 99999
   death_timer: 1500
   pellet_count: 50
-  charge_reduced: True
 areas:
 - x: var x
   y: var y
+  properties:
+    charge_reduced: True
   zones:
   - type: teleport
     x: 1216

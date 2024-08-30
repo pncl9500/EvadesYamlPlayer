@@ -4953,3 +4953,4 @@ properties:
   - 75
   friction: 0.75
   pellet_count: 100
+  radioactive_gloop_reduced: true

@@ -1,7 +1,7 @@
 name: Endless Echo Hard
 properties:
   friction: 0.75
-  max_level: 1000
+  max_level: 99999
   background_color:
   - 55
   - 94

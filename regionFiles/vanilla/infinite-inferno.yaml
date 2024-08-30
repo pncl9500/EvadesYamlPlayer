@@ -2,10 +2,10 @@ name: Infinite Inferno
 properties:
   friction: 0.75
   background_color:
-  - 112
-  - 20
-  - 29
-  - 122
+  - 88
+  - 12
+  - 24
+  - 172
 areas:
 # Area 1, Prayer's Passage
 # Tunnel leading to elevator
@@ -28,7 +28,7 @@ areas:
     translate:
       x: 0
       y: -1120
-  # To Withering Wasteland
+  # To Central Core
   - x: 0
     y: 416
     width: 320
@@ -36,7 +36,7 @@ areas:
     type: teleport
     translate:
       x: 0
-      y: 23952
+      y: -149752
   
   - x: 0
     y: 64
@@ -548,6 +548,13 @@ areas:
 - x: last_x
   y: last_y - 480
   name: Circle 2-4
+  properties:
+    # Sniper bullets were nearly the same colour as background.
+    background_color:
+      - 66
+      - 12
+      - 24
+      - 152
   zones:
   - x: 0
     y: 0
@@ -788,6 +795,13 @@ areas:
 - x: last_x
   y: last_y - 480
   name: Circle 3-4
+  properties:
+    # Sniper bullets were nearly the same colour as background.
+    background_color:
+      - 66
+      - 12
+      - 24
+      - 152
   zones:
   - x: 0
     y: 0

@@ -5,7 +5,7 @@ properties:
   - 0
   - 0
   - 40
-  max_level: 1000
+  max_level: 99999
   friction: 0.75
 areas:
 # Area 1

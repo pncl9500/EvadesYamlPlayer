@@ -6,7 +6,7 @@ properties:
   - 115
   - 100
   friction: 0.75
-  max_level: 1000
+  max_level: 99999
 areas:
 - x: var x
   y: var y

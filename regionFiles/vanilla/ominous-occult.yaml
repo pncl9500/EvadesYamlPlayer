@@ -2,7 +2,6 @@ name: Ominous Occult
 properties:
   friction: 0.75
   crumble_reduced: true
-  lightning_reduced: true
   pellet_count: 50
   pellet_multiplier: 5
   background_color:

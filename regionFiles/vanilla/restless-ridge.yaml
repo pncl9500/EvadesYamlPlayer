@@ -1,6 +1,5 @@
 name: Restless Ridge
 properties:
-  pellet_count: 50
   friction: 0.75
   background_color:
     - 222
@@ -11,8 +10,6 @@ areas:
   # Area 1
   - x: 0
     y: 43040
-    properties:
-      pellet_count: 25
     zones:
       - type: teleport
         x: 32

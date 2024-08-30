@@ -1149,7 +1149,7 @@ areas:
         width: 320
         x: 1600
         y: 0
-      - height: 192
+      - height: 256
         translate:
           x: 160
           y: 0

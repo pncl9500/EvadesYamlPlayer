@@ -38,6 +38,13 @@ areas:
       - 255
       - 248
       - 75
+  - height: 96
+    properties:
+      minimum_speed: 10
+    type: safe
+    width: 32
+    x: 0
+    y: 192
   - height: 64
     translate: {x: 0, y: -10440}
     type: teleport
@@ -56,13 +63,6 @@ areas:
     width: 288
     x: 32
     y: 64
-  - height: 96
-    properties:
-      minimum_speed: 10
-    type: safe
-    width: 32
-    x: 0
-    y: 192
   - height: 480
     spawner:
     - count: 1
@@ -943,6 +943,7 @@ areas:
   x: 1952
   y: 145072
   properties:
+    background_color: [0, 138, 101, 225]
     pellet_count: 10
   zones:
   - height: 960
@@ -977,12 +978,11 @@ areas:
     y: 0
     properties:
       background_color: [0, 0, 0, 175]
-  properties:
-    background_color: [0, 138, 101, 225]
 - name: Data Center B
   x: 7872
   y: 145072
   properties:
+    background_color: [36, 117, 133, 225]
     pellet_count: 10
   zones:
   - height: 960
@@ -1017,13 +1017,12 @@ areas:
     y: 0
     properties:
       background_color: [0, 0, 0, 175]
-  properties:
-    background_color: [36, 117, 133, 225]
 - name: Data Center C
   x: 1952
   y: 139952
   properties:
     pellet_count: 10
+    background_color: [135, 88, 38, 225]
   zones:
   - height: 960
     spawner:
@@ -1057,13 +1056,12 @@ areas:
     y: 928
     properties:
       background_color: [0, 0, 0, 175]
-  properties:
-    background_color: [135, 88, 38, 225]
 - name: Data Center D
   x: 7872
   y: 139952
   properties:
     pellet_count: 10
+    background_color: [179, 102, 7, 225]
   zones:
   - height: 960
     spawner:
@@ -1091,14 +1089,12 @@ areas:
     y: 0
   - height: 32
     translate: {x: 0, y: 160}
-    type: teleport
+    type: exit
     width: 32
     x: 928
     y: 928
     properties:
       background_color: [0, 0, 0, 175]
-  properties:
-    background_color: [179, 102, 7, 225]
 - name: FINAL BOSS
   x: 4816
   y: 142416
