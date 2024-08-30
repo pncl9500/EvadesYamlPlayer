@@ -99,4 +99,6 @@ settings = {
   lightMapDownsample: 8,
   nightMode: false,
   hideTorches : false,
+
+  useNewUnits: false,
 }

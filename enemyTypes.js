@@ -514,6 +514,9 @@ class SpeedSniperBullet extends Bullet{
   constructor(x, y, angle, speed, radius, color, loss){
     super(x, y, angle, speed, radius, color);
     this.loss = loss;
+    if (settings.useNewUnits) {
+      this.loss /= 30;
+    }
     this.inherentlyHarmless = true;
   }
   playerCollisionEvent(player){
@@ -577,7 +580,11 @@ class SpeedGhost extends Enemy{
     for (var i in players){
       if (circleCircle(this, players[i]) && !this.disabled){
         let player = players[i];
-        player.speed -= 0.1 * player.effectVulnerability * tFix;
+        let loss = 0.1 * player.effectVulnerability * tFix;
+        if (settings.useNewUnits) {
+          loss /= 30;
+        }
+        player.speed -= loss
         if (player.speed < gameConsts.startingSpeed){
           player.speed = gameConsts.startingSpeed;
         }

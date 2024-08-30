@@ -615,7 +615,7 @@ class Player extends Entity{
     for (var z in this.zonesTouched){
       const zone = this.zonesTouched[z];
       if (zone.properties.hasOwnProperty("minimum_speed")){
-        this.gainEffect(new MinimumSpeedZoneEffect(zone.properties.minimum_speed), false);
+        this.gainEffect(new MinimumSpeedZoneEffect(zone.properties.minimum_speed / (settings.useNewUnits ? 30 : 1)), false);
       }
       switch (zone.type) {
         case "removal":

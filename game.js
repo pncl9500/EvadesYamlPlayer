@@ -84,6 +84,10 @@ class Game{
       timeScale = 1 + sin(wobbleClock * settings.wobbleFrequency * 8) / 1.5;
     }
   }
+  resetMainArea(){
+    game.mainPlayer.area.unload();
+    game.mainPlayer.area.load();
+  }
 }
 wobbleClock = 0;
 

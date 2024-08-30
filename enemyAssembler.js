@@ -1,6 +1,9 @@
 function getEnemyFromSpawner(x, y, d, enemyType, spawner, spawnIndex, zone){
   let r = spawner.radius;
   let s = spawner.speed ?? 0;
+  if (settings.useNewUnits) {
+    s /= 30;
+  }
   let auraSize = spawner[enemyType + "_radius"] ?? (defaults.spawnerProps[enemyType + "_radius"] ?? 150);
   function property(prop){
     return spawner[prop] ?? defaults.spawnerProps[prop];

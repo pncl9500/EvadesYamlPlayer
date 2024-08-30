@@ -144,6 +144,10 @@ function setCheatMenuItems(){
         row([btn("Import Map", null, 12, () => {tryImportSelector()}, "Import a map file."),
           
         ]),
+        row([
+          txt("Use legacy units: ", 12),
+          tog(11, 11, false, () => {settings.useNewUnits = false; game.resetMainArea()}, () => {settings.useNewUnits = true; game.resetMainArea()}, () => {return !settings.useNewUnits;}, "Whether or not to use legacy units. If enemies are moving too fast, disable this. If enemies are moving too slow, enable this."),
+        ]),
         row([txt("Change hero: ", 12), 
             btn("Open list", 37, 12, () => {queueCheatMenuChange(getHeroSelectorMenu())}, "Select a hero."),]),
         row([txt("Change region: ", 12), 
