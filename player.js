@@ -685,7 +685,7 @@ class Player extends Entity{
       //network connector
       //also in rr40 i think
       for (var a = this.region.areas.length - 1; a >= 0; a--){
-        if (a === this.areaNum){
+        if (a === this.areaNum || !this.region.areas[a]){
           //this doesnt even work
           continue;
         }
@@ -727,9 +727,13 @@ class Player extends Entity{
     this.region = this.game.regions[id];
     if (this.regionNum !== id) ui.alertBox.setAlertsForRegion(this.region);
     this.regionNum = id;
+    const isEndless = this.region.name.includes("Endless Echo");
+    if (isEndless) this.game.echoManagers[this.region.name.includes("Hard")&1].create_areas([],this.areaNum)
   }
   goToAreaFromId(id){
-    this.areaNum = constrain(id, 0, this.region.areas.length - 1);
+    const isEndless = this.region.name.includes("Endless Echo");
+    this.areaNum = constrain(id, 0, (this.region.areas.length - 1) / !isEndless);
+    if (isEndless) this.game.echoManagers[this.region.name.includes("Hard")&1].create_areas([],this.areaNum)
     this.area = this.region.areas[this.areaNum];
   }
   doTeleportTranslate(zoneId){

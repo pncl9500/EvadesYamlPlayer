@@ -159,6 +159,10 @@ class Area{
       player.ability3.upgrade(player, true);
     }
     this.players.push(player);
+    if (player.region.name.includes("Endless Echo")){
+      player.game.echoManagers[player.region.name.includes("Hard")&1].create_areas([],player.areaNum)
+      new RandomEnemyGenerator(player.area,player.region.name.includes("Hard")&1).generate_random_enemies(player.areaNum);
+    }
     if (!player.visitedAreas.includes(this)){
       player.visitedAreas.push(this);
       player.addXp(this.getXpValue());

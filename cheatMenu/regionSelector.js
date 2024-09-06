@@ -15,18 +15,11 @@ unimplementedGimmickMapNames = [
   "Cyber Castle",
   "Cyber Castle Hard",
   "Stellar Square",
-  "Endless Echo",
-  "Endless Echo Hard",
   "Burning Bunker",
   "Burning Bunker Hard",
   "Frozen Fjord",
   "Frozen Fjord Hard",
   "Dusty Depths",
-]
-
-infiniteMaps = [
-  "Endless Echo",
-  "Endless Echo Hard",
 ]
 
 wallMaps = [

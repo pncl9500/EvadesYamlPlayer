@@ -447,7 +447,6 @@ class AlertBox extends UIpanel{
       }
     }
     if (outdatedMapNames.includes(region.name)){ this.alerts.push("Outdated map file: " + region.name); }
-    if (infiniteMaps.includes(region.name)){ this.alerts.push("Missing mechanic in " + region.name + ": infinite map"); }
     if (wallMaps.includes(region.name)){ this.alerts.push("Missing mechanic in " + region.name + ": walls"); }
     if (requirementMaps.includes(region.name)){ this.alerts.push("Missing mechanic in " + region.name + ": blocked teleports"); }
     if (stellarSquareMaps.includes(region.name)){ this.alerts.push("Missing mechanic in " + region.name + ": is stellar square"); }

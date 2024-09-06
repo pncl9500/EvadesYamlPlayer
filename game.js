@@ -3,6 +3,7 @@ class Game{
     this.regions = [];
     this.players = [];
     this.mainPlayer = null;
+    this.echoManagers=[new EchoManager("Endless Echo",this,false),new EchoManager("Endless Echo Hard",this,true)]
   }
   draw(){
     let prS = millis();
