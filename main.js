@@ -42,14 +42,14 @@ function setup() {
 
   ui.alertBox.hidden = false;
   ui.alertBox.timeUntilVanish = 12000;
-  ui.alertBox.alerts.push("Welcome to EvadesYamlPlayer!")
   ui.alertBox.alerts.push("Press escape to open the options menu.")
   ui.alertBox.alerts.push("Press F to fully level.")
   ui.alertBox.alerts.push(" ")
-  ui.alertBox.alerts.push("Note that EvadesYamlPlayer is currently in open beta.")
-  ui.alertBox.alerts.push("The game does not have every Evades.io feature and may")
-  ui.alertBox.alerts.push("crash without warning.")
-  ui.alertBox.alerts.push(`Current patch: ${ver}`)
+  ui.alertBox.alerts.push("If it wasn't obvious already, EYP isn't being updated")
+  ui.alertBox.alerts.push("anymore. Use pifary-dev.github.io/ravel for evades")
+  ui.alertBox.alerts.push("simulation purposes. EYP won't be updated to reflect")
+  ui.alertBox.alerts.push("current evades.io versions and I'll mostly just use it as")
+  ui.alertBox.alerts.push("a testing ground for fan heroes. Sorry")
 
   cheatMenuItems = setCheatMenuItems();
   
