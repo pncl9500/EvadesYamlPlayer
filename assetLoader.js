@@ -135,6 +135,9 @@ function loadAssets(){
     "ab.impulse": loadImg("imageAssets/ab/impulse.png", "ab.impulse"),
     "ab.misery": loadImg("imageAssets/ab/misery.png", "ab.misery"),
 
+    "ab.stick": loadImg("imageAssets/ab/stick.png", "ab.stick"),
+    "ab.spill": loadImg("imageAssets/ab/spill.png", "ab.spill"),
+
     "ab.lantern": loadImg("imageAssets/ab/lantern.png", "ab.lantern"),
     "ab.flashlight": loadImg("imageAssets/ab/flashlight.png", "ab.flashlight"),
   }
