@@ -168,6 +168,7 @@ pal = {
     nov: "82776c",
     irit: "9caff0",
     tecto: "bd2700",
+    lide: "3a3723",
     
     
     oldmorfe: "00dd00",

@@ -23,7 +23,6 @@ heroList = {
   "bold": Boldrock,
   "rock": Boldrock,
   "br": Boldrock,
-  "glob": Glob,
 
   "fab": Fab,
   "leporid": Leporid,
@@ -31,6 +30,7 @@ heroList = {
   "nov": Nov,
   "irit": Irit,
   "tecto": Tecto,
+  "lide": Lide,
   
   "oldmorfe": OldMorfe,
   "ogmorfe": OldMorfe,
@@ -54,7 +54,6 @@ vanillaHeroes = [
   "candy",
   "mirage",
   "boldrock",
-  //"glob"
 ]
 
 modHeroes = [
@@ -64,6 +63,7 @@ modHeroes = [
   "nov",
   "irit",
   "tecto",
+  "lide"
 ]
 
 variantHeroes = [
