@@ -49,7 +49,7 @@ class StickEffectPlayer extends Effect{
 
 class StickEffectEnemy extends Effect{
   constructor(){
-    super(-1, getEffectPriority("StickEffectEnemy"), false);
+    super(5000, getEffectPriority("StickEffectEnemy"), false);
     this.pcf = (player, enemy) => {
       player.gainEffect(new StuckEffect(this))
     }
@@ -86,4 +86,3 @@ class StuckEffect extends Effect{
     this.parentEffect.noDuration = false;
   }
 }
-

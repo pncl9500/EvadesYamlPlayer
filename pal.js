@@ -169,6 +169,7 @@ pal = {
     irit: "9caff0",
     tecto: "bd2700",
     lide: "3a3723",
+    kuipra: "ae3bd1",
     
     
     oldmorfe: "00dd00",
