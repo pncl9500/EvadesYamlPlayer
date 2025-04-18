@@ -65,7 +65,7 @@ modHeroes = [
   "irit",
   "tecto",
   "lide",
-  //"kuipra",
+  "kuipra",
 ]
 
 variantHeroes = [

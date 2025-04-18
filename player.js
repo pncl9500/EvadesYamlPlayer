@@ -518,6 +518,9 @@ class Player extends Entity{
   instantRespawnAppropriate(){
     return true;
   }
+  onAreaExit(){
+
+  }
   resetToSpawn(){
     this.x = 176 + random(-64,64);
     this.y = 240 + random(-96,96);
@@ -527,6 +530,7 @@ class Player extends Entity{
         this.region = this.game.regions[i];
       }
     }
+    this.onAreaExit()
     this.area.exit(this);
     this.area.attemptUnload(this);
     this.areaNum = startingAreaNum;
@@ -711,6 +715,7 @@ class Player extends Entity{
       console.warn("Exit translation could not find valid area. Search cut to prevent infinite loop. This is not normal and something has gone very wrong.")
     }
     if (foundArea !== null){
+      this.onAreaExit()
       this.area.exit(this);
       this.area.attemptUnload(this);
       this.x += exitZone.translate.x;
@@ -765,6 +770,7 @@ class Player extends Entity{
     for (var i in this.game.regions){
       if (this.game.regions[i].name === dest){
         //found region
+        this.onAreaExit()
         this.area.exit(this);
         this.area.attemptUnload(this);
         this.goToRegionFromId(i);
@@ -793,6 +799,7 @@ class Player extends Entity{
     }
   }
   changeAreaCheat(areaOffset){
+    this.onAreaExit()
     this.area.exit(this);
     this.area.attemptUnload(this);
     this.areaNum += areaOffset;
